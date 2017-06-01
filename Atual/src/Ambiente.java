@@ -34,16 +34,19 @@ public abstract class Ambiente  {
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
     }
-
+    
     /**
-     * Define as saidas do ambiente. Cada direcao ou leva a um
-     * outro ambiente ou eh null (nenhuma saida para la).
-     * @param norte A saida norte.
-     * @param leste A saida leste.
-     * @param sul A saida sul.
-     * @param oeste A saida oeste.
+     * De acordo com a parametro recebido, onde cada campo representa um ambiente
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no caso do ambiente inferno, pois o mesmo não possui mais saída.
+     * @param denver
+     * @param houston
+     * @param casaCaim 
+     * @param casaBob
+     * @param inferno
+     * @param purgatorio
+     * @param casaWinchester 
      */
-
     public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester){
         if(denver != null)
             saida1 = denver;

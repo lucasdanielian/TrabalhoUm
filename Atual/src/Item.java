@@ -20,10 +20,10 @@ public class Item {
      * @param descricaoItem 
      */
     public Item(String nomeItem, String descricaoItem) {
-        this.nomeItem = nomeItem;
+        this.nomeItem = nomeItem;   
         this.descricaoItem = descricaoItem;
     }
-    
+
     /**
      * Retorna o nome do item juntamente com sua descrição
      * @return 

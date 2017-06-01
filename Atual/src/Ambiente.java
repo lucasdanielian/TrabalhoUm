@@ -13,8 +13,8 @@
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2017.05.16)
  */
-public class Ambiente  {
-    public String descricao;
+public abstract class Ambiente  {
+    private String nomeAmbiente;
     public Ambiente saida1;
     public Ambiente saida2;
     public Ambiente saida3;
@@ -22,7 +22,6 @@ public class Ambiente  {
     public Ambiente saida5;
     public Ambiente saida6;
     public Ambiente saida7;
-
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
@@ -32,8 +31,8 @@ public class Ambiente  {
      * "um jardim aberto".
      * @param descricao A descricao do ambiente.
      */
-    public Ambiente(String descricao)  {
-        this.descricao = descricao;
+    public Ambiente(String nomeAmbiente)  {
+        this.nomeAmbiente = nomeAmbiente;
     }
 
     /**
@@ -44,28 +43,29 @@ public class Ambiente  {
      * @param sul A saida sul.
      * @param oeste A saida oeste.
      */
-    public void ajustarSaidas(Ambiente um, Ambiente dois, Ambiente tres, Ambiente quatro, Ambiente cinco, Ambiente seis, Ambiente sete)  {
-        if(um != null)
-            saida1 = um;
-        if(dois != null)
-            saida2 = dois;
-        if(tres != null)
-            saida3 = tres;
-        if(quatro != null)
-            saida4 = quatro;
-        if(cinco != null)
-            saida5 = cinco;
-        if(seis != null)
-            saida6 = seis;
-        if(sete != null)
-            saida7 = sete;
+
+    public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester){
+        if(denver != null)
+            saida1 = denver;
+        if(houston != null)
+            saida2 = houston;
+        if(casaCaim != null)
+            saida3 = casaCaim;
+        if(casaBob != null)
+            saida4 = casaBob;
+        if(inferno != null)
+            saida5 = inferno;
+        if(purgatorio != null)
+            saida6 = purgatorio;
+        if(casaWinchester != null)
+            saida7 = casaWinchester;
     }
 
     /**
-     * @return A descricao do ambiente.
+     * @return o nome do ambiente.
      */
-    public String getDescricao() {
-        return descricao;
+    public String getNomeAmbiente() {
+        return nomeAmbiente;
     }
 
 }

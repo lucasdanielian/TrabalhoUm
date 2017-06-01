@@ -34,13 +34,13 @@ public class Jogo  {
         Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio;
       
         // cria os ambientes
-        casaWinchester = new Ambiente("CasaWinchester");
-        denver = new Ambiente("Denver");
-        houston = new Ambiente("Houston");
-        casaCaim = new Ambiente("CasaCaim");
-        casaBob = new Ambiente("CasaBob");
-        inferno = new Ambiente("PortalInferno");
-        purgatorio = new Ambiente ("Purgatorio");
+        casaWinchester = new CasaWinchester("CasaWinchester");
+        denver = new Denver("Denver");
+        houston = new Houston("Houston");
+        casaCaim = new CasaCaim("CasaCaim");
+        casaBob = new CasaBob("CasaBob");
+        inferno = new Inferno("PortalInferno");
+        purgatorio = new Purgatorio("Purgatorio");
         
         // inicializa as saidas dos ambientes
         casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null);
@@ -81,29 +81,31 @@ public class Jogo  {
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
+        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
     
         System.out.println("Proximo destino: ");
+        
+        
         if(ambienteAtual.saida1 != null) {
-            System.out.println(ambienteAtual.saida1.descricao + " ");
+            System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida2 != null) {
-            System.out.println(ambienteAtual.saida2.descricao + " ");
+            System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida3 != null) {
-            System.out.println(ambienteAtual.saida3.descricao + " ");
+            System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida4 != null) {
-            System.out.println(ambienteAtual.saida4.descricao + " ");
+            System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida5 != null) {
-            System.out.println(ambienteAtual.saida5.descricao + " ");
+            System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida6 != null) {
-            System.out.println(ambienteAtual.saida6.descricao + " ");
+            System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
         }
         if(ambienteAtual.saida7 != null) {
-            System.out.println(ambienteAtual.saida7.descricao + " ");
+            System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
         }
         System.out.println();
     }
@@ -196,29 +198,29 @@ public class Jogo  {
         else {
             ambienteAtual = proximoAmbiente;
             
-            System.out.println("Voce esta " + ambienteAtual.getDescricao());
+            System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
             
             System.out.println("Proximo destino: ");
             if(ambienteAtual.saida1 != null) {
-                System.out.println(ambienteAtual.saida1.descricao + " ");
+                System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida2 != null) {
-                System.out.println(ambienteAtual.saida2.descricao + " ");
+                System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida3 != null) {
-                System.out.println(ambienteAtual.saida3.descricao + " ");
+                System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida4 != null) {
-                System.out.println(ambienteAtual.saida4.descricao + " ");
+                System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida5 != null) {
-                System.out.println(ambienteAtual.saida5.descricao + " ");
+                System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida6 != null) {
-                System.out.println(ambienteAtual.saida6.descricao + " ");
+                System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
             }
             if(ambienteAtual.saida7 != null) {
-                System.out.println(ambienteAtual.saida7.descricao + " ");
+                System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
             }
             System.out.println();
         }

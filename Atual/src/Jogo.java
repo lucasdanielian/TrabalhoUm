@@ -1,8 +1,9 @@
 /**
- *  Essa eh a classe principal da aplicacao "World of Zull".
- *  "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
- *  Usuarios podem caminhar em um cenario. E eh tudo! Ele realmente
- *  precisa ser estendido para fazer algo interessante!
+ *  Essa eh a classe principal do Jogo "SuperNatural".
+ *  "SuperNatural" eh um jogo de aventura muito simples, baseado em texto.
+ *  Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
+ *  comprir a missão que é salvar seu irmão do inferno.
+ *  Para isto o mesmo deve realizar a tarefa em um tempo inferior a 30. 
  * 
  *  Para jogar esse jogo, crie uma instancia dessa classe e chame o metodo
  *  "jogar".
@@ -13,8 +14,8 @@
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2017.05.16)
+ * @Modificado: Valdeci Soares da Silva Junior & Lucas Danielian 
  */
-
 public class Jogo  {
     private Analisador analisador;
     private Ambiente ambienteAtual;

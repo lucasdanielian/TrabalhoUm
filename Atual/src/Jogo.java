@@ -94,35 +94,14 @@ public class Jogo  {
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
-        System.out.println("Voce esta em " + ambienteAtual.getNomeAmbiente()+ " no dia " + contador);
+        exibirAmbienteAtual();
+    }
     
-        System.out.println("Proximo destino: ");
+    private void exibirAmbienteAtual() {
+        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
         
-        
-        if(ambienteAtual.saida1 != null) {
-            System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida2 != null) {
-            System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida3 != null) {
-            System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida4 != null) {
-            System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida5 != null) {
-            System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida6 != null) {
-            System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida7 != null) {
-            System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
-        }
-        if(ambienteAtual.saida8 != null) {
-            System.out.println(ambienteAtual.saida8.getNomeAmbiente() + " ");
-        }
+        System.out.print("Saidas: ");
+        System.out.println(ambienteAtual.getSaidas());
         System.out.println();
     }
 
@@ -183,34 +162,8 @@ public class Jogo  {
 
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao.equals("CasaWinchester")) {
-            proximoAmbiente = ambienteAtual.saida7;
-        }
-        if(direcao.equals("Denver")) {
-            proximoAmbiente = ambienteAtual.saida1;
-        }
-        if(direcao.equals("Houston")) {
-            proximoAmbiente = ambienteAtual.saida2;
-        }
-        if(direcao.equals("CasaCaim")) {
-            proximoAmbiente = ambienteAtual.saida3;
-        }
-        if(direcao.equals("CasaBob")) {
-            proximoAmbiente = ambienteAtual.saida4;
-        }
-
-        if(direcao.equals("PortalInferno")) {
-            proximoAmbiente = ambienteAtual.saida5;
-        }
-
-        if(direcao.equals("Purgatorio")) {
-            proximoAmbiente = ambienteAtual.saida6;
-        }
         
-        if(direcao.equals("Ceu")){
-            proximoAmbiente = ambienteAtual.saida8;
-        }
-
+            proximoAmbiente = ambienteAtual.getAmbiente(direcao);
 
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
@@ -218,47 +171,7 @@ public class Jogo  {
         else {
             ambienteAtual = proximoAmbiente;
             
-            contador = contador + 3;
-            
-            if(contador < 31){ //verifica se o jogador já estourou o tempo dentro do jogo
-            
-                ambienteAtual.mensagemDeEntrada();
-
-                System.out.println("Voce esta no(a)" + ambienteAtual.getNomeAmbiente()+ " no dia " + contador);
-
-                System.out.println("");
-
-                System.out.println("Proximo destino: ");
-                if(ambienteAtual.saida1 != null) {
-                    System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida2 != null) {
-                    System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida3 != null) {
-                    System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida4 != null) {
-                    System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida5 != null) {
-                    System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida6 != null) {
-                    System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida7 != null) {
-                    System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
-                }
-                if(ambienteAtual.saida8 != null) {
-                    System.out.println(ambienteAtual.saida8.getNomeAmbiente() + " ");
-                }
-                System.out.println();
-            }
-            else{
-                System.out.println("O TEMPO LIMITE FOI ESGOTADO.\nSAM WINCHESTER ESTÁ MORTO.\nGAME OVER!");
-                terminado = true; // ainda nao funciona, deve fechar o jogo caso o jogador estourte o tempo deisponivel
-            }
+            exibirAmbienteAtual();
         }
     }
 

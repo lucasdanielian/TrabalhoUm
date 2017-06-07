@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
@@ -16,22 +19,7 @@
 public abstract class Ambiente  {
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
-
-    public boolean getJaVisitada() {
-        return jaVisitada;
-    }
-
-    public void setJaVisitada(boolean jaVisitada) {
-        this.jaVisitada = jaVisitada;
-    }
-    public Ambiente saida1;
-    public Ambiente saida2;
-    public Ambiente saida3;
-    public Ambiente saida4;
-    public Ambiente saida5;
-    public Ambiente saida6;
-    public Ambiente saida7;
-    public Ambiente saida8;
+    private HashMap<String, Ambiente> saidas;
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
@@ -44,6 +32,7 @@ public abstract class Ambiente  {
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
+        saidas = new HashMap<String, Ambiente>();
     }
     
     /**
@@ -60,21 +49,21 @@ public abstract class Ambiente  {
      */
     public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester, Ambiente ceu){
         if(denver != null)
-            saida1 = denver;
+            saidas.put(denver.getNomeAmbiente(), denver);
         if(houston != null)
-            saida2 = houston;
+            saidas.put(houston.getNomeAmbiente(), houston);
         if(casaCaim != null)
-            saida3 = casaCaim;
+            saidas.put(casaCaim.getNomeAmbiente(), casaCaim);
         if(casaBob != null)
-            saida4 = casaBob;
+            saidas.put(casaBob.getNomeAmbiente(), casaBob);
         if(inferno != null)
-            saida5 = inferno;
+            saidas.put(inferno.getNomeAmbiente(), inferno);
         if(purgatorio != null)
-            saida6 = purgatorio;
+            saidas.put(purgatorio.getNomeAmbiente(), purgatorio);
         if(casaWinchester != null)
-            saida7 = casaWinchester;
+            saidas.put(casaWinchester.getNomeAmbiente(), casaWinchester);
         if(ceu!=null)
-            saida8 = ceu;
+            saidas.put(ceu.getNomeAmbiente(), ceu);
     }
 
     /**
@@ -87,6 +76,35 @@ public abstract class Ambiente  {
     public void mensagemDeEntrada() // metodo que retornará as mensagens que o ambiente no qual o jogador está deverá ser impresso
     {
         
+    }
+    
+    public boolean getJaVisitada() {
+        return jaVisitada;
+    }
+
+    public void setJaVisitada(boolean jaVisitada) {
+        this.jaVisitada = jaVisitada;
+    }
+    
+    /**
+     * Retorna a saida com a devida direcao
+     * @param direcao
+     * @return 
+     */
+    public Ambiente getAmbiente(String direcao){
+        return saidas.get(direcao);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getSaidas(){
+        String textoSaidas = "";
+        for (String direcao : saidas.keySet()){
+            textoSaidas = textoSaidas + direcao + " ";
+        }
+        return textoSaidas;
     }
 
 }

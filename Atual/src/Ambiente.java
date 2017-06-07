@@ -84,7 +84,7 @@ public abstract class Ambiente  {
         return nomeAmbiente;
     }
     
-    public void mensagemDeEntrada() // metodo que retornará as mensagens que o ambiente no qual o jogador está deverá ser impresso
+    public void mensagemDeEntrada(Dean dean) // metodo que retornará as mensagens que o ambiente no qual o jogador está deverá ser impresso
     {
         
     }

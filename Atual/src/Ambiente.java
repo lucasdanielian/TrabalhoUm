@@ -15,6 +15,15 @@
  */
 public abstract class Ambiente  {
     private String nomeAmbiente;
+    private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
+
+    public boolean getJaVisitada() {
+        return jaVisitada;
+    }
+
+    public void setJaVisitada(boolean jaVisitada) {
+        this.jaVisitada = jaVisitada;
+    }
     public Ambiente saida1;
     public Ambiente saida2;
     public Ambiente saida3;
@@ -22,6 +31,7 @@ public abstract class Ambiente  {
     public Ambiente saida5;
     public Ambiente saida6;
     public Ambiente saida7;
+    public Ambiente saida8;
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
@@ -33,6 +43,7 @@ public abstract class Ambiente  {
      */
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
+        jaVisitada = false;
     }
     
     /**
@@ -47,7 +58,7 @@ public abstract class Ambiente  {
      * @param purgatorio
      * @param casaWinchester 
      */
-    public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester){
+    public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester, Ambiente ceu){
         if(denver != null)
             saida1 = denver;
         if(houston != null)
@@ -62,6 +73,8 @@ public abstract class Ambiente  {
             saida6 = purgatorio;
         if(casaWinchester != null)
             saida7 = casaWinchester;
+        if(ceu!=null)
+            saida8 = ceu;
     }
 
     /**
@@ -69,6 +82,11 @@ public abstract class Ambiente  {
      */
     public String getNomeAmbiente() {
         return nomeAmbiente;
+    }
+    
+    public void mensagemDeEntrada() // metodo que retornará as mensagens que o ambiente no qual o jogador está deverá ser impresso
+    {
+        
     }
 
 }

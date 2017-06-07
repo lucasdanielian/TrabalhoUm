@@ -19,6 +19,10 @@
 public class Jogo  {
     private Analisador analisador;
     private Ambiente ambienteAtual;
+    private boolean terminado; // variavel que encerra o jogo
+    private int contador; //variavel que conta quantas ações o jogador ja fez
+    
+    
         
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -26,13 +30,15 @@ public class Jogo  {
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
+        terminado = false;
+        contador = 1;
     }
 
     /**
      * Cria todos os ambientes e liga as saidas deles
      */
     private void criarAmbientes() {
-        Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio;
+        Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
       
         // cria os ambientes
         casaWinchester = new CasaWinchester("CasaWinchester");
@@ -42,15 +48,17 @@ public class Jogo  {
         casaBob = new CasaBob("CasaBob");
         inferno = new Inferno("PortalInferno");
         purgatorio = new Purgatorio("Purgatorio");
+        ceu = new Ceu("Ceu");
         
         // inicializa as saidas dos ambientes
-        casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null);
-        denver.ajustarSaidas(null, houston, casaCaim, casaBob, inferno, purgatorio, casaWinchester);
-        houston.ajustarSaidas(denver, null, casaCaim, casaBob, inferno, purgatorio, casaWinchester);
-        casaCaim.ajustarSaidas(denver, houston, null, casaBob, inferno, purgatorio, casaWinchester);
-        casaBob.ajustarSaidas(denver, houston, casaCaim, null, inferno, purgatorio, casaWinchester);
-        inferno.ajustarSaidas(null, null, null, null, null, null, null);
-        purgatorio.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, null, casaWinchester);
+        casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null, ceu);
+        denver.ajustarSaidas(null, houston, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
+        houston.ajustarSaidas(denver, null, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
+        casaCaim.ajustarSaidas(denver, houston, null, casaBob, inferno, purgatorio, casaWinchester, ceu);
+        casaBob.ajustarSaidas(denver, houston, casaCaim, null, inferno, purgatorio, casaWinchester, ceu);
+        inferno.ajustarSaidas(null, null, null, null, null, null, null, null);
+        purgatorio.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, null, casaWinchester, ceu);
+        ceu.ajustarSaidas(denver,houston,casaCaim,casaBob,inferno,purgatorio,casaWinchester,null);
 
         ambienteAtual = casaWinchester;  // o jogo comeca do lado de fora
     }
@@ -63,8 +71,7 @@ public class Jogo  {
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
         // comandos e os executamos ate o jogo terminar.
-                
-        boolean terminado = false;
+
         while (! terminado) {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
@@ -77,7 +84,7 @@ public class Jogo  {
      */
     private void imprimirBoasVindas() {
         System.out.println();
-        System.out.println("Bem vindo à Supernatural : Morte Súbita. O jogo é do tipo text adventure, ou seja,\né um jogo basicamente lógico com ações básicas. A imersão na história começa… AGORA\n");
+        System.out.println("Bem vindo à Supernatural : Morte Súbita. O jogo é do tipo text adventure, ou seja,\né um jogo basicamente lógico com ações básicas. A imersão na história começa… AGORA!\n");
         System.out.println("Dean winchester está prioritariamente preocupado. Já haviam duas semanas que seu\nirmão Sam havia saído de casa para investigar um caso de ataques de\nbruxas na cidade de Weston, no estado da Flórida. Seria apenas uma\ncaçada a mais na vida de um hunter, entretanto, Sam é um\ncaçador extremamente experiente e um grupo de bruxas não deveria \ncustar mais de poucos dias para ser resolvido. \n" +
 " \n" +
 "Ao meio de um sono bastante turbulento, o telefone\nde Dean Winchester toca. Ele atende. Após alguns segundos de silêncio\nabsoluto, um ruído semelhante à um aparelho de rádio fora de sintonia\n toma conta do aparelho. Aos poucos uma voz bastante distorcida\ndiz algumas palavras que parecem estar em algum idioma desconhecido\npor ele : “Vala noocenoquedam quisrim tatstus. Hairo nai no demonai,\nainote shiros. Saisudore corena, naishteiros”. A frase se repete\ninúmeras vezes ao fundo. Rapidamente, Dean anota a frase em um pedaço\nde papel. Ao fazer isto, Dean percebe que há um barulho estranho ao fundo do\nambiente ao outro lado da linha. Um som agudo, que vem e volta. \nSúbitamente ele identifica o ruído e entra em completo desespero\n: Era a voz de seu irmão, que gritava com toda a força existente no seu \npeito. A ligação é desligada. “\n" +
@@ -87,7 +94,7 @@ public class Jogo  {
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
-        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
+        System.out.println("Voce esta em " + ambienteAtual.getNomeAmbiente()+ " no dia " + contador);
     
         System.out.println("Proximo destino: ");
         
@@ -112,6 +119,9 @@ public class Jogo  {
         }
         if(ambienteAtual.saida7 != null) {
             System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
+        }
+        if(ambienteAtual.saida8 != null) {
+            System.out.println(ambienteAtual.saida8.getNomeAmbiente() + " ");
         }
         System.out.println();
     }
@@ -196,6 +206,10 @@ public class Jogo  {
         if(direcao.equals("Purgatorio")) {
             proximoAmbiente = ambienteAtual.saida6;
         }
+        
+        if(direcao.equals("Ceu")){
+            proximoAmbiente = ambienteAtual.saida8;
+        }
 
 
         if (proximoAmbiente == null) {
@@ -204,31 +218,47 @@ public class Jogo  {
         else {
             ambienteAtual = proximoAmbiente;
             
-            System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
+            contador = contador + 3;
             
-            System.out.println("Proximo destino: ");
-            if(ambienteAtual.saida1 != null) {
-                System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
+            if(contador < 31){ //verifica se o jogador já estourou o tempo dentro do jogo
+            
+                ambienteAtual.mensagemDeEntrada();
+
+                System.out.println("Voce esta no(a)" + ambienteAtual.getNomeAmbiente()+ " no dia " + contador);
+
+                System.out.println("");
+
+                System.out.println("Proximo destino: ");
+                if(ambienteAtual.saida1 != null) {
+                    System.out.println(ambienteAtual.saida1.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida2 != null) {
+                    System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida3 != null) {
+                    System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida4 != null) {
+                    System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida5 != null) {
+                    System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida6 != null) {
+                    System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida7 != null) {
+                    System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
+                }
+                if(ambienteAtual.saida8 != null) {
+                    System.out.println(ambienteAtual.saida8.getNomeAmbiente() + " ");
+                }
+                System.out.println();
             }
-            if(ambienteAtual.saida2 != null) {
-                System.out.println(ambienteAtual.saida2.getNomeAmbiente() + " ");
+            else{
+                System.out.println("O TEMPO LIMITE FOI ESGOTADO.\nSAM WINCHESTER ESTÁ MORTO.\nGAME OVER!");
+                terminado = true; // ainda nao funciona, deve fechar o jogo caso o jogador estourte o tempo deisponivel
             }
-            if(ambienteAtual.saida3 != null) {
-                System.out.println(ambienteAtual.saida3.getNomeAmbiente() + " ");
-            }
-            if(ambienteAtual.saida4 != null) {
-                System.out.println(ambienteAtual.saida4.getNomeAmbiente() + " ");
-            }
-            if(ambienteAtual.saida5 != null) {
-                System.out.println(ambienteAtual.saida5.getNomeAmbiente() + " ");
-            }
-            if(ambienteAtual.saida6 != null) {
-                System.out.println(ambienteAtual.saida6.getNomeAmbiente() + " ");
-            }
-            if(ambienteAtual.saida7 != null) {
-                System.out.println(ambienteAtual.saida7.getNomeAmbiente() + " ");
-            }
-            System.out.println();
         }
     }
 

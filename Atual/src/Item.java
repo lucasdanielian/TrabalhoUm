@@ -13,7 +13,7 @@ public class Item {
     String nomeItem;
     //Descrição Objeto
     String descricaoItem;
-    
+    // teste valdeci3
     /**
      * Constroi um item passando seu nome e seu descrição 
      * @param nomeItem

@@ -5,7 +5,7 @@ public class CasaWinchester extends Ambiente {
      * @param nomeAmbiente 
      */
     public CasaWinchester(String nomeAmbiente)  {
-        super(nomeAmbiente);
+        super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
     }
 
 }

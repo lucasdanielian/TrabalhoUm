@@ -71,4 +71,13 @@ public class ColecaoDeItens {
         return null;
     }
     
+    public boolean espacoDisponivel(){
+        if(quantidadeAtual < capacidade){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
 }

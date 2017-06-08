@@ -21,6 +21,7 @@ public class Jogo  {
     private Ambiente ambienteAtual;
     private boolean terminado; // variavel que encerra o jogo
     private int contador; //variavel que conta quantas ações o jogador ja fez
+    private Dean dean;
     
     
         
@@ -32,6 +33,7 @@ public class Jogo  {
         analisador = new Analisador();
         terminado = false;
         contador = 1;
+        dean = new Dean();
     }
 
     /**

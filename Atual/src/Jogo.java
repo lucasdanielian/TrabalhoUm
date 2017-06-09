@@ -100,7 +100,9 @@ public class Jogo  {
     }
     
     private void exibirAmbienteAtual() {
-        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente());
+        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia " + contador);
+        
+        ambienteAtual.mensagemDeEntrada(dean);
         
         System.out.print("Saidas: ");
         System.out.println(ambienteAtual.getSaidas());
@@ -171,7 +173,10 @@ public class Jogo  {
             System.out.println("Nao ha passagem!");
         }
         else {
+            
             ambienteAtual = proximoAmbiente;
+            
+            contador = contador+3;
             
             exibirAmbienteAtual();
         }

@@ -73,10 +73,13 @@ public abstract class Ambiente  {
         return nomeAmbiente;
     }
     
-    public void mensagemDeEntrada(Dean dean) // metodo que retornará as mensagens que o ambiente no qual o jogador está deverá ser impresso
-    {
-        
-    }
+    /**
+     * Metodo que retornará as mensagens quando o jogador entra em um novo ambiente.
+     * passará as informações referentes as condições do jogador de acordo com 
+     * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
+     * @param dean Jogador
+     */
+    public abstract void mensagemDeEntrada(Dean dean);
     
     public boolean getJaVisitada() {
         return jaVisitada;

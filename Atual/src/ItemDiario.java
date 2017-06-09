@@ -12,19 +12,32 @@ import java.util.List;
  *
  * @author Lucas Danielian
  */
-public class Diario extends Item{
+public class ItemDiario extends Item{
     
     private List<String> paginas;
-
-    public Diario(String nomeItem, String descricaoItem) {
+    
+    /**
+     * Cria um Item Diario com seu nome e sua descrição
+     * @param nomeItem
+     * @param descricaoItem 
+     */
+    public ItemDiario(String nomeItem, String descricaoItem) {
         super(nomeItem, descricaoItem);
         paginas = new ArrayList<String>();
     }
     
+    /**
+     * Adiciona páginas ao diario, que são Strings
+     * @param chave 
+     */
     public void adicionarPagina(String chave){
         this.paginas.add(chave);
     }
     
+    /**
+     * Retorna uma String com todas as páginas concatenadas
+     * @return 
+     */
     public String getPaginas(){
         String resposta = "";
         for(String aux : this.paginas){
@@ -33,10 +46,20 @@ public class Diario extends Item{
         return resposta;
     }
     
+    /**
+     * Retorna o tamanho da lista de String, que são as páginas do diario
+     * @return 
+     */
     public int getTamanho(){
         return paginas.size();
     }
     
+    /**
+     * Pega uma página especifica, que é a posição da lista na qual a mesma foi
+     * adiciona.
+     * @param i
+     * @return 
+     */
     public String getPagina(int i){
         return paginas.get(i);
     }

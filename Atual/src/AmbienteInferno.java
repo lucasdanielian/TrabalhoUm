@@ -1,26 +1,43 @@
 /**
- * Classe que representa um ambiente chamado purgatorio e que herda da classe
- * abstrata Ambientes 
- * @author junior
+ * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
+ *
+ * Esta classe eh parte da aplicacao "World of Zuul".
+ * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ *
+ * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
+ * conectado aos outros ambientes atraves de saidas. As saidas sao
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
+ * guarda uma referencia para o ambiente vizinho, ou null se nao ha
+ * saida naquela direcao.
+ * 
+ * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
-public class Inferno extends Ambiente {
-    // teste lucas 3
-    /**
-     * Constroi um ambiente "Inferno" passando seu nome por parametro
-     * @param nomeAmbiente 
-     */
-    
+public class AmbienteInferno extends Ambiente {
     private boolean denteLobo;
     private boolean penaAnjo;
     private boolean almas;
     
-    
-    public Inferno(String nomeAmbiente)  {
+    /**
+     * Constroi um ambiente "Inferno" passando seu nome por parametro
+     * denteLobo, penaAnjo e almas é inicializado como false
+     * @param nomeAmbiente 
+     */
+    public AmbienteInferno(String nomeAmbiente)  {
         super(nomeAmbiente);
+        denteLobo = false;
+        penaAnjo = false;
+        almas = false;
     }
-
+    
+    /**
+     * Exibe a mensagem de entrada qunndo se chega ao ambiente inferno
+     * @param dean 
+     */
     @Override
-    public void mensagemDeEntrada(Dean dean) {
+    public void mensagemDeEntrada(JogadorDean dean) {
          for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
                     if(dean.getMochila().retornaItem(i).getNomeItem().equals("Dente de lobisomem")){
                         denteLobo = true;
@@ -45,7 +62,7 @@ public class Inferno extends Ambiente {
              }
          }
          else{
-             //fazer texto de que Dean fica aprisionado no inferno sem poder ajudar o irmão
+             //fazer texto de que JogadorDean fica aprisionado no inferno sem poder ajudar o irmão
          }
         
     }

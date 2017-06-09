@@ -33,6 +33,10 @@ public class Item {
         return retorno;
     }
     
+    /**
+     * Retorna uma String contendo o nome do Item
+     * @return 
+     */
     public String getNomeItem(){
         return nomeItem;
     }

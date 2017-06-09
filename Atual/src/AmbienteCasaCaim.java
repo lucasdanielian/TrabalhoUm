@@ -1,21 +1,40 @@
-public class CasaCaim extends Ambiente {
+/**
+ * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
+ *
+ * Esta classe eh parte da aplicacao "World of Zuul".
+ * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ *
+ * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
+ * conectado aos outros ambientes atraves de saidas. As saidas sao
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
+ * guarda uma referencia para o ambiente vizinho, ou null se nao ha
+ * saida naquela direcao.
+ * 
+ * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
+ */
+public class AmbienteCasaCaim extends Ambiente {
+    private boolean visitouBob;
+    private boolean recebeuTask;
     
     /**
      * Constroi um ambiente "Inferno" passando seu nome por parametro
      * @param nomeAmbiente 
      */
-    private boolean visitouBob;
-    private boolean recebeuTask;
-    
-    
-    public CasaCaim(String nomeAmbiente)  {
+    public AmbienteCasaCaim(String nomeAmbiente)  {
         super(nomeAmbiente);
         visitouBob = false;
         recebeuTask = false;
     }
     
+    /**
+     * Exibe a mensagem de entrada referente a casa Caim
+     * @param dean 
+     */
     @Override
-    public void mensagemDeEntrada(Dean dean){
+    public void mensagemDeEntrada(JogadorDean dean){
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
             for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {

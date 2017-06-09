@@ -1,21 +1,42 @@
-public class Denver extends Ambiente {
-    // Teste git
-    /**
-     * Constroi um ambiente "Denver" passando seu nome por parametro
-     * @param nomeAmbiente 
-     */
+/**
+ * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
+ *
+ * Esta classe eh parte da aplicacao "World of Zuul".
+ * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ *
+ * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
+ * conectado aos outros ambientes atraves de saidas. As saidas sao
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
+ * guarda uma referencia para o ambiente vizinho, ou null se nao ha
+ * saida naquela direcao.
+ * 
+ * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
+ */
+public class AmbienteDenver extends Ambiente {
     
     private Item denteLobo;
     private boolean itemFoiColetado;
-            
-    public Denver(String nomeAmbiente)  {
+    
+    /**
+     * Constroi um ambiente "AmbienteDenver" passando seu nome por parametro
+     * @param nomeAmbiente 
+     */
+    public AmbienteDenver(String nomeAmbiente)  {
         super(nomeAmbiente);
         denteLobo = new Item("Dente de lobisomem","O dente de lobisomem representa o mal do mundo");
         itemFoiColetado = false;
     }
     
+    /**
+     * Sobrescreve a mensagem de entrada da classe pai "Ambiente"
+     * passando as informações referentes ao ambiente Denver
+     * @param dean 
+     */
     @Override
-    public void mensagemDeEntrada(Dean dean){
+    public void mensagemDeEntrada(JogadorDean dean){
         
         if(getJaVisitada() == false){//se o jogador nunca visitou este ambiente
             System.out.println("Dean se direciona para a cidade de Denver, no estado do Colorado.\nHá informações de que uma alcateia de lobisomens vêm atacando os moradores.\nApós certa investigação, Dean descobre onde estes lobos estão, invade seu esconderijo,\ne mata todos, um a um.");

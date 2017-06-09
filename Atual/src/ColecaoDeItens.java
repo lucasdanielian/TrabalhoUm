@@ -71,6 +71,11 @@ public class ColecaoDeItens {
         return null;
     }
     
+    /**
+     * Retorna true caso haja espaço disponível para armazenar mais itens, ou
+     * false caso já esteja cheio e não seja mais possivel adicionar
+     * @return 
+     */
     public boolean espacoDisponivel(){
         if(quantidadeAtual < capacidade){
             return true;
@@ -80,10 +85,19 @@ public class ColecaoDeItens {
         }
     }
     
+    /**
+     * Retorna um inteiro com a quantidade de itens
+     * @return 
+     */
     public int getQuantidadeAtual(){
         return quantidadeAtual;
     }
     
+    /**
+     * Retorna um item, passado sua posicao no vetor.
+     * @param i
+     * @return 
+     */
     public Item retornaItem(int i){
         return itens.get(i);
     } 

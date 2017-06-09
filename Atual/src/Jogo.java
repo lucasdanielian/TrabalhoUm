@@ -22,8 +22,6 @@ public class Jogo  {
     private boolean terminado; // variavel que encerra o jogo
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private Dean dean;
-    
-    
         
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -195,5 +193,9 @@ public class Jogo  {
         else {
             return true;  // sinaliza que nos queremos sair
         }
+    }
+    
+    public int getContador() {
+        return contador;
     }
 }

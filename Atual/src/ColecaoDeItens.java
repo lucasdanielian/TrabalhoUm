@@ -34,17 +34,19 @@ public class ColecaoDeItens {
     /**
      * o metodo exibir() mostra na tela a atual disposicao dos itens na sua 
      */
-    public void exibir(){
+    public String exibirItens(){
+        String itensRetorno = null;
         for(Item i:itens){
-            System.out.println(i.getDescricaoItem());
+            itensRetorno = " " + i.getDescricaoItem();
         }
+        return itensRetorno;
     }
     
     /**
-     * O metodo inserir() insere um novo item na coleção recebendo o mesmo como parâmetro
+     * O metodo inserirItens() insere um novo item na coleção recebendo o mesmo como parâmetro
      * @param novo 
      */
-    public boolean inserir(Item novo){
+    public boolean inserirItens(Item novo){
         if(quantidadeAtual < capacidade){
             itens.add(novo);
             return true;
@@ -68,6 +70,20 @@ public class ColecaoDeItens {
             }
         }
         
+        return null;
+    }
+    
+    /**
+     * O metodo que busca um item na lista tendo como chave o seu nome.
+     * @param nomeDoItem
+     * @return Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
+     */
+    public Item buscarPeloNome(String nomeDoItem){
+        for(Item i:itens){
+            if(i.getNomeItem().equals(nomeDoItem)){
+                return i;
+            }
+        }
         return null;
     }
     

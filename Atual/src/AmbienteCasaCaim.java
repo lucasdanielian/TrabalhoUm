@@ -35,6 +35,7 @@ public class AmbienteCasaCaim extends Ambiente {
      */
     @Override
     public void mensagemDeEntrada(JogadorDean dean){
+        System.out.println("Nao ha objetos para ser coletado neste local");
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
             for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {

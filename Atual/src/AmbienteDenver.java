@@ -37,12 +37,12 @@ public class AmbienteDenver extends Ambiente {
      */
     @Override
     public void mensagemDeEntrada(JogadorDean dean){
-        
+        System.out.println("Objeto deste local: Dente de lobisomem");
         if(getJaVisitada() == false){//se o jogador nunca visitou este ambiente
             System.out.println("Dean se direciona para a cidade de Denver, no estado do Colorado.\nHá informações de que uma alcateia de lobisomens vêm atacando os moradores.\nApós certa investigação, Dean descobre onde estes lobos estão, invade seu esconderijo,\ne mata todos, um a um.");
             setJaVisitada(true);
             if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
-                dean.getMochila().inserir(denteLobo);
+                dean.getMochila().inserirItens(denteLobo);
                 itemFoiColetado = true;
                 System.out.println("Um dente de lobo foi coletado");
             }
@@ -53,7 +53,7 @@ public class AmbienteDenver extends Ambiente {
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserir(denteLobo);
+                    dean.getMochila().inserirItens(denteLobo);
                     itemFoiColetado = true;
                     System.out.println("Um dente de lobo foi coletado");
                 }

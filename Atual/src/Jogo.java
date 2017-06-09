@@ -22,6 +22,7 @@ public class Jogo  {
     private boolean terminado; // variavel que encerra o jogo
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
+    Item carta;
     
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -32,6 +33,8 @@ public class Jogo  {
         terminado = false;
         contador = 1;
         dean = new JogadorDean();
+        carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
+                + "que cobra um favor que caim devia a Bob");
     }
 
     /**
@@ -56,6 +59,7 @@ public class Jogo  {
         houston.ajustarSaidas(denver, null, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
         casaCaim.ajustarSaidas(denver, houston, null, casaBob, inferno, purgatorio, casaWinchester, ceu);
         casaBob.ajustarSaidas(denver, houston, casaCaim, null, inferno, purgatorio, casaWinchester, ceu);
+        casaBob.setItem(carta);
         inferno.ajustarSaidas(null, null, null, null, null, null, null, null);
         purgatorio.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, null, casaWinchester, ceu);
         ceu.ajustarSaidas(denver,houston,casaCaim,casaBob,inferno,purgatorio,casaWinchester,null);

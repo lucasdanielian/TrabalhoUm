@@ -42,7 +42,7 @@ public class AmbientePurgatorio extends Ambiente {
             setJaVisitada(true);
             
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserir(portadorAlmas);
+                dean.getMochila().inserirItens(portadorAlmas);
                 itemFoiColetado = true;
                 System.out.println("O portador de almas foi coletado e está na mochila");
             }
@@ -53,7 +53,7 @@ public class AmbientePurgatorio extends Ambiente {
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserir(portadorAlmas);
+                    dean.getMochila().inserirItens(portadorAlmas);
                     itemFoiColetado = true;
                     System.out.println("O portador de almas foi coletado e está na mochila");
                 }

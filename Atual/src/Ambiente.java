@@ -22,6 +22,7 @@ public abstract class Ambiente  {
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
+    Item item;
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
@@ -35,6 +36,28 @@ public abstract class Ambiente  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
+    }
+
+    /**
+     * Retorna um item do ambiente
+     * @return 
+     */
+    public Item getItem() {
+        return item;
+    }
+    
+    /**
+     * Adiciona um item no ambiente
+     * @param item 
+     */
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    
+    public Item removeItem(){
+        Item aux = item;
+        item = null;
+        return aux;
     }
     
     /**

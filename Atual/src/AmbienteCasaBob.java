@@ -35,8 +35,9 @@ public class AmbienteCasaBob extends Ambiente {
      */
     @Override
     public void mensagemDeEntrada(JogadorDean dean){
-        
-        if(getJaVisitada() == false){ //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
+        System.out.println("Itens da CasaBob: Carta");
+        //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
+        if(getJaVisitada() == false){ 
             System.out.println("Dean se direciona para Boulder, no estado do "
                     + "Colorado.\nLá mora Bob, melhor amigo de seu falecido pai,"
                     + " que se tornou como um pai para os\ngarotos. Chegando à "
@@ -53,7 +54,7 @@ public class AmbienteCasaBob extends Ambiente {
             setJaVisitada(true);
             dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserir(carta);
+                dean.getMochila().inserirItens(carta);
                 itemFoiColetado = true;
                 System.out.println("Item : carta de reconhecimento foi colocado na mochila");
             }
@@ -64,11 +65,14 @@ public class AmbienteCasaBob extends Ambiente {
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == true){    
-            System.out.println("Dean se direciona para Boulder, no estado do Colorado.\nLá mora Bob, melhor amigo de seu falecido pai, que se tornou como um pai para os\ngarotos. Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente garoto, eu já não\nposso fazer mais nada por você”\n");
+            System.out.println("Dean se direciona para Boulder, no estado do Colorado.\nLá mora Bob, "
+                    + "melhor amigo de seu falecido pai, que se tornou como um pai para os\ngarotos. "
+                    + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente garoto, eu já não\nposso"
+                    + " fazer mais nada por você”\n");
             }
             else{
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserir(carta);
+                    dean.getMochila().inserirItens(carta);
                     itemFoiColetado = true;
                     System.out.println("Item : carta de reconhecimento foi colocado na mochila");
                 }

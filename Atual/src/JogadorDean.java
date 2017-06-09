@@ -5,18 +5,23 @@
  */
 
 /**
- *
+ * Classe que representa o jogador
  * @author Lucas Danielian
  */
-public class Dean {
+public class JogadorDean {
     
     private ColecaoDeItens mochila;
     private boolean marcaCaim;
-    private Diario diario;
+    private ItemDiario diario;
     
-    public Dean(){
+    /**
+     * Cria um "jogador Dean" com uma coleção de itens "Mochila" de tamanho 3
+     * e inicializa as páginas do diario para que o jogador através das dicas 
+     * possa assim avançar no jogo.
+     */
+    public JogadorDean(){
         marcaCaim = false;
-        diario = new Diario("Diário de John Winchester", "O diário em questão pertencia ao pai dos irmãos antes de morrer. Ele possui diversas informações importantes.");
+        diario = new ItemDiario("Diário de John Winchester", "O diário em questão pertencia ao pai dos irmãos antes de morrer. Ele possui diversas informações importantes.");
         mochila = new ColecaoDeItens(3);
         diario.adicionarPagina("Existem lobisomens a serem caçados em Denver");
         diario.adicionarPagina("Existem vampiros a serem caçados em Houston");
@@ -25,23 +30,37 @@ public class Dean {
         diario.adicionarPagina("Almas podem ser coletadas no purgatorio");
     }
     
-    public Diario getDiario(){
+    /**
+     * Retorna um Diario
+     * @return 
+     */
+    public ItemDiario getDiario(){
         return diario;
     }
     
+    /**
+     * Retorna o boolean, true se:
+     * e false se: 
+     * @return 
+     */
     public boolean getMarcaCaim(){
         return marcaCaim;
     }
     
+    /**
+     * Retorna a coleção de itens do jogador, denominada mochila
+     * @return 
+     */
     public ColecaoDeItens getMochila(){
         return mochila;
     }
     
+    /**
+     * Autera o valor de Marca de false para true caso
+     * @param aux 
+     */
     public void setMarcaCaim(boolean aux){
         marcaCaim = aux;
     }
-    
-    
-    
     
 }

@@ -1,21 +1,40 @@
-public class CasaBob extends Ambiente {
-    
-    /**
-     * Constroi um ambiente "CasaBob" passando seu nome por parametro
-     * @param nomeAmbiente 
-     */
-    
+/**
+ * Classe AmbienteCasaBob - um ambiente em um jogo adventure.
+ *
+ * Esta classe eh parte da aplicacao "World of Zuul".
+ * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ *
+ * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
+ * conectado aos outros ambientes atraves de saidas. As saidas sao
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
+ * guarda uma referencia para o ambiente vizinho, ou null se nao ha
+ * saida naquela direcao.
+ * 
+ * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
+ */
+public class AmbienteCasaBob extends Ambiente {
     private Item carta;
     private boolean itemFoiColetado;
     
-    public CasaBob(String nomeAmbiente)  {
+    /**
+     * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
+     * @param nomeAmbiente 
+     */
+    public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
         carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
                 + " cobra um favor que caim devia a Bob");
     }
     
+    /**
+     * Exibe a mensagem de entrada referente a casa do Bob
+     * @param dean 
+     */
     @Override
-    public void mensagemDeEntrada(Dean dean){
+    public void mensagemDeEntrada(JogadorDean dean){
         
         if(getJaVisitada() == false){ //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
             System.out.println("Dean se direciona para Boulder, no estado do "

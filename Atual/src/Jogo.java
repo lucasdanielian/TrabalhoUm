@@ -21,8 +21,8 @@ public class Jogo  {
     private Ambiente ambienteAtual;
     private boolean terminado; // variavel que encerra o jogo
     private int contador; //variavel que conta quantas ações o jogador ja fez
-    private Dean dean;
-        
+    private JogadorDean dean;
+    
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
@@ -31,7 +31,7 @@ public class Jogo  {
         analisador = new Analisador();
         terminado = false;
         contador = 1;
-        dean = new Dean();
+        dean = new JogadorDean();
     }
 
     /**
@@ -41,14 +41,14 @@ public class Jogo  {
         Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
       
         // cria os ambientes
-        casaWinchester = new CasaWinchester("CasaWinchester");
-        denver = new Denver("Denver");
-        houston = new Houston("Houston");
-        casaCaim = new CasaCaim("CasaCaim");
-        casaBob = new CasaBob("CasaBob");
-        inferno = new Inferno("PortalInferno");
-        purgatorio = new Purgatorio("Purgatorio");
-        ceu = new Ceu("Ceu");
+        casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
+        denver = new AmbienteDenver("Denver");
+        houston = new AmbienteHouston("Houston");
+        casaCaim = new AmbienteCasaCaim("CasaCaim");
+        casaBob = new AmbienteCasaBob("CasaBob");
+        inferno = new AmbienteInferno("PortalInferno");
+        purgatorio = new AmbientePurgatorio("Purgatorio");
+        ceu = new AmbienteCeu("Ceu");
         
         // inicializa as saidas dos ambientes
         casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null, ceu);
@@ -61,7 +61,7 @@ public class Jogo  {
         ceu.ajustarSaidas(denver,houston,casaCaim,casaBob,inferno,purgatorio,casaWinchester,null);
 
         ambienteAtual = casaWinchester;  // o jogo comeca do lado de fora
-    }
+}
 
     /**
      *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
@@ -125,6 +125,9 @@ public class Jogo  {
         exibirAmbienteAtual();
     }
     
+    /**
+     * Exibe o ambiente em que o jogador está no momento
+     */
     private void exibirAmbienteAtual() {
         System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia " + contador);
         
@@ -163,8 +166,6 @@ public class Jogo  {
 
         return querSair;
     }
-
-    // Implementacoes dos comandos do usuario
 
     /**
      * Printe informacoes de ajuda.
@@ -223,9 +224,5 @@ public class Jogo  {
         else {
             return true;  // sinaliza que nos queremos sair
         }
-    }
-    
-    public int getContador() {
-        return contador;
     }
 }

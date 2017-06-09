@@ -9,12 +9,14 @@ import java.util.HashMap;
  *
  * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
  * conectado aos outros ambientes atraves de saidas. As saidas sao
- * nomeadas como norte, sul, leste e oeste. Para cada direcao, o ambiente
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
  * guarda uma referencia para o ambiente vizinho, ou null se nao ha
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public abstract class Ambiente  {
     private String nomeAmbiente;
@@ -77,9 +79,10 @@ public abstract class Ambiente  {
      * Metodo que retornará as mensagens quando o jogador entra em um novo ambiente.
      * passará as informações referentes as condições do jogador de acordo com 
      * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
+     * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @param dean Jogador
      */
-    public abstract void mensagemDeEntrada(Dean dean);
+    public abstract void mensagemDeEntrada(JogadorDean dean);
     
     public boolean getJaVisitada() {
         return jaVisitada;
@@ -109,5 +112,4 @@ public abstract class Ambiente  {
         }
         return textoSaidas;
     }
-
 }

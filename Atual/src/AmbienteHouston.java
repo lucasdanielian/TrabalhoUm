@@ -1,21 +1,42 @@
-public class Houston extends Ambiente {
-    
-    /**
-     * Constroi um ambiente "Inferno" passando seu nome por parametro
-     * @param nomeAmbiente 
-     */
-    
+/**
+ * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
+ *
+ * Esta classe eh parte da aplicacao "World of Zuul".
+ * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ *
+ * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
+ * conectado aos outros ambientes atraves de saidas. As saidas sao
+ * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
+ * casaWinchester e ceu, que são outras saídas. Para cada direcao, o ambiente
+ * guarda uma referencia para o ambiente vizinho, ou null se nao ha
+ * saida naquela direcao.
+ * 
+ * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * @version 2011.07.31 (2017.05.16)
+ * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
+ */
+public class AmbienteHouston extends Ambiente {
+
     private Item cabecaVampiro;
     private boolean itemFoiColetado;
     
-    public Houston(String nomeAmbiente)  {
+    /**
+     * Constroi um ambiente "Houston" passando seu nome por parametro
+     * @param nomeAmbiente 
+     */
+    public AmbienteHouston(String nomeAmbiente)  {
         super(nomeAmbiente);
         cabecaVampiro = new Item("Cabeca de Vampiro", "Cabeca do vampiro oiginal");
         itemFoiColetado = false;
     }
     
+    /**
+     * Exibe a mensagem de entrada ao ambiente Houston e 
+     * faz a sobrescrita do metodo na classe pai
+     * @param dean 
+     */
     @Override
-    public void mensagemDeEntrada(Dean dean){
+    public void mensagemDeEntrada(JogadorDean dean){
         
         if(getJaVisitada() == false){ // caso o jogador nunca tenha vindo a este ambiente
             // fazer o texto dos vampiros

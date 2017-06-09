@@ -53,6 +53,7 @@ public class AmbienteCasaBob extends Ambiente {
                     + " que ele poderá lhe ajudar” \n");
             setJaVisitada(true);
             dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
+            dean.getMochila().inserirItens(carta);
             if(dean.getMochila().espacoDisponivel()){
                 dean.getMochila().inserirItens(carta);
                 itemFoiColetado = true;

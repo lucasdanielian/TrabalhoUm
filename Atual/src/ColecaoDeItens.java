@@ -81,7 +81,7 @@ public class ColecaoDeItens {
     }
     
     public int getQuantidadeAtual(){
-        return quantidadeAtual;
+        return itens.size();
     }
     
     public Item retornaItem(int i){

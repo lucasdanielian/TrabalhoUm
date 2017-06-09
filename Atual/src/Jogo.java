@@ -86,12 +86,40 @@ public class Jogo  {
      */
     private void imprimirBoasVindas() {
         System.out.println();
-        System.out.println("Bem vindo à Supernatural : Morte Súbita. O jogo é do tipo text adventure, ou seja,\né um jogo basicamente lógico com ações básicas. A imersão na história começa… AGORA!\n");
-        System.out.println("Dean winchester está prioritariamente preocupado. Já haviam duas semanas que seu\nirmão Sam havia saído de casa para investigar um caso de ataques de\nbruxas na cidade de Weston, no estado da Flórida. Seria apenas uma\ncaçada a mais na vida de um hunter, entretanto, Sam é um\ncaçador extremamente experiente e um grupo de bruxas não deveria \ncustar mais de poucos dias para ser resolvido. \n" +
-" \n" +
-"Ao meio de um sono bastante turbulento, o telefone\nde Dean Winchester toca. Ele atende. Após alguns segundos de silêncio\nabsoluto, um ruído semelhante à um aparelho de rádio fora de sintonia\n toma conta do aparelho. Aos poucos uma voz bastante distorcida\ndiz algumas palavras que parecem estar em algum idioma desconhecido\npor ele : “Vala noocenoquedam quisrim tatstus. Hairo nai no demonai,\nainote shiros. Saisudore corena, naishteiros”. A frase se repete\ninúmeras vezes ao fundo. Rapidamente, Dean anota a frase em um pedaço\nde papel. Ao fazer isto, Dean percebe que há um barulho estranho ao fundo do\nambiente ao outro lado da linha. Um som agudo, que vem e volta. \nSúbitamente ele identifica o ruído e entra em completo desespero\n: Era a voz de seu irmão, que gritava com toda a força existente no seu \npeito. A ligação é desligada. “\n" +
-" \n" +
-"Dean precisa salvar seu irmão, mas não sabe por onde\ncomeçar. Tudo que ele possui é a sua mochila. Dentro dela, está o\ndiário de seu pai, que possui algumas informações sobre criaturas místicas. Dean\nnunca pode retirar o diário de dentro de sua mochila,\nentretanto, ele pode acrescentar mais dois itens nela. Sabe-se que, em sua\ncasa, Dean pode deixar guardado quantos itens quiser, em seu armário.\nSabe-se também que, a cada vez que Dean tem que se deslocar de um lugar para outro,\nele precisa de 3 dias. É seu papel guiar Dean no caminho correto que salvará seu irmão.\nBoa sorte.");
+        System.out.println("Bem vindo à Supernatural : Morte Súbita. O jogo é do"
+                + " tipo text adventure, ou seja,\né um jogo basicamente lógico "
+                + "com ações básicas. A imersão na história começa… AGORA!\n");
+        
+        System.out.println("Dean winchester está prioritariamente preocupado. Já"
+                + " haviam duas semanas que seu\nirmão Sam havia saído de casa "
+                + "para investigar um caso de ataques de\nbruxas na cidade de "
+                + "Weston, no estado da Flórida. Seria apenas uma\ncaçada a mais"
+                + " na vida de um hunter, entretanto, Sam é um\ncaçador extremamente"
+                + " experiente e um grupo de bruxas não deveria \ncustar mais de"
+                + "poucos dias para ser resolvido. \n" +"Ao meio de um sono "
+                + "bastante turbulento, o telefone\nde Dean Winchester toca. "
+                + "Ele atende. Após alguns segundos de silêncio\nabsoluto, um "
+                + "ruído semelhante à um aparelho de rádio fora de sintonia\n "
+                + "toma conta do aparelho. Aos poucos uma voz bastante "
+                + "distorcida\ndiz algumas palavras que parecem estar em algum "
+                + "idioma desconhecido\npor ele : “Vala noocenoquedam quisrim "
+                + "tatstus. Hairo nai no demonai,\nainote shiros. Saisudore "
+                + "corena, naishteiros”. A frase se repete\ninúmeras vezes ao "
+                + "fundo. Rapidamente, Dean anota a frase em um pedaço\nde papel."
+                + " Ao fazer isto, Dean percebe que há um barulho estranho ao "
+                + "fundo do\nambiente ao outro lado da linha. Um som agudo, que"
+                + " vem e volta. \nSúbitamente ele identifica o ruído e entra em"
+                + " completo desespero\n: Era a voz de seu irmão, que gritava com"
+                + " toda a força existente no seu \npeito. A ligação é desligada. "
+                + "“\n" +"Dean precisa salvar seu irmão, mas não sabe por "
+                + "onde\ncomeçar. Tudo que ele possui é a sua mochila e o\ndiário"
+                + " de seu pai, que possui algumas informações preciosas. Sua "
+                + "mochila começa vazia e ele pode acrescentar apenas dois itens nela. "
+                + "Sabe-se que, em sua\ncasa, Dean pode deixar guardado quantos "
+                + "itens quiser, em seu armário.\nSabe-se também que, a cada vez"
+                + " que Dean tem que se deslocar de um lugar para outro,\nele "
+                + "precisa de 3 dias. É seu papel guiar Dean no caminho correto "
+                + "que salvará seu irmão.\nBoa sorte.");
         
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
@@ -101,6 +129,8 @@ public class Jogo  {
     
     private void exibirAmbienteAtual() {
         System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia " + contador);
+        
+        System.out.println("");
         
         ambienteAtual.mensagemDeEntrada(dean);
         

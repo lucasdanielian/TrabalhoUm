@@ -14,6 +14,7 @@ public class Denver extends Ambiente {
         itemFoiColetado = false;
     }
     
+    @Override
     public void mensagemDeEntrada(Dean dean){
         
         if(getJaVisitada() == false){//se o jogador nunca visitou este ambiente

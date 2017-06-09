@@ -36,7 +36,7 @@ public class ColecaoDeItens {
      */
     public void exibir(){
         for(Item i:itens){
-            System.out.println(i.descricaoItem);
+            System.out.println(i.getDescricaoItem());
         }
     }
     
@@ -62,7 +62,7 @@ public class ColecaoDeItens {
      */
     public Item removerPeloNome(String nomeDoItem){
         for(Item i:itens){
-            if(i.nomeItem.equals(nomeDoItem)){
+            if(i.getNomeItem().equals(nomeDoItem)){
                 itens.remove(i);
                 return i;
             }
@@ -79,5 +79,13 @@ public class ColecaoDeItens {
             return false;
         }
     }
+    
+    public int getQuantidadeAtual(){
+        return quantidadeAtual;
+    }
+    
+    public Item retornaItem(int i){
+        return itens.get(i);
+    } 
     
 }

@@ -10,9 +10,9 @@
  */
 public class Item {
     //Nome objeto
-    String nomeItem;
+    private String nomeItem;
     //Descrição Objeto
-    String descricaoItem;
+    private String descricaoItem;
     // teste valdeci3
     /**
      * Constroi um item passando seu nome e seu descrição 
@@ -31,5 +31,9 @@ public class Item {
     public String getDescricaoItem(){
         String retorno = "Item: " + nomeItem + "Descricao Item: " + descricaoItem;
         return retorno;
+    }
+    
+    public String getNomeItem(){
+        return nomeItem;
     }
 }

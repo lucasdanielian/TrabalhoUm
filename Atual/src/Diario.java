@@ -33,4 +33,12 @@ public class Diario extends Item{
         return resposta;
     }
     
+    public int getTamanho(){
+        return paginas.size();
+    }
+    
+    public String getPagina(int i){
+        return paginas.get(i);
+    }
+    
 }

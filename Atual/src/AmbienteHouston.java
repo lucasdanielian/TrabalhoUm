@@ -42,7 +42,7 @@ public class AmbienteHouston extends Ambiente {
             // fazer o texto dos vampiros
             setJaVisitada(true);
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserir(cabecaVampiro);
+                dean.getMochila().inserirItens(cabecaVampiro);
                 itemFoiColetado = true;
                 System.out.println("A cabeça do vampiro foi coletada");
             }
@@ -53,7 +53,7 @@ public class AmbienteHouston extends Ambiente {
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserir(cabecaVampiro);
+                    dean.getMochila().inserirItens(cabecaVampiro);
                     itemFoiColetado = true;
                     System.out.println("A cabeça do vampiro foi coletada");
                 }

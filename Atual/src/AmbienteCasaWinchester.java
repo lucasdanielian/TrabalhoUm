@@ -35,6 +35,33 @@ public class AmbienteCasaWinchester extends Ambiente {
      */
     @Override
     public void mensagemDeEntrada(JogadorDean dean) {
+        imprimeObjetosArmario();
         System.out.println("Falta Implementacao do metodo");
     }
+    
+    /**
+     * Exibe a coleçao de objetos guardados no armario localizado na CasaWinchester
+     */
+    private void imprimeObjetosArmario(){
+        System.out.println("\n Objetos no armario: " + armario.exibirItens() + "\n");
+    }
+    
+    /**
+     * Insere o item passado como parametro no Armario
+     * @param item 
+     */
+    private void insereObjetosArmario(Item item){
+        armario.inserirItens(item);
+    }
+    
+    /**
+     * 
+     * @param item
+     * @return 
+     */
+    private Item removerObjetosArmario(Item item){
+        armario.removerPeloNome(item.getNomeItem());
+        return item;
+    }
+    
 }

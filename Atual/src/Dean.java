@@ -16,8 +16,13 @@ public class Dean {
     
     public Dean(){
         marcaCaim = false;
-        diario = new Diario("Diário de John Winchester", "O diário em questão pertencia ao pai dos irmãos antes de morrer. Ele possui diversas informações auxiliares.");
+        diario = new Diario("Diário de John Winchester", "O diário em questão pertencia ao pai dos irmãos antes de morrer. Ele possui diversas informações importantes.");
         mochila = new ColecaoDeItens(3);
+        diario.adicionarPagina("Existem lobisomens a serem caçados em Denver");
+        diario.adicionarPagina("Existem vampiros a serem caçados em Houston");
+        diario.adicionarPagina("Voce pode buscar ajuda com Castiel, no ceu");
+        diario.adicionarPagina("Você pode buscar ajuda com Bob, na casa dele");
+        diario.adicionarPagina("Almas podem ser coletadas no purgatorio");
     }
     
     public Diario getDiario(){
@@ -30,6 +35,10 @@ public class Dean {
     
     public ColecaoDeItens getMochila(){
         return mochila;
+    }
+    
+    public void setMarcaCaim(boolean aux){
+        marcaCaim = aux;
     }
     
     

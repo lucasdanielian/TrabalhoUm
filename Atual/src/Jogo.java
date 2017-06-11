@@ -22,7 +22,7 @@ public class Jogo  {
     private boolean terminado; // variavel que encerra o jogo
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
-    Item carta;
+    Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
     
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -38,20 +38,44 @@ public class Jogo  {
     }
 
     /**
-     * Cria todos os ambientes e liga as saidas deles
+     * Cria todos os ambientes
      */
     private void criarAmbientes() {
         Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
       
-        // cria os ambientes
+        //Inserção do Ambiente casa Winchester
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
+        
+        //Inserção do Ambiente Denver
         denver = new AmbienteDenver("Denver");
+        denteLobo = new Item("Dente de lobisomem","O dente de lobisomem representa o mal do mundo");
+        denver.setItem(denteLobo);
+        
+        //Inserção do Ambiente Houston
         houston = new AmbienteHouston("Houston");
+        cabecaVampiro = new Item("Cabeca de Vampiro", "Cabeca do vampiro oiginal");
+        houston.setItem(cabecaVampiro);
+        
         casaCaim = new AmbienteCasaCaim("CasaCaim");
+        
+        //Iserção casa bob
         casaBob = new AmbienteCasaBob("CasaBob");
+        carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
+                + " cobra um favor que caim devia a Bob");
+        casaBob.setItem(carta);
+        
+        //Inserção do Ambiente Inferno
         inferno = new AmbienteInferno("PortalInferno");
+        
+        //Inserção do Ambiente Purgatorio
         purgatorio = new AmbientePurgatorio("Purgatorio");
+        portadorAlmas = new Item("Portador de almas", "Armazena 10 almas em seu interior.");
+        purgatorio.setItem(portadorAlmas);
+        
+        //Inserção do Ambiente Ceu
         ceu = new AmbienteCeu("Ceu");
+        pena = new Item("pena", "pena do anjo Castiel");
+        ceu.setItem(pena);
         
         // inicializa as saidas dos ambientes
         casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null, ceu);
@@ -59,12 +83,12 @@ public class Jogo  {
         houston.ajustarSaidas(denver, null, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
         casaCaim.ajustarSaidas(denver, houston, null, casaBob, inferno, purgatorio, casaWinchester, ceu);
         casaBob.ajustarSaidas(denver, houston, casaCaim, null, inferno, purgatorio, casaWinchester, ceu);
-        casaBob.setItem(carta);
         inferno.ajustarSaidas(null, null, null, null, null, null, null, null);
         purgatorio.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, null, casaWinchester, ceu);
         ceu.ajustarSaidas(denver,houston,casaCaim,casaBob,inferno,purgatorio,casaWinchester,null);
-
-        ambienteAtual = casaWinchester;  // o jogo comeca do lado de fora
+     
+        // o jogo comeca do lado de fora
+        ambienteAtual = casaWinchester;
 }
 
     /**
@@ -137,7 +161,7 @@ public class Jogo  {
         
         System.out.println("");
         
-        ambienteAtual.mensagemDeEntrada(dean);
+        System.out.println(ambienteAtual.mensagemDeEntrada(dean));
         
         System.out.print("Saidas: ");
         System.out.println(ambienteAtual.getSaidas());

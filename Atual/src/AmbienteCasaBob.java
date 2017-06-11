@@ -16,7 +16,6 @@
  * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public class AmbienteCasaBob extends Ambiente {
-    private Item carta;
     private boolean itemFoiColetado;
     
     /**
@@ -25,20 +24,25 @@ public class AmbienteCasaBob extends Ambiente {
      */
     public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
-        carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
-                + " cobra um favor que caim devia a Bob");
     }
     
     /**
-     * Exibe a mensagem de entrada referente a casa do Bob
-     * @param dean 
+     * Retornará uma String que devera exibir a mensagem de entrada referente
+     * a casa do Bob
+     * @param dean
+     * @return String
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean){
-        System.out.println("Itens da CasaBob: Carta");
+    public String mensagemDeEntrada(JogadorDean dean){
         //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
-        if(getJaVisitada() == false){ 
-            System.out.println("Dean se direciona para Boulder, no estado do "
+        if(getJaVisitada() == false){
+            setJaVisitada(true);
+            dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
+            dean.getMochila().inserirItens(item);
+            if(dean.getMochila().espacoDisponivel()){
+                dean.getMochila().inserirItens(item);
+                itemFoiColetado = true;
+                return "Dean se direciona para Boulder, no estado do "
                     + "Colorado.\nLá mora Bob, melhor amigo de seu falecido pai,"
                     + " que se tornou como um pai para os\ngarotos. Chegando à "
                     + "casa de Bob, Dean explica toda a situação ocorrida para "
@@ -50,36 +54,42 @@ public class AmbienteCasaBob extends Ambiente {
                     + "porém ele poderá lhe conceder a “Marca de Caim”\nque lhe "
                     + "tornará forte o suficiente para lhe transformar em um "
                     + "Deus. Ele me deve alguns favores,\nleve esta carta contigo"
-                    + " que ele poderá lhe ajudar” \n");
-            setJaVisitada(true);
-            dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
-            dean.getMochila().inserirItens(carta);
-            if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(carta);
-                itemFoiColetado = true;
-                System.out.println("Item : carta de reconhecimento foi colocado na mochila");
+                    + " que ele poderá lhe ajudar” \n"
+                    + "\nItem : carta de reconhecimento foi colocado na mochila\n";
             }
             else{
-                System.out.println("Voce nao possui espaco na mochila para guardar"
-                        + " o item");
+                return "Dean se direciona para Boulder, no estado do "
+                    + "Colorado.\nLá mora Bob, melhor amigo de seu falecido pai,"
+                    + " que se tornou como um pai para os\ngarotos. Chegando à "
+                    + "casa de Bob, Dean explica toda a situação ocorrida para "
+                    + "o mesmo.\nEm seguida, Bob diz : “Você não pode, de forma "
+                    + "alguma, entregar as almas requeridas pelo\ndemônio, seria"
+                    + " um desrespeito à memória de seu pai.. Acredito que você "
+                    + "possa adquirir\npoderes suficientes para matar a criatura"
+                    + " se procurar Caim, filho de adão e\neva. Não será fácil, "
+                    + "porém ele poderá lhe conceder a “Marca de Caim”\nque lhe "
+                    + "tornará forte o suficiente para lhe transformar em um "
+                    + "Deus. Ele me deve alguns favores,\nleve esta carta contigo"
+                    + " que ele poderá lhe ajudar” \n"
+                    + "\nPorem voce nao possui espaco na mochila para guardar o item\n";
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == true){    
-            System.out.println("Dean se direciona para Boulder, no estado do Colorado.\nLá mora Bob, "
+            return "Dean se direciona para Boulder, no estado do Colorado.\nLá mora Bob, "
                     + "melhor amigo de seu falecido pai, que se tornou como um pai para os\ngarotos. "
                     + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente garoto, eu já não\nposso"
-                    + " fazer mais nada por você”\n");
+                    + " fazer mais nada por você”\n";
             }
             else{
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(carta);
+                    dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    System.out.println("Item : carta de reconhecimento foi colocado na mochila");
+                    return "Item : carta de reconhecimento foi colocado na mochila";
                 }
                 else{
-                    System.out.println("Voce nao possui espaco na mochila para guardar"
-                        + " o item");
+                    return "Voce nao possui espaco na mochila para guardar"
+                        + " o item";
                 }
             }
         }

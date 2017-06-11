@@ -33,11 +33,12 @@ public class AmbienteInferno extends Ambiente {
     }
     
     /**
-     * Exibe a mensagem de entrada qunndo se chega ao ambiente inferno
+     * Metodo que retorna a mensagem de entrada quando se chega ao ambiente inferno
      * @param dean 
+     * @return String
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(JogadorDean dean) {
          for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
                     if(dean.getMochila().retornaItem(i).getNomeItem().equals("Dente de lobisomem")){
                         denteLobo = true;
@@ -49,22 +50,19 @@ public class AmbienteInferno extends Ambiente {
                         almas = true;
                     }
             }
-         
          if(denteLobo == true && penaAnjo == true){ //significa que ele pode entrar
              if(almas == false && dean.getMarcaCaim() == false){
-                 //fazer texto de que ambos os irmãos morreram
+                return "fazer texto de que ambos os irmãos morreram";
              }
              else if(almas == true && dean.getMarcaCaim() == false){
-                 //fazer texto que apenas sam se salva, dean morre
+                 return "fazer texto que apenas sam se salva, dean morre";
              }
              else{
-                 // dean mata o demonio, e salva seu irmao
+                return "dean mata o demonio, e salva seu irmao";
              }
          }
          else{
-             //fazer texto de que JogadorDean fica aprisionado no inferno sem poder ajudar o irmão
+            return "fazer texto de que JogadorDean fica aprisionado no inferno sem poder ajudar o irmão";
          }
-        
     }
-
 }

@@ -54,6 +54,11 @@ public abstract class Ambiente  {
         this.item = item;
     }
     
+    /**
+     * remove o item e passa o item removido como retorno do metodo caso queira
+     * adicionar em outra lista
+     * @return 
+     */
     public Item removeItem(){
         Item aux = item;
         item = null;
@@ -104,9 +109,26 @@ public abstract class Ambiente  {
      * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @param dean Jogador
+     * @return 
      */
-    public abstract void mensagemDeEntrada(JogadorDean dean);
+    public abstract String mensagemDeEntrada(JogadorDean dean);
     
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String 
+     */
+    public String itensAmbiente() {
+       if (item == null){
+           return "Nao item neste ambiente";
+       }else{
+           return "Item: " + item.getNomeItem();
+       }
+    }
+    
+    /**
+     * Metodo que retorna se um ambiente já foi visitado ou nao.
+     * @return 
+     */
     public boolean getJaVisitada() {
         return jaVisitada;
     }

@@ -30,20 +30,23 @@ public class AmbienteCasaWinchester extends Ambiente {
      
     /**
      * Sobrescreve o metodo mensagem de entrada na classe pai passando a mensagem
-     * correta do Ambiente Winchester
-     * @param dean 
+     * correta do Ambiente Winchester e retornando em uma String
+     * @param dean
+     * @return String
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(JogadorDean dean) {
         imprimeObjetosArmario();
-        System.out.println("Falta Implementacao do metodo");
+        return "Falta Implementacao do metodo";
     }
     
     /**
-     * Exibe a coleçao de objetos guardados no armario localizado na CasaWinchester
+     * Retorna uma string contendo a coleçao de objetos guardados no armario
+     * localizado na CasaWinchester
+     * @return String
      */
-    private void imprimeObjetosArmario(){
-        System.out.println("\n Objetos no armario: " + armario.exibirItens() + "\n");
+    private String imprimeObjetosArmario(){
+        return "\n Objetos no armario: " + armario.exibirItens() + "\n";
     }
     
     /**

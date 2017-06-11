@@ -17,7 +17,6 @@
  */
 public class AmbienteHouston extends Ambiente {
 
-    private Item cabecaVampiro;
     private boolean itemFoiColetado;
     
     /**
@@ -26,43 +25,43 @@ public class AmbienteHouston extends Ambiente {
      */
     public AmbienteHouston(String nomeAmbiente)  {
         super(nomeAmbiente);
-        cabecaVampiro = new Item("Cabeca de Vampiro", "Cabeca do vampiro oiginal");
         itemFoiColetado = false;
     }
     
     /**
-     * Exibe a mensagem de entrada ao ambiente Houston e 
-     * faz a sobrescrita do metodo na classe pai
-     * @param dean 
+     * Retorna uma String que deverá ser utilizada para exibir a mensagem de
+     * entrada ao ambiente Houston e fazer a sobrescrita do metodo na classe pai
+     * @param dean
+     * @return String
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(JogadorDean dean){
         
         if(getJaVisitada() == false){ // caso o jogador nunca tenha vindo a este ambiente
             // fazer o texto dos vampiros
             setJaVisitada(true);
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(cabecaVampiro);
+                dean.getMochila().inserirItens(item);
                 itemFoiColetado = true;
-                System.out.println("A cabeça do vampiro foi coletada");
+                return "A cabeça do vampiro foi coletada";
             }
             else{
-                System.out.println("Sua mochila está cheia, não há espaço para coletar o item");
+                return "Sua mochila está cheia, não há espaço para coletar o item";
             }
         }
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(cabecaVampiro);
+                    dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    System.out.println("A cabeça do vampiro foi coletada");
+                    return "A cabeça do vampiro foi coletada";
                 }
                 else{
-                    System.out.println("Sua mochila está cheia, não há espaço para coletar o item");
+                    return "Sua mochila está cheia, não há espaço para coletar o item";
                 }
             }
             else{
-                //fazer texto sobre nao haver mais nada para fazer nesta cidade
+                return "fazer texto sobre nao haver mais nada para fazer nesta cidade";
             }
         }
         

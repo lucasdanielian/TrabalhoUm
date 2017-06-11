@@ -17,7 +17,6 @@
  */
 public class AmbientePurgatorio extends Ambiente {
 
-    private Item portadorAlmas;
     private boolean itemFoiColetado;
     
     /**
@@ -26,43 +25,44 @@ public class AmbientePurgatorio extends Ambiente {
      */
     public AmbientePurgatorio(String nomeAmbiente)  {
         super(nomeAmbiente);
-        portadorAlmas = new Item("Portador de almas", "Armazena 10 almas em seu interior.");
         itemFoiColetado = false;
     }
     
     /**
-     * Exibe a mensagem de entrada referente ao ambiente pugatorio
-     * @param dean 
+     * Metodo que retorna uma String que deverá exibir a mensagem de entrada
+     * referente ao ambiente pugatorio
+     * @param dean
+     * @return 
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(JogadorDean dean) {
         
         if(getJaVisitada() == false){ // se o jogador ainda nao passou por este ambiente
             //fazer texto do purgatório
             setJaVisitada(true);
             
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(portadorAlmas);
+                dean.getMochila().inserirItens(item);
                 itemFoiColetado = true;
-                System.out.println("O portador de almas foi coletado e está na mochila");
+                return "O portador de almas foi coletado e está na mochila";
             }
             else{
-                System.out.println("Você não possui espaço suficiente na mochila para pegar o item");
+                return "Você não possui espaço suficiente na mochila para pegar o item";
             }
         }
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(portadorAlmas);
+                    dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    System.out.println("O portador de almas foi coletado e está na mochila");
+                    return "O portador de almas foi coletado e está na mochila";
                 }
                 else{
-                    System.out.println("Você não possui espaço suficiente na mochila para pegar o item");
+                    return "Você não possui espaço suficiente na mochila para pegar o item";
                 }
             }
             else{
-                // fazer mensagem de que não existe mais nada a ser feito neste ambiente
+                return "fazer mensagem de que não existe mais nada a ser feito neste ambiente";
             }
         }
     }

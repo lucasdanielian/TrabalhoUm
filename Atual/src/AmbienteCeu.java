@@ -17,7 +17,6 @@
  */
 public class AmbienteCeu extends Ambiente {
     
-    private Item pena;
     private boolean itemFoiColetado;
     
     /**
@@ -26,20 +25,28 @@ public class AmbienteCeu extends Ambiente {
      */
     public AmbienteCeu(String nomeAmbiente)  {
         super(nomeAmbiente);
-        pena = new Item("pena", "pena do anjo Castiel");
         itemFoiColetado = false;
     }
     
     /**
      * Sobrescreve a mensagem de entrada da classe pai de acordo com as informações
-     * corretas do ambiente Céu
-     * @param dean 
+     * corretas do ambiente Céu e as retorna em uma String
+     * @param dean
+     * @return String
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean){
-        System.out.println("\n Objetos no local: pena \n");
+    public String mensagemDeEntrada(JogadorDean dean){
+        
         if(getJaVisitada()== false){//texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
-            System.out.println("Dean chega até o portal do céu. Reconhecidamente"
+            setJaVisitada(true);
+            dean.getDiario().adicionarPagina("Deve-se entregar uma pena de anjo "
+                    + "e um dente de lobo no portal do inferno.");
+            dean.getDiario().adicionarPagina("Sam morrerá após 30 dias após a ligação");
+            dean.getDiario().adicionarPagina("Você pode, mas não deve buscar as almas no Purgatório.");
+            if(dean.getMochila().espacoDisponivel()){
+                dean.getMochila().inserirItens(item);
+                itemFoiColetado = true;
+                return "Dean chega até o portal do céu. Reconhecidamente"
                     + " um amigo de Castiel,\no mesmo foi chamado para se encontrar"
                     + " com o irmão Winchester. Após o encontro\ndos dois,Dean "
                     + "conta toda a história do acontecido para seu amigo.\nCastiel"
@@ -59,36 +66,52 @@ public class AmbienteCeu extends Ambiente {
                     + "Purgatório para o\ndemônio,mas seria cometer um pecado "
                     + "ainda maior que deixar seu irmao morrer.\nVocê deveria "
                     + "descobrir uma outra maneira de derrotá - lo. Infelizmente"
-                    + " não posso ajudá-lo com mais nada\n.Tome cuidado”\n");
-            setJaVisitada(true);
-            dean.getDiario().adicionarPagina("Deve-se entregar uma pena de anjo "
-                    + "e um dente de lobo no portal do inferno.");
-            dean.getDiario().adicionarPagina("Sam morrerá após 30 dias após a ligação");
-            dean.getDiario().adicionarPagina("Você pode, mas não deve buscar as almas no Purgatório.");
-            if(dean.getMochila().espacoDisponivel()){
-                System.out.println("A pena foi colocada na sua mochila");
-                dean.getMochila().inserirItens(pena);
-                itemFoiColetado = true;
+                    + " não posso ajudá-lo com mais nada\n.Tome cuidado”\n"
+                    + "\n A pena foi colocada na sua mochila\n";
             }
             else{
-                System.out.println("Você nao possui espaço na mochila disponivel.\n Você deve liberar espaço para coletar o item.");
+                return "Dean chega até o portal do céu. Reconhecidamente"
+                    + " um amigo de Castiel,\no mesmo foi chamado para se encontrar"
+                    + " com o irmão Winchester. Após o encontro\ndos dois,Dean "
+                    + "conta toda a história do acontecido para seu amigo.\nCastiel"
+                    + " pede para Dean lhe mostrar a frase dita pela voz do outro"
+                    + "\nlado da ligação. Instantaneamente, ele reconhece o idioma"
+                    + " como Demvalium, a língua\ncriada por lúcifer : Derivada "
+                    + "do Valirium, castiel consegue traduzir a\nmensagem facilmente"
+                    + " : “Sam é um guerreiro nato, mas em trinta dias não resistirá"
+                    + " sob as\nparedes do inferno. Pelo preço de dez almas o "
+                    + "libertarei daqui.”.\nCastiel complementa : “Para salvar "
+                    + "seu irmão, você terá de ir até o inferno.\nEntretanto, "
+                    + "para conseguir passar pelo portal, você precisará entregar"
+                    + " o mal e o bem.\nComo um anjo do senhor, posso lhe fornecer"
+                    + " uma pena de minhas asas, que servirão\ncomo item de bem."
+                    + " Um dente de lobisomem será suficiente como item de mal\n."
+                    + " Mais uma coisa, você sabe que pode pegar as almas no "
+                    + "Purgatório para o\ndemônio,mas seria cometer um pecado "
+                    + "ainda maior que deixar seu irmao morrer.\nVocê deveria "
+                    + "descobrir uma outra maneira de derrotá - lo. Infelizmente"
+                    + " não posso ajudá-lo com mais nada\n.Tome cuidado”\n"
+                    + "\nVocê nao possui espaço na mochila disponivel.\n"
+                    + "Você deve liberar espaço para coletar o item.\n";
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    System.out.println("A pena foi colocada na sua mochila");
-                    dean.getMochila().inserirItens(pena);
+                    dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
+                    return "A pena foi colocada na sua mochila";
                 }
                 else{
-                     System.out.println("Você nao possui espaço na mochila disponivel.\n Você deve liberar espaço para coletar o item");
+                     return "Você nao possui espaço na mochila disponivel."
+                            + "\n Você deve liberar espaço para coletar o item";
                 }
             }
             else{
-                System.out.println("Dean chega até o portal do céu. Reconhecidamente um amigo de Castiel,\no mesmo foi chamado para se encontrar com o irmão Winchester. Castiel diz:\n“Me desculpe Dean, não há mais nada em que posso ajudar”.");
+                return "Dean chega até o portal do céu. Reconhecidamente um amigo de Castiel,"
+                        + "\no mesmo foi chamado para se encontrar com o irmão Winchester."
+                        + "Castiel diz:\n“Me desculpe Dean, não há mais nada em que posso ajudar”.";
             }
         }
     }
-
 }

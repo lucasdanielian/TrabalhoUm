@@ -30,12 +30,12 @@ public class AmbienteCasaCaim extends Ambiente {
     }
     
     /**
-     * Exibe a mensagem de entrada referente a casa Caim
+     * Retorna uma String que devera exibir a mensagem de entrada referente a casa Caim
      * @param dean 
+     * @return  
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean){
-        System.out.println("Nao ha objetos para ser coletado neste local");
+    public String mensagemDeEntrada(JogadorDean dean){
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
             for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
@@ -44,69 +44,72 @@ public class AmbienteCasaCaim extends Ambiente {
                     }
             }
             if(visitouBob == true){ // se ele passou por Bob
-                System.out.println("Dean se direciona para a casa de caim. "
+                recebeuTask = true;
+                return "Dean se direciona para a casa de caim. "
                         + "Chegando lá, Dean apresenta a ele a carta entregue "
-                        + "por Bob. Caim, com muita fúria afirma que ele era um "
+                        + "por Bob. \nCaim, com muita fúria afirma que ele era um "
                         + "rapaz muito ousado para encarar face a face o primeiro"
-                        + " assassino da história. Entretanto, Caim decide ajudar"
-                        + " Dean pelo pedido de Bob. Ele diz : “Para que você "
+                        + " assassino da história. \nEntretanto, Caim decide ajudar"
+                        + " Dean pelo pedido de Bob. \nEle diz : “Para que você "
                         + "receba o poder da marca de Caim, que será necessário "
                         + "para derrotar o demônio que aprisionou seu irmão, "
-                        + "você precisará fazer algo para mim também. Atualmente,"
+                        + "você precisará fazer algo para mim também. \nAtualmente,"
                         + " um dos meus negócios é a venda ilegal de orgãos. "
-                        + "Entretanto, existe um grupo de vampiros em Houston "
+                        + "\nEntretanto, existe um grupo de vampiros em Houston "
                         + "que está drenando os corpos dos cadáveres, inutilizando"
-                        + " meus preciosos corpos. Preciso que você mate todos"
+                        + " meus preciosos corpos. \nPreciso que você mate todos"
                         + " para mim, e me traga a cabeça de um deles como prova."
-                        + " Após isto, volte até mim e eu o darei o que precisa.");
-                recebeuTask = true;
+                        + " Após isto, volte até mim e eu o darei o que precisa.";
             }
             else{ // se ele nao passou por Bob
-                System.out.println("Dean se direciona para a casa de caim. "
+                return "Dean se direciona para a casa de caim.\n "
                         + "Chegando lá, Caim, com muita fúria afirma que ele era"
                         + " um rapaz muito ousado para encarar face a face o "
-                        + "primeiro assassino da história. Diz ainda que não deve"
+                        + "primeiro assassino da história. \nDiz ainda que não deve"
                         + " nada ao mesmo, e que não irá ajudá-lo, a não ser que"
-                        + " alguém importante o peça para fazê-lo.");
+                        + " alguém importante o peça para fazê-lo.";
             }
         }
         else{ // se o jogador ja veio nesse ambiente
             if(recebeuTask == true && dean.getMarcaCaim() == false){
                 for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Cabeca de Vampiro")){ // se ele completou a task
-                        System.out.println("Dean se direciona para a casa de caim. "
-                            + "Chegando lá, ele entrega a caim a cabeça de vampiro"
-                            + " que coletou na missão feita. Caim, impressionado "
-                            + "com o sucesso do rapaz, concede ao mesmo a marca de"
-                            + " Caim, um poder que o torna um Semi-Deus.");
-                            //precisa implementar o remover item da mochila
+                    // se ele completou a task
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Cabeca de Vampiro")){
                         dean.setMarcaCaim(true);
                         dean.getDiario().adicionarPagina("Você possui a marca de Caim");
+                        return "Dean se direciona para a casa de caim.\n"
+                            + "Chegando lá, ele entrega a caim a cabeça de vampiro"
+                            + " que coletou na missão feita. \nCaim, impressionado "
+                            + "com o sucesso do rapaz, concede ao mesmo a marca de"
+                            + " Caim, um poder que o torna um Semi-Deus.";
                     }
                 }
                 if(dean.getMarcaCaim() == false){ // se ele nao completou a task
-                    System.out.println("Dean se direciona para a casa de caim. "
+                    return "Dean se direciona para a casa de caim.\n "
                             + "Chegando lá, Caim fica furioso com Dean, pois ele"
-                            + " ainda não fez a task requerida por ele. O mesmo "
+                            + " ainda não fez a task requerida por ele. \nO mesmo "
                             + "ordena que Dean vá embora, e apenas volte com a "
-                            + "cabeça de vampiro.");
+                            + "cabeça de vampiro.";
                 }
             }
-            else if(recebeuTask == true && dean.getMarcaCaim() == true){ // nao ha mais nada a se fazer no ambiente
-                System.out.println("Dean se direciona para a casa de Caim,porem"
-                        + " nao há mais nada a ser feito neste ambiente. Você "
-                        + "está perdendo tempo aqui");
+             // nao ha mais nada a se fazer no ambiente
+            else if(recebeuTask == true && dean.getMarcaCaim() == true){
+                return"Dean se direciona para a casa de Caim,porem"
+                        + " nao há mais nada a ser feito neste ambiente. \nVocê "
+                        + "está perdendo tempo aqui";
             }
+            //ainda nao foi em Bob
             else{
-                System.out.println("Dean se direciona para a casa de caim. " //ainda nao foi em Bob
+                return "Dean se direciona para a casa de caim.\n"
                         + "Chegando lá, Caim, com muita fúria afirma que ele era"
                         + " um rapaz muito ousado para encarar face a face o "
-                        + "primeiro assassino da história. Diz ainda que não deve"
+                        + "primeiro assassino da história. \nDiz ainda que não deve"
                         + " nada ao mesmo, e que não irá ajudá-lo, a não ser que"
-                        + " alguém importante o peça para fazê-lo.");
+                        + " alguém importante o peça para fazê-lo.";
             }
             
         }
+        return null;
     }
 
 }

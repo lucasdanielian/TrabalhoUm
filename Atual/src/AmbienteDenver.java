@@ -17,7 +17,6 @@
  */
 public class AmbienteDenver extends Ambiente {
     
-    private Item denteLobo;
     private boolean itemFoiColetado;
     private boolean foiCeu;
     
@@ -27,64 +26,68 @@ public class AmbienteDenver extends Ambiente {
      */
     public AmbienteDenver(String nomeAmbiente)  {
         super(nomeAmbiente);
-        denteLobo = new Item("Dente de lobisomem","O dente de lobisomem representa o mal do mundo");
         itemFoiColetado = false;
         foiCeu = false;
     }
     
     /**
      * Sobrescreve a mensagem de entrada da classe pai "Ambiente"
-     * passando as informações referentes ao ambiente Denver
+     * passando as informações referentes ao ambiente Denver e as retorna em
+     * uma String
      * @param dean 
+     * @return String 
      */
     @Override
-    public void mensagemDeEntrada(JogadorDean dean){
-        System.out.println("Objeto deste local: Dente de lobisomem");
+    public String mensagemDeEntrada(JogadorDean dean){
         if(getJaVisitada() == false){//se o jogador nunca visitou este ambiente
             for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
                 if(dean.getDiario().getPagina(i).equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
                     foiCeu = true;
                 }
             }
-            
             if(foiCeu == true){
-                System.out.println("Dean se direciona para a cidade de Denver, no "
+                setJaVisitada(true);
+                if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
+                    dean.getMochila().inserirItens(item);
+                    itemFoiColetado = true;
+                    return "Dean se direciona para a cidade de Denver, no "
                         + "estado do Colorado.\nHá informações de que uma alcateia "
                         + "de lobisomens vêm atacando os moradores.\nApós certa "
                         + "investigação, Dean descobre onde estes lobos estão, invade"
-                        + " seu esconderijo,\ne mata todos, um a um.");
-                setJaVisitada(true);
-                if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
-                    dean.getMochila().inserirItens(denteLobo);
-                    itemFoiColetado = true;
-                    System.out.println("Um dente de lobo foi coletado");
+                        + " seu esconderijo,\ne mata todos, um a um."
+                        + "\n Um dente de lobo foi coletado\n";
                 }
                 else{
-                    System.out.println("Você não pode coletar o dente de lobo,\npois"
-                            + " nao há espaço disponível na sua mochila");
+                    return "Dean se direciona para a cidade de Denver, no "
+                        + "estado do Colorado.\nHá informações de que uma alcateia "
+                        + "de lobisomens vêm atacando os moradores.\nApós certa "
+                        + "investigação, Dean descobre onde estes lobos estão, invade"
+                        + " seu esconderijo,\ne mata todos, um a um."
+                        + "\nVocê não pode coletar o dente de lobo,\npois"
+                        + " nao há espaço disponível na sua mochila\n";
                 }
             }
             else{
-                System.out.println("Dean se direciona para a cidade de Denver,"
-                        + " mas não sabe o que fazer aqui.");
+                return "Dean se direciona para a cidade de Denver,"
+                        + " mas não sabe o que fazer aqui.";
             }
         }
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(denteLobo);
+                    dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    System.out.println("Um dente de lobo foi coletado");
+                    return "Um dente de lobo foi coletado";
                 }
                 else{
-                    System.out.println("Você não pode coletar o dente de lobo,\npois nao há espaço disponível na sua mochila");
+                    return "Você não pode coletar o dente de lobo,\n"
+                            + "pois nao há espaço disponível na sua mochila";
                 }
             }
             else{ // caso ele ja tenha realizado todas as açoes possiveis neste ambiente
-                System.out.println("Dean retorna à cidade de Denver, entretanto, ele não sabe o que fazer.\nNão há mais ações nesta cidade. Você está perdendo tempo aqui!");
+                return "Dean retorna à cidade de Denver, entretanto,ele não sabe o que fazer.\n"
+                        + "Não há mais ações nesta cidade. Você está perdendo tempo aqui!";
             }
         }
     }
-    
-    
 }

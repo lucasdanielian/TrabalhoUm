@@ -192,7 +192,23 @@ public class Jogo  {
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
         }
-
+        
+        else if (palavraDeComando.equals("guardar")) {
+            guardar(comando);
+        }
+    
+        else if (palavraDeComando.equals("pegar")) {
+            pegar(comando);
+        }
+        
+        else if (palavraDeComando.equals("analisar")) {
+            analisar(comando);
+        }
+        
+        else if (palavraDeComando.equals("ler")){
+            ler(comando);
+        }
+        
         return querSair;
     }
 
@@ -253,5 +269,71 @@ public class Jogo  {
         else {
             return true;  // sinaliza que nos queremos sair
         }
+    }
+    
+    
+    private void analisar(Comando comando){
+       if (!comando.temSegundaPalavra()){
+           System.out.println("Analisar o que? \n");
+           return;
+        }
+        String itens = comando.getSegundaPalavra();
+        if (itens.equals("mochila")){
+            System.out.println(dean.getMochila().exibirItens());
+                        
+        }else if (itens.equals("armario")){
+            System.out.println(ambienteAtual.getArmario().exibirItens());
+        }else{
+            System.out.println("Palavra Invalida");
+        }
+    }
+    
+    private void guardar(Comando comando){
+        if (!comando.temSegundaPalavra()){
+           System.out.println("Guardar o que? \n");
+           return;
+        }
+        String nomeItem = comando.getSegundaPalavra();
+        Item itemAux = dean.getMochila().removerPeloNome(nomeItem);
+        if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
+            System.out.println(ambienteAtual.getArmario().inserirItens(itemAux));
+                        
+        }else{
+            System.out.println("Este ambiente nao lhe permite guardar nenhum item. \n");
+        }
+    }
+    
+    private void pegar(Comando comando){
+        if (!comando.temSegundaPalavra()){
+           System.out.println("Pegar o que? \n");
+           return;
+        }
+        String nomeItem = comando.getSegundaPalavra();
+        if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
+            Item aux = ambienteAtual.getArmario().removerPeloNome(nomeItem);
+            boolean verificacao = dean.getMochila().inserirItens(aux);
+            if (verificacao == true){
+                System.out.println("Item: " + nomeItem + " inserido com sucesso");
+            }else{
+                System.out.println("Item " + nomeItem + " não foi inserido");
+            }
+                        
+        }else{
+            System.out.println("Este ambiente nao lhe permite guardar nenhum item. \n");
+        }
+    }
+    
+    private void ler(Comando comando){
+        if (!comando.temSegundaPalavra()){
+           System.out.println("Ler o que? \n");
+           return;
+        }
+        String nomeItem = comando.getSegundaPalavra();
+        if(nomeItem.equals("diario")){
+            System.out.println(dean.getDiario().getPaginas());
+        }else{
+            System.out.println("Este item nao e o diario, logo nao pode ser lido");
+        }
+        
     }
 }

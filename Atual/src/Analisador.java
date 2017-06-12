@@ -90,4 +90,12 @@ public class Analisador  {
             return new Comando(null, palavra2); 
         }
     }
+    
+    /**
+     * Retorna uma String contendo todos os programas disponíveis
+     * @return 
+     */
+    public String[] comandosDisponiveis() {
+        return palavrasDeComando.comandos();
+    }
 }

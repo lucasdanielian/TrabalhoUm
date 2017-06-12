@@ -36,4 +36,13 @@ public class PalavrasComando {
         // se chegamos aqui, a string nao foi encontrada nos comandos.
         return false;
     }
+    
+    /**
+     * Retorna uma String contendo todas as palavras de comando
+     * @return 
+     */
+    public String[] comandos() {
+        return this.comandosValidos;
+    }
+    
 }

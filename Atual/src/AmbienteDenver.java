@@ -48,7 +48,7 @@ public class AmbienteDenver extends Ambiente {
             if(foiCeu == true){
                 setJaVisitada(true);
                 if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Dean se direciona para a cidade de Denver, no\n"
                         + "estado do Colorado.Há informações de que uma alcateia\n"
@@ -75,7 +75,7 @@ public class AmbienteDenver extends Ambiente {
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Um dente de lobo foi coletado";
                 }

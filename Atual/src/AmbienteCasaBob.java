@@ -18,7 +18,6 @@
 public class AmbienteCasaBob extends Ambiente {
     private boolean itemFoiColetado;
     private boolean foiCeu;
-    private Item carta;
     
     /**
      * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
@@ -27,7 +26,6 @@ public class AmbienteCasaBob extends Ambiente {
     public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
         foiCeu = false;
-        carta = new Item("Carta de reconhecimento", "Carta que Bob envia a Caim para ajudar Dean");
     }
     
     /**
@@ -55,7 +53,7 @@ public class AmbienteCasaBob extends Ambiente {
                 setJaVisitada(true);
                 dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(carta);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Dean se direciona para Boulder, no estado do\n"
                         + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
@@ -106,7 +104,7 @@ public class AmbienteCasaBob extends Ambiente {
             }
             else{
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Item : carta de reconhecimento foi colocado na mochila";
                 }

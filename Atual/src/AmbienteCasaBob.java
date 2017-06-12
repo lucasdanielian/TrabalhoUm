@@ -68,7 +68,7 @@ public class AmbienteCasaBob extends Ambiente {
                         + "tornará forte o suficiente para lhe transformar em um\n"
                         + "Deus. Ele me deve alguns favores,leve esta carta contigo\n"
                         + "que ele poderá lhe ajudar”\n"
-                        + "Item : carta de reconhecimento foi colocado na mochila\n";
+                        + "O item 'Carta' foi adicionado na mochila\n";
                 }
                 else{
                     return "Dean se direciona para Boulder, no estado do\n"
@@ -106,7 +106,7 @@ public class AmbienteCasaBob extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "Item : carta de reconhecimento foi colocado na mochila";
+                    return "O item 'Carta' foi adicionado no mochila";
                 }
                 else{
                     return "Voce nao possui espaco na mochila para guardar"

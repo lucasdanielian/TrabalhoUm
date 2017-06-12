@@ -37,7 +37,8 @@ public class AmbienteCasaWinchester extends Ambiente {
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
         imprimeObjetosArmario();
-        return "Falta Implementacao do metodo";
+        return "Dean está em sua casa. Aqui ele pode guardar itens coletados, e "
+                + "pegar itens que estão em seu armário.";
     }
     
     /**

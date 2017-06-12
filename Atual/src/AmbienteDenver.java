@@ -50,21 +50,21 @@ public class AmbienteDenver extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
                     dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    return "Dean se direciona para a cidade de Denver, no "
-                        + "estado do Colorado.\nHá informações de que uma alcateia "
-                        + "de lobisomens vêm atacando os moradores.\nApós certa "
-                        + "investigação, Dean descobre onde estes lobos estão, invade"
-                        + " seu esconderijo,\ne mata todos, um a um."
-                        + "\n Um dente de lobo foi coletado\n";
+                    return "Dean se direciona para a cidade de Denver, no\n"
+                        + "estado do Colorado.Há informações de que uma alcateia\n"
+                        + "de lobisomens vêm atacando os moradores.Após certa\n"
+                        + "investigação, Dean descobre onde estes lobos estão, invade\n"
+                        + "seu esconderijo,e mata todos, um a um.\n"
+                        + "Um dente de lobo foi coletado\n";
                 }
                 else{
-                    return "Dean se direciona para a cidade de Denver, no "
-                        + "estado do Colorado.\nHá informações de que uma alcateia "
-                        + "de lobisomens vêm atacando os moradores.\nApós certa "
-                        + "investigação, Dean descobre onde estes lobos estão, invade"
-                        + " seu esconderijo,\ne mata todos, um a um."
-                        + "\nVocê não pode coletar o dente de lobo,\npois"
-                        + " nao há espaço disponível na sua mochila\n";
+                    return "Dean se direciona para a cidade de Denver, no\n"
+                        + "estado do Colorado.Há informações de que uma alcateia\n"
+                        + "de lobisomens vêm atacando os moradores.Após certa\n"
+                        + "investigação, Dean descobre onde estes lobos estão, invade\n"
+                        + "seu esconderijo,e mata todos, um a um.\n"
+                        + "Você não pode coletar o dente de lobo,pois\n"
+                        + "nao há espaço disponível na sua mochila\n";
                 }
             }
             else{

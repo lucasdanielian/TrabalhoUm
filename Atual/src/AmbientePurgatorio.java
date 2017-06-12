@@ -53,7 +53,7 @@ public class AmbientePurgatorio extends Ambiente {
                 setJaVisitada(true);
 
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Dean se direciona para o purgatório. Chegando lá, devido\n"
                             + "à sua enorme experiência como um hunter, ele consegue\n"
@@ -75,7 +75,7 @@ public class AmbientePurgatorio extends Ambiente {
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "O portador de almas foi coletado e está na mochila";
                 }

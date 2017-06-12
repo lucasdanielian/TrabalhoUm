@@ -22,7 +22,8 @@ public abstract class Ambiente  {
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
-    Item item;
+    private ColecaoDeItens armario;
+    private Item item;
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
@@ -36,6 +37,8 @@ public abstract class Ambiente  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
+        item = null;
+        armario = new ColecaoDeItens(100);
     }
 
     /**
@@ -156,5 +159,36 @@ public abstract class Ambiente  {
             textoSaidas = textoSaidas + direcao + " ";
         }
         return textoSaidas;
+    }
+    
+    /**
+     * Retorna uma string contendo a coleçao de objetos guardados no armario
+     * localizado na CasaWinchester
+     * @return String
+     */
+    private String imprimeObjetosArmario(){
+        return "\n Objetos no armario: " + armario.exibirItens() + "\n";
+    }
+    
+    /**
+     * Insere o item passado como parametro no Armario
+     * @param item 
+     */
+    private void insereObjetosArmario(Item item){
+        armario.inserirItens(item);
+    }
+    
+    /**
+     * 
+     * @param item
+     * @return 
+     */
+    private Item removerObjetosArmario(Item item){
+        armario.removerPeloNome(item.getNomeItem());
+        return item;
+    }
+    
+    public ColecaoDeItens getArmario(){
+        return armario;
     }
 }

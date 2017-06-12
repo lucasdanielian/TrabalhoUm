@@ -17,15 +17,12 @@
  */
 public class AmbienteCasaWinchester extends Ambiente {
     
-    private ColecaoDeItens armario;
-    
     /**
      * Constroi um ambiente "CasaWincester" passando seu nome por parametro
      * @param nomeAmbiente 
      */
     public AmbienteCasaWinchester(String nomeAmbiente)  {
         super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
-        armario = new ColecaoDeItens(100);
     }
      
     /**
@@ -36,36 +33,7 @@ public class AmbienteCasaWinchester extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
-        imprimeObjetosArmario();
         return "Dean está em sua casa. Aqui ele pode guardar itens coletados, e "
                 + "pegar itens que estão em seu armário.";
     }
-    
-    /**
-     * Retorna uma string contendo a coleçao de objetos guardados no armario
-     * localizado na CasaWinchester
-     * @return String
-     */
-    private String imprimeObjetosArmario(){
-        return "\n Objetos no armario: " + armario.exibirItens() + "\n";
-    }
-    
-    /**
-     * Insere o item passado como parametro no Armario
-     * @param item 
-     */
-    private void insereObjetosArmario(Item item){
-        armario.inserirItens(item);
-    }
-    
-    /**
-     * 
-     * @param item
-     * @return 
-     */
-    private Item removerObjetosArmario(Item item){
-        armario.removerPeloNome(item.getNomeItem());
-        return item;
-    }
-    
 }

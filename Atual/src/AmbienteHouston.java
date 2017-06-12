@@ -54,7 +54,7 @@ public class AmbienteHouston extends Ambiente {
             if(foiCaim == true){
                 setJaVisitada(true);
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "Dean se direciona para Houston. Ele investiga onde o grupo\n"
                             + "de vampiros citado por Caim está. Após descobrir,\n"
@@ -80,7 +80,7 @@ public class AmbienteHouston extends Ambiente {
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(item);
+                    dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
                     return "A cabeça do vampiro foi coletada";
                 }

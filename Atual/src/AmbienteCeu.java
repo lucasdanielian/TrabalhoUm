@@ -67,7 +67,7 @@ public class AmbienteCeu extends Ambiente {
                     + "ainda maior que deixar seu irmao morrer. Você deveria\n"
                     + "descobrir uma outra maneira de derrotá - lo. Infelizmente\n"
                     + "não posso ajudá-lo com mais nada .Tome cuidado”\n"
-                    + "A pena foi colocada na sua mochila\n";
+                    + "O item 'Pena' foi adicionado na mochila\n";
             }
             else{
                 return "Dean chega até o portal do céu. Reconhecidamente\n"
@@ -100,7 +100,7 @@ public class AmbienteCeu extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "A pena foi colocada na sua mochila";
+                    return "O item 'Pena' foi adicionado na mochila";
                 }
                 else{
                      return "Você nao possui espaço na mochila disponivel."

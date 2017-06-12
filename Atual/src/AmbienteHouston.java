@@ -59,8 +59,8 @@ public class AmbienteHouston extends Ambiente {
                     return "Dean se direciona para Houston. Ele investiga onde o grupo\n"
                             + "de vampiros citado por Caim está. Após descobrir,\n"
                             + "Dean mata cada um deles e reserva uma das cabeças para\n"
-                            + "levar para Caim, assim como foi exigido. A cabeça do\n"
-                            + "vampiro foi coletada\n";
+                            + "levar para Caim, assim como foi exigido. O item 'CabecaVampiro'\n"
+                            + "foi coletado\n";
                 }
             
                 else{
@@ -82,7 +82,7 @@ public class AmbienteHouston extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "A cabeça do vampiro foi coletada";
+                    return "O item 'CabecaVampiro' foi coletado";
                 }
                 else{
                     return "Sua mochila está cheia, não há espaço para coletar o item";

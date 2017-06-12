@@ -55,7 +55,7 @@ public class AmbienteDenver extends Ambiente {
                         + "de lobisomens vêm atacando os moradores.Após certa\n"
                         + "investigação, Dean descobre onde estes lobos estão, invade\n"
                         + "seu esconderijo,e mata todos, um a um.\n"
-                        + "Um dente de lobo foi coletado\n";
+                        + "O item 'Dente' foi colocado na mochila\n";
                 }
                 else{
                     return "Dean se direciona para a cidade de Denver, no\n"
@@ -77,7 +77,7 @@ public class AmbienteDenver extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "Um dente de lobo foi coletado";
+                    return "O item 'Dente' foi adicionado na mochila";
                 }
                 else{
                     return "Você não pode coletar o dente de lobo,\n"

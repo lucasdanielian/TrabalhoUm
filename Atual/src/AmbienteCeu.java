@@ -44,7 +44,7 @@ public class AmbienteCeu extends Ambiente {
             dean.getDiario().adicionarPagina("Sam morrerá após 30 dias após a ligação");
             dean.getDiario().adicionarPagina("Você pode, mas não deve buscar as almas no Purgatório.");
             if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(super.getItem());
+                dean.getMochila().inserirItens(getItem());
                 itemFoiColetado = true;
                 return "Dean chega até o portal do céu. Reconhecidamente\n"
                     + "um amigo de Castiel, o mesmo foi chamado para se encontrar\n"
@@ -98,7 +98,7 @@ public class AmbienteCeu extends Ambiente {
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == false){
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                    dean.getMochila().inserirItens(getItem());
                     itemFoiColetado = true;
                     return "O item 'Pena' foi adicionado na mochila";
                 }

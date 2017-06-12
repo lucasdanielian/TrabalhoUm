@@ -29,7 +29,7 @@ public class Item {
      * @return 
      */
     public String getDescricaoItem(){
-        String retorno = "Item: " + nomeItem + "Descricao Item: " + descricaoItem;
+        String retorno = "Item: " + nomeItem + " / Descricao Item: " + descricaoItem;
         return retorno;
     }
     

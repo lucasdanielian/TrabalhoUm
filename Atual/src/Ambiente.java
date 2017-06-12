@@ -36,6 +36,7 @@ public abstract class Ambiente  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
+        item = null;
     }
 
     /**

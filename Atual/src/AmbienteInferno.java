@@ -40,50 +40,55 @@ public class AmbienteInferno extends Ambiente {
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
          for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Dente de lobisomem")){
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Dente")){
                         denteLobo = true;
                     }
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("pena")){
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Pena")){
                         penaAnjo = true;
                     }
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Portador de almas")){
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Almas")){
                         almas = true;
                     }
             }
          if(denteLobo == true && penaAnjo == true){ //significa que ele pode entrar
              if(almas == false && dean.getMarcaCaim() == false){
                 return "Dean chega até ao portal do inferno. Com o devido ritual,\n"
-                        + "ele oferece o mal e o bem e assim, sua entrada é liberada.\n"
+                        + "ele oferece o dente e a pena e assim, sua entrada é liberada.\n"
                         + "Tudo está muito escuro, ele mal consegue enxergar.\n"
                         + "Repentinamente, o demônio que capturou Sam aparece e\n"
                         + "identifica que ele não trouxe as suas almas requeridas.\n"
-                        + "Ele mata ambos os irmãos.\n";
+                        + "Ele mata ambos irmãos.\n"
+                        + "GAME OVER! Digite 'sair' e tente novamente!";
              }
              else if(almas == true && dean.getMarcaCaim() == false){
                  return "Dean chega até ao portal do inferno. Com o devido ritual,\n"
-                         + "ele oferece o mal e o bem e assim, sua entrada é\n"
+                         + "ele oferece o dente e a pena e assim, sua entrada é\n"
                          + "liberada. Tudo está muito escuro, ele mal consegue\n"
                          + "enxergar. Repentinamente, o demônio que capturou Sam\n"
                          + "aparece e captura as almas trazidas por Dean. Em seguida,\n"
                          + "o mesmo libera Sam para ir embora, cumprindo sua\n"
                          + "palavra. Entretanto, ele nunca prometeu à Dean que o\n"
-                         + "deixaria voltar, e dessa maneira o mata cruelmente.\n";
+                         + "deixaria voltar, e dessa maneira o mata cruelmente.\n"
+                         + "GAME OVER! Digite 'sair' e tente novamente";
              }
              else{
                 return "Dean chega até ao portal do inferno. Com o devido ritual,\n"
-                        + "ele oferece o mal e o bem e assim, sua entrada é\n"
+                        + "ele oferece o dente e a pena e assim, sua entrada é\n"
                         + "liberada. Tudo está muito escuro, ele mal consegue\n"
                         + "enxergar. Repentinamente, o demônio que capturou Sam\n"
                         + "aparece. Dean, com sua fúria por seu irmão ter sido\n"
                         + "torturado e quase morto, utiliza o poder que adquiriu\n"
                         + "e mata o demonio, liberta seu irmão e vai embora para\n"
                         + "casa. Eles podem, enfim, voltar à sua nada normal vida\n"
-                        + "de caçadores de criaturas sobrenaturais.\n";
+                        + "de caçadores de criaturas sobrenaturais.\n"
+                        + "Parabéns! Você Ganhou! Digite 'sair'. " ;
              }
          }
          else{
-            return "Dean chega até o portal do inferno. Entretanto, não possui"
-                    + " os itens necessários para entrar. ";
+            return "Dean chega até o portal do inferno. Entretanto, não possui\n"
+                    + " os itens necessários para entrar. Assim, ele ficará preso\n"
+                    + "para sempre num limbo do inferno e seu irmão morrerá\n"
+                    + "GAME OVER! Digite 'sair' e tente novamente";
          }
     }
 }

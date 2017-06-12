@@ -58,7 +58,7 @@ public class AmbientePurgatorio extends Ambiente {
                     return "Dean se direciona para o purgatório. Chegando lá, devido\n"
                             + "à sua enorme experiência como um hunter, ele consegue\n"
                             + "aprisionar as 10 almas requeridas pelo demônio para\n"
-                            + "salvar seu irmão. O item foi adicionado na mochila\n";
+                            + "salvar seu irmão. O item 'Almas' foi adicionado na mochila\n";
                 }
                 else{
                     return "Dean se direciona para o purgatório. Chegando lá, devido\n"
@@ -77,7 +77,7 @@ public class AmbientePurgatorio extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(item);
                     itemFoiColetado = true;
-                    return "O portador de almas foi coletado e está na mochila";
+                    return "O item 'Almas' foi adicionado na mochila";
                 }
                 else{
                     return "Você não possui espaço suficiente na mochila para pegar o item";

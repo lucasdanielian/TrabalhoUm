@@ -48,20 +48,20 @@ public class Jogo  {
         
         //Inserção do Ambiente Denver
         denver = new AmbienteDenver("Denver");
-        denteLobo = new Item("Dente de lobisomem","O dente de lobisomem representa o mal do mundo");
+        denteLobo = new Item("Dente","O dente de lobisomem representa o mal do mundo");
         denver.setItem(denteLobo);
         
         //Inserção do Ambiente Houston
         houston = new AmbienteHouston("Houston");
-        cabecaVampiro = new Item("Cabeca de Vampiro", "Cabeca do vampiro oiginal");
+        cabecaVampiro = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
         houston.setItem(cabecaVampiro);
         
         casaCaim = new AmbienteCasaCaim("CasaCaim");
         
         //Iserção casa bob
         casaBob = new AmbienteCasaBob("CasaBob");
-        carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
-                + " cobra um favor que caim devia a Bob");
+        carta = new Item("Carta", "Carta de Bob para Caim, que"
+                + "cedida pelo mesmo para ajudar Dean.");
         casaBob.setItem(carta);
         
         //Inserção do Ambiente Inferno
@@ -69,12 +69,12 @@ public class Jogo  {
         
         //Inserção do Ambiente Purgatorio
         purgatorio = new AmbientePurgatorio("Purgatorio");
-        portadorAlmas = new Item("Portador de almas", "Armazena 10 almas em seu interior.");
+        portadorAlmas = new Item("Almas", "Armazena 10 almas em seu interior.");
         purgatorio.setItem(portadorAlmas);
         
         //Inserção do Ambiente Ceu
         ceu = new AmbienteCeu("Ceu");
-        pena = new Item("pena", "pena do anjo Castiel");
+        pena = new Item("Pena", "pena do anjo Castiel");
         ceu.setItem(pena);
         
         // inicializa as saidas dos ambientes
@@ -202,11 +202,18 @@ public class Jogo  {
      * palavras de comando
      */
     private void imprimirAjuda() {
-        System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
-        System.out.println("pela universidade.");
-        System.out.println();
-        System.out.println("Suas palavras de comando sao:");
-        System.out.println("   ir sair ajuda");
+        System.out.println("Voce é Dean. Voce precisa salvar seu irmao. Voce\n "
+                + "deve descobrir como isso será possivel.\n");
+        System.out.println("Para utilizar o comando 'ir' voce deve digitar em\n"
+                + "seguida qual o ambiente a seguir\n");
+        System.out.println("Para utilizar o comando 'guardar' você deve estar em\n"
+                + "CasaWinchester e colocar o nome do item que vai ser guardada\n");
+        System.out.println("Para utilizar o comando 'analisar', você deve colocar\n"
+                + "em sequencia se quer listar os itens de 'mochila' ou 'armario'\n");
+        System.out.println("Para utilizar o comando 'pegar' voce deve estar em\n"
+                + "CasaWinchester e colocar o nome do item que será recolhido\n");
+        System.out.println("Para utilizar o comando 'ler' você deve colocar em\n"
+                + "sequencia a palavra 'diario'\n");
     }
 
     /** 

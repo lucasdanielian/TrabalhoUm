@@ -39,7 +39,7 @@ public class AmbienteCasaCaim extends Ambiente {
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
             for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Carta de reconhecimento")){
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Carta")){
                         visitouBob = true;
                     }
             }
@@ -76,7 +76,7 @@ public class AmbienteCasaCaim extends Ambiente {
             if(recebeuTask == true && dean.getMarcaCaim() == false){
                 for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
                     // se ele completou a task
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Cabeca de Vampiro")){
+                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("CabecaVampiro")){
                         dean.setMarcaCaim(true);
                         dean.getDiario().adicionarPagina("Você possui a marca de Caim");
                         return "Dean se direciona para a casa de caim.\n"

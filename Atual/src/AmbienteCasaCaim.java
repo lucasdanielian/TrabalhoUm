@@ -45,29 +45,31 @@ public class AmbienteCasaCaim extends Ambiente {
             }
             if(visitouBob == true){ // se ele passou por Bob
                 recebeuTask = true;
-                return "Dean se direciona para a casa de caim. "
-                        + "Chegando lá, Dean apresenta a ele a carta entregue "
-                        + "por Bob. \nCaim, com muita fúria afirma que ele era um "
-                        + "rapaz muito ousado para encarar face a face o primeiro"
-                        + " assassino da história. \nEntretanto, Caim decide ajudar"
-                        + " Dean pelo pedido de Bob. \nEle diz : “Para que você "
-                        + "receba o poder da marca de Caim, que será necessário "
-                        + "para derrotar o demônio que aprisionou seu irmão, "
-                        + "você precisará fazer algo para mim também. \nAtualmente,"
-                        + " um dos meus negócios é a venda ilegal de orgãos. "
-                        + "\nEntretanto, existe um grupo de vampiros em Houston "
-                        + "que está drenando os corpos dos cadáveres, inutilizando"
-                        + " meus preciosos corpos. \nPreciso que você mate todos"
-                        + " para mim, e me traga a cabeça de um deles como prova."
-                        + " Após isto, volte até mim e eu o darei o que precisa.";
+                dean.getDiario().adicionarPagina("Em Houston, existe um grupo de"
+                        + " vampiros que Caim o pediu para que fossem eliminados");
+                return "Dean se direciona para a casa de caim.\n"
+                        + "Chegando lá, Dean apresenta a ele a carta entregue\n"
+                        + "por Bob. Caim, com muita fúria afirma que ele era um\n"
+                        + "rapaz muito ousado para encarar face a face o primeiro\n"
+                        + "assassino da história. Entretanto, Caim decide ajudar\n"
+                        + "Dean pelo pedido de Bob. Ele diz : “Para que você\n"
+                        + "receba o poder da marca de Caim, que será necessário\n"
+                        + "para derrotar o demônio que aprisionou seu irmão,\n"
+                        + "você precisará fazer algo para mim também. Atualmente,\n"
+                        + "um dos meus negócios é a venda ilegal de orgãos.\n"
+                        + "Entretanto, existe um grupo de vampiros em Houston\n"
+                        + "que está drenando os corpos dos cadáveres, inutilizando\n"
+                        + "meus preciosos corpos.Preciso que você mate todos\n"
+                        + "para mim, e me traga a cabeça de um deles como prova.\n"
+                        + "Após isto, volte até mim e eu o darei o que precisa.\n";
             }
             else{ // se ele nao passou por Bob
                 return "Dean se direciona para a casa de caim.\n "
-                        + "Chegando lá, Caim, com muita fúria afirma que ele era"
-                        + " um rapaz muito ousado para encarar face a face o "
-                        + "primeiro assassino da história. \nDiz ainda que não deve"
-                        + " nada ao mesmo, e que não irá ajudá-lo, a não ser que"
-                        + " alguém importante o peça para fazê-lo.";
+                        + "Chegando lá, Caim, com muita fúria afirma que ele era\n"
+                        + "um rapaz muito ousado para encarar face a face o\n"
+                        + "primeiro assassino da história. Diz ainda que não deve\n"
+                        + "nada ao mesmo, e que não irá ajudá-lo, a não ser que\n"
+                        + "alguém importante o peça para fazê-lo.\n";
             }
         }
         else{ // se o jogador ja veio nesse ambiente
@@ -78,18 +80,18 @@ public class AmbienteCasaCaim extends Ambiente {
                         dean.setMarcaCaim(true);
                         dean.getDiario().adicionarPagina("Você possui a marca de Caim");
                         return "Dean se direciona para a casa de caim.\n"
-                            + "Chegando lá, ele entrega a caim a cabeça de vampiro"
-                            + " que coletou na missão feita. \nCaim, impressionado "
-                            + "com o sucesso do rapaz, concede ao mesmo a marca de"
-                            + " Caim, um poder que o torna um Semi-Deus.";
+                            + "Chegando lá, ele entrega a caim a cabeça de vampiro\n"
+                            + "que coletou na missão feita. Caim, impressionado\n"
+                            + "com o sucesso do rapaz, concede ao mesmo a marca de\n"
+                            + "Caim, um poder que o torna um Semi-Deus.\n";
                     }
                 }
                 if(dean.getMarcaCaim() == false){ // se ele nao completou a task
                     return "Dean se direciona para a casa de caim.\n "
-                            + "Chegando lá, Caim fica furioso com Dean, pois ele"
-                            + " ainda não fez a task requerida por ele. \nO mesmo "
-                            + "ordena que Dean vá embora, e apenas volte com a "
-                            + "cabeça de vampiro.";
+                            + "Chegando lá, Caim fica furioso com Dean, pois ele\n"
+                            + "ainda não fez a task requerida por ele. O mesmo\n"
+                            + "ordena que Dean vá embora, e apenas volte com a\n"
+                            + "cabeça de vampiro.\n";
                 }
             }
              // nao ha mais nada a se fazer no ambiente
@@ -101,11 +103,11 @@ public class AmbienteCasaCaim extends Ambiente {
             //ainda nao foi em Bob
             else{
                 return "Dean se direciona para a casa de caim.\n"
-                        + "Chegando lá, Caim, com muita fúria afirma que ele era"
-                        + " um rapaz muito ousado para encarar face a face o "
-                        + "primeiro assassino da história. \nDiz ainda que não deve"
-                        + " nada ao mesmo, e que não irá ajudá-lo, a não ser que"
-                        + " alguém importante o peça para fazê-lo.";
+                        + "Chegando lá, Caim, com muita fúria afirma que ele era\n"
+                        + "um rapaz muito ousado para encarar face a face o\n"
+                        + "primeiro assassino da história. Diz ainda que não deve\n"
+                        + "nada ao mesmo, e que não irá ajudá-lo, a não ser que\n"
+                        + "alguém importante o peça para fazê-lo.\n";
             }
             
         }

@@ -18,6 +18,7 @@
 public class AmbientePurgatorio extends Ambiente {
 
     private boolean itemFoiColetado;
+    private boolean foiCeu;
     
     /**
      * Constroi um ambiente "AmbientePurgatorio" passando seu nome por parametro
@@ -26,6 +27,7 @@ public class AmbientePurgatorio extends Ambiente {
     public AmbientePurgatorio(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
+        foiCeu = false;
     }
     
     /**
@@ -39,15 +41,35 @@ public class AmbientePurgatorio extends Ambiente {
         
         if(getJaVisitada() == false){ // se o jogador ainda nao passou por este ambiente
             //fazer texto do purgatório
-            setJaVisitada(true);
             
-            if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(item);
-                itemFoiColetado = true;
-                return "O portador de almas foi coletado e está na mochila";
+            for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
+                if(dean.getDiario().getPagina(i).equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
+                    foiCeu = true;
+                }
+            }
+            
+            if(foiCeu == true){
+            
+                setJaVisitada(true);
+
+                if(dean.getMochila().espacoDisponivel()){
+                    dean.getMochila().inserirItens(item);
+                    itemFoiColetado = true;
+                    return "Dean se direciona para o purgatório. Chegando lá, devido\n"
+                            + "à sua enorme experiência como um hunter, ele consegue\n"
+                            + "aprisionar as 10 almas requeridas pelo demônio para\n"
+                            + "salvar seu irmão. O item foi adicionado na mochila\n";
+                }
+                else{
+                    return "Dean se direciona para o purgatório. Chegando lá, devido\n"
+                            + "à sua enorme experiência como um hunter, ele consegue\n"
+                            + "aprisionar as 10 almas requeridas pelo demônio para\n"
+                            + "salvar seu irmão.Entretanto, você não possui espaço\n"
+                            + "suficiente na mochila para pegar o item\n";
+                }
             }
             else{
-                return "Você não possui espaço suficiente na mochila para pegar o item";
+                return "Dean se direciona para o purgatório, mas não sabe o que fazer neste ambiente.";
             }
         }
         else{ // caso o jogador ja tenha passado por este ambiente antes
@@ -62,7 +84,8 @@ public class AmbientePurgatorio extends Ambiente {
                 }
             }
             else{
-                return "fazer mensagem de que não existe mais nada a ser feito neste ambiente";
+                return "Dean se direciona para o purgatório, mas não há mais "
+                        + "ações a serem feitas aqui. Você está perdendo tempo!";
             }
         }
     }

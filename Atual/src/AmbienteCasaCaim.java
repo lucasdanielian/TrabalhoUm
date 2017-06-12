@@ -38,10 +38,8 @@ public class AmbienteCasaCaim extends Ambiente {
     public String mensagemDeEntrada(JogadorDean dean){
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
-            for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Carta de reconhecimento")){
-                        visitouBob = true;
-                    }
+            if(dean.getMochila().buscarPeloNome("Carta")!=null){
+                visitouBob = true;
             }
             if(visitouBob == true){ // se ele passou por Bob
                 recebeuTask = true;

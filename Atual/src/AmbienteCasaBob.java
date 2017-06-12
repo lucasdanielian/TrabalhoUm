@@ -53,7 +53,7 @@ public class AmbienteCasaBob extends Ambiente {
                 setJaVisitada(true);
                 dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                    dean.getMochila().inserirItens(getItem());
                     itemFoiColetado = true;
                     return "Dean se direciona para Boulder, no estado do\n"
                         + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
@@ -104,7 +104,7 @@ public class AmbienteCasaBob extends Ambiente {
             }
             else{
                 if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                    dean.getMochila().inserirItens(getItem());
                     itemFoiColetado = true;
                     return "O item 'Carta' foi adicionado no mochila";
                 }

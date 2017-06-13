@@ -39,17 +39,15 @@ public class AmbienteInferno extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
-         for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Dente de lobisomem")){
-                        denteLobo = true;
-                    }
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("pena")){
-                        penaAnjo = true;
-                    }
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Portador de almas")){
-                        almas = true;
-                    }
-            }
+        if(dean.getMochila().buscarPeloNome("Dente")!=null){
+            denteLobo = true;
+        }
+        if(dean.getMochila().buscarPeloNome("Pena")!=null){
+            penaAnjo = true;
+        }
+        if(dean.getMochila().buscarPeloNome("Almas")!=null){
+            almas = true;
+        }
          if(denteLobo == true && penaAnjo == true){ //significa que ele pode entrar
              if(almas == false && dean.getMarcaCaim() == false){
                 return "Dean chega até ao portal do inferno. Com o devido ritual,\n"

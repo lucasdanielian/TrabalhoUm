@@ -34,6 +34,6 @@ public class AmbienteCasaWinchester extends Ambiente {
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
         return "Dean está em sua casa. Aqui ele pode guardar itens coletados, e "
-                + "pegar itens que estão em seu armário.";
+                + "pegar itens que estão em seu armário.\n";
     }
 }

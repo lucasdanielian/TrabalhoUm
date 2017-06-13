@@ -145,8 +145,8 @@ public class Jogo  {
                 + "itens quiser, em seu armário. Sabe-se também que, a cada vez\n"
                 + "que Dean tem que se deslocar de um lugar para outro,ele\n"
                 + "precisa de 3 dias.  É seu papel guiar Dean no caminho correto\n"
-                + "que salvará seu irmão.Dica : Dean pode procurar a ajuda de seu\n"
-                + "anjo protetor Castiel.\nBoa Sorte!\n");
+                + "que salvará seu irmão."
+                + "\nBoa Sorte!\n");
         
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
@@ -253,13 +253,17 @@ public class Jogo  {
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
         }
-        else {
-            
+        else { 
             ambienteAtual = proximoAmbiente;
-            
             contador = contador+3;
             
-            exibirAmbienteAtual();
+            if(contador <=30){
+                exibirAmbienteAtual();
+            }
+            else{
+                System.out.println("Voce excedeu o tempo limite. Sam Winchester está morto.\n"
+                        + "GAME OVER! Digite 'sair' e tente novamente");
+            }
         }
     }
 
@@ -303,7 +307,8 @@ public class Jogo  {
         String nomeItem = comando.getSegundaPalavra();
         Item itemAux = dean.getMochila().removerPeloNome(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            System.out.println(ambienteAtual.getArmario().inserirItens(itemAux));
+            ambienteAtual.getArmario().inserirItens(itemAux);
+            System.out.println("Item: " + nomeItem + " guardado com sucesso");
                         
         }else{
             System.out.println("Este ambiente nao lhe permite guardar nenhum item. \n");
@@ -320,9 +325,9 @@ public class Jogo  {
             Item aux = ambienteAtual.getArmario().removerPeloNome(nomeItem);
             boolean verificacao = dean.getMochila().inserirItens(aux);
             if (verificacao == true){
-                System.out.println("Item: " + nomeItem + " inserido com sucesso");
+                System.out.println("Item: " + nomeItem + " coletado com sucesso");
             }else{
-                System.out.println("Item " + nomeItem + " não foi inserido");
+                System.out.println("Item " + nomeItem + " não foi coletado");
             }
                         
         }else{

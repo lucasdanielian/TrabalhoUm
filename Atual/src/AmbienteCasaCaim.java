@@ -42,9 +42,10 @@ public class AmbienteCasaCaim extends Ambiente {
                 visitouBob = true;
             }
             if(visitouBob == true){ // se ele passou por Bob
+                dean.getMochila().removerPeloNome("Carta");
                 recebeuTask = true;
                 dean.getDiario().adicionarPagina("Em Houston, existe um grupo de"
-                        + " vampiros que Caim o pediu para que fossem eliminados");
+                        + " vampiros que Caim o pediu para que fossem eliminados.");
                 return "Dean se direciona para a casa de caim.\n"
                         + "Chegando lá, Dean apresenta a ele a carta entregue\n"
                         + "por Bob. Caim, com muita fúria afirma que ele era um\n"
@@ -72,17 +73,16 @@ public class AmbienteCasaCaim extends Ambiente {
         }
         else{ // se o jogador ja veio nesse ambiente
             if(recebeuTask == true && dean.getMarcaCaim() == false){
-                for (int i = 0; i < dean.getMochila().getQuantidadeAtual() ;i++) {
                     // se ele completou a task
-                    if(dean.getMochila().retornaItem(i).getNomeItem().equals("Cabeca de Vampiro")){
-                        dean.setMarcaCaim(true);
-                        dean.getDiario().adicionarPagina("Você possui a marca de Caim");
-                        return "Dean se direciona para a casa de caim.\n"
-                            + "Chegando lá, ele entrega a caim a cabeça de vampiro\n"
-                            + "que coletou na missão feita. Caim, impressionado\n"
-                            + "com o sucesso do rapaz, concede ao mesmo a marca de\n"
-                            + "Caim, um poder que o torna um Semi-Deus.\n";
-                    }
+                if(dean.getMochila().buscarPeloNome("CabecaVampiro")!=null){
+                    dean.setMarcaCaim(true);
+                    dean.getDiario().adicionarPagina("Você possui a marca de Caim");
+                    dean.getMochila().removerPeloNome("CabecaVampiro");
+                    return "Dean se direciona para a casa de caim.\n"
+                        + "Chegando lá, ele entrega a caim a cabeça de vampiro\n"
+                        + "que coletou na missão feita. Caim, impressionado\n"
+                        + "com o sucesso do rapaz, concede ao mesmo a marca de\n"
+                        + "Caim, um poder que o torna um Semi-Deus.\n";
                 }
                 if(dean.getMarcaCaim() == false){ // se ele nao completou a task
                     return "Dean se direciona para a casa de caim.\n "

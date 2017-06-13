@@ -49,6 +49,7 @@ public class ColecaoDeItens {
     public boolean inserirItens(Item novo){
         if(quantidadeAtual < capacidade){
             itens.add(novo);
+            quantidadeAtual++;
             return true;
         }
         else{
@@ -66,6 +67,7 @@ public class ColecaoDeItens {
         for(Item i:itens){
             if(i.getNomeItem().equals(nomeDoItem)){
                 itens.remove(i);
+                quantidadeAtual++;
                 return i;
             }
         }

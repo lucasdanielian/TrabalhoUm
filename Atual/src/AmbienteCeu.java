@@ -43,6 +43,7 @@ public class AmbienteCeu extends Ambiente {
                     + "e um dente de lobo no portal do inferno.");
             dean.getDiario().adicionarPagina("Sam morrerá após 30 dias após a ligação");
             dean.getDiario().adicionarPagina("Você pode, mas não deve buscar as almas no Purgatório.");
+            dean.getDiario().adicionarPagina("Existe um grupo de lobisomens em Denver");
             if(dean.getMochila().espacoDisponivel()){
                 dean.getMochila().inserirItens(getItem());
                 itemFoiColetado = true;
@@ -62,6 +63,7 @@ public class AmbienteCeu extends Ambiente {
                     + "o mal e o bem. Como um anjo do senhor, posso lhe fornecer\n"
                     + "uma pena de minhas asas, que servirão como item de bem.\n"
                     + "Um dente de lobisomem será suficiente como item de mal.\n"
+                    + "Há um grupo de lobisomens em Denver, Colorado.\n"
                     + "Mais uma coisa, você sabe que pode pegar as almas no\n"
                     + "Purgatório para o demônio,mas seria cometer um pecado\n"
                     + "ainda maior que deixar seu irmao morrer. Você deveria\n"

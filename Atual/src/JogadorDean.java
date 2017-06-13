@@ -26,33 +26,33 @@ public class JogadorDean {
     }
     
     /**
+     * @return
      * Retorna um Diario
-     * @return 
      */
     public ItemDiario getDiario(){
         return diario;
     }
     
     /**
+     * @return
      * Retorna o boolean, true se:
      * e false se: 
-     * @return 
      */
     public boolean getMarcaCaim(){
         return marcaCaim;
     }
     
     /**
+     * @return
      * Retorna a coleção de itens do jogador, denominada mochila
-     * @return 
      */
     public ColecaoDeItens getMochila(){
         return mochila;
     }
     
     /**
+     * @param aux
      * Autera o valor de Marca de false para true caso
-     * @param aux 
      */
     public void setMarcaCaim(boolean aux){
         marcaCaim = aux;

@@ -17,9 +17,11 @@ public class ItemDiario extends Item{
     private List<String> paginas;
     
     /**
-     * Cria um Item Diario com seu nome e sua descrição
+     * Cria um Item Diario
      * @param nomeItem
-     * @param descricaoItem 
+     * com seu nome
+     * @param descricaoItem
+     * e sua descrição
      */
     public ItemDiario(String nomeItem, String descricaoItem) {
         super(nomeItem, descricaoItem);
@@ -27,16 +29,16 @@ public class ItemDiario extends Item{
     }
     
     /**
+     * @param chave
      * Adiciona páginas ao diario, que são Strings
-     * @param chave 
      */
     public void adicionarPagina(String chave){
         this.paginas.add(chave);
     }
     
     /**
+     * @return String
      * Retorna uma String com todas as páginas concatenadas
-     * @return 
      */
     public String getPaginas(){
         String resposta = "";
@@ -47,18 +49,19 @@ public class ItemDiario extends Item{
     }
     
     /**
+     * @return Int
      * Retorna o tamanho da lista de String, que são as páginas do diario
-     * @return 
      */
     public int getTamanho(){
         return paginas.size();
     }
     
     /**
+     * @param i
      * Pega uma página especifica, que é a posição da lista na qual a mesma foi
      * adiciona.
-     * @param i
-     * @return 
+     * @return
+     * e retorna a página 
      */
     public String getPagina(int i){
         return paginas.get(i);

@@ -12,8 +12,8 @@
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
- * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public class AmbientePurgatorio extends Ambiente {
 
@@ -21,8 +21,8 @@ public class AmbientePurgatorio extends Ambiente {
     private boolean foiCeu;
     
     /**
+     * @param nomeAmbiente
      * Constroi um ambiente "AmbientePurgatorio" passando seu nome por parametro
-     * @param nomeAmbiente 
      */
     public AmbientePurgatorio(String nomeAmbiente)  {
         super(nomeAmbiente);
@@ -31,10 +31,11 @@ public class AmbientePurgatorio extends Ambiente {
     }
     
     /**
+     * @param dean
+     * Passa um jogador como parametro para interagir com o meio ambiente
+     * @return
      * Metodo que retorna uma String que deverá exibir a mensagem de entrada
      * referente ao ambiente pugatorio
-     * @param dean
-     * @return 
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {

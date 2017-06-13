@@ -21,8 +21,9 @@ public class ColecaoDeItens {
     
     
     /**
-     * Constroi uma lista de objetos da classe Itens, e determina a capacidade da mesma a partir de uma capacidade
-     * @param capacidade 
+     * @param capacidade
+     * Constroi uma lista de objetos da classe Itens,
+     * e determina a capacidade da mesma a partir de uma capacidade
      */
     public ColecaoDeItens(int capacidade) {
         this.capacidade = capacidade;
@@ -32,6 +33,7 @@ public class ColecaoDeItens {
     
     
     /**
+     * @return String
      * o metodo exibir() mostra na tela a atual disposicao dos itens na sua 
      */
     public String exibirItens(){
@@ -43,8 +45,10 @@ public class ColecaoDeItens {
     }
     
     /**
-     * O metodo inserirItens() insere um novo item na coleção recebendo o mesmo como parâmetro
      * @param novo 
+     * O metodo inserirItens() insere um novo item na coleção recebendo o mesmo como parâmetro
+     * @return boolean
+     * Se inseriu o item retorna true
      */
     public boolean inserirItens(Item novo){
         if(quantidadeAtual < capacidade){
@@ -59,9 +63,10 @@ public class ColecaoDeItens {
     
     
     /**
-     * O metodo removerPeloNome(nomeDoItem) busca pelo objeto passado como parâmetro e o remove caso exista.
      * @param nomeDoItem
-     * @return Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
+     * O metodo removerPeloNome(nomeDoItem) busca pelo objeto passado como parâmetro e o remove caso exista.
+     * @return Item
+     * Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
      */
     public Item removerPeloNome(String nomeDoItem){
         for(Item i:itens){
@@ -76,9 +81,10 @@ public class ColecaoDeItens {
     }
     
     /**
-     * O metodo que busca um item na lista tendo como chave o seu nome.
      * @param nomeDoItem
-     * @return Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
+     * O metodo que busca um item na lista tendo como chave o seu nome.
+     * @return Item
+     * Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
      */
     public Item buscarPeloNome(String nomeDoItem){
         for(Item i:itens){
@@ -90,9 +96,9 @@ public class ColecaoDeItens {
     }
     
     /**
+     * @return boolean
      * Retorna true caso haja espaço disponível para armazenar mais itens, ou
      * false caso já esteja cheio e não seja mais possivel adicionar
-     * @return 
      */
     public boolean espacoDisponivel(){
         if(quantidadeAtual < capacidade){
@@ -104,17 +110,18 @@ public class ColecaoDeItens {
     }
     
     /**
+     * @return Int
      * Retorna um inteiro com a quantidade de itens
-     * @return 
      */
     public int getQuantidadeAtual(){
         return quantidadeAtual;
     }
     
     /**
-     * Retorna um item, passado sua posicao no vetor.
      * @param i
-     * @return 
+     * busca pela posicao do vetor, inteiro "i"
+     * @return Item
+     * Retorna um item, passado sua posicao no vetor.
      */
     public Item retornaItem(int i){
         return itens.get(i);

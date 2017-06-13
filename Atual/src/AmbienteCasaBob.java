@@ -12,16 +12,17 @@
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
- * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public class AmbienteCasaBob extends Ambiente {
     private boolean itemFoiColetado;
     private boolean foiCeu;
     
     /**
-     * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
+     * 
      * @param nomeAmbiente 
+     * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
      */
     public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
@@ -29,10 +30,12 @@ public class AmbienteCasaBob extends Ambiente {
     }
     
     /**
+     * 
+     * @param dean
+     * Passa o jogador como parametro
+     * @return String
      * Retornará uma String que devera exibir a mensagem de entrada referente
      * a casa do Bob
-     * @param dean
-     * @return String
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean){

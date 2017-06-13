@@ -15,9 +15,11 @@ public class Item {
     private String descricaoItem;
     // teste valdeci3
     /**
-     * Constroi um item passando seu nome e seu descrição 
+     * Constroi um item passando 
      * @param nomeItem
-     * @param descricaoItem 
+     * seu nome
+     * @param descricaoItem
+     * e seu descrição
      */
     public Item(String nomeItem, String descricaoItem) {
         this.nomeItem = nomeItem;   
@@ -25,8 +27,8 @@ public class Item {
     }
 
     /**
+     * @return String
      * Retorna o nome do item juntamente com sua descrição
-     * @return 
      */
     public String getDescricaoItem(){
         String retorno = "Item: " + nomeItem + " / Descricao Item: " + descricaoItem;
@@ -34,8 +36,8 @@ public class Item {
     }
     
     /**
+     * @return String
      * Retorna uma String contendo o nome do Item
-     * @return 
      */
     public String getNomeItem(){
         return nomeItem;

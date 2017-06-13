@@ -13,8 +13,8 @@
  *  executa os comandos que o analisador retorna.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Modificado: Valdeci Soares da Silva Junior e Lucas Danielian 
  * @version 2011.07.31 (2017.05.16)
- * @Modificado: Valdeci Soares da Silva Junior & Lucas Danielian 
  */
 public class Jogo  {
     private Analisador analisador;
@@ -282,7 +282,11 @@ public class Jogo  {
         }
     }
     
-    
+    /**
+     * Metodo que permite exibir o que o jogador carrega consigo, ou que tem no
+     * armario
+     * @param comando 
+     */
     private void analisar(Comando comando){
        if (!comando.temSegundaPalavra()){
            System.out.println("Analisar o que? \n");
@@ -299,6 +303,13 @@ public class Jogo  {
         }
     }
     
+    /**
+     * Metodo que permite guardar um item que o jogador Dean carrega consigo,
+     * no ambiente "CasaWinchester" quando ele precisar remover um item da mochila
+     * Obs: pela dinâmica do jogo, ele só pode retirar um item da mochila e guardar
+     * no armario que se encontra no ambiente elencado acima.
+     * @param comando 
+     */
     private void guardar(Comando comando){
         if (!comando.temSegundaPalavra()){
            System.out.println("Guardar o que? \n");
@@ -315,6 +326,11 @@ public class Jogo  {
         }
     }
     
+    /**
+     * Metodo que permite pegar um item que o jogador Dean precisa carregar consigo,
+     * no ambiente "CasaWinchester", para conquistar seu objetivo de salvar seu irmão
+     * @param comando 
+     */
     private void pegar(Comando comando){
         if (!comando.temSegundaPalavra()){
            System.out.println("Pegar o que? \n");
@@ -331,10 +347,14 @@ public class Jogo  {
             }
                         
         }else{
-            System.out.println("Este ambiente nao lhe permite guardar nenhum item. \n");
+            System.out.println("Este ambiente nao lhe permite coletar nenhum item. \n");
         }
     }
     
+    /**
+     * Metodo que Lê o Diario que o jogador Dean carrega consigo.
+     * @param comando 
+     */
     private void ler(Comando comando){
         if (!comando.temSegundaPalavra()){
            System.out.println("Ler o que? \n");

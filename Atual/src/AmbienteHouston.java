@@ -12,8 +12,8 @@
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
- * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public class AmbienteHouston extends Ambiente {
 
@@ -21,8 +21,8 @@ public class AmbienteHouston extends Ambiente {
     private boolean foiCaim;
     
     /**
+     * @param nomeAmbiente
      * Constroi um ambiente "Houston" passando seu nome por parametro
-     * @param nomeAmbiente 
      */
     public AmbienteHouston(String nomeAmbiente)  {
         super(nomeAmbiente);
@@ -31,10 +31,11 @@ public class AmbienteHouston extends Ambiente {
     }
     
     /**
+     * @param dean
+     * Passa o jogador como parametro para interação com o ambiente
+     * @return String
      * Retorna uma String que deverá ser utilizada para exibir a mensagem de
      * entrada ao ambiente Houston e fazer a sobrescrita do metodo na classe pai
-     * @param dean
-     * @return String
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean){

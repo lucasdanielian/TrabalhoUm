@@ -12,8 +12,8 @@
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
- * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public class AmbienteInferno extends Ambiente {
     private boolean denteLobo;
@@ -21,9 +21,9 @@ public class AmbienteInferno extends Ambiente {
     private boolean almas;
     
     /**
+     * @param nomeAmbiente
      * Constroi um ambiente "Inferno" passando seu nome por parametro
      * denteLobo, penaAnjo e almas é inicializado como false
-     * @param nomeAmbiente 
      */
     public AmbienteInferno(String nomeAmbiente)  {
         super(nomeAmbiente);
@@ -33,9 +33,10 @@ public class AmbienteInferno extends Ambiente {
     }
     
     /**
-     * Metodo que retorna a mensagem de entrada quando se chega ao ambiente inferno
      * @param dean 
+     * Passa o jogador como parametro para interagir com o ambiente
      * @return String
+     * Metodo que retorna a mensagem de entrada quando se chega ao ambiente inferno
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {

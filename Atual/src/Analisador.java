@@ -62,7 +62,10 @@ public class Analisador  {
     }
     
     /**
-     * @return O proximo comando do usuario
+     * @param comando
+     * Processa o comando recebido
+     * @return Comando
+     * E retorna o proximo comando valido para o usuario
      */
     public Comando prossesarComandoDireto(String comando)  {
         String linha;   // guardara uma linha inteira
@@ -92,8 +95,8 @@ public class Analisador  {
     }
     
     /**
+     * @return String[]
      * Retorna uma String contendo todos os programas disponíveis
-     * @return 
      */
     public String[] comandosDisponiveis() {
         return palavrasDeComando.comandos();

@@ -38,8 +38,8 @@ public class PalavrasComando {
     }
     
     /**
+     * @return String
      * Retorna uma String contendo todas as palavras de comando
-     * @return 
      */
     public String[] comandos() {
         return this.comandosValidos;

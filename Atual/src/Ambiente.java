@@ -15,8 +15,8 @@ import java.util.HashMap;
  * saida naquela direcao.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
+ * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
- * @editor Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  */
 public abstract class Ambiente  {
     private String nomeAmbiente;
@@ -25,13 +25,10 @@ public abstract class Ambiente  {
     private ColecaoDeItens armario;
     private Item item;
     /**
+     * @param nomeAmbiente
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
-     * "
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "um jardim aberto".
-     * @param descricao A descricao do ambiente.
+     * "um jardim aberto"
      */
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
@@ -43,15 +40,15 @@ public abstract class Ambiente  {
 
     /**
      * Retorna um item do ambiente
-     * @return 
+     * @return Item
      */
     public Item getItem() {
         return item;
     }
     
     /**
+     * @param item
      * Adiciona um item no ambiente
-     * @param item 
      */
     public void setItem(Item item) {
         this.item = item;
@@ -60,7 +57,7 @@ public abstract class Ambiente  {
     /**
      * remove o item e passa o item removido como retorno do metodo caso queira
      * adicionar em outra lista
-     * @return 
+     * @return Item
      */
     public Item removeItem(){
         Item aux = item;
@@ -69,16 +66,31 @@ public abstract class Ambiente  {
     }
     
     /**
-     * De acordo com a parametro recebido, onde cada campo representa um ambiente
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no caso do ambiente inferno, pois o mesmo não possui mais saída.
+     * De acordo com o parametro recebido, onde cada campo representa um ambiente
      * @param denver
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      * @param houston
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      * @param casaCaim 
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      * @param casaBob
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      * @param inferno
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      * @param purgatorio
-     * @param casaWinchester 
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
+     * @param casaWinchester
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
+     * @param ceu
+     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
+     * volta no ambiente inferno, pois o mesmo não possui mais saída.
      */
     public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester, Ambiente ceu){
         if(denver != null)
@@ -107,12 +119,12 @@ public abstract class Ambiente  {
     }
     
     /**
-     * Metodo que retornará as mensagens quando o jogador entra em um novo ambiente.
-     * passará as informações referentes as condições do jogador de acordo com 
-     * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @param dean Jogador
-     * @return 
+     * passará as informações referentes as condições do jogador de acordo com 
+     * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
+     * @return String
+     *  Metodo que retornará as mensagens quando o jogador entra em um novo ambiente.
      */
     public abstract String mensagemDeEntrada(JogadorDean dean);
     
@@ -130,7 +142,7 @@ public abstract class Ambiente  {
     
     /**
      * Metodo que retorna se um ambiente já foi visitado ou nao.
-     * @return 
+     * @return Boleano
      */
     public boolean getJaVisitada() {
         return jaVisitada;
@@ -141,9 +153,10 @@ public abstract class Ambiente  {
     }
     
     /**
-     * Retorna a saida com a devida direcao
      * @param direcao
-     * @return 
+     * Recebe a devida direcao
+     * @return Ambiente
+     * Retorna a saida com a devida direcao
      */
     public Ambiente getAmbiente(String direcao){
         return saidas.get(direcao);
@@ -151,7 +164,7 @@ public abstract class Ambiente  {
     
     /**
      * 
-     * @return 
+     * @return String
      */
     public String getSaidas(){
         String textoSaidas = "";
@@ -181,13 +194,17 @@ public abstract class Ambiente  {
     /**
      * 
      * @param item
-     * @return 
+     * @return Item
      */
     private Item removerObjetosArmario(Item item){
         armario.removerPeloNome(item.getNomeItem());
         return item;
     }
     
+    /**
+     * Retoran uma lista dos itens contido no armario
+     * @return ColecaoDeItens
+     */
     public ColecaoDeItens getArmario(){
         return armario;
     }

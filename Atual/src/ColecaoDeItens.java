@@ -72,7 +72,7 @@ public class ColecaoDeItens {
         for(Item i:itens){
             if(i.getNomeItem().equals(nomeDoItem)){
                 itens.remove(i);
-                quantidadeAtual++;
+                quantidadeAtual--;
                 return i;
             }
         }

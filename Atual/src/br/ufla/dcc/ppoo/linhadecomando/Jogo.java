@@ -13,9 +13,10 @@ import br.ufla.dcc.ppoo.trabalhodois.regradenegocio.Item;
 import br.ufla.dcc.ppoo.trabalhodois.regradenegocio.Comando;
 import br.ufla.dcc.ppoo.trabalhodois.regradenegocio.Analisador;
 import br.ufla.dcc.ppoo.trabalhodois.regradenegocio.AmbienteCasaCaim;
+import javax.swing.JOptionPane;
 
 /**
- *  Essa eh a classe principal do Jogo "SuperNatural".
+ *  Essa eh a classe principal(Para jogar na lina de comando) do Jogo "SuperNatural".
  *  "SuperNatural" eh um jogo de aventura muito simples, baseado em texto.
  *  Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
  *  comprir a missão que é salvar seu irmão do inferno.
@@ -35,7 +36,7 @@ import br.ufla.dcc.ppoo.trabalhodois.regradenegocio.AmbienteCasaCaim;
 public class Jogo  {
     private Analisador analisador;
     private Ambiente ambienteAtual;
-    private boolean terminado; // variavel que encerra o jogo
+    private String terminado; // variavel que encerra o jogo    
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
     Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
@@ -46,8 +47,8 @@ public class Jogo  {
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
-        terminado = false;
         contador = 1;
+        terminado = "ok";
         dean = new JogadorDean();
         carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
                 + "que cobra um favor que caim devia a Bob");
@@ -105,34 +106,52 @@ public class Jogo  {
      
         // o jogo comeca do lado de fora
         ambienteAtual = casaWinchester;
-}
+    }
 
-    /**
+     /**
      *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
      */
-    public void jogar() {            
-        imprimirBoasVindas();
+    public void jogarTerminal() {            
+        System.out.println(imprimirBoasVindas());
+        System.out.println(exibirAmbienteAtual());
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
         // comandos e os executamos ate o jogo terminar.
 
-        while (! terminado) {
+        while (terminado != null) {
             Comando comando = analisador.pegarComando();
+            System.out.println(processarComando(comando));
             terminado = processarComando(comando);
         }
-        System.out.println("Obrigado por jogar. Ate mais!");
+        System.out.println("\nObrigado por jogar. Ate mais!\n");
+    }
+    
+    /**
+     *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
+     */
+    public void jogarInterfaceGrafica() {            
+        JOptionPane.showMessageDialog(null, imprimirBoasVindas());
+        JOptionPane.showMessageDialog(null, exibirAmbienteAtual());
+        
+        // Entra no loop de comando principal. Aqui nos repetidamente lemos
+        // comandos e os executamos ate o jogo terminar.
+
+        while (terminado != null) {
+            Comando comando = analisador.pegarComandoInterfaceGrafia();
+            JOptionPane.showMessageDialog(null, processarComando(comando));
+            terminado = processarComando(comando);
+        }
+        JOptionPane.showMessageDialog(null, "Obrigado por jogar. Ate mais!");
     }
 
     /**
      * Imprime a mensagem de abertura para o jogador.
      */
-    private void imprimirBoasVindas() {
-        System.out.println();
-        System.out.println("Bem vindo à Supernatural : Morte Súbita. O jogo é do"
+    private String imprimirBoasVindas() {
+        return "\n Bem vindo à Supernatural : Morte Súbita. O jogo é do"
                 + " tipo text adventure, ou seja,\né um jogo basicamente lógico "
-                + "com ações básicas. A imersão na história começa… AGORA!\n");
-        
-        System.out.println("Dean winchester está prioritariamente preocupado. Já\n"
+                + "com ações básicas. A imersão na história começa… AGORA!\n"
+                + "\nDean winchester está prioritariamente preocupado. Já\n"
                 + "haviam duas semanas que seu irmão Sam havia saído de casa\n"
                 + "para investigar um caso de ataques de bruxas na cidade de\n"
                 + "Weston, no estado da Flórida. Seria apenas uma caçada a mais\n"
@@ -161,28 +180,18 @@ public class Jogo  {
                 + "itens quiser, em seu armário. Sabe-se também que, a cada vez\n"
                 + "que Dean tem que se deslocar de um lugar para outro,ele\n"
                 + "precisa de 3 dias.  É seu papel guiar Dean no caminho correto\n"
-                + "que salvará seu irmão."
-                + "\nBoa Sorte!\n");
-        
-        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
-        System.out.println();
-        
-        exibirAmbienteAtual();
+                + "que salvará seu irmão.\n"
+                + "\nBoa Sorte!\n"
+                + "\n Digite 'ajuda' a qualquer momento se voce precisar de ajuda.\n";
     }
     
     /**
      * Exibe o ambiente em que o jogador está no momento
      */
-    private void exibirAmbienteAtual() {
-        System.out.println("Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia " + contador);
-        
-        System.out.println("");
-        
-        System.out.println(ambienteAtual.mensagemDeEntrada(dean));
-        
-        System.out.print("Saidas: ");
-        System.out.println(ambienteAtual.getSaidas());
-        System.out.println();
+    private String exibirAmbienteAtual() {
+        return "\n Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia "
+                + contador + "\n" + ambienteAtual.mensagemDeEntrada(dean)
+                + "Saidas: " + ambienteAtual.getSaidas() + "\n";
     }
 
     /**
@@ -190,39 +199,38 @@ public class Jogo  {
      * @param comando O Comando a ser processado.
      * @return true se o comando finaliza o jogo.
      */
-    private boolean processarComando(Comando comando) {
-        boolean querSair = false;
+    private String processarComando(Comando comando) {
+        String querSair = null;
 
         if(comando.ehDesconhecido()) {
-            System.out.println("Eu nao entendi o que voce disse...");
-            return false;
+            return "\n Eu nao entendi o que voce disse... \n";
         }
 
         String palavraDeComando = comando.getPalavraDeComando();
         if (palavraDeComando.equals("ajuda")) {
-            imprimirAjuda();
+            return imprimirAjuda();
         }
         else if (palavraDeComando.equals("ir")) {
-            irParaAmbiente(comando);
+            return irParaAmbiente(comando);
         }
         else if (palavraDeComando.equals("sair")) {
-            querSair = sair(comando);
+            return querSair = sair(comando);
         }
         
         else if (palavraDeComando.equals("guardar")) {
-            guardar(comando);
+            return guardar(comando);
         }
     
         else if (palavraDeComando.equals("pegar")) {
-            pegar(comando);
+            return pegar(comando);
         }
         
         else if (palavraDeComando.equals("analisar")) {
-            analisar(comando);
+            return analisar(comando);
         }
         
         else if (palavraDeComando.equals("ler")){
-            ler(comando);
+            return ler(comando);
         }
         
         return querSair;
@@ -233,52 +241,51 @@ public class Jogo  {
      * Aqui nos imprimimos algo bobo e enigmatico e a lista de 
      * palavras de comando
      */
-    private void imprimirAjuda() {
-        System.out.println("Voce é Dean. Voce precisa salvar seu irmao. Voce\n "
-                + "deve descobrir como isso será possivel.\n");
-        System.out.println("Para utilizar o comando 'ir' voce deve digitar em\n"
-                + "seguida qual o ambiente a seguir\n");
-        System.out.println("Para utilizar o comando 'guardar' você deve estar em\n"
-                + "CasaWinchester e colocar o nome do item que vai ser guardada\n");
-        System.out.println("Para utilizar o comando 'analisar', você deve colocar\n"
-                + "em sequencia se quer listar os itens de 'mochila' ou 'armario'\n");
-        System.out.println("Para utilizar o comando 'pegar' voce deve estar em\n"
-                + "CasaWinchester e colocar o nome do item que será recolhido\n");
-        System.out.println("Para utilizar o comando 'ler' você deve colocar em\n"
-                + "sequencia a palavra 'diario'\n");
+    private String imprimirAjuda() {
+        return "\nVoce é Dean. Voce precisa salvar seu irmao. Voce\n "
+                + "deve descobrir como isso será possivel.\n"
+                + "\nPara utilizar o comando 'ir' voce deve digitar em\n"
+                + "seguida qual o ambiente a seguir\n"
+                + "\nPara utilizar o comando 'guardar' você deve estar em\n"
+                + "CasaWinchester e colocar o nome do item que vai ser guardada\n"
+                + "\nPara utilizar o comando 'analisar', você deve colocar\n"
+                + "em sequencia se quer listar os itens de 'mochila' ou 'armario'\n"
+                + "\nPara utilizar o comando 'pegar' voce deve estar em\n"
+                + "CasaWinchester e colocar o nome do item que será recolhido\n"
+                + "\nPara utilizar o comando 'ler' você deve colocar em\n"
+                + "sequencia a palavra 'diario'\n";
     }
 
     /** 
      * Tenta ir em uma direcao. Se existe uma saida entra no 
      * novo ambiente, caso contrario imprime mensagem de erro.
      */
-    private void irParaAmbiente(Comando comando) {
+    private String irParaAmbiente(Comando comando) {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
-            System.out.println("Ir pra onde?");
-            return;
-        }
+            return "\nIr pra onde?\n";
+        }else{
+            String direcao = comando.getSegundaPalavra();
 
-        String direcao = comando.getSegundaPalavra();
+            // Tenta sair do ambiente atual
+            Ambiente proximoAmbiente = null;
 
-        // Tenta sair do ambiente atual
-        Ambiente proximoAmbiente = null;
-        
             proximoAmbiente = ambienteAtual.getAmbiente(direcao);
 
-        if (proximoAmbiente == null) {
-            System.out.println("Nao ha passagem!");
-        }
-        else { 
-            ambienteAtual = proximoAmbiente;
-            contador = contador+3;
-            
-            if(contador <=30){
-                exibirAmbienteAtual();
+            if (proximoAmbiente == null) {
+                return "\nNao ha passagem!\n";
             }
-            else{
-                System.out.println("Voce excedeu o tempo limite. Sam Winchester está morto.\n"
-                        + "GAME OVER! Digite 'sair' e tente novamente");
+            else { 
+                ambienteAtual = proximoAmbiente;
+                contador = contador+3;
+
+                if(contador <=30){
+                    return exibirAmbienteAtual();
+                }
+                else{
+                    return "\nVoce excedeu o tempo limite. Sam Winchester está"
+                            + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
+                }
             }
         }
     }
@@ -288,13 +295,12 @@ public class Jogo  {
      * se nos queremos realmente sair do jogo.
      * @return true, se este comando sai do jogo, false, caso contrario
      */
-    private boolean sair(Comando comando) {
+    private String sair(Comando comando) {
         if(comando.temSegundaPalavra()) {
-            System.out.println("Sair o que?");
-            return false;
+            return "Sair o que?";
         }
         else {
-            return true;  // sinaliza que nos queremos sair
+            return null;  // sinaliza que nos queremos sair
         }
     }
     
@@ -303,19 +309,18 @@ public class Jogo  {
      * armario
      * @param comando 
      */
-    private void analisar(Comando comando){
+    private String analisar(Comando comando){
        if (!comando.temSegundaPalavra()){
-           System.out.println("Analisar o que? \n");
-           return;
+           return "\nAnalisar o que? \n";
         }
         String itens = comando.getSegundaPalavra();
         if (itens.equals("mochila")){
-            System.out.println(dean.getMochila().exibirItens());
+            return dean.getMochila().exibirItens();
                         
         }else if (itens.equals("armario")){
-            System.out.println(ambienteAtual.getArmario().exibirItens());
+            return ambienteAtual.getArmario().exibirItens();
         }else{
-            System.out.println("Palavra Invalida");
+            return "\nPalavra Invalida\n";
         }
     }
     
@@ -326,19 +331,18 @@ public class Jogo  {
      * no armario que se encontra no ambiente elencado acima.
      * @param comando 
      */
-    private void guardar(Comando comando){
+    private String guardar(Comando comando){
         if (!comando.temSegundaPalavra()){
-           System.out.println("Guardar o que? \n");
-           return;
+           return "\n Guardar o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
         Item itemAux = dean.getMochila().removerPeloNome(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             ambienteAtual.getArmario().inserirItens(itemAux);
-            System.out.println("Item: " + nomeItem + " guardado com sucesso");
+            return "\n Item: " + nomeItem + " guardado com sucesso\n";
                         
         }else{
-            System.out.println("Este ambiente nao lhe permite guardar nenhum item. \n");
+            return "\n Este ambiente nao lhe permite guardar nenhum item. \n";
         }
     }
     
@@ -347,23 +351,22 @@ public class Jogo  {
      * no ambiente "CasaWinchester", para conquistar seu objetivo de salvar seu irmão
      * @param comando 
      */
-    private void pegar(Comando comando){
+    private String pegar(Comando comando){
         if (!comando.temSegundaPalavra()){
-           System.out.println("Pegar o que? \n");
-           return;
+           return "\n Pegar o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             Item aux = ambienteAtual.getArmario().removerPeloNome(nomeItem);
             boolean verificacao = dean.getMochila().inserirItens(aux);
             if (verificacao == true){
-                System.out.println("Item: " + nomeItem + " coletado com sucesso");
+                return "\n Item: " + nomeItem + " coletado com sucesso\n";
             }else{
-                System.out.println("Item " + nomeItem + " não foi coletado");
+                return "\n Item " + nomeItem + " não foi coletado\n";
             }
                         
         }else{
-            System.out.println("Este ambiente nao lhe permite coletar nenhum item. \n");
+            return "\n Este ambiente nao lhe permite coletar nenhum item. \n";
         }
     }
     
@@ -371,16 +374,15 @@ public class Jogo  {
      * Metodo que Lê o Diario que o jogador Dean carrega consigo.
      * @param comando 
      */
-    private void ler(Comando comando){
+    private String ler(Comando comando){
         if (!comando.temSegundaPalavra()){
-           System.out.println("Ler o que? \n");
-           return;
+           return "\n Ler o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
         if(nomeItem.equals("diario")){
-            System.out.println(dean.getDiario().getPaginas());
+            return dean.getDiario().getPaginas();
         }else{
-            System.out.println("Este item nao e o diario, logo nao pode ser lido");
+            return "\n Este item nao e o diario, logo nao pode ser lido";
         }
         
     }

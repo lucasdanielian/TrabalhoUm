@@ -4,6 +4,7 @@ import br.ufla.dcc.ppoo.linhadecomando.Jogo;
 /**
  * Classe principal do Programa. Apenas inicia o jogo.
  * @author Julio
+ * Edicao: Valdeci & Lucas
  */
 public class Programa {
 
@@ -14,6 +15,7 @@ public class Programa {
      */
     public static void main(String[] args) {
         Jogo jogo = new Jogo();
-        jogo.jogar();
+        //jogo.jogarTerminal();
+        jogo.jogarInterfaceGrafica();
     }
 }

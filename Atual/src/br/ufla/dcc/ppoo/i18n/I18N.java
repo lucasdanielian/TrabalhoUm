@@ -368,45 +368,8 @@ public class I18N {
      *
      * @return Texto do rótulo nome do filme.
      */
-    public static String obterRotuloFilmeNome() {
-        return rb.getString("rotulo.filme.nome");
-    }
-
-    /**
-     * Retorna o texto do rótulo gênero do filme.
-     *
-     * @return Texto do rótulo gênero do filme.
-     */
-    public static String obterRotuloFilmeGenero() {
-        return rb.getString("rotulo.filme.genero");
-    }
-
-    /**
-     * Retorna o texto do rótulo ano do filme.
-     *
-     * @return Texto do rótulo ano do filme.
-     */
-    public static String obterRotuloFilmeAno() {
-        return rb.getString("rotulo.filme.ano");
-    }
-
-    /**
-     * Retorna o texto do rótulo da duração do filme.
-     *
-     * @return Texto do rótulo da duração do filme.
-     */
-    public static String obterRotuloFilmeDuracao() {
-
-        return rb.getString("rotulo.filme.duracao");
-    }
-
-    /**
-     * Retorna o texto do rótulo descrição do filme.
-     *
-     * @return Texto do rótulo descrição do filme.
-     */
-    public static String obterRotuloFilmeDescricao() {
-        return rb.getString("rotulo.jogo.descricao");
+    public static String obterRotuloEntradaComandos() {
+        return rb.getString("rotulo.entrada.comando");
     }
 
     /**
@@ -425,5 +388,9 @@ public class I18N {
      */
     public static String obterRotuloUsuarioNome() {
         return rb.getString("rotulo.usuario.nome");
+    }
+
+    public static String obterRotuloTextoComandos() {
+        return rb.getString("rotulo.texto.comando");
     }
 }

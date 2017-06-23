@@ -38,8 +38,10 @@ public class TelaJogo {
     private GridBagConstraints gbc;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
-    private JLabel lbNomes;
-    private JTextField txtNome;
+    private JLabel lbTexto1;
+    private JLabel lbTexto2;
+    private JLabel lbEntradaComandos;
+    private JTextField txtEntradaComandos;
 
 
      /**
@@ -92,17 +94,29 @@ public class TelaJogo {
      */
     private void adicionarComponentes() {
         
-        lbNomes = new JLabel(I18N.obterRotuloFilmeNome());
-        adicionarComponente(lbNomes,
+        lbTexto1 = new JLabel(I18N.obterRotuloTextoComandos());
+        adicionarComponente(lbTexto1,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
                 1, 0, 1, 1);
+        
+        lbTexto2 = new JLabel(I18N.obterRotuloTextoComandos());
+        adicionarComponente(lbTexto1,
+                GridBagConstraints.LINE_END,
+                GridBagConstraints.NONE,
+                1, 0, 1, 1);
+        
+        lbEntradaComandos = new JLabel(I18N.obterRotuloEntradaComandos());
+        adicionarComponente(lbEntradaComandos,
+                GridBagConstraints.LINE_END,
+                GridBagConstraints.NONE,
+                2, 0, 2, 2);
 
-        txtNome = new JTextField(25);
-        adicionarComponente(txtNome,
+        txtEntradaComandos = new JTextField(25);
+        adicionarComponente(txtEntradaComandos,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.HORIZONTAL,
-                1, 1, 3, 1);
+                2, 2, 4, 2);
 
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);

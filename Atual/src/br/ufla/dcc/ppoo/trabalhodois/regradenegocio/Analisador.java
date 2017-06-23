@@ -36,11 +36,12 @@ public class Analisador  {
      * @return O proximo comando do usuario
      */
     public Comando pegarComando()  {
-        String linha;   // guardara uma linha inteira
+        //   
         String palavra1 = null;
         String palavra2 = null;
 
-        linha = entrada.nextLine();
+        // guardara a entrada do usuario em uma linha inteira
+        String linha = entrada.nextLine();
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);
@@ -66,11 +67,11 @@ public class Analisador  {
      * @return O proximo comando do usuario
      */
     public Comando pegarComandoInterfaceGrafia()  {
-        String linha;   // guardara uma linha inteira
+        //   
         String palavra1 = null;
         String palavra2 = null;
-
-       linha = JOptionPane.showInputDialog("> ");
+        // guardara uma linha inteira
+        String linha = JOptionPane.showInputDialog("Digite sua opcao > ");
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);

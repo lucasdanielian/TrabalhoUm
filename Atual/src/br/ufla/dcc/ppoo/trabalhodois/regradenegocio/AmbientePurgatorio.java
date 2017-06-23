@@ -41,7 +41,11 @@ public class AmbientePurgatorio extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
-        
+        //
+        String texto1 = "Dean se direciona para o purgatório. Chegando lá, devido\n"
+                            + "à sua enorme experiência como um hunter, ele consegue\n"
+                            + "aprisionar as 10 almas requeridas pelo demônio para\n"
+                            + "salvar seu irmão.";
         if(getJaVisitada() == false){ // se o jogador ainda nao passou por este ambiente
             //fazer texto do purgatório
             
@@ -58,16 +62,10 @@ public class AmbientePurgatorio extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "Dean se direciona para o purgatório. Chegando lá, devido\n"
-                            + "à sua enorme experiência como um hunter, ele consegue\n"
-                            + "aprisionar as 10 almas requeridas pelo demônio para\n"
-                            + "salvar seu irmão. O item 'Almas' foi adicionado na mochila\n";
+                    return texto1 + "\nO item 'Almas' foi adicionado na mochila\n";
                 }
                 else{
-                    return "Dean se direciona para o purgatório. Chegando lá, devido\n"
-                            + "à sua enorme experiência como um hunter, ele consegue\n"
-                            + "aprisionar as 10 almas requeridas pelo demônio para\n"
-                            + "salvar seu irmão.Entretanto, você não possui espaço\n"
+                    return texto1 + "\nEntretanto, você não possui espaço\n"
                             + "suficiente na mochila para pegar o item\n";
                 }
             }

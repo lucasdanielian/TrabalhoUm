@@ -41,7 +41,11 @@ public class AmbienteHouston extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean){
-        
+        //
+        String texto1 = "Dean se direciona para Houston. Ele investiga onde o grupo\n"
+                            + "de vampiros citado por Caim está. Após descobrir,\n"
+                            + "Dean mata cada um deles e reserva uma das cabeças para\n"
+                            + "levar para Caim, assim como foi exigido.";
         if(getJaVisitada() == false){ // caso o jogador nunca tenha vindo a este ambiente
             // fazer o texto dos vampiros
             
@@ -59,19 +63,11 @@ public class AmbienteHouston extends Ambiente {
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "Dean se direciona para Houston. Ele investiga onde o grupo\n"
-                            + "de vampiros citado por Caim está. Após descobrir,\n"
-                            + "Dean mata cada um deles e reserva uma das cabeças para\n"
-                            + "levar para Caim, assim como foi exigido. O item 'CabecaVampiro'\n"
-                            + "foi coletado\n";
+                    return texto1 + "\nO item. 'CabecaVampiro' foi coletado\n";
                 }
             
                 else{
-                    return "Dean se direciona para Houston. Ele investiga onde o grupo\n"
-                            + "de vampiros citado por Caim está. Após descobrir,\n"
-                            + "Dean mata cada um deles e reserva uma das cabeças para\n"
-                            + "levar para Caim, assim como foi exigido.Sua mochila\n"
-                            + "está cheia, não há espaço para coletar o item\n";
+                    return texto1 + "\nSua mochila está cheia, não há espaço para coletar o item\n";
                 }
                 
             }

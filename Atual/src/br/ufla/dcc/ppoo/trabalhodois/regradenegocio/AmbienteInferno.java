@@ -42,6 +42,12 @@ public class AmbienteInferno extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean) {
+        //
+        String texto1 = "Dean chega até ao portal do inferno. Com o devido ritual,\n"
+                         + "ele oferece o dente e a pena e assim, sua entrada é\n"
+                         + "liberada. Tudo está muito escuro, ele mal consegue\n"
+                         + "enxergar. Repentinamente, o demônio que capturou Sam\n"
+                         + "aparece";
         if(dean.getMochila().buscarPeloNome("Dente")!=null){
             denteLobo = true;
         }
@@ -62,22 +68,14 @@ public class AmbienteInferno extends Ambiente {
                         + "GAME OVER! Digite 'sair' e tente novamente!";
              }
              else if(almas == true && dean.getMarcaCaim() == false){
-                 return "Dean chega até ao portal do inferno. Com o devido ritual,\n"
-                         + "ele oferece o dente e a pena e assim, sua entrada é\n"
-                         + "liberada. Tudo está muito escuro, ele mal consegue\n"
-                         + "enxergar. Repentinamente, o demônio que capturou Sam\n"
-                         + "aparece e captura as almas trazidas por Dean. Em seguida,\n"
+                 return texto1 + " e captura as almas trazidas por Dean. Em seguida,\n"
                          + "o mesmo libera Sam para ir embora, cumprindo sua\n"
                          + "palavra. Entretanto, ele nunca prometeu à Dean que o\n"
                          + "deixaria voltar, e dessa maneira o mata cruelmente.\n"
                          + "GAME OVER! Digite 'sair' e tente novamente";
              }
              else{
-                return "Dean chega até ao portal do inferno. Com o devido ritual,\n"
-                        + "ele oferece o dente e a pena e assim, sua entrada é\n"
-                        + "liberada. Tudo está muito escuro, ele mal consegue\n"
-                        + "enxergar. Repentinamente, o demônio que capturou Sam\n"
-                        + "aparece. Dean, com sua fúria por seu irmão ter sido\n"
+                return texto1 + " Dean, com sua fúria por seu irmão ter sido\n"
                         + "torturado e quase morto, utiliza o poder que adquiriu\n"
                         + "e mata o demonio, liberta seu irmão e vai embora para\n"
                         + "casa. Eles podem, enfim, voltar à sua nada normal vida\n"

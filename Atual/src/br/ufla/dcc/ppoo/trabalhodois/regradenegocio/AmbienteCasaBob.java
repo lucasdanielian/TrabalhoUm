@@ -42,6 +42,22 @@ public class AmbienteCasaBob extends Ambiente {
     @Override
     public String mensagemDeEntrada(JogadorDean dean){
         //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
+        String texto1 = "\nDean se direciona para Boulder, no estado do\n"
+            + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
+            + "que se tornou como um pai para os garotos.\n";
+        String texto2 = "\nDean se direciona para Boulder, no estado do\n"
+            + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
+            + "que se tornou como um pai para os garotos. Chegando à\n"
+            + "casa de Bob, Dean explica toda a situação ocorrida para\n"
+            + "o mesmo.Em seguida, Bob diz : “Você não pode, de forma\n"
+            + "alguma, entregar as almas requeridas pelo demônio, seri\n"
+            + "um desrespeito à memória de seu pai.. Acredito que você\n"
+            + "possa adquirir poderes suficientes para matar a criatura\n"
+            + "se procurar Caim, filho de adão e eva. Não será fácil,\n"
+            + "porém ele poderá lhe conceder a “Marca de Caim” que lhe\n"
+            + "tornará forte o suficiente para lhe transformar em um\n"
+            + "Deus. Ele me deve alguns favores,leve esta carta contigo\n"
+            + "que ele poderá lhe ajudar”\n";
         if(getJaVisitada() == false){
             
             for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
@@ -52,60 +68,27 @@ public class AmbienteCasaBob extends Ambiente {
                     foiCeu = true;
                 }
             }
-            
             if(foiCeu == true){
-            
                 setJaVisitada(true);
                 dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
                 if(dean.getMochila().espacoDisponivel()){
                     dean.getMochila().inserirItens(getItem());
                     itemFoiColetado = true;
-                    return "Dean se direciona para Boulder, no estado do\n"
-                        + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
-                        + "que se tornou como um pai para os garotos. Chegando à\n"
-                        + "casa de Bob, Dean explica toda a situação ocorrida para\n"
-                        + "o mesmo.Em seguida, Bob diz : “Você não pode, de forma\n"
-                        + "alguma, entregar as almas requeridas pelo demônio, seri\n"
-                        + "um desrespeito à memória de seu pai.. Acredito que você\n"
-                        + "possa adquirir poderes suficientes para matar a criatura\n"
-                        + "se procurar Caim, filho de adão e eva. Não será fácil,\n"
-                        + "porém ele poderá lhe conceder a “Marca de Caim” que lhe\n"
-                        + "tornará forte o suficiente para lhe transformar em um\n"
-                        + "Deus. Ele me deve alguns favores,leve esta carta contigo\n"
-                        + "que ele poderá lhe ajudar”\n"
-                        + "O item 'Carta' foi adicionado na mochila\n";
+                    return texto2 + "\nO item 'Carta' foi adicionado na mochila\n";
                 }
                 else{
-                    return "Dean se direciona para Boulder, no estado do\n"
-                        + "Colorado. Lá mora Bob, melhor amigo de seu falecido pai,\n"
-                        + "que se tornou como um pai para os garotos. Chegando à\n"
-                        + "casa de Bob, Dean explica toda a situação ocorrida para\n"
-                        + "o mesmo.Em seguida, Bob diz : “Você não pode, de forma\n"
-                        + "alguma, entregar as almas requeridas pelo demônio, seria\n"
-                        + "um desrespeito à memória de seu pai.. Acredito que você\n"
-                        + "possa adquirir poderes suficientes para matar a criatura\n"
-                        + "se procurar Caim, filho de adão e eva. Não será fácil,\n"
-                        + "porém ele poderá lhe conceder a “Marca de Caim”que lhe\n"
-                        + "tornará forte o suficiente para lhe transformar em um\n"
-                        + "Deus. Ele me deve alguns favores, leve esta carta contigo\n"
-                        + "que ele poderá lhe ajudar” \n"
-                        + "\nPorem voce nao possui espaco na mochila para guardar o item\n";
+                    return texto2 + "\nPorem voce nao possui espaco na mochila para guardar o item\n";
                 }
             }
             else{
-                return "Dean se direciona para Boulder, no estado do\n"
-                        + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
-                        + "que se tornou como um pai para os garotos. Entretanto,\n"
-                        + "por mais que Bob queira ajudar, Dean não possui informações\n"
-                        + "suficientes para que possa ser ajudado\n";
+                return texto1 + "Entretanto,\n por mais que Bob queira ajudar,"
+                        + "Dean não possui informações\n suficientes para que possa ser ajudado\n";
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == true){    
-            return "Dean se direciona para Boulder, no estado do Colorado.Lá mora Bob,\n"
-                    + "melhor amigo de seu falecido pai, que se tornou como um pai para os garotos.\n"
-                    + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente garoto, eu já não posso\n"
-                    + "fazer mais nada por você”\n";
+            return texto1 + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente"
+                    + "garoto, eu já não posso\n fazer mais nada por você”\n";
             }
             else{
                 if(dean.getMochila().espacoDisponivel()){

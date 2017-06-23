@@ -42,7 +42,15 @@ public class AmbienteDenver extends Ambiente {
      */
     @Override
     public String mensagemDeEntrada(JogadorDean dean){
-        if(getJaVisitada() == false){//se o jogador nunca visitou este ambiente
+        //Mensgem de entrada do ambiente
+        String texto1 = "Dean se direciona para a cidade de Denver, no\n"
+                        + "estado do Colorado.Há informações de que uma alcateia\n"
+                        + "de lobisomens vêm atacando os moradores.Após certa\n"
+                        + "investigação, Dean descobre onde estes lobos estão, invade\n"
+                        + "seu esconderijo,e mata todos, um a um.\n";
+        
+        //se o jogador nunca visitou este ambiente
+        if(getJaVisitada() == false){
             for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
                 if(dean.getDiario().getPagina(i).equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
                     foiCeu = true;
@@ -50,23 +58,15 @@ public class AmbienteDenver extends Ambiente {
             }
             if(foiCeu == true){
                 setJaVisitada(true);
-                if(dean.getMochila().espacoDisponivel()){ // se ha espaco disponivel para armazenar o item
+                
+                // se ha espaco disponivel para armazenar o item
+                if(dean.getMochila().espacoDisponivel()){ 
                     dean.getMochila().inserirItens(super.getItem());
                     itemFoiColetado = true;
-                    return "Dean se direciona para a cidade de Denver, no\n"
-                        + "estado do Colorado.Há informações de que uma alcateia\n"
-                        + "de lobisomens vêm atacando os moradores.Após certa\n"
-                        + "investigação, Dean descobre onde estes lobos estão, invade\n"
-                        + "seu esconderijo,e mata todos, um a um.\n"
-                        + "O item 'Dente' foi colocado na mochila\n";
+                    return texto1 + "O item 'Dente' foi colocado na mochila\n";
                 }
                 else{
-                    return "Dean se direciona para a cidade de Denver, no\n"
-                        + "estado do Colorado.Há informações de que uma alcateia\n"
-                        + "de lobisomens vêm atacando os moradores.Após certa\n"
-                        + "investigação, Dean descobre onde estes lobos estão, invade\n"
-                        + "seu esconderijo,e mata todos, um a um.\n"
-                        + "Você não pode coletar o dente de lobo,pois\n"
+                    return texto1 + "Você não pode coletar o dente de lobo,pois\n"
                         + "nao há espaço disponível na sua mochila\n";
                 }
             }

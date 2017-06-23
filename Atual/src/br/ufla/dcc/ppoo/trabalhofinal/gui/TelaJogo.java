@@ -1,11 +1,9 @@
 package br.ufla.dcc.ppoo.trabalhofinal.gui;
 
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
-import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.Jogo;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
-import br.ufla.dcc.ppoo.util.Utilidades;
+import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.Jogo;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,26 +14,21 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
- *  Essa eh a classe principal(Para jogar com interface Grafica) do Jogo "SuperNatural".
+ *  Essa eh a classe principal(Para iniciar com interface Grafica) do RegraNegocio "SuperNatural".
  *  "SuperNatural" eh um jogo de aventura muito simples, baseado em texto.
- *  Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
- *  comprir a missão que é salvar seu irmão do inferno.
- *  Para isto o mesmo deve realizar a tarefa em um tempo inferior a 30. 
- * 
- *  Para jogar esse jogo, crie uma instancia dessa classe e chame o metodo
- *  "jogar".
- * 
- *  Essa classe principal cria e inicializa todas as outras: ela cria os
- *  ambientes, cria o analisador e comeca o jogo. Ela tambeme avalia e 
- *  executa os comandos que o analisador retorna.
+  Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
+  comprir a missão que é salvar seu irmão do inferno.
+  Para isto o mesmo deve realizar a tarefa em um tempo inferior a 30. 
+ 
+  Para iniciar esse jogo, crie uma instancia dessa classe e chame o metodo
+  "iniciar".
+ 
+  Essa classe principal cria e inicializa todas as outras: ela cria os
+  ambientes, cria o analisador e comeca o jogo. Ela tambeme avalia e 
+  executa os comandos que o analisador retorna.
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * Modificado: Valdeci Soares da Silva Junior e Lucas Danielian 

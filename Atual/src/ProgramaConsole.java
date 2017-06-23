@@ -9,7 +9,7 @@ import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.Jogo;
 public class ProgramaConsole {
 
     /**
-     * Método principal. Cria um objeto da classe Jogo e inicia o jogo.
+     * Método principal. Cria um objeto da classe RegraNegocio e inicia o jogo.
      * 
      * @param args argumentos de linha de comando (não utilizados)
      */

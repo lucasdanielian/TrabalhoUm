@@ -1,3 +1,6 @@
+
+import br.ufla.dcc.ppoo.linhadecomando.Jogo;
+
 /**
  * Classe principal do Programa. Apenas inicia o jogo.
  * @author Julio

@@ -1,6 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhodois.regradenegocio;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Esta classe eh parte da aplicacao "World of Zuul".
@@ -39,9 +40,37 @@ public class Analisador  {
         String palavra1 = null;
         String palavra2 = null;
 
-        System.out.print("> ");     // imprime o prompt
-
         linha = entrada.nextLine();
+
+        // Tenta encontrar ate duas palavras na linha
+        Scanner tokenizer = new Scanner(linha);
+        if(tokenizer.hasNext()) {
+            palavra1 = tokenizer.next();      // pega a primeira palavra
+            if(tokenizer.hasNext()) {
+                palavra2 = tokenizer.next();      // pega a segunda palavra
+                // obs: nos simplesmente ignoramos o resto da linha.
+            }
+        }
+
+        // Agora verifica se esta palavra eh conhecida. Se for, cria um
+        // com ela. Se nao, cria um comando "null" (para comando desconhecido)
+        if(palavrasDeComando.ehComando(palavra1)) {
+            return new Comando(palavra1, palavra2);
+        }
+        else {
+            return new Comando(null, palavra2); 
+        }
+    }
+    
+    /**
+     * @return O proximo comando do usuario
+     */
+    public Comando pegarComandoInterfaceGrafia()  {
+        String linha;   // guardara uma linha inteira
+        String palavra1 = null;
+        String palavra2 = null;
+
+       linha = JOptionPane.showInputDialog("> ");
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);

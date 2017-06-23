@@ -35,7 +35,7 @@ public class Analisador  {
     /**
      * @return O proximo comando do usuario
      */
-    public Comando pegarComando()  {
+    public Comando pegarComandoConsole()  {
         //   
         String palavra1 = null;
         String palavra2 = null;

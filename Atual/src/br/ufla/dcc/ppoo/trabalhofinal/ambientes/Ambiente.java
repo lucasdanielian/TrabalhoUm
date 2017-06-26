@@ -134,6 +134,13 @@ public abstract class Ambiente  {
     public abstract String mensagemDeEntrada(JogadorDean dean);
     
     /**
+     * O metodo é abstrato e deve ser sobrescrito nas classes filhas
+     * @return String
+     *  Metodo que retornará uma string com a localização da imagem.
+     */
+    public abstract String imagemDeEntrada();
+    
+    /**
      * Metodo que retorna o item do Ambiente
      * @return String 
      */

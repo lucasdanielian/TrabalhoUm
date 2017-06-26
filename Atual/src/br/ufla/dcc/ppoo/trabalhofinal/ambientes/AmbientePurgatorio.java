@@ -92,5 +92,15 @@ public class AmbientePurgatorio extends Ambiente {
             }
         }
     }
+    
+    /**
+     * 
+     * @return String
+     * retorna uma String com o endereco da imagem
+     */
+    @Override
+    public String imagemDeEntrada() {
+        return "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_add.png";
+    }
 
 }

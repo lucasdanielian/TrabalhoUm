@@ -41,4 +41,14 @@ public class AmbienteCasaWinchester extends Ambiente {
         return "Dean está em sua casa. Aqui ele pode guardar itens coletados, e "
                 + "pegar itens que estão em seu armário.\n";
     }
+    
+        /**
+     * 
+     * @return String
+     * retorna uma String com o endereco da imagem
+     */
+    @Override
+    public String imagemDeEntrada() {
+        return "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_add.png";
+    }
 }

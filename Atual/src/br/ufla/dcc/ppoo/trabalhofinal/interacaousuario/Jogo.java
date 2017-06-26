@@ -1,6 +1,5 @@
 package br.ufla.dcc.ppoo.trabalhofinal.interacaousuario;
 
-import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import javax.swing.JOptionPane;
 
 public class Jogo{

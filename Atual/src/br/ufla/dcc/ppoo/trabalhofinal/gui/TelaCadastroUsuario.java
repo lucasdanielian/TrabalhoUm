@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.gui;
 
+import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.modelo.Usuario;

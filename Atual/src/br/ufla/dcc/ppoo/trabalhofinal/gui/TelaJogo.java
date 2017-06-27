@@ -1,8 +1,10 @@
 package br.ufla.dcc.ppoo.trabalhofinal.gui;
 
+import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
-import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.Jogo;
+import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.JogoTerminal;
+import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -45,7 +47,7 @@ public class TelaJogo {
     private GridBagConstraints gbc;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
-    private JLabel lbTexto1;
+    private JLabel lbTextoDinamico;
     private JLabel lbTexto2;
     private JLabel lbEntradaComandos;
     private JTextField txtEntradaComandos;
@@ -100,33 +102,19 @@ public class TelaJogo {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentes() {
-        Jogo jogo = new Jogo();
-        jogo.jogarInterfaceGrafica();
-        /**
-        lbTexto1 = new JLabel("Teste1");
-        adicionarComponente(lbTexto1,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.NONE,
-                1, 0, 1, 1);
+        RegraNegocio regraNegocio = new RegraNegocio();
         
-        lbTexto2 = new JLabel(I18N.obterRotuloTextoComandos());
-        adicionarComponente(lbTexto1,
+        lbTextoDinamico = new JLabel(regraNegocio.mensagemBoasVindas());
+        adicionarComponente(lbTextoDinamico,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
-                1, 0, 1, 1);
-        
-        lbEntradaComandos = new JLabel(I18N.obterRotuloEntradaComandos());
-        adicionarComponente(lbEntradaComandos,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.NONE,
-                2, 0, 2, 2);
+                10, 10, 10, 10);
 
         txtEntradaComandos = new JTextField(25);
         adicionarComponente(txtEntradaComandos,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.HORIZONTAL,
                 2, 2, 4, 2);
-                */
 
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);

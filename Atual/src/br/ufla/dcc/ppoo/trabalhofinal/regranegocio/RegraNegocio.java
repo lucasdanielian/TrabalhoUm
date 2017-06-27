@@ -1,4 +1,4 @@
-package br.ufla.dcc.ppoo.trabalhofinal.interacaousuario;
+package br.ufla.dcc.ppoo.trabalhofinal.regranegocio;
 
 import br.ufla.dcc.ppoo.trabalhofinal.ambientes.AmbienteCasaBob;
 import br.ufla.dcc.ppoo.trabalhofinal.ambientes.AmbienteCasaWinchester;
@@ -13,7 +13,6 @@ import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Analisador;
 import br.ufla.dcc.ppoo.trabalhofinal.ambientes.AmbienteCasaCaim;
-import javax.swing.JOptionPane;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -36,7 +35,6 @@ import javax.swing.JOptionPane;
 public class RegraNegocio  {
     private Analisador analisador;
     private Ambiente ambienteAtual;
-    private String terminado; // variavel que encerra o jogo 
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
     Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
@@ -48,42 +46,9 @@ public class RegraNegocio  {
         criarAmbientes();
         analisador = new Analisador();
         contador = 1;
-        terminado = "ok";
         dean = new JogadorDean();
         carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
                 + "que cobra um favor que caim devia a Bob");
-    }
-
-     /**
-     *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
-     */
-    public void iniciarConsole() {            
-        // Entra no loop de comando principal. Aqui nos repetidamente lemos
-        // comandos e os executamos ate o jogo terminar.
-        while (terminado != null) {
-            Comando comando = analisador.pegarComandoConsole();
-            if(processarComando(comando) != null){
-                System.out.println(processarComando(comando));
-            }else{
-                terminado = processarComando(comando);
-            }
-        }
-    }
-    
-        /**
-     *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
-     */
-    public void iniciarInterfaceGrafica() {            
-        // Entra no loop de comando principal. Aqui nos repetidamente lemos
-        // comandos e os executamos ate o jogo terminar.
-        while (terminado != null) {
-            Comando comando = analisador.pegarComandoInterfaceGrafia();
-            if(processarComando(comando) != null){
-                JOptionPane.showMessageDialog(null, processarComando(comando));
-            }else{
-                terminado = processarComando(comando);
-            }
-        }
     }
     
     /**

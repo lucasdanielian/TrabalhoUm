@@ -1,5 +1,8 @@
-package br.ufla.dcc.ppoo.trabalhofinal.gui;
+package br.ufla.dcc.ppoo.trabalhofinal.interacaousuario;
 
+import br.ufla.dcc.ppoo.trabalhofinal.gui.TelaAutenticacao;
+import br.ufla.dcc.ppoo.trabalhofinal.gui.TelaCadastroUsuario;
+import br.ufla.dcc.ppoo.trabalhofinal.gui.TelaJogo;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.seguranca.SessaoUsuario;

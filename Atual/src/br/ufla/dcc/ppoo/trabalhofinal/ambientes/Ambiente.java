@@ -138,7 +138,7 @@ public abstract class Ambiente  {
      * @return String
      *  Metodo que retornará uma string com a localização da imagem.
      */
-    public abstract String imagemDeEntrada();
+    public abstract String imagemDoAmbiente();
     
     /**
      * Metodo que retorna o item do Ambiente

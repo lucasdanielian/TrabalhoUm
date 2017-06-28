@@ -10,6 +10,7 @@ public class JogoTerminal{
     public static void main(String[] args) {
         RegraNegocio regraNegocio = new RegraNegocio();
         Analisador analisador = new Analisador();
+        Comando comando;
         String terminado = "ok"; // variavel que encerra o jogo
         System.out.println(regraNegocio.mensagemBoasVindas());
         System.out.print("> ");
@@ -17,7 +18,7 @@ public class JogoTerminal{
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
         // comandos e os executamos ate o jogo terminar.
         while (terminado != null) {
-            Comando comando = analisador.pegarComandoConsole();
+            comando = analisador.pegarComandoConsole();
             if(regraNegocio.processarComando(comando) != null){
                 System.out.println(regraNegocio.processarComando(comando));
                 System.out.print("> ");

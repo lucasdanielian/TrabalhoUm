@@ -5,7 +5,6 @@ import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
-import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.JogoTerminal;
 import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -15,8 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -51,12 +50,19 @@ public class TelaJogo {
     private JButton btnEnviarComando;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
-    private JTextArea textoDinamico;
-    private JLabel lbEntradaComandos;
+    private JButton btnIrCasaWinchester;
+    private JButton btnIrDenver;
+    private JButton btnIrHouston;
+    private JButton btnIrCasaCaim;
+    private JButton btnIrCasaBob;
+    private JButton btnIrInferno;
+    private JButton btnIrPurgatorio;
+    private JButton btnIrCeu;
+    private JTextArea  textoDinamico;
     private JTextField txtEntradaComandos;
     private RegraNegocio regraNegocio;
-    Comando comando;
-    Analisador analisador;
+    private Comando comando;
+    private Analisador analisador;
 
 
      /**
@@ -72,7 +78,7 @@ public class TelaJogo {
      * Inicializa a tela, construindo seus componentes, configurando os eventos
      * e, ao final, exibe a tela.
      */
-    public void inicializar() {
+    public void inicializar(){
         construirTela();
         configurarEventosTela();
         exibirTela();
@@ -103,48 +109,92 @@ public class TelaJogo {
         btnSalvarJogo.setEnabled(true);
         btnCancelarJogo.setEnabled(true);
         btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
     }
 
     /**
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
-    private void adicionarComponentes() {
+    private void adicionarComponentes(){
+        //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
+        //Analisador de comandos do jogo
         analisador = new Analisador();
         
+        //Imprime o texto na tela
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
         adicionarComponente(textoDinamico,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
-                10, 10, 10, 10);
+                //linha, coluna, largura, altura
+                1, 1, 10, 10);
 
+        //Recebe a entrada do usuario na tela
         txtEntradaComandos = new JTextField(25);
         adicionarComponente(txtEntradaComandos,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.HORIZONTAL,
-                2, 2, 4, 2);
-
-        comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
-        btnEnviarComando  = new JButton(I18N.obterBotaoEnviar(),
+                //linha, coluna, largura, altura
+                2, 1, 5, 1);
+        
+        //Botao que envia um comando
+        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
                 GerenciadorDeImagens.OK);
                 
+        //Botao que salva o jogo em persistencia
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
 
+        //Botao que encerra o jogo
         btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
                 GerenciadorDeImagens.CANCELAR);
 
+        //Botoes dos Ambientes
+        btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
+                GerenciadorDeImagens.OK);
+        btnIrDenver = new JButton(I18N.obterBotaoDenver(),
+                GerenciadorDeImagens.OK);
+        btnIrHouston = new JButton(I18N.obterBotaoHouston(),
+                GerenciadorDeImagens.OK);
+        btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
+                GerenciadorDeImagens.OK);
+        btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
+                GerenciadorDeImagens.OK);
+        btnIrInferno = new JButton(I18N.obterBotaoInferno(),
+                GerenciadorDeImagens.OK);
+        btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
+                GerenciadorDeImagens.OK);
+        btnIrCeu = new JButton(I18N.obterBotaoCeu(),
+                GerenciadorDeImagens.OK);
+        
         prepararComponentesEstadoInicial();
 
+        //Adiciona os botoes na tela
         JPanel painelBotoes = new JPanel();
         painelBotoes.add(btnEnviarComando);
         painelBotoes.add(btnSalvarJogo);
         painelBotoes.add(btnCancelarJogo);
+        painelBotoes.add(btnIrCasaWinchester);
+        painelBotoes.add(btnIrDenver);
+        painelBotoes.add(btnIrHouston);
+        painelBotoes.add(btnIrCasaCaim);
+        painelBotoes.add(btnIrCasaBob);
+        painelBotoes.add(btnIrInferno);
+        painelBotoes.add(btnIrPurgatorio);
+        painelBotoes.add(btnIrCeu);
 
         adicionarComponente(painelBotoes,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                6, 0, 4, 1);
+                //linha, coluna, largura, altura
+                3, 1, 1, 1);
     }
 
     /**
@@ -152,9 +202,74 @@ public class TelaJogo {
      */
     private void configurarEventosTela() {
         
+        btnIrCeu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir Ceu");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrCasaWinchester.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrDenver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrHouston.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrInferno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrPurgatorio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrCasaCaim.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnIrCasaBob.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
         btnEnviarComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
                 textoDinamico.setText(regraNegocio.processarComando(comando));
             }
         });
@@ -177,7 +292,7 @@ public class TelaJogo {
     /**
      * Constrói a janela tratando internacionalização, componentes e layout.
      */
-    private void construirTela() {
+    private void construirTela(){
         janela = new JDialog();
         janela.setTitle(I18N.obterTituloTelaMeuJogo());
         layout = new GridBagLayout();

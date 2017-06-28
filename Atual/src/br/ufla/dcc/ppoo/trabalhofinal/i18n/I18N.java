@@ -388,4 +388,68 @@ public class I18N {
     public static String obterBotaoEnviar() {
         return rb.getString("botao.enviar");
     }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Winchester
+     */
+    public static String obterBotaoWinchester() {
+        return rb.getString("botao.winchester");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Denver
+     */
+    public static String obterBotaoDenver() {
+        return rb.getString("botao.Denver");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Houston
+     */
+    public static String obterBotaoHouston() {
+        return rb.getString("botao.houston");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao CasaCaim
+     */
+    public static String obterBotaoCasaCaim() {
+        return rb.getString("botao.casa_caim");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao CasaBob
+     */
+    public static String obterBotaoCasaBob() {
+        return rb.getString("botao.CasaBob");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Inferno
+     */
+    public static String obterBotaoInferno() {
+        return rb.getString("botao.inferno");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Purgatorio
+     */
+    public static String obterBotaoPurgatorio() {
+        return rb.getString("botao.purgatorio");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Ceu
+     */
+    public static String obterBotaoCeu() {
+        return rb.getString("botao.ceu");
+    }
 }

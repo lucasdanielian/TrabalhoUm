@@ -106,7 +106,8 @@ public class RegraNegocio  {
     }
 
     /**
-     * Imprime a mensagem de abertura para o jogador.
+     * Mensagem de abertura para o jogador.
+     * @return Retorna a mensagem de abertura para o jogador.
      */
     public String mensagemBoasVindas() {
         return "\n Bem vindo à Supernatural : Morte Súbita. O jogo é do"
@@ -143,11 +144,13 @@ public class RegraNegocio  {
                 + "precisa de 3 dias.  É seu papel guiar Dean no caminho correto\n"
                 + "que salvará seu irmão.\n"
                 + "\nBoa Sorte!\n"
-                + "\n Digite 'ajuda' a qualquer momento se voce precisar de ajuda.\n";
+                + "\n Digite 'ajuda' a qualquer momento se voce precisar de ajuda.\n"
+                + descricaoAmbienteAtual();
     }
     
     /**
-     * Exibe o ambiente em que o jogador está no momento
+     * Ambiente em que o jogador está no momento
+     * @return String contendo o ambiente
      */
     public String descricaoAmbienteAtual() {
         return "\n Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia "
@@ -198,9 +201,8 @@ public class RegraNegocio  {
     }
 
     /**
-     * Printe informacoes de ajuda.
-     * Aqui nos imprimimos algo bobo e enigmatico e a lista de 
-     * palavras de comando
+     * Aqui nos imprimimos algo bobo e enigmatico.
+     * @return String contendo a lista de comandos
      */
     public String imprimirAjuda() {
         return "\nVoce é Dean. Voce precisa salvar seu irmao. Voce\n "
@@ -218,8 +220,9 @@ public class RegraNegocio  {
     }
 
     /** 
-     * Tenta ir em uma direcao. Se existe uma saida entra no 
-     * novo ambiente, caso contrario imprime mensagem de erro.
+     * Tenta ir em uma direcao. Se existe uma saida entra no novo ambiente.
+     * @param comando Recebe um comando como paramentro
+     * @return caso contrario imprime mensagem de erro.
      */
     public String irParaAmbiente(Comando comando) {
         if(!comando.temSegundaPalavra()) {
@@ -254,6 +257,7 @@ public class RegraNegocio  {
     /** 
      * "Sair" foi digitado. Verifica o resto do comando pra ver
      * se nos queremos realmente sair do jogo.
+     * @param comando Recebe o camando por parametro
      * @return true, se este comando sai do jogo, false, caso contrario
      */
     public String sair(Comando comando) {
@@ -268,7 +272,8 @@ public class RegraNegocio  {
     /**
      * Metodo que permite exibir o que o jogador carrega consigo, ou que tem no
      * armario
-     * @param comando 
+     * @param comando e passado por parametro para ser avaliado
+     * @return  String com item analisado
      */
     public String analisar(Comando comando){
        if (!comando.temSegundaPalavra()){
@@ -290,7 +295,8 @@ public class RegraNegocio  {
      * no ambiente "CasaWinchester" quando ele precisar remover um item da mochila
      * Obs: pela dinâmica do jogo, ele só pode retirar um item da mochila e guardar
      * no armario que se encontra no ambiente elencado acima.
-     * @param comando 
+     * @param comando e passado por parametro para ser avaliado
+     * @return  String contendo informacoes se o item foi guardado ou nao
      */
     public String guardar(Comando comando){
         if (!comando.temSegundaPalavra()){
@@ -310,7 +316,8 @@ public class RegraNegocio  {
     /**
      * Metodo que permite pegar um item que o jogador Dean precisa carregar consigo,
      * no ambiente "CasaWinchester", para conquistar seu objetivo de salvar seu irmão
-     * @param comando 
+     * @param comando e passado por parametro para ser avaliado
+     * @return  String contendo o item que foi pego
      */
     public String pegar(Comando comando){
         if (!comando.temSegundaPalavra()){
@@ -333,7 +340,8 @@ public class RegraNegocio  {
     
     /**
      * Metodo que Lê o Diario que o jogador Dean carrega consigo.
-     * @param comando 
+     * @param comando e passado por parametro para ser avaliado
+     * @return  String com informacoes do diario ou de erro de leitura
      */
     public String ler(Comando comando){
         if (!comando.temSegundaPalavra()){

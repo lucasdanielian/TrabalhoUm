@@ -54,6 +54,7 @@ public class SessaoUsuario {
      * Altera o usuário atualmente logado, verificando sua senha.
      * 
      * @param usuario Novo usuário logado.
+     * @param senha Para verificacao
      * @throws Exception Exceção gerada caso o usuário não possa ser autenticado,
      * ou seja, usuário não existe ou senha incorreta.
      */

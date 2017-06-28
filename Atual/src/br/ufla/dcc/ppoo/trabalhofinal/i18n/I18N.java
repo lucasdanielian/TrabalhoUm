@@ -380,4 +380,12 @@ public class I18N {
     public static String obterRotuloUsuarioNome() {
         return rb.getString("rotulo.usuario.nome");
     }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao enviar
+     */
+    public static String obterBotaoEnviar() {
+        return rb.getString("botao.enviar");
+    }
 }

@@ -1,5 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhofinal.gui;
 
+import br.ufla.dcc.ppoo.trabalhofinal.comandos.Analisador;
+import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
@@ -16,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -45,12 +48,15 @@ public class TelaJogo {
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
+    private JButton btnEnviarComando;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
-    private JLabel lbTextoDinamico;
-    private JLabel lbTexto2;
+    private JTextArea textoDinamico;
     private JLabel lbEntradaComandos;
     private JTextField txtEntradaComandos;
+    private RegraNegocio regraNegocio;
+    Comando comando;
+    Analisador analisador;
 
 
      /**
@@ -76,8 +82,8 @@ public class TelaJogo {
      * Adiciona um componente à tela.
      */
     private void adicionarComponente(Component c,
-            int anchor, int fill, int linha,
-            int coluna, int largura, int altura) {
+        int anchor, int fill, int linha,
+        int coluna, int largura, int altura) {
         gbc.anchor = anchor;
         gbc.fill = fill;
         gbc.gridy = linha;
@@ -96,16 +102,18 @@ public class TelaJogo {
 
         btnSalvarJogo.setEnabled(true);
         btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
     }
 
     /**
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentes() {
-        RegraNegocio regraNegocio = new RegraNegocio();
+        regraNegocio = new RegraNegocio();
+        analisador = new Analisador();
         
-        lbTextoDinamico = new JLabel(regraNegocio.mensagemBoasVindas());
-        adicionarComponente(lbTextoDinamico,
+        textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
+        adicionarComponente(textoDinamico,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
                 10, 10, 10, 10);
@@ -116,6 +124,10 @@ public class TelaJogo {
                 GridBagConstraints.HORIZONTAL,
                 2, 2, 4, 2);
 
+        comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
+        btnEnviarComando  = new JButton(I18N.obterBotaoEnviar(),
+                GerenciadorDeImagens.OK);
+                
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
 
@@ -125,6 +137,7 @@ public class TelaJogo {
         prepararComponentesEstadoInicial();
 
         JPanel painelBotoes = new JPanel();
+        painelBotoes.add(btnEnviarComando);
         painelBotoes.add(btnSalvarJogo);
         painelBotoes.add(btnCancelarJogo);
 
@@ -138,6 +151,14 @@ public class TelaJogo {
      * Configura os eventos da tela.
      */
     private void configurarEventosTela() {
+        
+        btnEnviarComando.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
         btnCancelarJogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

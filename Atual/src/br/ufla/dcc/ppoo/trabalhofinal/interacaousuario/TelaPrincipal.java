@@ -255,7 +255,7 @@ public class TelaPrincipal {
     /**
      * Retorna uma referência para a janela
      * 
-     * @return 
+     * @return JFrame
      */
     public JFrame obterJanela() {
         return this.janela;

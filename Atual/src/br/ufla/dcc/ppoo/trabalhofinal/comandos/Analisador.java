@@ -64,17 +64,16 @@ public class Analisador  {
     }
     
     /**
+     * @param entrada Recebe a String por parametro para ser avaliada
      * @return O proximo comando do usuario
      */
-    public Comando pegarComandoInterfaceGrafia()  {
+    public Comando pegarComandoInterfaceGrafia(String entrada)  {
         //   
         String palavra1 = null;
         String palavra2 = null;
-        // guardara uma linha inteira
-        String linha = JOptionPane.showInputDialog("Digite sua opcao > ");
 
         // Tenta encontrar ate duas palavras na linha
-        Scanner tokenizer = new Scanner(linha);
+        Scanner tokenizer = new Scanner(entrada);
         if(tokenizer.hasNext()) {
             palavra1 = tokenizer.next();      // pega a primeira palavra
             if(tokenizer.hasNext()) {

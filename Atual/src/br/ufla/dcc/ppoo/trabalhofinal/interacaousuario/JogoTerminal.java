@@ -12,7 +12,6 @@ public class JogoTerminal{
         Analisador analisador = new Analisador();
         String terminado = "ok"; // variavel que encerra o jogo
         System.out.println(regraNegocio.mensagemBoasVindas());
-        System.out.println(regraNegocio.descricaoAmbienteAtual());
         System.out.print("> ");
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos

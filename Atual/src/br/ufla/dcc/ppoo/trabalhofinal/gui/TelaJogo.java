@@ -9,11 +9,16 @@ import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -62,8 +67,11 @@ public class TelaJogo {
     private Comando comando;
     private Analisador analisador;
     private JScrollPane jScrollPaneSaida;
-    private ImageIcon icon;
+    private ImageIcon logo;
     private JLabel label;
+    private File file;
+    private URL resource;
+    private String diretorio;
 
      /**
      * Constrói a tela Meus Filmes guardando a referência da tela principal.
@@ -103,163 +111,268 @@ public class TelaJogo {
     }
 
     /**
+     * Adiciona imgagem na tela
+     */
+    private void adicionarImagem(String diretorio)throws Exception{
+        
+        File file = new File(diretorio);
+        if(file.exists()) {
+            logo = new ImageIcon(file.getPath());
+
+            label = new JLabel(logo);
+            janela.add(label, BorderLayout.EAST);
+        }else{
+            throw new Exception();
+        }
+    }
+    
+    /**
+     * Troca a imgagem atual da tela
+     */
+    private void trocaImagem(String diretorio)throws Exception{
+
+        File file = new File(diretorio);
+        if(file.exists()) {
+            label.setIcon(new ImageIcon(file.getPath()));
+        }else{
+            throw new Exception();
+        }
+    }
+    
+    /**
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentes(){
-        //Adiciona imgagem na tela
-        icon = new ImageIcon("/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_add.png");
-        label = new JLabel(icon);
-        janela.add(label, BorderLayout.EAST);
-        
-        //Gerenciador do Jogo
-        regraNegocio = new RegraNegocio();
-        //Analisador de comandos do jogo
-        analisador = new Analisador();
-        
-        //Imprime o texto na tela
-        textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
-        //Adiciona barra de rolagem ao texto
-        jScrollPaneSaida = new JScrollPane(textoDinamico);
-        //Adiciona o texto na tela
-        janela.add(jScrollPaneSaida, BorderLayout.CENTER);
+        try{
+            diretorio = "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/bandeira-br.png";
+            adicionarImagem(diretorio);
 
-        //Recebe a entrada do usuario na tela
-        txtEntradaComandos = new JTextField(10);
-        janela.add(txtEntradaComandos, BorderLayout.SOUTH);
-        
-        //Botao que envia um comando
-        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
-                GerenciadorDeImagens.OK);
-                
-        //Botao que salva o jogo em persistencia
-        btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
-                GerenciadorDeImagens.OK);
+            //Gerenciador do Jogo
+            regraNegocio = new RegraNegocio();
+            //Analisador de comandos do jogo
+            analisador = new Analisador();
 
-        //Botao que encerra o jogo
-        btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
-                GerenciadorDeImagens.CANCELAR);
+            //Imprime o texto na tela
+            textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
+            //Adiciona barra de rolagem ao texto
+            jScrollPaneSaida = new JScrollPane(textoDinamico);
+            //Adiciona o texto na tela
+            janela.add(jScrollPaneSaida, BorderLayout.CENTER);
 
-        //Botoes dos Ambientes
-        btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
-                GerenciadorDeImagens.OK);
-        btnIrDenver = new JButton(I18N.obterBotaoDenver(),
-                GerenciadorDeImagens.OK);
-        btnIrHouston = new JButton(I18N.obterBotaoHouston(),
-                GerenciadorDeImagens.OK);
-        btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
-                GerenciadorDeImagens.OK);
-        btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
-                GerenciadorDeImagens.OK);
-        btnIrInferno = new JButton(I18N.obterBotaoInferno(),
-                GerenciadorDeImagens.OK);
-        btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
-                GerenciadorDeImagens.OK);
-        btnIrCeu = new JButton(I18N.obterBotaoCeu(),
-                GerenciadorDeImagens.OK);
-        
-        prepararComponentesEstadoInicial();
+            //Recebe a entrada do usuario na tela
+            txtEntradaComandos = new JTextField(10);
+            janela.add(txtEntradaComandos, BorderLayout.SOUTH);
 
-        //Adiciona os botoes principais na tela
-        JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
-        painelBotoes.add(btnEnviarComando);
-        painelBotoes.add(btnSalvarJogo);
-        painelBotoes.add(btnCancelarJogo);
-        painelBotoes.add(btnIrCasaWinchester);
-        painelBotoes.add(btnIrDenver);
-        painelBotoes.add(btnIrHouston);
-        painelBotoes.add(btnIrCasaCaim);
-        painelBotoes.add(btnIrCasaBob);
-        painelBotoes.add(btnIrInferno);
-        painelBotoes.add(btnIrPurgatorio);
-        painelBotoes.add(btnIrCeu);
-        janela.add(painelBotoes, BorderLayout.WEST);
-        
+            //Botao que envia um comando
+            btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
+                    GerenciadorDeImagens.OK);
+
+            //Botao que salva o jogo em persistencia
+            btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
+                    GerenciadorDeImagens.OK);
+
+            //Botao que encerra o jogo
+            btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
+                    GerenciadorDeImagens.CANCELAR);
+
+            //Botoes dos Ambientes
+            btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
+                    GerenciadorDeImagens.OK);
+            btnIrDenver = new JButton(I18N.obterBotaoDenver(),
+                    GerenciadorDeImagens.OK);
+            btnIrHouston = new JButton(I18N.obterBotaoHouston(),
+                    GerenciadorDeImagens.OK);
+            btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
+                    GerenciadorDeImagens.OK);
+            btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
+                    GerenciadorDeImagens.OK);
+            btnIrInferno = new JButton(I18N.obterBotaoInferno(),
+                    GerenciadorDeImagens.OK);
+            btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
+                    GerenciadorDeImagens.OK);
+            btnIrCeu = new JButton(I18N.obterBotaoCeu(),
+                    GerenciadorDeImagens.OK);
+
+            prepararComponentesEstadoInicial();
+
+            //Adiciona os botoes principais na tela
+            JPanel painelBotoes = new JPanel();
+            painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
+            painelBotoes.add(btnEnviarComando);
+            painelBotoes.add(btnSalvarJogo);
+            painelBotoes.add(btnCancelarJogo);
+            painelBotoes.add(btnIrCasaWinchester);
+            painelBotoes.add(btnIrDenver);
+            painelBotoes.add(btnIrHouston);
+            painelBotoes.add(btnIrCasaCaim);
+            painelBotoes.add(btnIrCasaBob);
+            painelBotoes.add(btnIrInferno);
+            painelBotoes.add(btnIrPurgatorio);
+            painelBotoes.add(btnIrCeu);
+            janela.add(painelBotoes, BorderLayout.WEST);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio + " Nao encontrada");
+            JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+        }
     }
 
     /**
      * Configura os eventos da tela.
      */
     private void configurarEventosTela() {
-        
-        btnIrCeu.addActionListener(new ActionListener() {
+
+        btnIrCeu.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir Ceu");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+            public void actionPerformed(ActionEvent e){
+                try{
+                    comando = analisador.pegarComandoInterfaceGrafia("ir Ceu");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }   
             }
         });
-        
+            
         btnIrCasaWinchester.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrDenver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrHouston.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrInferno.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrPurgatorio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrCasaCaim.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual() 
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnIrCasaBob.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual() 
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
         btnEnviarComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
+                try {
+                    comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
+                            + " Nao encontrada");
+                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
+                            + "Se o problema persistir contate o administrador do sistema");
+                    janela.dispose();
+                }
             }
         });
         
@@ -273,7 +386,7 @@ public class TelaJogo {
         btnSalvarJogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prepararComponentesEstadoInicial();
+                JOptionPane.showMessageDialog(janela, "Persistencia ainda nao foi implementada, Aguarde pela nova versao");
             }
         });
     }

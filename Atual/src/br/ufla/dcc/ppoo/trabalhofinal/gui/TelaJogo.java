@@ -12,11 +12,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -63,6 +65,7 @@ public class TelaJogo {
     private RegraNegocio regraNegocio;
     private Comando comando;
     private Analisador analisador;
+    private JScrollPane jScrollPaneSaida;
 
 
      /**
@@ -87,16 +90,7 @@ public class TelaJogo {
     /**
      * Adiciona um componente à tela.
      */
-    private void adicionarComponente(Component c,
-        int anchor, int fill, int linha,
-        int coluna, int largura, int altura) {
-        gbc.anchor = anchor;
-        gbc.fill = fill;
-        gbc.gridy = linha;
-        gbc.gridx = coluna;
-        gbc.gridwidth = largura;
-        gbc.gridheight = altura;
-        gbc.insets = new Insets(5, 5, 5, 5);
+    private void adicionarComponente(Component c) {
         layout.setConstraints(c, gbc);
         janela.add(c);
     }
@@ -130,19 +124,14 @@ public class TelaJogo {
         
         //Imprime o texto na tela
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
-        adicionarComponente(textoDinamico,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.NONE,
-                //linha, coluna, largura, altura
-                1, 1, 10, 10);
+        //Adiciona barra de rolagem ao texto
+        jScrollPaneSaida = new JScrollPane(textoDinamico);
+        //Adiciona o texto na tela
+        adicionarComponente(jScrollPaneSaida);
 
         //Recebe a entrada do usuario na tela
         txtEntradaComandos = new JTextField(25);
-        adicionarComponente(txtEntradaComandos,
-                GridBagConstraints.LINE_START,
-                GridBagConstraints.HORIZONTAL,
-                //linha, coluna, largura, altura
-                2, 1, 5, 1);
+        adicionarComponente(txtEntradaComandos);
         
         //Botao que envia um comando
         btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
@@ -178,6 +167,7 @@ public class TelaJogo {
 
         //Adiciona os botoes na tela
         JPanel painelBotoes = new JPanel();
+        painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
         painelBotoes.add(btnEnviarComando);
         painelBotoes.add(btnSalvarJogo);
         painelBotoes.add(btnCancelarJogo);
@@ -190,11 +180,7 @@ public class TelaJogo {
         painelBotoes.add(btnIrPurgatorio);
         painelBotoes.add(btnIrCeu);
 
-        adicionarComponente(painelBotoes,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                //linha, coluna, largura, altura
-                3, 1, 1, 1);
+        adicionarComponente(painelBotoes);
     }
 
     /**

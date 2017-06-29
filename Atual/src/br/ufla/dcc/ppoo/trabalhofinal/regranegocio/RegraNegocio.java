@@ -157,6 +157,14 @@ public class RegraNegocio  {
                 + contador + "\n" + ambienteAtual.mensagemDeEntrada(dean)
                 + "Saidas: " + ambienteAtual.getSaidas() + "\n";
     }
+    
+    /**
+     * Retorna o endereço da imagem do ambiente Atual
+     * @return String contendo o endereco da imagem
+     */
+    public String imagemAmbienteAtual() {
+        return ambienteAtual.imagemDoAmbiente();
+    }
 
     /**
      * Dado um comando, processa-o (ou seja, executa-o)

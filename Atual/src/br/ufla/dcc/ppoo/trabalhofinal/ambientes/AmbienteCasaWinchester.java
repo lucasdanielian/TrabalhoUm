@@ -49,6 +49,6 @@ public class AmbienteCasaWinchester extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_add.png";
+        return "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group.png";
     }
 }

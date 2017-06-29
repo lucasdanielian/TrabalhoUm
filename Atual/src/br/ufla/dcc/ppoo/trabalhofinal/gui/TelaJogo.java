@@ -6,17 +6,14 @@ import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -46,9 +43,8 @@ public class TelaJogo {
     private final TelaPrincipal telaPrincipal;
             
     // componentes da tela
-    private JDialog janela;
-    private GridBagLayout layout;
-    private GridBagConstraints gbc;
+    private JFrame janela;
+    private BorderLayout layout;
     private JButton btnEnviarComando;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
@@ -66,7 +62,8 @@ public class TelaJogo {
     private Comando comando;
     private Analisador analisador;
     private JScrollPane jScrollPaneSaida;
-
+    private ImageIcon icon;
+    private JLabel label;
 
      /**
      * Constrói a tela Meus Filmes guardando a referência da tela principal.
@@ -85,14 +82,6 @@ public class TelaJogo {
         construirTela();
         configurarEventosTela();
         exibirTela();
-    }
-
-    /**
-     * Adiciona um componente à tela.
-     */
-    private void adicionarComponente(Component c) {
-        layout.setConstraints(c, gbc);
-        janela.add(c);
     }
 
     /**
@@ -117,6 +106,11 @@ public class TelaJogo {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentes(){
+        //Adiciona imgagem na tela
+        icon = new ImageIcon("/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_add.png");
+        label = new JLabel(icon);
+        janela.add(label, BorderLayout.EAST);
+        
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
         //Analisador de comandos do jogo
@@ -127,11 +121,11 @@ public class TelaJogo {
         //Adiciona barra de rolagem ao texto
         jScrollPaneSaida = new JScrollPane(textoDinamico);
         //Adiciona o texto na tela
-        adicionarComponente(jScrollPaneSaida);
+        janela.add(jScrollPaneSaida, BorderLayout.CENTER);
 
         //Recebe a entrada do usuario na tela
-        txtEntradaComandos = new JTextField(25);
-        adicionarComponente(txtEntradaComandos);
+        txtEntradaComandos = new JTextField(10);
+        janela.add(txtEntradaComandos, BorderLayout.SOUTH);
         
         //Botao que envia um comando
         btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
@@ -165,7 +159,7 @@ public class TelaJogo {
         
         prepararComponentesEstadoInicial();
 
-        //Adiciona os botoes na tela
+        //Adiciona os botoes principais na tela
         JPanel painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
         painelBotoes.add(btnEnviarComando);
@@ -179,8 +173,8 @@ public class TelaJogo {
         painelBotoes.add(btnIrInferno);
         painelBotoes.add(btnIrPurgatorio);
         painelBotoes.add(btnIrCeu);
-
-        adicionarComponente(painelBotoes);
+        janela.add(painelBotoes, BorderLayout.WEST);
+        
     }
 
     /**
@@ -193,6 +187,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir Ceu");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -201,6 +196,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -209,6 +205,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -217,6 +214,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -225,6 +223,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -233,6 +232,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -241,6 +241,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -249,6 +250,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -257,6 +259,7 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                label.setIcon(new ImageIcon(regraNegocio.imagemAmbienteAtual()));
             }
         });
         
@@ -279,10 +282,9 @@ public class TelaJogo {
      * Constrói a janela tratando internacionalização, componentes e layout.
      */
     private void construirTela(){
-        janela = new JDialog();
+        janela = new JFrame("Super Natural : Morte Subita");
         janela.setTitle(I18N.obterTituloTelaMeuJogo());
-        layout = new GridBagLayout();
-        gbc = new GridBagConstraints();
+        layout = new BorderLayout();
         janela.setLayout(layout);
         adicionarComponentes();
         janela.pack();
@@ -293,9 +295,8 @@ public class TelaJogo {
      * Exibe a tela.
      */
     private void exibirTela() {
-        janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         janela.setLocationRelativeTo(telaPrincipal.obterJanela());
-        janela.setModal(true);
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setVisible(true);
         janela.setResizable(false);
     }

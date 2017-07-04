@@ -92,14 +92,69 @@ public class RegraNegocio  {
         ceu.setItem(pena);
         
         // inicializa as saidas dos ambientes
-        casaWinchester.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, purgatorio, null, ceu);
-        denver.ajustarSaidas(null, houston, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
-        houston.ajustarSaidas(denver, null, casaCaim, casaBob, inferno, purgatorio, casaWinchester, ceu);
-        casaCaim.ajustarSaidas(denver, houston, null, casaBob, inferno, purgatorio, casaWinchester, ceu);
-        casaBob.ajustarSaidas(denver, houston, casaCaim, null, inferno, purgatorio, casaWinchester, ceu);
-        inferno.ajustarSaidas(null, null, null, null, null, null, null, null);
-        purgatorio.ajustarSaidas(denver, houston, casaCaim, casaBob, inferno, null, casaWinchester, ceu);
-        ceu.ajustarSaidas(denver,houston,casaCaim,casaBob,inferno,purgatorio,casaWinchester,null);
+        casaWinchester.ajustarSaidas(ceu);
+        casaWinchester.ajustarSaidas(inferno);
+        casaWinchester.ajustarSaidas(denver);
+        casaWinchester.ajustarSaidas(casaBob);
+        casaWinchester.ajustarSaidas(houston);
+        casaWinchester.ajustarSaidas(casaCaim);
+        casaWinchester.ajustarSaidas(purgatorio);
+        
+        denver.ajustarSaidas(ceu);
+        denver.ajustarSaidas(inferno);
+        denver.ajustarSaidas(casaBob);
+        denver.ajustarSaidas(houston);
+        denver.ajustarSaidas(casaCaim);
+        denver.ajustarSaidas(purgatorio);
+        denver.ajustarSaidas(casaWinchester);
+        
+        houston.ajustarSaidas(ceu);
+        houston.ajustarSaidas(inferno);
+        houston.ajustarSaidas(casaBob);
+        houston.ajustarSaidas(casaCaim);
+        houston.ajustarSaidas(casaWinchester);
+        houston.ajustarSaidas(purgatorio);
+        houston.ajustarSaidas(denver);
+        
+        casaCaim.ajustarSaidas(houston);
+        casaCaim.ajustarSaidas(ceu);
+        casaCaim.ajustarSaidas(casaBob);
+        casaCaim.ajustarSaidas(casaWinchester);
+        casaCaim.ajustarSaidas(denver);
+        casaCaim.ajustarSaidas(purgatorio);
+        casaCaim.ajustarSaidas(inferno);
+        
+        casaBob.ajustarSaidas(ceu);
+        casaBob.ajustarSaidas(denver);
+        casaBob.ajustarSaidas(casaWinchester);
+        casaBob.ajustarSaidas(casaCaim);
+        casaBob.ajustarSaidas(inferno);
+        casaBob.ajustarSaidas(purgatorio);
+        casaBob.ajustarSaidas(houston);
+        
+        inferno.ajustarSaidas(ceu);
+        inferno.ajustarSaidas(denver);
+        inferno.ajustarSaidas(casaWinchester);
+        inferno.ajustarSaidas(casaCaim);
+        inferno.ajustarSaidas(casaBob);
+        inferno.ajustarSaidas(houston);
+        inferno.ajustarSaidas(purgatorio);
+        
+        purgatorio.ajustarSaidas(ceu);
+        purgatorio.ajustarSaidas(denver);
+        purgatorio.ajustarSaidas(casaWinchester);
+        purgatorio.ajustarSaidas(casaBob);
+        purgatorio.ajustarSaidas(casaCaim);
+        purgatorio.ajustarSaidas(inferno);
+        purgatorio.ajustarSaidas(houston);
+        
+        ceu.ajustarSaidas(houston);
+        ceu.ajustarSaidas(inferno);
+        ceu.ajustarSaidas(casaCaim);
+        ceu.ajustarSaidas(casaBob);
+        ceu.ajustarSaidas(casaWinchester);
+        ceu.ajustarSaidas(denver);
+        ceu.ajustarSaidas(purgatorio);
      
         // o jogo comeca do lado de fora
         ambienteAtual = casaWinchester;

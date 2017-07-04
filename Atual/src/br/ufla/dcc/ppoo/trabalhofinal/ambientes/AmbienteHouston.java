@@ -104,6 +104,6 @@ public class AmbienteHouston extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "/home/junior/projetos/TrabalhoUm/Atual/src/br/ufla/dcc/ppoo/trabalhofinal/imagens/group_edit.png";
+        return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/Houston.jpg";
     }
 }

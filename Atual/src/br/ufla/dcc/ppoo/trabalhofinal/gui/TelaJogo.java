@@ -160,7 +160,7 @@ public class TelaJogo {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentes(){
-        diretorio = "/br/ufla/dcc/ppoo/trabalhofinal/imagens/bandeira-br.png";
+        diretorio = "/br/ufla/dcc/ppoo/trabalhofinal/imagens/principal.jpeg";
         adicionarImagem(diretorio);
 
         //Gerenciador do Jogo

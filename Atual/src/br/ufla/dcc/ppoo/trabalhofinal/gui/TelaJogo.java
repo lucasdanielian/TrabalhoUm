@@ -2,6 +2,7 @@ package br.ufla.dcc.ppoo.trabalhofinal.gui;
 
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Analisador;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
+import br.ufla.dcc.ppoo.trabalhofinal.excecoes.ExcecaoImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
@@ -111,9 +112,12 @@ public class TelaJogo {
     }
 
     /**
-     * Adiciona imgagem na tela
+     * Troca a imgagem atual da tela
+     * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void adicionarImagem(String diretorio)throws Exception{
+    private void adicionarImagem(String diretorio){
+        //URL resource = getClass().getResource(diretorio);
+        //File file = new File(resource.toURI());
         
         File file = new File(diretorio);
         if(file.exists()) {
@@ -122,20 +126,25 @@ public class TelaJogo {
             label = new JLabel(logo);
             janela.add(label, BorderLayout.EAST);
         }else{
-            throw new Exception();
+            throw new ExcecaoImagens("Imagem: " + diretorio + " Nao encontrada. \t"
+                    + "O jogo sera fechado, tente jogar novamente. \n"
+                    + "Se o problema persistir contate o administrador do sistema");
         }
     }
     
     /**
      * Troca a imgagem atual da tela
+     * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void trocaImagem(String diretorio)throws Exception{
+    private void trocaImagem(String diretorio){
 
         File file = new File(diretorio);
         if(file.exists()) {
             label.setIcon(new ImageIcon(file.getPath()));
         }else{
-            throw new Exception();
+            throw new ExcecaoImagens("Imagem: " + diretorio + " Nao encontrada. \t"
+                    + "O jogo sera fechado, tente jogar novamente. \n"
+                    + "Se o problema persistir contate o administrador do sistema");
         }
     }
     
@@ -210,10 +219,8 @@ public class TelaJogo {
             painelBotoes.add(btnIrPurgatorio);
             painelBotoes.add(btnIrCeu);
             janela.add(painelBotoes, BorderLayout.WEST);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio + " Nao encontrada");
-            JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+        }catch(ExcecaoImagens e){
+            JOptionPane.showMessageDialog(janela, e.getMessage());
                     janela.dispose();
         }
     }
@@ -247,11 +254,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -264,11 +268,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -281,11 +282,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -298,11 +296,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -315,11 +310,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -332,11 +324,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual() 
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -349,11 +338,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual() 
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }
@@ -366,11 +352,8 @@ public class TelaJogo {
                     comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
                     textoDinamico.setText(regraNegocio.processarComando(comando));
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(janela, "Imagem: " + regraNegocio.imagemAmbienteAtual()
-                            + " Nao encontrada");
-                    JOptionPane.showMessageDialog(janela, "O jogo sera fechado, tente jogar novamente. \n"
-                            + "Se o problema persistir contate o administrador do sistema");
+                }catch(ExcecaoImagens excecaoImagens){
+                    JOptionPane.showMessageDialog(janela, excecaoImagens.getMessage());
                     janela.dispose();
                 }
             }

@@ -1,4 +1,4 @@
-package br.ufla.dcc.ppoo.util;
+package br.ufla.dcc.ppoo.trabalhofinal.util;
 
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import javax.swing.JOptionPane;

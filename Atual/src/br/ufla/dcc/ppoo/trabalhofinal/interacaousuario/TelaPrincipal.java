@@ -6,7 +6,7 @@ import br.ufla.dcc.ppoo.trabalhofinal.gui.TelaJogo;
 import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.seguranca.SessaoUsuario;
-import br.ufla.dcc.ppoo.util.Utilidades;
+import br.ufla.dcc.ppoo.trabalhofinal.util.Utilidades;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;

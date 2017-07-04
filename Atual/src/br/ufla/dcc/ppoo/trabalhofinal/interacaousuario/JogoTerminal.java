@@ -5,7 +5,6 @@ import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Analisador;
 
 public class JogoTerminal{
- 
 
     public static void main(String[] args) {
         RegraNegocio regraNegocio = new RegraNegocio();

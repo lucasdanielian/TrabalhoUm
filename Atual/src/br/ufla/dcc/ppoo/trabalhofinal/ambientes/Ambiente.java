@@ -71,49 +71,15 @@ public abstract class Ambiente  {
     }
     
     /**
-     * De acordo com o parametro recebido, onde cada campo representa um ambiente
-     * @param denver
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param houston
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param casaCaim 
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param casaBob
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param inferno
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param purgatorio
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param casaWinchester
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
-     * @param ceu
-     * logo se este valor vier como nulo, a saida estará bloqueada e não terá mais 
-     * volta no ambiente inferno, pois o mesmo não possui mais saída.
+     * Define as saidas do ambiente. Cada direcao ou leva a um
+     * outro ambiente ou eh null (nenhuma saida para la).
+     * @param norte A saida norte.
+     * @param leste A saida leste.
+     * @param sul A saida sul.
+     * @param oeste A saida oeste.
      */
-    public void ajustarSaidas(Ambiente denver, Ambiente houston, Ambiente casaCaim, Ambiente casaBob, Ambiente inferno, Ambiente purgatorio, Ambiente casaWinchester, Ambiente ceu){
-        if(denver != null)
-            saidas.put(denver.getNomeAmbiente(), denver);
-        if(houston != null)
-            saidas.put(houston.getNomeAmbiente(), houston);
-        if(casaCaim != null)
-            saidas.put(casaCaim.getNomeAmbiente(), casaCaim);
-        if(casaBob != null)
-            saidas.put(casaBob.getNomeAmbiente(), casaBob);
-        if(inferno != null)
-            saidas.put(inferno.getNomeAmbiente(), inferno);
-        if(purgatorio != null)
-            saidas.put(purgatorio.getNomeAmbiente(), purgatorio);
-        if(casaWinchester != null)
-            saidas.put(casaWinchester.getNomeAmbiente(), casaWinchester);
-        if(ceu!=null)
-            saidas.put(ceu.getNomeAmbiente(), ceu);
+    public void ajustarSaidas( Ambiente ambiente)  {
+        saidas.put(ambiente.getNomeAmbiente(), ambiente);
     }
 
     /**

@@ -73,10 +73,7 @@ public abstract class Ambiente  {
     /**
      * Define as saidas do ambiente. Cada direcao ou leva a um
      * outro ambiente ou eh null (nenhuma saida para la).
-     * @param norte A saida norte.
-     * @param leste A saida leste.
-     * @param sul A saida sul.
-     * @param oeste A saida oeste.
+     * @param ambiente é o ambiente disponivel para este local.
      */
     public void ajustarSaidas( Ambiente ambiente)  {
         saidas.put(ambiente.getNomeAmbiente(), ambiente);

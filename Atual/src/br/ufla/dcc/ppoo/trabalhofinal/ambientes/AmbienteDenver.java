@@ -54,7 +54,8 @@ public class AmbienteDenver extends Ambiente {
         //se o jogador nunca visitou este ambiente
         if(getJaVisitada() == false){
             for (int i = 0; i < dean.tamanhoDiario(); i++) {
-                if(dean.lerPaginasDiario().equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
+                if(dean.lerPaginasDiario().indexOf("Deve-se entregar uma pena de"
+                        + " anjo e um dente de lobo no portal do inferno.")>=0){
                     foiCeu = true;
                 }
             }

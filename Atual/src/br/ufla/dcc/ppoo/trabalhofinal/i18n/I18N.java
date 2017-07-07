@@ -15,8 +15,16 @@ public class I18N {
     // objeto utilizado para carregar os textos do sistema de acordo com a localidade
     private static ResourceBundle rb = ResourceBundle.getBundle(CAMINHO_ARQUIVOBASE_I18N, Locale.getDefault());
     // indica a localidade (idioma) Português - Brasil
+
+    /**
+     *
+     */
     public static final Locale PT_BR = new Locale("pt", "BR");
     // indica a localidade (idioma) Inglês - Americano
+
+    /**
+     *
+     */
     public static final Locale EN_US = new Locale("en", "US");
 
     /**

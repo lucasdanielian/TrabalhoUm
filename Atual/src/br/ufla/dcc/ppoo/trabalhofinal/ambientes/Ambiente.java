@@ -24,16 +24,18 @@ import java.util.HashMap;
  * @version 2011.07.31 (2017.05.16)
  */
 public abstract class Ambiente  {
+    //Atributos
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
     private ColecaoDeItens armario;
     private Item item;
+    
     /**
-     * @param nomeAmbiente
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
      * "um jardim aberto"
+     * @param nomeAmbiente
      */
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
@@ -47,13 +49,13 @@ public abstract class Ambiente  {
      * Retorna um item do ambiente
      * @return Item
      */
-    public Item getItem() {
+    protected Item getItem() {
         return item;
     }
     
     /**
-     * @param item
      * Adiciona um item no ambiente
+     * @param item
      */
     public void setItem(Item item) {
         this.item = item;
@@ -80,7 +82,8 @@ public abstract class Ambiente  {
     }
 
     /**
-     * @return o nome do ambiente.
+     * Metodo utilizado para saber o nome de um ambiente
+     * @return uma string contendo o nome do ambiente.
      */
     public String getNomeAmbiente() {
         return nomeAmbiente;
@@ -88,28 +91,27 @@ public abstract class Ambiente  {
     
     /**
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
-     * @param dean Jogador
      * passará as informações referentes as condições do jogador de acordo com 
      * cada ambiente, como itens na mochila no qual o jogador está deverá ser impresso
-     * @return String
-     *  Metodo que retornará as mensagens quando o jogador entra em um novo ambiente.
+     * @param dean Jogador
+     * @return String com as mensagens quando o jogador entra em um novo ambiente.
      */
     public abstract String mensagemDeEntrada(JogadorDean dean);
     
     /**
+     *  Metodo que retornará uma string com a localização da imagem.
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @return String
-     *  Metodo que retornará uma string com a localização da imagem.
      */
     public abstract String imagemDoAmbiente();
     
     /**
      * Metodo que retorna o item do Ambiente
-     * @return String 
+     * @return String com os itens contidos nos ambientes
      */
     public String itensAmbiente() {
        if (item == null){
-           return "Nao item neste ambiente";
+           return "Nao ha item neste ambiente";
        }else{
            return "Item: " + item.getNomeItem();
        }
@@ -117,31 +119,35 @@ public abstract class Ambiente  {
     
     /**
      * Metodo que retorna se um ambiente já foi visitado ou nao.
-     * @return Boleano
+     * @return Boleano com true se já visitado
      */
     public boolean getJaVisitada() {
         return jaVisitada;
     }
 
+    /**
+     * Altera o status de visita do ambiente
+     * @param jaVisitada recebe true quando já visitada e false para os demais casos
+     */
     public void setJaVisitada(boolean jaVisitada) {
         this.jaVisitada = jaVisitada;
     }
     
     /**
-     * @param direcao
      * Recebe a devida direcao
-     * @return Ambiente
      * Retorna a saida com a devida direcao
+     * @param direcao recebe a nova direção por string
+     * @return Ambiente de acordo com a direção desejada
      */
-    public Ambiente getAmbiente(String direcao){
+    public Ambiente irProximoAmbiente(String direcao){
         return saidas.get(direcao);
     }
     
     /**
-     * 
-     * @return String
+     * Metodo utilizado para saber as saidas
+     * @return String contendo as saidas disponíveis no ambiente
      */
-    public String getSaidas(){
+    public String saidasValidas(){
         String textoSaidas = "";
         for (String direcao : saidas.keySet()){
             textoSaidas = textoSaidas + direcao + " ";
@@ -155,21 +161,21 @@ public abstract class Ambiente  {
      * @return String
      */
     private String imprimeObjetosArmario(){
-        return "\n Objetos no armario: " + armario.exibirItens() + "\n";
+        return "\n Objetos no armario: " + armario.retornaItens() + "\n";
     }
     
     /**
      * Insere o item passado como parametro no Armario
-     * @param item 
+     * @param item que deseja inserir no armario
      */
     private void insereObjetosArmario(Item item){
         armario.inserirItens(item);
     }
     
     /**
-     * 
-     * @param item
-     * @return Item
+     * Metodo utilizado quando deseja-se remover um item do armario
+     * @param item a ser removido
+     * @return Item removido para devido tratamento
      */
     private Item removerObjetosArmario(Item item){
         armario.removerPeloNome(item.getNomeItem());
@@ -177,10 +183,27 @@ public abstract class Ambiente  {
     }
     
     /**
-     * Retoran uma lista dos itens contido no armario
-     * @return ColecaoDeItens
+     * Metodo que retorna os itens contidos no armario
+     * @return String contendo os itens
      */
-    public ColecaoDeItens getArmario(){
-        return armario;
+    public String retornaItensDoArmario(){
+        return armario.retornaItens();
+    }
+    
+    /**
+     * Remove um objeto contido no armario.
+     * @param nome criterio de remoção
+     * @return Item removido é retornado para tratamento
+     */
+    public Item removerPeloNomeNoArmario(String nome){
+        return armario.removerPeloNome(nome);
+    }
+    
+    /**
+     * Insere um item no armario
+     * @param item o item passado por referencia é colocado no armario
+     */
+    public void inserirItensArmario(Item item){
+        armario.inserirItens(item);
     }
 }

@@ -4,8 +4,16 @@ import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Comando;
 import br.ufla.dcc.ppoo.trabalhofinal.comandos.Analisador;
 
+/**
+ *
+ * @author junior
+ */
 public class JogoTerminal{
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         RegraNegocio regraNegocio = new RegraNegocio();
         Analisador analisador = new Analisador();

@@ -53,8 +53,8 @@ public class AmbienteHouston extends Ambiente {
             
             for (int i = 0; i < dean.tamanhoDiario(); i++) {
                 
-                if(dean.lerPaginasDiario().equals("Em Houston, existe um "
-                        + "grupo de vampiros que Caim o pediu para que fossem eliminados.")){
+                if(dean.lerPaginasDiario().indexOf("Em Houston, existe um grupo "
+                        + "de vampiros que Caim o pediu para que fossem eliminados.")>=0){
                     
                     foiCaim = true;
                 }

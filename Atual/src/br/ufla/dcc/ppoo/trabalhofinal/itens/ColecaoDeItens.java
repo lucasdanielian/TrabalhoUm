@@ -38,7 +38,7 @@ public class ColecaoDeItens {
      * @return String
      * o metodo exibir() mostra na tela a atual disposicao dos itens na sua 
      */
-    public String exibirItens(){
+    public String retornaItens(){
         String itensRetorno = " ";
         for(Item i:itens){
             itensRetorno += " " + i.getDescricaoItem() + "\n";

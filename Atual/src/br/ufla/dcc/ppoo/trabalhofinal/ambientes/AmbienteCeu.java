@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -22,14 +23,16 @@ import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 public class AmbienteCeu extends Ambiente {
     
     private boolean itemFoiColetado;
-    
+    private Item pena;
+            
     /**
      * @param nomeAmbiente 
      * Constroi um ambiente "Ceu" passando seu nome por parametro
      */
-    public AmbienteCeu(String nomeAmbiente)  {
+    public AmbienteCeu(String nomeAmbiente, Item pena)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
+        this.pena = pena;
     }
     
     /**
@@ -73,7 +76,7 @@ public class AmbienteCeu extends Ambiente {
             dean.adicionarPaginaDiario("Você pode, mas não deve buscar as almas no Purgatório.");
             dean.adicionarPaginaDiario("Existe um grupo de lobisomens em Denver");
             if(dean.espacoDisponivelMochila()){
-                dean.inserirItensMochila(getItem());
+                dean.inserirItensMochila(pena);
                 itemFoiColetado = true;
                 return texto1 + "O item 'Pena' foi adicionado na mochila\n";
             }
@@ -85,7 +88,7 @@ public class AmbienteCeu extends Ambiente {
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(getItem());
+                    dean.inserirItensMochila(pena);
                     itemFoiColetado = true;
                     return "O item 'Pena' foi adicionado na mochila";
                 }
@@ -110,5 +113,17 @@ public class AmbienteCeu extends Ambiente {
     @Override
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/ceu.jpg";
+    }
+    
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String com os itens contidos nos ambientes
+     */
+    public String retornaItenAmbienteCasaBob() {
+       if (pena == null){
+           return "Nao ha item neste ambiente";
+       }else{
+           return "Item: " + pena.getNomeItem();
+       }
     }
 }

@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -22,15 +23,17 @@ import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 public class AmbienteCasaBob extends Ambiente {
     private boolean itemFoiColetado;
     private boolean foiCeu;
+    private Item carta;
     
     /**
      * 
      * @param nomeAmbiente 
      * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
      */
-    public AmbienteCasaBob(String nomeAmbiente)  {
+    public AmbienteCasaBob(String nomeAmbiente, Item carta)  {
         super(nomeAmbiente);
         foiCeu = false;
+        this.carta = carta;
     }
     
     /**
@@ -74,7 +77,7 @@ public class AmbienteCasaBob extends Ambiente {
                 setJaVisitada(true);
                 dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(getItem());
+                    dean.inserirItensMochila(carta);
                     itemFoiColetado = true;
                     return texto2 + "\nO item 'Carta' foi adicionado na mochila\n";
                 }
@@ -94,7 +97,7 @@ public class AmbienteCasaBob extends Ambiente {
             }
             else{
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(getItem());
+                    dean.inserirItensMochila(carta);
                     itemFoiColetado = true;
                     return "O item 'Carta' foi adicionado no mochila";
                 }
@@ -114,5 +117,17 @@ public class AmbienteCasaBob extends Ambiente {
     @Override
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/casaBob.jpg";
+    }
+    
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String com os itens contidos nos ambientes
+     */
+    public String retornaItenAmbienteCasaBob() {
+       if (carta == null){
+           return "Nao ha item neste ambiente";
+       }else{
+           return "Item: " + carta.getNomeItem();
+       }
     }
 }

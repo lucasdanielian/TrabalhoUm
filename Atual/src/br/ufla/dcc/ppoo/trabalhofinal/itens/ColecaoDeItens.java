@@ -90,8 +90,10 @@ public class ColecaoDeItens {
      */
     public Item buscarPeloNome(String nomeDoItem){
         for(Item i:itens){
-            if(i.getNomeItem().equals(nomeDoItem)){
-                return i;
+            if(i!=null){
+                if(i.getNomeItem().equals(nomeDoItem)){
+                    return i;
+                }
             }
         }
         return null;

@@ -55,7 +55,8 @@ public class AmbientePurgatorio extends Ambiente {
             //fazer texto do purgatório
             
             for (int i = 0; i < dean.tamanhoDiario(); i++) {
-                if(dean.lerPaginasDiario().equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
+                if(dean.lerPaginasDiario().indexOf("Deve-se entregar uma pena de anjo "
+                        + "e um dente de lobo no portal do inferno.")>=0){
                     foiCeu = true;
                 }
             }
@@ -75,7 +76,7 @@ public class AmbientePurgatorio extends Ambiente {
                 }
             }
             else{
-                return "Dean se direciona para o purgatório, mas não sabe o que fazer neste ambiente.";
+                return "Dean se direciona para o purgatório, mas não sabe o que fazer neste ambiente.\n";
             }
         }
         else{ // caso o jogador ja tenha passado por este ambiente antes

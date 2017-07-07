@@ -276,7 +276,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir Inferno");
+                comando = analisador.pegarComandoInterfaceGrafia("ir PortalInferno");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             

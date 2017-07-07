@@ -51,8 +51,8 @@ public class AmbientePurgatorio extends Ambiente {
         if(getJaVisitada() == false){ // se o jogador ainda nao passou por este ambiente
             //fazer texto do purgatório
             
-            for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
-                if(dean.getDiario().getPagina(i).equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
+            for (int i = 0; i < dean.tamanhoDiario(); i++) {
+                if(dean.lerPaginasDiario().equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
                     foiCeu = true;
                 }
             }
@@ -61,8 +61,8 @@ public class AmbientePurgatorio extends Ambiente {
             
                 setJaVisitada(true);
 
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return texto1 + "\nO item 'Almas' foi adicionado na mochila\n";
                 }
@@ -77,8 +77,8 @@ public class AmbientePurgatorio extends Ambiente {
         }
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return "O item 'Almas' foi adicionado na mochila";
                 }

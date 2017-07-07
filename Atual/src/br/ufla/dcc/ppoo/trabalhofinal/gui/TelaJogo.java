@@ -120,12 +120,7 @@ public class TelaJogo {
             logo = new ImageIcon(file.getPath());
             label = new JLabel(logo);
             janela.add(label, BorderLayout.EAST); 
-        } catch (URISyntaxException ex){
-            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
-                    + " Nao encontrada");
-            JOptionPane.showMessageDialog(janela, "O jogo continuará sem imagem. \n"
-                    + "Se o problema persistir contate o administrador do sistema");
-        }catch (NullPointerException npex){
+        } catch (URISyntaxException | NullPointerException ex){
             JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
                     + " Nao encontrada");
             JOptionPane.showMessageDialog(janela, "O jogo continuará sem imagem. \n"

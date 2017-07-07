@@ -127,13 +127,14 @@ public class RegraNegocio  {
         casaBob.ajustarSaidas(purgatorio);
         casaBob.ajustarSaidas(houston);
         
-        inferno.ajustarSaidas(ceu);
+        /*inferno.ajustarSaidas(ceu);
         inferno.ajustarSaidas(denver);
         inferno.ajustarSaidas(casaWinchester);
         inferno.ajustarSaidas(casaCaim);
         inferno.ajustarSaidas(casaBob);
         inferno.ajustarSaidas(houston);
         inferno.ajustarSaidas(purgatorio);
+        */
         
         purgatorio.ajustarSaidas(ceu);
         purgatorio.ajustarSaidas(denver);

@@ -41,7 +41,9 @@ public class ColecaoDeItens {
     public String retornaItens(){
         String itensRetorno = " ";
         for(Item i:itens){
-            itensRetorno += " " + i.getDescricaoItem() + "\n";
+            if(i!=null){
+                itensRetorno += " " + i.getDescricaoItem() + "\n";
+            }
         }
         return itensRetorno;
     }

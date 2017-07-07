@@ -61,30 +61,35 @@ public class RegraNegocio  {
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
         
         //Inserção do Ambiente Denver
-        denver = new AmbienteDenver("Denver", denteLobo);
         denteLobo = new Item("Dente","O dente de lobisomem representa o mal do mundo");
+        denver = new AmbienteDenver("Denver", denteLobo);
+        
         
         //Inserção do Ambiente Houston
-        houston = new AmbienteHouston("Houston", cabecaVampiro);
         cabecaVampiro = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
+        houston = new AmbienteHouston("Houston", cabecaVampiro);
+        
         
         casaCaim = new AmbienteCasaCaim("CasaCaim");
         
         //Iserção casa bob
-        casaBob = new AmbienteCasaBob("CasaBob", carta);
         carta = new Item("Carta", "Carta de Bob para Caim, que"
                 + "cedida pelo mesmo para ajudar Dean.");
+        casaBob = new AmbienteCasaBob("CasaBob", carta);
+        
         
         //Inserção do Ambiente Inferno
         inferno = new AmbienteInferno("PortalInferno");
         
         //Inserção do Ambiente Purgatorio
-        purgatorio = new AmbientePurgatorio("Purgatorio", portadorAlmas);
         portadorAlmas = new Item("Almas", "Armazena 10 almas em seu interior.");
+        purgatorio = new AmbientePurgatorio("Purgatorio", portadorAlmas);
+        
         
         //Inserção do Ambiente Ceu
-        ceu = new AmbienteCeu("Ceu", pena);
         pena = new Item("Pena", "pena do anjo Castiel");
+        ceu = new AmbienteCeu("Ceu", pena);
+        
         
         // inicializa as saidas dos ambientes
         casaWinchester.ajustarSaidas(ceu);

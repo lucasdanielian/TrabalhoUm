@@ -63,9 +63,7 @@ public class JogadorDean {
      * @return booleano para informar se foi inserido ou não
      */
     public boolean inserirItensMochila(Item item){
-        boolean inseriu = false;
-        inseriu = mochila.inserirItens(item);
-        return inseriu;
+        return  mochila.inserirItens(item);
     }
     
     /**

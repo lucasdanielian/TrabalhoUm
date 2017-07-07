@@ -76,9 +76,13 @@ public class AmbienteCeu extends Ambiente {
             dean.adicionarPaginaDiario("Você pode, mas não deve buscar as almas no Purgatório.");
             dean.adicionarPaginaDiario("Existe um grupo de lobisomens em Denver");
             if(dean.espacoDisponivelMochila()){
-                dean.inserirItensMochila(pena);
-                itemFoiColetado = true;
-                return texto1 + "O item 'Pena' foi adicionado na mochila\n";
+                if(dean.inserirItensMochila(pena)){
+                    itemFoiColetado = true;
+                    return texto1 + "O item " + pena.getNomeItem() + " foi adicionado na mochila\n";
+                }
+                else{
+                    return texto1 + "O item " + pena.getNomeItem() + " nao foi adicionado na mochila";
+                }
             }
             else{
                 return texto1 + "Você nao possui espaço na mochila disponivel.\n"

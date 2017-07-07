@@ -82,7 +82,7 @@ public class JogadorDean {
      * @return String contendo os itens da mochila
      */
     public String exibirItensMochila(){
-        return mochila.exibirItens();
+        return mochila.retornaItens();
     }
     
     /**

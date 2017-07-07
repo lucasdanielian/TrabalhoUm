@@ -64,8 +64,8 @@ public class AmbienteCasaBob extends Ambiente {
             
             for (int i = 0; i < dean.tamanhoDiario(); i++) {
                 
-                if(dean.lerPaginasDiario().equals("Você pode, mas não deve "
-                        + "buscar as almas no Purgatório.")){
+                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
+                        + "buscar as almas no Purgatório.")>=0){
                     
                     foiCeu = true;
                 }

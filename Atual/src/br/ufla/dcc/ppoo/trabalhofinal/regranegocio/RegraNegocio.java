@@ -210,7 +210,7 @@ public class RegraNegocio  {
     public String descricaoAmbienteAtual() {
         return "\n Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia "
                 + contador + "\n" + ambienteAtual.mensagemDeEntrada(dean)
-                + "Saidas: " + ambienteAtual.getSaidas() + "\n";
+                + "Saidas: " + ambienteAtual.saidasValidas() + "\n";
     }
     
     /**
@@ -297,7 +297,7 @@ public class RegraNegocio  {
             // Tenta sair do ambiente atual
             Ambiente proximoAmbiente = null;
 
-            proximoAmbiente = ambienteAtual.getAmbiente(direcao);
+            proximoAmbiente = ambienteAtual.irProximoAmbiente(direcao);
 
             if (proximoAmbiente == null) {
                 return "\nNao ha passagem!\n";
@@ -347,7 +347,7 @@ public class RegraNegocio  {
             return dean.exibirItensMochila();
                         
         }else if (itens.equals("armario")){
-            return ambienteAtual.getArmario().exibirItens();
+            return ambienteAtual.retornaItensDoArmario();
         }else{
             return "\nPalavra Invalida\n";
         }
@@ -368,7 +368,7 @@ public class RegraNegocio  {
         String nomeItem = comando.getSegundaPalavra();
         Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            ambienteAtual.getArmario().inserirItens(itemAux);
+            ambienteAtual.inserirItensArmario(itemAux);
             return "\n Item: " + nomeItem + " guardado com sucesso\n";
                         
         }else{
@@ -388,7 +388,7 @@ public class RegraNegocio  {
         }
         String nomeItem = comando.getSegundaPalavra();
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            Item aux = ambienteAtual.getArmario().removerPeloNome(nomeItem);
+            Item aux = ambienteAtual.removerPeloNomeNoArmario(nomeItem);
             boolean verificacao = dean.inserirItensMochila(aux);
             if (verificacao == true){
                 return "\n Item: " + nomeItem + " coletado com sucesso\n";

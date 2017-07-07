@@ -67,13 +67,13 @@ public class AmbienteCeu extends Ambiente {
         
         if(getJaVisitada()== false){//texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
             setJaVisitada(true);
-            dean.getDiario().adicionarPagina("Deve-se entregar uma pena de anjo "
+            dean.adicionarPaginaDiario("Deve-se entregar uma pena de anjo "
                     + "e um dente de lobo no portal do inferno.");
-            dean.getDiario().adicionarPagina("Sam morrerá após 30 dias após a ligação");
-            dean.getDiario().adicionarPagina("Você pode, mas não deve buscar as almas no Purgatório.");
-            dean.getDiario().adicionarPagina("Existe um grupo de lobisomens em Denver");
-            if(dean.getMochila().espacoDisponivel()){
-                dean.getMochila().inserirItens(getItem());
+            dean.adicionarPaginaDiario("Sam morrerá após 30 dias após a ligação");
+            dean.adicionarPaginaDiario("Você pode, mas não deve buscar as almas no Purgatório.");
+            dean.adicionarPaginaDiario("Existe um grupo de lobisomens em Denver");
+            if(dean.espacoDisponivelMochila()){
+                dean.inserirItensMochila(getItem());
                 itemFoiColetado = true;
                 return texto1 + "O item 'Pena' foi adicionado na mochila\n";
             }
@@ -84,8 +84,8 @@ public class AmbienteCeu extends Ambiente {
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == false){
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(getItem());
                     itemFoiColetado = true;
                     return "O item 'Pena' foi adicionado na mochila";
                 }

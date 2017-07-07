@@ -43,13 +43,13 @@ public class AmbienteCasaCaim extends Ambiente {
     public String mensagemDeEntrada(JogadorDean dean){
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
-            if(dean.getMochila().buscarPeloNome("Carta")!=null){
+            if(dean.buscarItemPeloNomeNaMochila("Carta")!=null){
                 visitouBob = true;
             }
             if(visitouBob == true){ // se ele passou por Bob
-                dean.getMochila().removerPeloNome("Carta");
+                dean.removerPeloNomeDaMochila("Carta");
                 recebeuTask = true;
-                dean.getDiario().adicionarPagina("Em Houston, existe um grupo de"
+                dean.adicionarPaginaDiario("Em Houston, existe um grupo de"
                         + " vampiros que Caim o pediu para que fossem eliminados.");
                 return "Dean se direciona para a casa de caim.\n"
                         + "Chegando lá, Dean apresenta a ele a carta entregue\n"
@@ -79,10 +79,10 @@ public class AmbienteCasaCaim extends Ambiente {
         else{ // se o jogador ja veio nesse ambiente
             if(recebeuTask == true && dean.getMarcaCaim() == false){
                     // se ele completou a task
-                if(dean.getMochila().buscarPeloNome("CabecaVampiro")!=null){
+                if(dean.buscarItemPeloNomeNaMochila("CabecaVampiro")!=null){
                     dean.setMarcaCaim(true);
-                    dean.getDiario().adicionarPagina("Você possui a marca de Caim");
-                    dean.getMochila().removerPeloNome("CabecaVampiro");
+                    dean.adicionarPaginaDiario("Você possui a marca de Caim");
+                    dean.removerPeloNomeDaMochila("CabecaVampiro");
                     return "Dean se direciona para a casa de caim.\n"
                         + "Chegando lá, ele entrega a caim a cabeça de vampiro\n"
                         + "que coletou na missão feita. Caim, impressionado\n"

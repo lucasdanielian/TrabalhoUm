@@ -62,9 +62,9 @@ public class AmbienteCasaBob extends Ambiente {
             + "que ele poderá lhe ajudar”\n";
         if(getJaVisitada() == false){
             
-            for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
+            for (int i = 0; i < dean.tamanhoDiario(); i++) {
                 
-                if(dean.getDiario().getPagina(i).equals("Você pode, mas não deve "
+                if(dean.lerPaginasDiario().equals("Você pode, mas não deve "
                         + "buscar as almas no Purgatório.")){
                     
                     foiCeu = true;
@@ -72,9 +72,9 @@ public class AmbienteCasaBob extends Ambiente {
             }
             if(foiCeu == true){
                 setJaVisitada(true);
-                dean.getDiario().adicionarPagina("Procurar caim para derrotar o demônio");
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(getItem());
+                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(getItem());
                     itemFoiColetado = true;
                     return texto2 + "\nO item 'Carta' foi adicionado na mochila\n";
                 }
@@ -93,8 +93,8 @@ public class AmbienteCasaBob extends Ambiente {
                     + "garoto, eu já não posso\n fazer mais nada por você”\n";
             }
             else{
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(getItem());
                     itemFoiColetado = true;
                     return "O item 'Carta' foi adicionado no mochila";
                 }

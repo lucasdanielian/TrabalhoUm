@@ -53,8 +53,8 @@ public class AmbienteDenver extends Ambiente {
         
         //se o jogador nunca visitou este ambiente
         if(getJaVisitada() == false){
-            for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
-                if(dean.getDiario().getPagina(i).equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
+            for (int i = 0; i < dean.tamanhoDiario(); i++) {
+                if(dean.lerPaginasDiario().equals("Deve-se entregar uma pena de anjo e um dente de lobo no portal do inferno.")){
                     foiCeu = true;
                 }
             }
@@ -62,8 +62,8 @@ public class AmbienteDenver extends Ambiente {
                 setJaVisitada(true);
                 
                 // se ha espaco disponivel para armazenar o item
-                if(dean.getMochila().espacoDisponivel()){ 
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){ 
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return texto1 + "O item 'Dente' foi colocado na mochila\n";
                 }
@@ -79,8 +79,8 @@ public class AmbienteDenver extends Ambiente {
         }
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return "O item 'Dente' foi adicionado na mochila";
                 }

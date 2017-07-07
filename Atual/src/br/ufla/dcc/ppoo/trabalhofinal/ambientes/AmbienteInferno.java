@@ -50,13 +50,13 @@ public class AmbienteInferno extends Ambiente {
                          + "liberada. Tudo está muito escuro, ele mal consegue\n"
                          + "enxergar. Repentinamente, o demônio que capturou Sam\n"
                          + "aparece";
-        if(dean.getMochila().buscarPeloNome("Dente")!=null){
+        if(dean.buscarItemPeloNomeNaMochila("Dente")!=null){
             denteLobo = true;
         }
-        if(dean.getMochila().buscarPeloNome("Pena")!=null){
+        if(dean.buscarItemPeloNomeNaMochila("Pena")!=null){
             penaAnjo = true;
         }
-        if(dean.getMochila().buscarPeloNome("Almas")!=null){
+        if(dean.buscarItemPeloNomeNaMochila("Almas")!=null){
             almas = true;
         }
          if(denteLobo == true && penaAnjo == true){ //significa que ele pode entrar

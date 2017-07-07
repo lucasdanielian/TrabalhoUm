@@ -1,6 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhofinal.jogador;
 
 import br.ufla.dcc.ppoo.trabalhofinal.itens.ColecaoDeItens;
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.itens.ItemDiario;
 
 /*
@@ -31,11 +32,11 @@ public class JogadorDean {
     }
     
     /**
-     * @return
-     * Retorna um Diario
+     * Metodo utilizado para ler o diario
+     * @return String contendo as paginas de um diario
      */
-    public ItemDiario getDiario(){
-        return diario;
+    public String lerPaginasDiario(){
+        return diario.getPaginas();
     }
     
     /**
@@ -48,14 +49,6 @@ public class JogadorDean {
     }
     
     /**
-     * @return
-     * Retorna a coleção de itens do jogador, denominada mochila
-     */
-    public ColecaoDeItens getMochila(){
-        return mochila;
-    }
-    
-    /**
      * @param aux
      * Autera o valor de Marca de false para true caso
      */
@@ -63,4 +56,65 @@ public class JogadorDean {
         marcaCaim = aux;
     }
     
+    /**
+     * Metodo que retorna true caso o item seja inserido ou
+     * false caso ao contraio
+     * @param item o objeto que sera inserido na mochila
+     * @return booleano para informar se foi inserido ou não
+     */
+    public boolean inserirItensMochila(Item item){
+        boolean inseriu = false;
+        inseriu = mochila.inserirItens(item);
+        return inseriu;
+    }
+    
+    /**
+     * Metodo utilizado para remover um item da mochila
+     * @param item Recebe o nome do item (String)
+     * @return retorna o item removido
+     */
+    public Item removerPeloNomeDaMochila(String item){
+        return mochila.removerPeloNome(item);
+    }
+    
+    /**
+     * Metodo Utilizado para mostrar o que há dentro da mochila
+     * @return String contendo os itens da mochila
+     */
+    public String exibirItensMochila(){
+        return mochila.exibirItens();
+    }
+    
+    /**
+     * Metodo utilizado para verificar se há espaço disponivel na mochila
+     * @return true caso haja espaço e false caso ao contrario
+     */
+    public boolean espacoDisponivelMochila(){
+        return mochila.espacoDisponivel();
+    }
+    
+    /**
+     * Adiciona a pagina ao diario do jogador
+     * @param pagina é uma string que irá compor as paginas.
+     */
+    public void adicionarPaginaDiario(String pagina){
+        diario.adicionarPagina(pagina);
+    }
+    
+    /**
+     * Retorna o tamanho atual do diario
+     * @return número inteiro contendo o tamanho do Diario
+     */
+    public int tamanhoDiario(){
+        return diario.getTamanho();
+    }
+    
+    /**
+     * Metodo utilizado para buscar o item
+     * @param item é uma string passada com o nome do item buscado
+     * @return Item buscado pelo nome
+     */
+    public Item buscarItemPeloNomeNaMochila(String item){
+        return mochila.buscarPeloNome(item);
+    }
 }

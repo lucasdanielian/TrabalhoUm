@@ -51,9 +51,9 @@ public class AmbienteHouston extends Ambiente {
         if(getJaVisitada() == false){ // caso o jogador nunca tenha vindo a este ambiente
             // fazer o texto dos vampiros
             
-            for (int i = 0; i < dean.getDiario().getTamanho(); i++) {
+            for (int i = 0; i < dean.tamanhoDiario(); i++) {
                 
-                if(dean.getDiario().getPagina(i).equals("Em Houston, existe um "
+                if(dean.lerPaginasDiario().equals("Em Houston, existe um "
                         + "grupo de vampiros que Caim o pediu para que fossem eliminados.")){
                     
                     foiCaim = true;
@@ -62,8 +62,8 @@ public class AmbienteHouston extends Ambiente {
             
             if(foiCaim == true){
                 setJaVisitada(true);
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return texto1 + "\nO item. 'CabecaVampiro' foi coletado\n";
                 }
@@ -80,8 +80,8 @@ public class AmbienteHouston extends Ambiente {
         }
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
-                if(dean.getMochila().espacoDisponivel()){
-                    dean.getMochila().inserirItens(super.getItem());
+                if(dean.espacoDisponivelMochila()){
+                    dean.inserirItensMochila(super.getItem());
                     itemFoiColetado = true;
                     return "O item 'CabecaVampiro' foi coletado";
                 }

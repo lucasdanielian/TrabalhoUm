@@ -344,7 +344,7 @@ public class RegraNegocio  {
         }
         String itens = comando.getSegundaPalavra();
         if (itens.equals("mochila")){
-            return dean.getMochila().exibirItens();
+            return dean.exibirItensMochila();
                         
         }else if (itens.equals("armario")){
             return ambienteAtual.getArmario().exibirItens();
@@ -366,7 +366,7 @@ public class RegraNegocio  {
            return "\n Guardar o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
-        Item itemAux = dean.getMochila().removerPeloNome(nomeItem);
+        Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             ambienteAtual.getArmario().inserirItens(itemAux);
             return "\n Item: " + nomeItem + " guardado com sucesso\n";
@@ -389,7 +389,7 @@ public class RegraNegocio  {
         String nomeItem = comando.getSegundaPalavra();
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             Item aux = ambienteAtual.getArmario().removerPeloNome(nomeItem);
-            boolean verificacao = dean.getMochila().inserirItens(aux);
+            boolean verificacao = dean.inserirItensMochila(aux);
             if (verificacao == true){
                 return "\n Item: " + nomeItem + " coletado com sucesso\n";
             }else{
@@ -412,7 +412,7 @@ public class RegraNegocio  {
         }
         String nomeItem = comando.getSegundaPalavra();
         if(nomeItem.equals("diario")){
-            return dean.getDiario().getPaginas();
+            return dean.lerPaginasDiario();
         }else{
             return "\n Este item nao e o diario, logo nao pode ser lido";
         }

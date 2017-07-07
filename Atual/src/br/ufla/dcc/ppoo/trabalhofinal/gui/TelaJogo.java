@@ -232,7 +232,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e){
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir Ceu");
+                comando = analisador.pegarComando("ir Ceu");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
                
@@ -243,7 +243,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaWinchester");
+                comando = analisador.pegarComando("ir CasaWinchester");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -254,7 +254,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir Denver");
+                comando = analisador.pegarComando("ir Denver");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -265,7 +265,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir Houston");
+                comando = analisador.pegarComando("ir Houston");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -276,7 +276,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir PortalInferno");
+                comando = analisador.pegarComando("ir PortalInferno");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -287,7 +287,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir Purgatorio");
+                comando = analisador.pegarComando("ir Purgatorio");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -298,7 +298,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaCaim");
+                comando = analisador.pegarComando("ir CasaCaim");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -309,7 +309,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia("ir CasaBob");
+                comando = analisador.pegarComando("ir CasaBob");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             
@@ -320,7 +320,7 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
             
-                comando = analisador.pegarComandoInterfaceGrafia(txtEntradaComandos.getText());
+                comando = analisador.pegarComando(txtEntradaComandos.getText());
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
             

@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -23,15 +24,17 @@ public class AmbienteHouston extends Ambiente {
 
     private boolean itemFoiColetado;
     private boolean foiCaim;
+    private Item cabecaVampiro;
     
     /**
      * @param nomeAmbiente
      * Constroi um ambiente "Houston" passando seu nome por parametro
      */
-    public AmbienteHouston(String nomeAmbiente)  {
+    public AmbienteHouston(String nomeAmbiente, Item cabecaVampiro)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCaim = false;
+        this.cabecaVampiro = cabecaVampiro;
     }
     
     /**
@@ -63,7 +66,7 @@ public class AmbienteHouston extends Ambiente {
             if(foiCaim == true){
                 setJaVisitada(true);
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(cabecaVampiro);
                     itemFoiColetado = true;
                     return texto1 + "\nO item. 'CabecaVampiro' foi coletado\n";
                 }
@@ -81,7 +84,7 @@ public class AmbienteHouston extends Ambiente {
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(cabecaVampiro);
                     itemFoiColetado = true;
                     return "O item 'CabecaVampiro' foi coletado";
                 }
@@ -105,5 +108,17 @@ public class AmbienteHouston extends Ambiente {
     @Override
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/Houston.jpg";
+    }
+    
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String com os itens contidos nos ambientes
+     */
+    public String retornaItenAmbienteCasaBob() {
+       if (cabecaVampiro == null){
+           return "Nao ha item neste ambiente";
+       }else{
+           return "Item: " + cabecaVampiro.getNomeItem();
+       }
     }
 }

@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -23,15 +24,17 @@ public class AmbienteDenver extends Ambiente {
     
     private boolean itemFoiColetado;
     private boolean foiCeu;
+    private Item denteLobo;
     
     /**
      * @param nomeAmbiente 
      * Constroi um ambiente "AmbienteDenver" passando seu nome por parametro
      */
-    public AmbienteDenver(String nomeAmbiente)  {
+    public AmbienteDenver(String nomeAmbiente, Item denteLobo)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
+        this.denteLobo = denteLobo;
     }
     
     /**
@@ -64,7 +67,7 @@ public class AmbienteDenver extends Ambiente {
                 
                 // se ha espaco disponivel para armazenar o item
                 if(dean.espacoDisponivelMochila()){ 
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(denteLobo);
                     itemFoiColetado = true;
                     return texto1 + "O item 'Dente' foi colocado na mochila\n";
                 }
@@ -81,7 +84,7 @@ public class AmbienteDenver extends Ambiente {
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(denteLobo);
                     itemFoiColetado = true;
                     return "O item 'Dente' foi adicionado na mochila";
                 }
@@ -105,5 +108,17 @@ public class AmbienteDenver extends Ambiente {
     @Override
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/Denver.jpg";
+    }
+    
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String com os itens contidos nos ambientes
+     */
+    public String retornaItenAmbienteCasaBob() {
+       if (denteLobo == null){
+           return "Nao ha item neste ambiente";
+       }else{
+           return "Item: " + denteLobo.getNomeItem();
+       }
     }
 }

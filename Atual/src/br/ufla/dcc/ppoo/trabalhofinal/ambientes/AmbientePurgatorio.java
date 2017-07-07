@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -23,15 +24,17 @@ public class AmbientePurgatorio extends Ambiente {
 
     private boolean itemFoiColetado;
     private boolean foiCeu;
+    private Item portadorAlmas;
     
     /**
      * @param nomeAmbiente
      * Constroi um ambiente "AmbientePurgatorio" passando seu nome por parametro
      */
-    public AmbientePurgatorio(String nomeAmbiente)  {
+    public AmbientePurgatorio(String nomeAmbiente, Item portadorAlmas)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
+        this.portadorAlmas = portadorAlmas;
     }
     
     /**
@@ -62,7 +65,7 @@ public class AmbientePurgatorio extends Ambiente {
                 setJaVisitada(true);
 
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(portadorAlmas);
                     itemFoiColetado = true;
                     return texto1 + "\nO item 'Almas' foi adicionado na mochila\n";
                 }
@@ -78,7 +81,7 @@ public class AmbientePurgatorio extends Ambiente {
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(super.getItem());
+                    dean.inserirItensMochila(portadorAlmas);
                     itemFoiColetado = true;
                     return "O item 'Almas' foi adicionado na mochila";
                 }
@@ -103,4 +106,15 @@ public class AmbientePurgatorio extends Ambiente {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/purgatorio.jpg";
     }
 
+    /**
+     * Metodo que retorna o item do Ambiente
+     * @return String com os itens contidos nos ambientes
+     */
+    public String retornaItenAmbienteCasaBob() {
+       if (portadorAlmas == null){
+           return "Nao ha item neste ambiente";
+       }else{
+           return "Item: " + portadorAlmas.getNomeItem();
+       }
+    }
 }

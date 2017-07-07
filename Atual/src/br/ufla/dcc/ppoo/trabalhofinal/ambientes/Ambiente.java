@@ -29,7 +29,6 @@ public abstract class Ambiente  {
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
     private ColecaoDeItens armario;
-    private Item item;
     
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -41,35 +40,7 @@ public abstract class Ambiente  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
-        item = null;
         armario = new ColecaoDeItens(100);
-    }
-
-    /**
-     * Retorna um item do ambiente
-     * @return Item
-     */
-    protected Item getItem() {
-        return item;
-    }
-    
-    /**
-     * Adiciona um item no ambiente
-     * @param item
-     */
-    public void setItem(Item item) {
-        this.item = item;
-    }
-    
-    /**
-     * remove o item e passa o item removido como retorno do metodo caso queira
-     * adicionar em outra lista
-     * @return Item
-     */
-    public Item removeItem(){
-        Item aux = item;
-        item = null;
-        return aux;
     }
     
     /**
@@ -104,18 +75,6 @@ public abstract class Ambiente  {
      * @return String
      */
     public abstract String imagemDoAmbiente();
-    
-    /**
-     * Metodo que retorna o item do Ambiente
-     * @return String com os itens contidos nos ambientes
-     */
-    public String itensAmbiente() {
-       if (item == null){
-           return "Nao ha item neste ambiente";
-       }else{
-           return "Item: " + item.getNomeItem();
-       }
-    }
     
     /**
      * Metodo que retorna se um ambiente já foi visitado ou nao.

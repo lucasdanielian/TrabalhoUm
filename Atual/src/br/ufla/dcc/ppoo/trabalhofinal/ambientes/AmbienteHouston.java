@@ -78,7 +78,7 @@ public class AmbienteHouston extends Ambiente {
             }
             else{
                 return "Dean se direciona para Houston. Entretanto, Dean não "
-                        + "sabe o que fazer lá.";
+                        + "sabe o que fazer lá.\n";
             }
         }
         else{// caso o jogador ja tenha vindo a esse ambiente

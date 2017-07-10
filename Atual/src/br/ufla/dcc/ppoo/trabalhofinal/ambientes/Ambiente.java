@@ -9,9 +9,6 @@ import java.util.HashMap;
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
  *
- * Esta classe eh parte da aplicacao "World of Zuul".
- * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
- *
  * Um "Ambiente" representa uma localizacao no cenario do jogo. Ele eh
  * conectado aos outros ambientes atraves de saidas. As saidas sao
  * nomeadas como denver,houston,casaCaim,casaBob,inferno,purgatorio,
@@ -28,7 +25,6 @@ public abstract class Ambiente  {
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
-    private ColecaoDeItens armario;
     
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -40,7 +36,6 @@ public abstract class Ambiente  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
-        armario = new ColecaoDeItens(100);
     }
     
     /**
@@ -112,57 +107,5 @@ public abstract class Ambiente  {
             textoSaidas = textoSaidas + direcao + " ";
         }
         return textoSaidas;
-    }
-    
-    /**
-     * Retorna uma string contendo a coleçao de objetos guardados no armario
-     * localizado na CasaWinchester
-     * @return String
-     */
-    private String imprimeObjetosArmario(){
-        return "\n Objetos no armario: " + armario.retornaItens() + "\n";
-    }
-    
-    /**
-     * Insere o item passado como parametro no Armario
-     * @param item que deseja inserir no armario
-     */
-    private void insereObjetosArmario(Item item){
-        armario.inserirItens(item);
-    }
-    
-    /**
-     * Metodo utilizado quando deseja-se remover um item do armario
-     * @param item a ser removido
-     * @return Item removido para devido tratamento
-     */
-    private Item removerObjetosArmario(Item item){
-        armario.removerPeloNome(item.getNomeItem());
-        return item;
-    }
-    
-    /**
-     * Metodo que retorna os itens contidos no armario
-     * @return String contendo os itens
-     */
-    public String retornaItensDoArmario(){
-        return armario.retornaItens();
-    }
-    
-    /**
-     * Remove um objeto contido no armario.
-     * @param nome criterio de remoção
-     * @return Item removido é retornado para tratamento
-     */
-    public Item removerPeloNomeNoArmario(String nome){
-        return armario.removerPeloNome(nome);
-    }
-    
-    /**
-     * Insere um item no armario
-     * @param item o item passado por referencia é colocado no armario
-     */
-    public void inserirItensArmario(Item item){
-        armario.inserirItens(item);
     }
 }

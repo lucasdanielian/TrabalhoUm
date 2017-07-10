@@ -31,8 +31,8 @@ public class ItemDiario extends Item{
     }
     
     /**
-     * Adiciona páginas ao diario, que são Strings
-     * @param chave
+     * Adiciona páginas ao diario
+     * @param chave  que são Strings esperadas
      */
     public void adicionarPagina(String chave){
         this.paginas.add(chave);

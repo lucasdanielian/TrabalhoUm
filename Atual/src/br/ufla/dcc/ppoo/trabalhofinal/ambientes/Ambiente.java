@@ -30,7 +30,7 @@ public abstract class Ambiente  {
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
      * "um jardim aberto"
-     * @param nomeAmbiente
+     * @param nomeAmbiente esperada uma string contendo o nome do ambiente
      */
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;

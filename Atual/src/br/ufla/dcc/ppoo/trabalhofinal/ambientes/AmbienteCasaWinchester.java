@@ -75,10 +75,11 @@ public class AmbienteCasaWinchester extends Ambiente {
     }
     
     /**
-     * Insere um item no armario
+     * Insere um item no armario 
      * @param item o item passado por referencia é colocado no armario
+     * @return boolean se inserido retorna true e se não inserido retorna false
      */
-    public void inserirItensArmario(Item item){
-        armario.inserirItens(item);
+    public boolean inserirItensArmario(Item item){
+        return armario.inserirItens(item);
     }
 }

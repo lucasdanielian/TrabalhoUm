@@ -27,8 +27,9 @@ public class AmbienteHouston extends Ambiente {
     private Item cabecaVampiro;
     
     /**
-     * @param nomeAmbiente
-     * Constroi um ambiente "Houston" passando seu nome por parametro
+     * Constroi um ambiente "Houston"
+     * @param nomeAmbiente  passando seu nome por parametro
+     * @param cabecaVampiro recebe este Item como parâmetro
      */
     public AmbienteHouston(String nomeAmbiente, Item cabecaVampiro)  {
         super(nomeAmbiente);

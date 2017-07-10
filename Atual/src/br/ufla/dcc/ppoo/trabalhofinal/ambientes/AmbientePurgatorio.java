@@ -27,8 +27,9 @@ public class AmbientePurgatorio extends Ambiente {
     private Item portadorAlmas;
     
     /**
-     * @param nomeAmbiente
-     * Constroi um ambiente "AmbientePurgatorio" passando seu nome por parametro
+     * Constroi um ambiente "AmbientePurgatorio"
+     * @param nomeAmbiente  passando seu nome por parametro
+     * @param portadorAlmas recebe este item como um parametro
      */
     public AmbientePurgatorio(String nomeAmbiente, Item portadorAlmas)  {
         super(nomeAmbiente);

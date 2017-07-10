@@ -26,8 +26,9 @@ public class AmbienteCeu extends Ambiente {
     private Item pena;
             
     /**
-     * @param nomeAmbiente 
-     * Constroi um ambiente "Ceu" passando seu nome por parametro
+     * Constroi um ambiente "Ceu"
+     * @param nomeAmbiente passando seu nome por parametro
+     * @param pena o item pena é passado por parâmetro
      */
     public AmbienteCeu(String nomeAmbiente, Item pena)  {
         super(nomeAmbiente);

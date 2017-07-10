@@ -37,7 +37,9 @@ public class RegraNegocio  {
     private Ambiente ambienteAtual;
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
-    Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
+    private Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
+    private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
+    private AmbienteCasaWinchester casaWinchester;
     
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -55,7 +57,6 @@ public class RegraNegocio  {
      * Cria todos os ambientes
      */
     public void criarAmbientes() {
-        Ambiente casaWinchester, denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
       
         //Inserção do Ambiente casa Winchester
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
@@ -90,8 +91,7 @@ public class RegraNegocio  {
         pena = new Item("Pena", "pena do anjo Castiel");
         ceu = new AmbienteCeu("Ceu", pena);
         
-        
-        // inicializa as saidas dos ambientes
+        // inicializa as saidas do ambiente casaWinchester
         casaWinchester.ajustarSaidas(ceu);
         casaWinchester.ajustarSaidas(inferno);
         casaWinchester.ajustarSaidas(denver);
@@ -100,6 +100,7 @@ public class RegraNegocio  {
         casaWinchester.ajustarSaidas(casaCaim);
         casaWinchester.ajustarSaidas(purgatorio);
         
+        // inicializa as saidas do ambiente denver
         denver.ajustarSaidas(ceu);
         denver.ajustarSaidas(inferno);
         denver.ajustarSaidas(casaBob);
@@ -108,6 +109,7 @@ public class RegraNegocio  {
         denver.ajustarSaidas(purgatorio);
         denver.ajustarSaidas(casaWinchester);
         
+        // inicializa as saidas do ambiente houston
         houston.ajustarSaidas(ceu);
         houston.ajustarSaidas(inferno);
         houston.ajustarSaidas(casaBob);
@@ -116,6 +118,7 @@ public class RegraNegocio  {
         houston.ajustarSaidas(purgatorio);
         houston.ajustarSaidas(denver);
         
+        // inicializa as saidas do ambiente casaCaim
         casaCaim.ajustarSaidas(houston);
         casaCaim.ajustarSaidas(ceu);
         casaCaim.ajustarSaidas(casaBob);
@@ -124,6 +127,7 @@ public class RegraNegocio  {
         casaCaim.ajustarSaidas(purgatorio);
         casaCaim.ajustarSaidas(inferno);
         
+        // inicializa as saidas do ambiente casaBob
         casaBob.ajustarSaidas(ceu);
         casaBob.ajustarSaidas(denver);
         casaBob.ajustarSaidas(casaWinchester);
@@ -132,6 +136,7 @@ public class RegraNegocio  {
         casaBob.ajustarSaidas(purgatorio);
         casaBob.ajustarSaidas(houston);
         
+        // O ambiente inferno não tem saidas disponíveis
         /*inferno.ajustarSaidas(ceu);
         inferno.ajustarSaidas(denver);
         inferno.ajustarSaidas(casaWinchester);
@@ -141,6 +146,7 @@ public class RegraNegocio  {
         inferno.ajustarSaidas(purgatorio);
         */
         
+        // inicializa as saidas do ambiente purgatorio
         purgatorio.ajustarSaidas(ceu);
         purgatorio.ajustarSaidas(denver);
         purgatorio.ajustarSaidas(casaWinchester);
@@ -149,6 +155,7 @@ public class RegraNegocio  {
         purgatorio.ajustarSaidas(inferno);
         purgatorio.ajustarSaidas(houston);
         
+        // inicializa as saidas do ambiente ceu
         ceu.ajustarSaidas(houston);
         ceu.ajustarSaidas(inferno);
         ceu.ajustarSaidas(casaCaim);
@@ -348,7 +355,7 @@ public class RegraNegocio  {
             return dean.exibirItensMochila();
                         
         }else if (itens.equals("armario")){
-            return ambienteAtual.retornaItensDoArmario();
+            return casaWinchester.retornaItensDoArmario();
         }else{
             return "\nPalavra Invalida\n";
         }
@@ -369,7 +376,7 @@ public class RegraNegocio  {
         String nomeItem = comando.getSegundaPalavra();
         Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            ambienteAtual.inserirItensArmario(itemAux);
+            casaWinchester.inserirItensArmario(itemAux);
             return "\n Item: " + nomeItem + " guardado com sucesso\n";
                         
         }else{
@@ -389,7 +396,7 @@ public class RegraNegocio  {
         }
         String nomeItem = comando.getSegundaPalavra();
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            Item aux = ambienteAtual.removerPeloNomeNoArmario(nomeItem);
+            Item aux = casaWinchester.removerPeloNomeNoArmario(nomeItem);
             boolean verificacao = dean.inserirItensMochila(aux);
             if (verificacao == true){
                 return "\n Item: " + nomeItem + " coletado com sucesso\n";

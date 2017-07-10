@@ -1,5 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.ColecaoDeItens;
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -21,12 +23,15 @@ import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
  */
 public class AmbienteCasaWinchester extends Ambiente {
     
+    private ColecaoDeItens armario;
+    
     /**
      * @param nomeAmbiente 
      * Constroi um ambiente "CasaWincester" passando seu nome por parametro
      */
     public AmbienteCasaWinchester(String nomeAmbiente)  {
         super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
+        armario = new ColecaoDeItens(100);
     }
      
     /**
@@ -50,5 +55,30 @@ public class AmbienteCasaWinchester extends Ambiente {
     @Override
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/casaWinchester.jpg";
+    }
+    
+    /**
+     * Metodo que retorna os itens contidos no armario
+     * @return String contendo os itens
+     */
+    public String retornaItensDoArmario(){
+        return armario.retornaItens();
+    }
+    
+    /**
+     * Remove um objeto contido no armario.
+     * @param nome criterio de remoção
+     * @return Item removido é retornado para tratamento
+     */
+    public Item removerPeloNomeNoArmario(String nome){
+        return armario.removerPeloNome(nome);
+    }
+    
+    /**
+     * Insere um item no armario
+     * @param item o item passado por referencia é colocado no armario
+     */
+    public void inserirItensArmario(Item item){
+        armario.inserirItens(item);
     }
 }

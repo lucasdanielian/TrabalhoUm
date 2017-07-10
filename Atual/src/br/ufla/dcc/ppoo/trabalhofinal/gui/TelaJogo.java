@@ -9,6 +9,8 @@ import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -67,7 +69,8 @@ public class TelaJogo {
     private Analisador analisador;
     private JScrollPane jScrollPaneSaida;
     private ImageIcon logo;
-    private JLabel label;
+    private JLabel imagensJogo;
+    private JLabel rotuloTxtEntradaComandos;
     private File file;
     private URL resource;
     private String diretorio;
@@ -118,8 +121,8 @@ public class TelaJogo {
             URL resource = getClass().getResource(diretorio);
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
-            label = new JLabel(logo);
-            janela.add(label, BorderLayout.EAST); 
+            imagensJogo = new JLabel(logo);
+            janela.add(imagensJogo, BorderLayout.EAST); 
         } catch (URISyntaxException | NullPointerException ex){
             JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
                     + " Nao encontrada");
@@ -137,7 +140,7 @@ public class TelaJogo {
            URL resource = getClass().getResource(diretorio);
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
-            label.setIcon(new ImageIcon(file.getPath())); 
+            imagensJogo.setIcon(new ImageIcon(file.getPath())); 
         }catch (URISyntaxException ex){
             JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
                     + " Nao encontrada");
@@ -165,13 +168,20 @@ public class TelaJogo {
 
         //Imprime o texto na tela
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
+        textoDinamico.setEditable(false);
         //Adiciona barra de rolagem ao texto
         jScrollPaneSaida = new JScrollPane(textoDinamico);
         //Adiciona o texto na tela
         janela.add(jScrollPaneSaida, BorderLayout.CENTER);
-
+        
         //Recebe a entrada do usuario na tela
-        txtEntradaComandos = new JTextField(10);
+        txtEntradaComandos = new JTextField("Comandos Devem Ser Digitados Aqui:");
+        txtEntradaComandos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                            txtEntradaComandos.setText("");
+			}
+		});
         janela.add(txtEntradaComandos, BorderLayout.SOUTH);
 
         //Botao que envia um comando
@@ -323,6 +333,7 @@ public class TelaJogo {
                 comando = analisador.pegarComando(txtEntradaComandos.getText());
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 trocaImagem(regraNegocio.imagemAmbienteAtual());
+                txtEntradaComandos.setText("Entrada de Comandos:");
             
             }
         });

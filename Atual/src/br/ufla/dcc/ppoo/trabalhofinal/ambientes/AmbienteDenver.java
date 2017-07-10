@@ -78,7 +78,7 @@ public class AmbienteDenver extends Ambiente {
             }
             else{
                 return "Dean se direciona para a cidade de Denver,"
-                        + " mas não sabe o que fazer aqui.";
+                        + " mas não sabe o que fazer aqui.\n";
             }
         }
         else{ // caso ele ja tenha vindo no ambiente

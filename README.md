@@ -34,7 +34,5 @@ License versão 2 com excepção do Classpath.
   Para o bom desempenho do jogo é altemente recomendado que se utilize a plataforma do netbeans uma vez que os testes foram feitos
   somente para esta plataforma.
   
-  Usuario e senha:
-  valdeci - 123
-  lucas - 123
-  julio - 123
+  Usuario: valdeci; julio; lucas
+  senha: 123

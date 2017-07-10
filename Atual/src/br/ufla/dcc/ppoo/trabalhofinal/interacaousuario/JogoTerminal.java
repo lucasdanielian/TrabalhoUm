@@ -13,7 +13,7 @@ public class JogoTerminal{
 
     /**
      * Metodo principal da classe
-     * @param args
+     * @param args parametro padrão do java
      */
     public static void main(String[] args) {
         //Variaveis

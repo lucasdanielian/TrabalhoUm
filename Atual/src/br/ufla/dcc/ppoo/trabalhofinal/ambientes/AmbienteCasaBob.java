@@ -26,9 +26,9 @@ public class AmbienteCasaBob extends Ambiente {
     private Item carta;
     
     /**
-     * 
-     * @param nomeAmbiente 
-     * Constroi um ambiente "AmbienteCasaBob" passando seu nome por parametro
+     * Constroi um ambiente CasaBob 
+     * @param nomeAmbiente passando seu nome por parametro
+     * @param carta passa o Item carta como parametro
      */
     public AmbienteCasaBob(String nomeAmbiente, Item carta)  {
         super(nomeAmbiente);

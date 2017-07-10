@@ -375,12 +375,21 @@ public class RegraNegocio  {
         }
         String nomeItem = comando.getSegundaPalavra();
         Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
-        if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            casaWinchester.inserirItensArmario(itemAux);
-            return "\n Item: " + nomeItem + " guardado com sucesso\n";
-                        
-        }else{
-            return "\n Este ambiente nao lhe permite guardar nenhum item. \n";
+        if(itemAux != null){
+            if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
+                boolean foi = casaWinchester.inserirItensArmario(itemAux);
+                if(foi){
+                    return "\n Item: " + itemAux.getNomeItem() + " guardado com sucesso\n"; 
+                }
+                else{
+                    return "erro " + itemAux.getNomeItem() + " nao inserido";
+                }
+            }else{
+                return "\n Este ambiente nao lhe permite guardar nenhum item. \n";
+            }
+        }
+        else{
+            return "O item " + nomeItem +" não está na mochila";
         }
     }
     

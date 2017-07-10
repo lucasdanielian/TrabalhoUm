@@ -94,7 +94,7 @@ public class AmbienteHouston extends Ambiente {
             }
             else{
                 return "Dean se direciona para Houston, mas não existem mais ações"
-                        + " aqui. Você está perdendo tempo!";
+                        + " aqui. Você está perdendo tempo!\n";
             }
         }
         

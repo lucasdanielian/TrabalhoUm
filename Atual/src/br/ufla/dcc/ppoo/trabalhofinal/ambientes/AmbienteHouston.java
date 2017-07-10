@@ -86,10 +86,10 @@ public class AmbienteHouston extends Ambiente {
                 if(dean.espacoDisponivelMochila()){
                     dean.inserirItensMochila(cabecaVampiro);
                     itemFoiColetado = true;
-                    return "O item 'CabecaVampiro' foi coletado";
+                    return "O item 'CabecaVampiro' foi coletado\n";
                 }
                 else{
-                    return "Sua mochila está cheia, não há espaço para coletar o item";
+                    return "Sua mochila está cheia, não há espaço para coletar o item\n";
                 }
             }
             else{

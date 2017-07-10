@@ -86,7 +86,7 @@ public class AmbienteDenver extends Ambiente {
                 if(dean.espacoDisponivelMochila()){
                     dean.inserirItensMochila(denteLobo);
                     itemFoiColetado = true;
-                    return "O item 'Dente' foi adicionado na mochila";
+                    return "O item 'Dente' foi adicionado na mochila\n";
                 }
                 else{
                     return "Você não pode coletar o dente de lobo,\n"
@@ -95,7 +95,7 @@ public class AmbienteDenver extends Ambiente {
             }
             else{ // caso ele ja tenha realizado todas as açoes possiveis neste ambiente
                 return "Dean retorna à cidade de Denver, entretanto,ele não sabe o que fazer.\n"
-                        + "Não há mais ações nesta cidade. Você está perdendo tempo aqui!";
+                        + "Não há mais ações nesta cidade. Você está perdendo tempo aqui!\n";
             }
         }
     }

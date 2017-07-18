@@ -7,6 +7,12 @@ import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -50,7 +56,17 @@ public class TelaJogo {
             
     // componentes da tela
     private JFrame janela;
-    private BorderLayout layout;
+    private JPanel painelNorte;
+    private JPanel painelSul;
+    private JPanel painelLeste;
+    private JPanel painelOeste;
+    private JPanel painelCentral;
+    private GridBagConstraints gbc;
+    private GridBagLayout layoutNorte;
+    private GridBagLayout layoutSul;
+    private GridBagLayout layoutLeste;
+    private GridBagLayout layoutOeste;
+    private GridBagLayout layoutCentral;
     private JButton btnEnviarComando;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
@@ -62,6 +78,8 @@ public class TelaJogo {
     private JButton btnIrInferno;
     private JButton btnIrPurgatorio;
     private JButton btnIrCeu;
+    private JButton btnVerItensArmario;
+    private JButton btnVerItensMochila;
     private JTextArea  textoDinamico;
     private JTextField txtEntradaComandos;
     private RegraNegocio regraNegocio;
@@ -110,6 +128,8 @@ public class TelaJogo {
         btnIrInferno.setEnabled(true);
         btnIrPurgatorio.setEnabled(true);
         btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(true);
+        btnVerItensMochila.setEnabled(true);
     }
 
     /**
@@ -122,7 +142,11 @@ public class TelaJogo {
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
             imagensJogo = new JLabel(logo);
-            janela.add(imagensJogo, BorderLayout.EAST); 
+            //Adicão dos botoes Ambientes no painei Oeste
+            adicionarComponentePainelLeste(imagensJogo,
+                    GridBagConstraints.NORTH,
+                    GridBagConstraints.NONE,
+                    0, 0, 1, 1);
         } catch (URISyntaxException | NullPointerException ex){
             JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
                     + " Nao encontrada");
@@ -141,17 +165,96 @@ public class TelaJogo {
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
             imagensJogo.setIcon(new ImageIcon(file.getPath())); 
-        }catch (URISyntaxException ex){
-            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
+        } catch (URISyntaxException | NullPointerException ex){
+            JOptionPane.showMessageDialog(painelNorte, "Imagem: " + diretorio
                     + " Nao encontrada");
-            JOptionPane.showMessageDialog(janela, "O jogo continuará com a imagem padrao. \n"
-                    + "Se o problema persistir contate o administrador do sistema");
-        }catch (NullPointerException npex){
-            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
-                    + " Nao encontrada");
-            JOptionPane.showMessageDialog(janela, "O jogo continuará com a imagem padrao. \n"
+            JOptionPane.showMessageDialog(painelNorte, "O jogo continuará sem imagem. \n"
                     + "Se o problema persistir contate o administrador do sistema");
         }
+    }
+    
+    /**
+     * Adiciona um componente à tela.
+     */
+    private void adicionarComponentePainelNorte(Component c,
+            int anchor, int fill, int linha,
+            int coluna, int largura, int altura) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+        gbc.gridy = linha;
+        gbc.gridx = coluna;
+        gbc.gridwidth = largura;
+        gbc.gridheight = altura;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        layoutNorte.setConstraints(c, gbc);
+        painelNorte.add(c);
+    }
+    
+    /**
+     * Adiciona um componente à tela.
+     */
+    private void adicionarComponentePainelSul(Component c,
+            int anchor, int fill, int linha,
+            int coluna, int largura, int altura) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+        gbc.gridy = linha;
+        gbc.gridx = coluna;
+        gbc.gridwidth = largura;
+        gbc.gridheight = altura;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        layoutSul.setConstraints(c, gbc);
+        painelSul.add(c);
+    }
+    
+    /**
+     * Adiciona um componente à tela.
+     */
+    private void adicionarComponentePainelLeste(Component c,
+            int anchor, int fill, int linha,
+            int coluna, int largura, int altura) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+        gbc.gridy = linha;
+        gbc.gridx = coluna;
+        gbc.gridwidth = largura;
+        gbc.gridheight = altura;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        layoutLeste.setConstraints(c, gbc);
+        painelLeste.add(c);
+    }
+    
+    /**
+     * Adiciona um componente à tela.
+     */
+    private void adicionarComponentePainelOeste(Component c, int anchor, 
+            int fill, int linha, int coluna, int largura, int altura) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+        gbc.gridy = linha;
+        gbc.gridx = coluna;
+        gbc.gridwidth = largura;
+        gbc.gridheight = altura;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        layoutOeste.setConstraints(c, gbc);
+        painelOeste.add(c);
+    }
+    
+    /**
+     * Adiciona um componente à tela.
+     */
+    private void adicionarComponentePainelCentral(Component c,
+            int anchor, int fill, int linha,
+            int coluna, int largura, int altura) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+        gbc.gridy = linha;
+        gbc.gridx = coluna;
+        gbc.gridwidth = largura;
+        gbc.gridheight = altura;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        layoutCentral.setConstraints(c, gbc);
+        painelCentral.add(c);
     }
     
     /**
@@ -163,16 +266,22 @@ public class TelaJogo {
 
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
+        
         //Analisador de comandos do jogo
         analisador = new Analisador();
 
         //Imprime o texto na tela
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
         textoDinamico.setEditable(false);
+        
         //Adiciona barra de rolagem ao texto
         jScrollPaneSaida = new JScrollPane(textoDinamico);
+        
         //Adiciona o texto na tela
-        janela.add(jScrollPaneSaida, BorderLayout.CENTER);
+        adicionarComponentePainelCentral(jScrollPaneSaida,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                1, 0, 1, 1);
         
         //Recebe a entrada do usuario na tela
         txtEntradaComandos = new JTextField("Comandos Devem Ser Digitados Aqui:");
@@ -182,7 +291,12 @@ public class TelaJogo {
                             txtEntradaComandos.setText("");
 			}
 		});
-        janela.add(txtEntradaComandos, BorderLayout.SOUTH);
+        
+        //Adiciona Entrada de comandos na tela
+        adicionarComponentePainelCentral(txtEntradaComandos,
+                GridBagConstraints.LINE_END,
+                GridBagConstraints.NONE,
+                2, 0, 5, 2);
 
         //Botao que envia um comando
         btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
@@ -213,31 +327,102 @@ public class TelaJogo {
                 GerenciadorDeImagens.OK);
         btnIrCeu = new JButton(I18N.obterBotaoCeu(),
                 GerenciadorDeImagens.OK);
+        
+        //Manipulação de itens
+        btnVerItensArmario = new JButton(I18N.obterBotaoVerItensAmbiente(),
+                GerenciadorDeImagens.OK);
+        btnVerItensMochila = new JButton(I18N.obterBotaoVerItensMochila(),
+            GerenciadorDeImagens.OK);
 
         prepararComponentesEstadoInicial();
-
-        //Adiciona os botoes principais na tela
-        JPanel painelBotoes = new JPanel();
-        painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
-        painelBotoes.add(btnEnviarComando);
-        painelBotoes.add(btnSalvarJogo);
-        painelBotoes.add(btnCancelarJogo);
-        painelBotoes.add(btnIrCasaWinchester);
-        painelBotoes.add(btnIrDenver);
-        painelBotoes.add(btnIrHouston);
-        painelBotoes.add(btnIrCasaCaim);
-        painelBotoes.add(btnIrCasaBob);
-        painelBotoes.add(btnIrInferno);
-        painelBotoes.add(btnIrPurgatorio);
-        painelBotoes.add(btnIrCeu);
-        janela.add(painelBotoes, BorderLayout.WEST);
+        //Component c, anchor, fill, linha, coluna, largura, altura
+        
+        
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelOeste(btnSalvarJogo,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                0, 0, 1, 1);
+        
+        //Adicão dos botoes Ambientes no painei Oeste
+        adicionarComponentePainelOeste(btnCancelarJogo,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                1, 0, 1, 1);
+        
+        //Adicão dos botoes principais no painei Oeste
+        adicionarComponentePainelOeste(btnEnviarComando,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                3, 0, 1, 1);
+        
+        //Adicão dos botoes principais no painei Oeste
+        adicionarComponentePainelOeste(btnIrCasaWinchester,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                4, 0, 1, 1);
+        
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelOeste(btnIrDenver,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                5, 0, 1, 1);
+        
+        //Adicão dos botoes Ambientes no painei Oeste
+        adicionarComponentePainelOeste(btnIrHouston,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                6, 0, 1, 1);
+        
+        //Adicão dos botoes principais no painei Oeste
+        adicionarComponentePainelOeste(btnIrCasaCaim,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                7, 0, 1, 1);
+        
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelOeste(btnIrCasaBob,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                8, 0, 1, 1);
+        
+        //Adicão dos botoes Ambientes no painei Oeste
+        adicionarComponentePainelOeste(btnIrInferno,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                9, 0, 1, 1);
+        
+        //Adicão dos botoes principais no painei Oeste
+        adicionarComponentePainelOeste(btnIrPurgatorio,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                10, 0, 1, 1);
+        
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelOeste(btnIrCeu,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                11, 0, 1, 1);
+        
+        //Adicão dos botoes Ambientes no painei Oeste
+        adicionarComponentePainelOeste(btnVerItensArmario,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.SOUTH,
+                13, 0, 1, 1);
+        
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelOeste(btnVerItensMochila,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                14, 0, 1, 1);
+        
     }
 
     /**
      * Configura os eventos da tela.
      */
     private void configurarEventosTela() {
-
+        
         btnIrCeu.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -326,6 +511,34 @@ public class TelaJogo {
             }
         });
         
+        btnVerItensArmario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("analisar armario");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao != null){
+                    textoDinamico.setText(textoExibicao);
+                }else{
+                    textoDinamico.setText("Nao ha intens guardados no armario");
+                }
+            }
+        });
+        
+        btnVerItensMochila.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("analisar mochila");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao != null){
+                    textoDinamico.setText(textoExibicao);
+                }else{
+                    textoDinamico.setText("Nao ha intens na mochila");
+                }
+            }
+        });
+        
         btnEnviarComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -357,10 +570,42 @@ public class TelaJogo {
      * Constrói a janela tratando internacionalização, componentes e layout.
      */
     private void construirTela(){
+        
+        //JFrame
         janela = new JFrame("Super Natural : Morte Subita");
         janela.setTitle(I18N.obterTituloTelaMeuJogo());
-        layout = new BorderLayout();
-        janela.setLayout(layout);
+        janela.setLayout( new BorderLayout());
+        
+        //JPanel
+        painelNorte = new JPanel();
+        painelSul = new JPanel();
+        painelLeste = new JPanel();
+        painelCentral = new JPanel();
+        painelOeste = new JPanel();
+        
+        //GridBagLayout
+        gbc = new GridBagConstraints();
+        layoutNorte = new GridBagLayout();
+        layoutSul = new GridBagLayout();
+        layoutLeste = new GridBagLayout();
+        layoutOeste = new GridBagLayout();
+        layoutCentral = new GridBagLayout();
+        
+        //Alterando Layout Padrão
+        painelOeste.setLayout(layoutOeste);
+        painelCentral.setLayout(layoutCentral);
+        painelNorte.setLayout(layoutNorte);
+        painelSul.setLayout(layoutSul);
+        painelLeste.setLayout(layoutLeste);
+        
+        //Configurando Layout dos paineis
+        janela.add(painelNorte, BorderLayout.NORTH);
+        janela.add(painelSul, BorderLayout.SOUTH);
+        janela.add(painelLeste, BorderLayout.EAST);
+        janela.add(painelOeste, BorderLayout.WEST);
+        janela.add(painelCentral, BorderLayout.CENTER);
+        
+        //
         adicionarComponentes();
         janela.pack();
         

@@ -67,6 +67,8 @@ public class TelaJogo {
     private GridBagLayout layoutLeste;
     private GridBagLayout layoutOeste;
     private GridBagLayout layoutCentral;
+    
+    //Botoes
     private JButton btnEnviarComando;
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
@@ -80,7 +82,15 @@ public class TelaJogo {
     private JButton btnIrCeu;
     private JButton btnVerItensArmario;
     private JButton btnVerItensMochila;
+    private JButton btnItemCarta;
+    private JButton btnItemPena;
+    private JButton btnItemDenteLobo;
+    private JButton btnItemCabecaVampiro;
+    private JButton btnItemPortadorAlmas;
+    
+    //Outros
     private JTextArea  textoDinamico;
+    private JTextArea tituloBotoesItens;
     private JTextField txtEntradaComandos;
     private RegraNegocio regraNegocio;
     private Comando comando;
@@ -291,131 +301,172 @@ public class TelaJogo {
                             txtEntradaComandos.setText("");
 			}
 		});
-        
         //Adiciona Entrada de comandos na tela
         adicionarComponentePainelCentral(txtEntradaComandos,
-                GridBagConstraints.LINE_END,
+                GridBagConstraints.SOUTH,
                 GridBagConstraints.NONE,
                 2, 0, 5, 2);
-
-        //Botao que envia um comando
-        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
-                GerenciadorDeImagens.OK);
-
+        
         //Botao que salva o jogo em persistencia
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
-
-        //Botao que encerra o jogo
-        btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
-                GerenciadorDeImagens.CANCELAR);
-
-        //Botoes dos Ambientes
-        btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
-                GerenciadorDeImagens.OK);
-        btnIrDenver = new JButton(I18N.obterBotaoDenver(),
-                GerenciadorDeImagens.OK);
-        btnIrHouston = new JButton(I18N.obterBotaoHouston(),
-                GerenciadorDeImagens.OK);
-        btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
-                GerenciadorDeImagens.OK);
-        btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
-                GerenciadorDeImagens.OK);
-        btnIrInferno = new JButton(I18N.obterBotaoInferno(),
-                GerenciadorDeImagens.OK);
-        btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
-                GerenciadorDeImagens.OK);
-        btnIrCeu = new JButton(I18N.obterBotaoCeu(),
-                GerenciadorDeImagens.OK);
-        
-        //Manipulação de itens
-        btnVerItensArmario = new JButton(I18N.obterBotaoVerItensAmbiente(),
-                GerenciadorDeImagens.OK);
-        btnVerItensMochila = new JButton(I18N.obterBotaoVerItensMochila(),
-            GerenciadorDeImagens.OK);
-
-        prepararComponentesEstadoInicial();
-        //Component c, anchor, fill, linha, coluna, largura, altura
-        
-        
-        //Adicão dos botoes de jogo no painei Oeste
+        //Adicão dos botao Salvar jogo no painei Oeste
         adicionarComponentePainelOeste(btnSalvarJogo,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
                 0, 0, 1, 1);
-        
+
+        //Botao que encerra o jogo
+        btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes Ambientes no painei Oeste
         adicionarComponentePainelOeste(btnCancelarJogo,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
                 1, 0, 1, 1);
         
-        //Adicão dos botoes principais no painei Oeste
+        //Botao que envia um comando
+        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
+                GerenciadorDeImagens.OK);
+        //Adicão do botao Enviar comando no painei Oeste
         adicionarComponentePainelOeste(btnEnviarComando,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 3, 0, 1, 1);
-        
+
+        //Botoes dos Ambientes
+        btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes principais no painei Oeste
         adicionarComponentePainelOeste(btnIrCasaWinchester,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 4, 0, 1, 1);
         
+        btnIrDenver = new JButton(I18N.obterBotaoDenver(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelOeste(btnIrDenver,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 5, 0, 1, 1);
         
+        btnIrHouston = new JButton(I18N.obterBotaoHouston(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes Ambientes no painei Oeste
         adicionarComponentePainelOeste(btnIrHouston,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 6, 0, 1, 1);
         
+        btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes principais no painei Oeste
         adicionarComponentePainelOeste(btnIrCasaCaim,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 7, 0, 1, 1);
         
+        btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelOeste(btnIrCasaBob,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 8, 0, 1, 1);
         
+        btnIrInferno = new JButton(I18N.obterBotaoInferno(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes Ambientes no painei Oeste
         adicionarComponentePainelOeste(btnIrInferno,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 9, 0, 1, 1);
         
+        btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes principais no painei Oeste
         adicionarComponentePainelOeste(btnIrPurgatorio,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 10, 0, 1, 1);
         
+        btnIrCeu = new JButton(I18N.obterBotaoCeu(),
+                GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelOeste(btnIrCeu,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 11, 0, 1, 1);
         
-        //Adicão dos botoes Ambientes no painei Oeste
+        //Botoes de Exibicao de itens
+        btnVerItensArmario = new JButton(I18N.obterBotaoVerItensAmbiente(),
+                GerenciadorDeImagens.OK);
+        //Adicão do botao VerItensArmario no painei Oeste
         adicionarComponentePainelOeste(btnVerItensArmario,
                 GridBagConstraints.SOUTH,
-                GridBagConstraints.SOUTH,
+                GridBagConstraints.VERTICAL,
                 13, 0, 1, 1);
         
-        //Adicão dos botoes de jogo no painei Oeste
+        btnVerItensMochila = new JButton(I18N.obterBotaoVerItensMochila(),
+            GerenciadorDeImagens.OK);
+        //Adicão do botao VerItensMochila no painel Oeste
         adicionarComponentePainelOeste(btnVerItensMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.VERTICAL,
                 14, 0, 1, 1);
         
+        //Imprime o texto na tela
+        tituloBotoesItens = new JTextArea("ITENS DISPONIVEIS NO JOGO");
+        tituloBotoesItens.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainelLeste(tituloBotoesItens,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                1, 0, 1, 1);
+        
+        //Botoes de Manipulação de itens
+        btnItemCarta = new JButton(I18N.obterBotaoItenCarta(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemCarta,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                2, 0, 1, 1);
+        
+        btnItemPena = new JButton(I18N.obterBotaoItenPena(),
+            GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemPena,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.NONE,
+                3, 0, 1, 1);
+        
+        btnItemDenteLobo = new JButton(I18N.obterBotaoItenDenteLobo(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemDenteLobo,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                4, 0, 1, 1);
+        
+        btnItemCabecaVampiro = new JButton(I18N.obterBotaoItenCabecaVampiro(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemCabecaVampiro,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                5, 0, 1, 1);
+        
+        btnItemPortadorAlmas = new JButton(I18N.obterBotaoItemPortadorAlmas(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemPortadorAlmas,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                6, 0, 1, 1);
+
+        prepararComponentesEstadoInicial();        
     }
 
     /**
@@ -536,6 +587,51 @@ public class TelaJogo {
                 }else{
                     textoDinamico.setText("Nao ha intens na mochila");
                 }
+            }
+        });
+        
+        btnItemCabecaVampiro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                comando = analisador.pegarComando("pegar CabecaVampiro");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnItemCarta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                comando = analisador.pegarComando("pegar Carta");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnItemDenteLobo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                comando = analisador.pegarComando("pegar Dente");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnItemPena.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                comando = analisador.pegarComando("pegar Pena");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+            }
+        });
+        
+        btnItemPortadorAlmas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+                comando = analisador.pegarComando("pegar Almas");
+                textoDinamico.setText(regraNegocio.processarComando(comando));
             }
         });
         

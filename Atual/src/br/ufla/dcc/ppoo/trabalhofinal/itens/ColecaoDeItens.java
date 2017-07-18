@@ -39,13 +39,17 @@ public class ColecaoDeItens {
      * o metodo exibir() mostra na tela a atual disposicao dos itens na sua 
      */
     public String retornaItens(){
-        String itensRetorno = " ";
-        for(Item i:itens){
-            if(i!=null){
-                itensRetorno += " " + i.getDescricaoItem() + "\n";
+        if(itens.size() > 0){
+            String itensRetorno = " ";
+            for(Item i:itens){
+                if(i!=null){
+                    itensRetorno += " " + i.getDescricaoItem() + "\n";
+                }
             }
+            return itensRetorno;
+        }else{
+        return null;
         }
-        return itensRetorno;
     }
     
     /**

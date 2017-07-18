@@ -460,4 +460,20 @@ public class I18N {
     public static String obterBotaoCeu() {
         return rb.getString("botao.ceu");
     }
+    
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Ver Itens Ambiente
+     */
+    public static String obterBotaoVerItensAmbiente() {
+        return rb.getString("botao.ver_itens_ambiente");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Ver Itens Mochila
+     */
+    public static String obterBotaoVerItensMochila() {
+        return rb.getString("botao.ver_itens_mochila");
+    }
 }

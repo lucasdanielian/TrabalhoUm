@@ -476,4 +476,44 @@ public class I18N {
     public static String obterBotaoVerItensMochila() {
         return rb.getString("botao.ver_itens_mochila");
     }
+    
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItenCarta
+     */
+    public static String obterBotaoItenCarta() {
+        return rb.getString("botao.iten_carta");
+    }
+    
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItenPena
+     */
+    public static String obterBotaoItenPena() {
+        return rb.getString("botao.iten_pena");
+    }
+    
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItenDenteLobo
+     */
+    public static String obterBotaoItenDenteLobo() {
+        return rb.getString("botao.iten_dente_lobo");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItenCabecaVampiro
+     */
+    public static String obterBotaoItenCabecaVampiro() {
+        return rb.getString("botao.iten_cabeca_vampiro");
+    }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItemPortadorAlmas
+     */
+    public static String obterBotaoItemPortadorAlmas() {
+        return rb.getString("botao.iten_portadorAlma");
+    }
 }

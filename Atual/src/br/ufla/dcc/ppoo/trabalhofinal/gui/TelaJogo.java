@@ -7,8 +7,11 @@ import br.ufla.dcc.ppoo.trabalhofinal.i18n.I18N;
 import br.ufla.dcc.ppoo.trabalhofinal.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.trabalhofinal.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -68,30 +71,51 @@ public class TelaJogo {
     private GridBagLayout layoutOeste;
     private GridBagLayout layoutCentral;
     
-    //Botoes
+    //Botao que envia os comandos
     private JButton btnEnviarComando;
+    
+    //Botoes principais
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
+    
+    //Botoes para navegacao entre os ambientes
     private JButton btnIrCasaWinchester;
     private JButton btnIrDenver;
     private JButton btnIrHouston;
     private JButton btnIrCasaCaim;
     private JButton btnIrCasaBob;
-    private JButton btnIrInferno;
+    private JButton btnIrPortalInferno;
     private JButton btnIrPurgatorio;
     private JButton btnIrCeu;
+    
+    //Botao que mostra os itens do armario na casa Winchester
     private JButton btnVerItensArmario;
-    private JButton btnVerItensMochila;
-    private JButton btnItemCarta;
-    private JButton btnItemPena;
-    private JButton btnItemDenteLobo;
-    private JButton btnItemCabecaVampiro;
-    private JButton btnItemPortadorAlmas;
+    
+    //Botao que mostra os itens dos ambientes
+    private JButton btnItemCartaAmbiente;
+    private JButton btnItemPenaAmbiente;
+    private JButton btnItemDenteLoboAmbiente;
+    private JButton btnItemCabecaVampiroAmbiente;
+    private JButton btnItemPortadorAlmasAmbiente;
+    
+    //Botoes que mostra os itens da mochila
+    private JButton btnItemCartaMochila;
+    private JButton btnItemPenaMochila;
+    private JButton btnItemDenteLoboMochila;
+    private JButton btnItemCabecaVampiroMochila;
+    private JButton btnItemPortadorAlmasMochila;
+    
+    //Exibicao de texto
+    private JTextArea textoDinamico;
+    private JTextArea tituloBotoesItens;
+    private JTextArea tituloBotoesAmbientes;
+    private JTextArea tituloBotoesPrincipais;
+    private JTextArea tituloBotoesVerItens;
+    
+    //Entradas do usuario
+    private JTextField txtEntradaComandos;
     
     //Outros
-    private JTextArea  textoDinamico;
-    private JTextArea tituloBotoesItens;
-    private JTextField txtEntradaComandos;
     private RegraNegocio regraNegocio;
     private Comando comando;
     private Analisador analisador;
@@ -126,6 +150,46 @@ public class TelaJogo {
      * Trata o estado inicial da tela
      */
     private void prepararComponentesEstadoInicial() {
+        
+        //Botoes Principais
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        
+        //Botao que envia os comandos
+        btnEnviarComando.setEnabled(true);
+        
+        //Botoes para navegar entre os ambientes
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        
+        //Botao que mostra os itens contidos no armario da casaWinchester
+        btnVerItensArmario.setEnabled(true);
+        
+        //Botoes Itens Ambientes
+        btnItemCartaAmbiente.setEnabled(true);
+        btnItemPenaAmbiente.setEnabled(true);
+        btnItemDenteLoboAmbiente.setEnabled(true);
+        btnItemCabecaVampiroAmbiente.setEnabled(true);
+        btnItemPortadorAlmasAmbiente.setEnabled(true);
+        
+        //Botões Itens mochila
+        btnItemCartaMochila.setEnabled(false);
+        btnItemPenaMochila.setEnabled(false);
+        btnItemDenteLoboMochila.setEnabled(false);
+        btnItemCabecaVampiroMochila.setEnabled(false);
+        btnItemPortadorAlmasMochila.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente Casa Bob
+     */
+    private void prepararComponentesEstadoInicialCasaBob() {
 
         btnSalvarJogo.setEnabled(true);
         btnCancelarJogo.setEnabled(true);
@@ -135,13 +199,185 @@ public class TelaJogo {
         btnIrHouston.setEnabled(true);
         btnIrCasaCaim.setEnabled(true);
         btnIrCasaBob.setEnabled(true);
-        btnIrInferno.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente Casa Caim
+     */
+    private void prepararComponentesEstadoInicialCasaCaim() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente Casa Winchester
+     */
+    private void prepararComponentesEstadoInicialCasaWinchester() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
         btnIrPurgatorio.setEnabled(true);
         btnIrCeu.setEnabled(true);
         btnVerItensArmario.setEnabled(true);
-        btnVerItensMochila.setEnabled(true);
+        btnItemCartaAmbiente.setEnabled(true);
+        btnItemPenaAmbiente.setEnabled(true);
+        btnItemDenteLoboAmbiente.setEnabled(true);
+        btnItemCabecaVampiroAmbiente.setEnabled(true);
+        btnItemPortadorAlmasAmbiente.setEnabled(true);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente CasaBob
+     */
+    private void prepararComponentesEstadoInicialCeu() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente CasaBob
+     */
+    private void prepararComponentesEstadoInicialDenver() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente CasaBob
+     */
+    private void prepararComponentesEstadoInicialHouston() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
     }
 
+    /**
+     * Trata o estado inicial do ambiente CasaBob
+     */
+    private void prepararComponentesEstadoInicialPortalInferno() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
+    /**
+     * Trata o estado inicial do ambiente CasaBob
+     */
+    private void prepararComponentesEstadoInicialPurgatorio() {
+
+        btnSalvarJogo.setEnabled(true);
+        btnCancelarJogo.setEnabled(true);
+        btnEnviarComando.setEnabled(true);
+        btnIrCasaWinchester.setEnabled(true);
+        btnIrDenver.setEnabled(true);
+        btnIrHouston.setEnabled(true);
+        btnIrCasaCaim.setEnabled(true);
+        btnIrCasaBob.setEnabled(true);
+        btnIrPortalInferno.setEnabled(true);
+        btnIrPurgatorio.setEnabled(true);
+        btnIrCeu.setEnabled(true);
+        btnVerItensArmario.setEnabled(false);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+    }
+    
     /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
@@ -153,10 +389,10 @@ public class TelaJogo {
             logo = new ImageIcon(file.getPath());
             imagensJogo = new JLabel(logo);
             //Adicão dos botoes Ambientes no painei Oeste
-            adicionarComponentePainelLeste(imagensJogo,
-                    GridBagConstraints.NORTH,
-                    GridBagConstraints.NONE,
-                    0, 0, 1, 1);
+            adicionarComponentePainelNorte(imagensJogo,
+                    GridBagConstraints.CENTER,
+                    GridBagConstraints.HORIZONTAL,
+                    0, 5, 1, 1);
         } catch (URISyntaxException | NullPointerException ex){
             JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
                     + " Nao encontrada");
@@ -286,10 +522,16 @@ public class TelaJogo {
         
         //Adiciona barra de rolagem ao texto
         jScrollPaneSaida = new JScrollPane(textoDinamico);
+        //textoDinamico.setMinimumSize(new Dimension(200, 100));
+        //textoDinamico.setMaximumSize(new Dimension(500, 400));
+        //textoDinamico.setPreferredSize(new Dimension(200, 100));
+        //jScrollPaneSaida.setMinimumSize(new Dimension(200, 100));
+        //jScrollPaneSaida.setMaximumSize(new Dimension(500, 400));
+        jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
         
         //Adiciona o texto na tela
         adicionarComponentePainelCentral(jScrollPaneSaida,
-                GridBagConstraints.CENTER,
+                GridBagConstraints.NORTH,
                 GridBagConstraints.NONE,
                 1, 0, 1, 1);
         
@@ -305,34 +547,58 @@ public class TelaJogo {
         adicionarComponentePainelCentral(txtEntradaComandos,
                 GridBagConstraints.SOUTH,
                 GridBagConstraints.NONE,
-                2, 0, 5, 2);
+                2, 0, 1, 1);
+        
+        //Botao que envia um comando
+        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
+                GerenciadorDeImagens.OK);
+        //Adicão do botao Enviar comando no painei Oeste
+        adicionarComponentePainelCentral(btnEnviarComando,
+                GridBagConstraints.PAGE_END,
+                GridBagConstraints.VERTICAL,
+                4, 0, 1, 1);
+        
+        //Imprime o texto na tela
+        tituloBotoesPrincipais = new JTextArea("BOTOES PRINCIPAIS");
+        tituloBotoesPrincipais.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesPrincipais.setBackground(Color.GRAY);
+        tituloBotoesPrincipais.setForeground(Color.WHITE);
+        tituloBotoesPrincipais.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainelOeste(tituloBotoesPrincipais,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                0, 0, 1, 1);
         
         //Botao que salva o jogo em persistencia
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botao Salvar jogo no painei Oeste
         adicionarComponentePainelOeste(btnSalvarJogo,
-                GridBagConstraints.NORTH,
+                GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                0, 0, 1, 1);
+                2, 0, 1, 1);
 
         //Botao que encerra o jogo
         btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
                 GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes Ambientes no painei Oeste
         adicionarComponentePainelOeste(btnCancelarJogo,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                1, 0, 1, 1);
-        
-        //Botao que envia um comando
-        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
-                GerenciadorDeImagens.OK);
-        //Adicão do botao Enviar comando no painei Oeste
-        adicionarComponentePainelOeste(btnEnviarComando,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                3, 0, 1, 1);
+                4, 0, 1, 1);
+        
+        //Imprime o texto na tela
+        tituloBotoesAmbientes = new JTextArea(" NAVEGACAO ENTRE\n       AMBIENTES ");
+        tituloBotoesAmbientes.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesAmbientes.setBackground(Color.GRAY);
+        tituloBotoesAmbientes.setForeground(Color.WHITE);
+        tituloBotoesAmbientes.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainelOeste(tituloBotoesAmbientes,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                8, 0, 2, 2);
 
         //Botoes dos Ambientes
         btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
@@ -341,7 +607,7 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrCasaWinchester,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                4, 0, 1, 1);
+                10, 0, 1, 1);
         
         btnIrDenver = new JButton(I18N.obterBotaoDenver(),
                 GerenciadorDeImagens.OK);
@@ -349,7 +615,7 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrDenver,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                5, 0, 1, 1);
+                12, 0, 1, 1);
         
         btnIrHouston = new JButton(I18N.obterBotaoHouston(),
                 GerenciadorDeImagens.OK);
@@ -357,7 +623,7 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrHouston,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                6, 0, 1, 1);
+                14, 0, 1, 1);
         
         btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
                 GerenciadorDeImagens.OK);
@@ -365,7 +631,7 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrCasaCaim,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                7, 0, 1, 1);
+                16, 0, 1, 1);
         
         btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
                 GerenciadorDeImagens.OK);
@@ -373,15 +639,15 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrCasaBob,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                8, 0, 1, 1);
+                18, 0, 1, 1);
         
-        btnIrInferno = new JButton(I18N.obterBotaoInferno(),
+        btnIrPortalInferno = new JButton(I18N.obterBotaoInferno(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes Ambientes no painei Oeste
-        adicionarComponentePainelOeste(btnIrInferno,
+        adicionarComponentePainelOeste(btnIrPortalInferno,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                9, 0, 1, 1);
+                20, 0, 1, 1);
         
         btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
                 GerenciadorDeImagens.OK);
@@ -389,7 +655,7 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrPurgatorio,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                10, 0, 1, 1);
+                22, 0, 1, 1);
         
         btnIrCeu = new JButton(I18N.obterBotaoCeu(),
                 GerenciadorDeImagens.OK);
@@ -397,75 +663,123 @@ public class TelaJogo {
         adicionarComponentePainelOeste(btnIrCeu,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                11, 0, 1, 1);
+                24, 0, 1, 1);
+        
+        //Imprime o titulo dos botões de itens na tela
+        tituloBotoesItens = new JTextArea(" ITENS AMBIENTES ");
+        tituloBotoesItens.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesItens.setBackground(Color.GRAY);
+        tituloBotoesItens.setForeground(Color.WHITE);
+        tituloBotoesItens.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainelLeste(tituloBotoesItens,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                0, 0, 2, 2);
+        
+        //Botoes de Manipulação de itens do ambiente
+        btnItemCartaAmbiente = new JButton(I18N.obterBotaoItenCarta(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemCartaAmbiente,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                2, 0, 1, 1);
+        
+        btnItemPenaAmbiente = new JButton(I18N.obterBotaoItenPena(),
+            GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemPenaAmbiente,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                4, 0, 1, 1);
+        
+        btnItemDenteLoboAmbiente = new JButton(I18N.obterBotaoItenDenteLobo(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemDenteLoboAmbiente,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                6, 0, 1, 1);
+        
+        btnItemCabecaVampiroAmbiente = new JButton(I18N.obterBotaoItenCabecaVampiro(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemCabecaVampiroAmbiente,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                8, 0, 1, 1);
+        
+        btnItemPortadorAlmasAmbiente = new JButton(I18N.obterBotaoItemPortadorAlmas(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes de jogo no painei Oeste
+        adicionarComponentePainelLeste(btnItemPortadorAlmasAmbiente,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                10, 0, 1, 1);
         
         //Botoes de Exibicao de itens
         btnVerItensArmario = new JButton(I18N.obterBotaoVerItensAmbiente(),
                 GerenciadorDeImagens.OK);
         //Adicão do botao VerItensArmario no painei Oeste
-        adicionarComponentePainelOeste(btnVerItensArmario,
-                GridBagConstraints.SOUTH,
+        adicionarComponentePainelLeste(btnVerItensArmario,
+                GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
-                13, 0, 1, 1);
-        
-        btnVerItensMochila = new JButton(I18N.obterBotaoVerItensMochila(),
-            GerenciadorDeImagens.OK);
-        //Adicão do botao VerItensMochila no painel Oeste
-        adicionarComponentePainelOeste(btnVerItensMochila,
-                GridBagConstraints.SOUTH,
-                GridBagConstraints.VERTICAL,
-                14, 0, 1, 1);
-        
-        //Imprime o texto na tela
-        tituloBotoesItens = new JTextArea("ITENS DISPONIVEIS NO JOGO");
-        tituloBotoesItens.setEditable(false);
+                12, 0, 1, 1);
+
+        //Imprime o titulo dos botoes de itens da mochila na tela
+        tituloBotoesVerItens = new JTextArea(" ITENS MOCHILA ");
+        tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesVerItens.setBackground(Color.GRAY);
+        tituloBotoesVerItens.setForeground(Color.WHITE);
+        tituloBotoesVerItens.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelLeste(tituloBotoesItens,
+        adicionarComponentePainelLeste(tituloBotoesVerItens,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                1, 0, 1, 1);
+                20, 0, 2, 2);
         
         //Botoes de Manipulação de itens
-        btnItemCarta = new JButton(I18N.obterBotaoItenCarta(),
+        btnItemCartaMochila = new JButton(I18N.obterBotaoItenCarta(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCarta,
+        adicionarComponentePainelLeste(btnItemCartaMochila,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                2, 0, 1, 1);
+                22, 0, 1, 1);
         
-        btnItemPena = new JButton(I18N.obterBotaoItenPena(),
+        btnItemPenaMochila = new JButton(I18N.obterBotaoItenPena(),
             GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPena,
+        adicionarComponentePainelLeste(btnItemPenaMochila,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                3, 0, 1, 1);
+                24, 0, 1, 1);
         
-        btnItemDenteLobo = new JButton(I18N.obterBotaoItenDenteLobo(),
+        btnItemDenteLoboMochila = new JButton(I18N.obterBotaoItenDenteLobo(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemDenteLobo,
+        adicionarComponentePainelLeste(btnItemDenteLoboMochila,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                4, 0, 1, 1);
+                26, 0, 1, 1);
         
-        btnItemCabecaVampiro = new JButton(I18N.obterBotaoItenCabecaVampiro(),
+        btnItemCabecaVampiroMochila = new JButton(I18N.obterBotaoItenCabecaVampiro(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCabecaVampiro,
+        adicionarComponentePainelLeste(btnItemCabecaVampiroMochila,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                5, 0, 1, 1);
+                28, 0, 1, 1);
         
-        btnItemPortadorAlmas = new JButton(I18N.obterBotaoItemPortadorAlmas(),
+        btnItemPortadorAlmasMochila = new JButton(I18N.obterBotaoItemPortadorAlmas(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPortadorAlmas,
+        adicionarComponentePainelLeste(btnItemPortadorAlmasMochila,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                6, 0, 1, 1);
-
+                30, 0, 1, 1);
+        
         prepararComponentesEstadoInicial();        
     }
 
@@ -477,88 +791,128 @@ public class TelaJogo {
         btnIrCeu.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-            
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir Ceu");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-               
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialCeu();
+                }
             }
         });
             
         btnIrCasaWinchester.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir CasaWinchester");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialCasaWinchester();
+                }
             }
         });
         
         btnIrDenver.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir Denver");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialDenver();
+                }
             }
         });
         
         btnIrHouston.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir Houston");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialHouston();
+                }
             }
         });
         
-        btnIrInferno.addActionListener(new ActionListener() {
+        btnIrPortalInferno.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir PortalInferno");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialPortalInferno();
+                }
             }
         });
         
         btnIrPurgatorio.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir Purgatorio");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialPurgatorio();
+                }
             }
         });
         
         btnIrCasaCaim.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir CasaCaim");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialCasaCaim();
+                }
             }
         });
         
         btnIrCasaBob.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            
+            public void actionPerformed(ActionEvent e){
+                String validaAmbiente;
                 comando = analisador.pegarComando("ir CasaBob");
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-            
+                validaAmbiente = regraNegocio.processarComando(comando);
+                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                    textoDinamico.setText("\nNao ha passagem!\n");
+                }else{
+                    textoDinamico.setText(validaAmbiente);
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    prepararComponentesEstadoInicialCasaBob();
+                }
             }
         });
         
@@ -576,62 +930,137 @@ public class TelaJogo {
             }
         });
         
-        btnVerItensMochila.addActionListener(new ActionListener() {
+        btnItemCabecaVampiroMochila.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String textoExibicao;
-                comando = analisador.pegarComando("analisar mochila");
+                comando = analisador.pegarComando("guardar CabecaVampiro");
                 textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao != null){
+                if(textoExibicao.indexOf("Item: CabecaVampiro guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
+                    btnItemCabecaVampiroMochila.setVisible(false);
+                    btnItemCabecaVampiroAmbiente.setVisible(true);
                 }else{
-                    textoDinamico.setText("Nao ha intens na mochila");
+                    textoDinamico.setText(textoExibicao);
                 }
             }
         });
         
-        btnItemCabecaVampiro.addActionListener(new ActionListener() {
+        btnItemCartaMochila.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
+                String textoExibicao;
+                comando = analisador.pegarComando("guardar Carta");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao.indexOf("Item: Carta guardado com sucesso")>=0){
+                    textoDinamico.setText(textoExibicao);
+                    btnItemCartaMochila.setVisible(false);
+                    btnItemCartaAmbiente.setVisible(true);
+                }else{
+                    textoDinamico.setText(textoExibicao);
+                }
+            }
+        });
+        
+        btnItemDenteLoboMochila.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("guardar DenteLobo");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao.indexOf("Item: CabecaVampiro guardado com sucesso")>=0){
+                    textoDinamico.setText(textoExibicao);
+                    btnItemDenteLoboMochila.setVisible(false);
+                    btnItemDenteLoboAmbiente.setVisible(true);
+                    
+                }else{
+                    textoDinamico.setText(textoExibicao);
+                }
+            }
+        });
+        
+        btnItemPenaMochila.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("guardar Pena");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao.indexOf("Item: Carta guardado com sucesso")>=0){
+                    textoDinamico.setText(textoExibicao);
+                    btnItemPenaMochila.setVisible(false);
+                    btnItemPenaAmbiente.setVisible(true);
+                }else{
+                    textoDinamico.setText(textoExibicao);
+                }
+            }
+        });
+        
+        btnItemPortadorAlmasMochila.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("guardar PortadorAlmas");
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao.indexOf("Item: PortadorAlmas guardado com sucesso")>=0){
+                    textoDinamico.setText(textoExibicao);
+                    btnItemPortadorAlmasMochila.setVisible(false);
+                    btnItemPortadorAlmasAmbiente.setVisible(true);
+                }else{
+                    textoDinamico.setText(textoExibicao);
+                }
+            }
+        });
+        
+        btnItemCabecaVampiroAmbiente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComando("pegar CabecaVampiro");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                btnItemCabecaVampiroAmbiente.setVisible(false);
+                btnItemCabecaVampiroMochila.setEnabled(true);
             }
         });
         
-        btnItemCarta.addActionListener(new ActionListener() {
+        btnItemCartaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
                 comando = analisador.pegarComando("pegar Carta");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                btnItemCartaAmbiente.setVisible(false);
+                btnItemCartaMochila.setEnabled(true);
             }
         });
         
-        btnItemDenteLobo.addActionListener(new ActionListener() {
+        btnItemDenteLoboAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Dente");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                btnItemDenteLoboAmbiente.setVisible(false);
+                btnItemDenteLoboMochila.setEnabled(true);
             }
         });
         
-        btnItemPena.addActionListener(new ActionListener() {
+        btnItemPenaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Pena");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                btnItemPenaAmbiente.setVisible(false);
+                btnItemPenaMochila.setEnabled(true);
             }
         });
         
-        btnItemPortadorAlmas.addActionListener(new ActionListener() {
+        btnItemPortadorAlmasAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Almas");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
+                btnItemPortadorAlmasAmbiente.setVisible(false);
+                btnItemPortadorAlmasMochila.setEnabled(true);
             }
         });
         

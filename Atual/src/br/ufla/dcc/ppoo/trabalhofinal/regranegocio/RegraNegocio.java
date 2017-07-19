@@ -385,7 +385,7 @@ public class RegraNegocio  {
                     return "erro " + itemAux.getNomeItem() + " nao inserido";
                 }
             }else{
-                return "\n Este ambiente nao lhe permite guardar nenhum item. \n";
+                return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite guardar nenhum item. \n";
             }
         }
         else{
@@ -414,7 +414,7 @@ public class RegraNegocio  {
             }
                         
         }else{
-            return "\n Este ambiente nao lhe permite coletar nenhum item. \n";
+            return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite coletar nenhum item. \n";
         }
     }
     

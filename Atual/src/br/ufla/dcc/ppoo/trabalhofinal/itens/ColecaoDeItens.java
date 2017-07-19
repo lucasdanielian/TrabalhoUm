@@ -48,7 +48,7 @@ public class ColecaoDeItens {
             }
             return itensRetorno;
         }else{
-        return null;
+            return null;
         }
     }
     
@@ -77,15 +77,20 @@ public class ColecaoDeItens {
      * Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
      */
     public Item removerPeloNome(String nomeDoItem){
-        for(Item i:itens){
-            if(i.getNomeItem().equals(nomeDoItem)){
-                itens.remove(i);
-                quantidadeAtual--;
-                return i;
+        if(itens.size() > 0){
+            for(Item i:itens){
+                if(i!=null){
+                    if(i.getNomeItem().equals(nomeDoItem)){
+                        itens.remove(i);
+                        quantidadeAtual--;
+                        return i;
+                    }
+                }
             }
-        }
-        
         return null;
+        }else{
+             return null;
+        }
     }
     
     /**
@@ -95,14 +100,18 @@ public class ColecaoDeItens {
      * Retorna o objeto do tipo Item que o usuario busca, ou retorna nulo (caso nao encontrar)
      */
     public Item buscarPeloNome(String nomeDoItem){
-        for(Item i:itens){
-            if(i!=null){
-                if(i.getNomeItem().equals(nomeDoItem)){
-                    return i;
+        if(itens.size() > 0){
+            for(Item i:itens){
+                if(i!=null){
+                    if(i.getNomeItem().equals(nomeDoItem)){
+                        return i;
+                    }
                 }
             }
+        return null;    
+        }else{
+            return null;
         }
-        return null;
     }
     
     /**

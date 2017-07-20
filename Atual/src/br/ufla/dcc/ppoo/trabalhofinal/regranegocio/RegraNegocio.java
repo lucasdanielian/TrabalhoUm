@@ -407,13 +407,17 @@ public class RegraNegocio  {
         String nomeItem = comando.getSegundaPalavra();
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             Item aux = casaWinchester.removerPeloNomeNoArmario(nomeItem);
-            boolean verificacao = dean.inserirItensMochila(aux);
-            if (verificacao == true){
-                return "\n Item: " + nomeItem + " coletado com sucesso\n";
-            }else{
-                return "\n Item " + nomeItem + " não foi coletado\n";
+            if(aux != null){
+                boolean verificacao = dean.inserirItensMochila(aux);
+                if (verificacao == true){
+                    return "\n Item: " + nomeItem + " coletado com sucesso\n";
+                }else{
+                    return "\n Item " + nomeItem + " não foi coletado\n";
+                }
             }
-                        
+            else{
+                return "\n Item: " + nomeItem + " nao esta no armario\n";
+            }
         }else{
             return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite coletar nenhum item. \n";
         }

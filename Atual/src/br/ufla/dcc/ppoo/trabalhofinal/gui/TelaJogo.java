@@ -838,9 +838,34 @@ public class TelaJogo {
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
+                    Comando auxComando = analisador.pegarComando("analisar armario");
+                    String aux = regraNegocio.processarComando(auxComando);
+                    if(aux == null || aux.equals(" ")){
+                        btnVerItensArmario.setEnabled(false);
+                    }
+                    else{
+                        if(aux.contentEquals("Dente")){
+                            btnItemDenteLoboAmbiente.setEnabled(true);
+                        }
+                        
+                        if(aux.contentEquals("CabecaVampiro")){
+                            btnItemCabecaVampiroAmbiente.setEnabled(true);
+                        }
+                        
+                        if(aux.contentEquals("Carta")){
+                            btnItemCartaAmbiente.setEnabled(true);
+                        }
+                        
+                        if(aux.contentEquals("Almas")){
+                            btnItemPortadorAlmasAmbiente.setEnabled(true);
+                        }
+                        
+                        if(aux.contentEquals("Pena")){
+                            btnItemPenaAmbiente.setEnabled(true);
+                        }
+                    }
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialCasaWinchester();
                     diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
                     diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
@@ -1065,11 +1090,14 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComando("pegar CabecaVampiro");
+                String aux = regraNegocio.processarComando(comando);
                 textoDinamico.setText(regraNegocio.processarComando(comando));
-                btnItemCabecaVampiroAmbiente.setVisible(false);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCabecaVampiroMochila.setEnabled(true);
-                btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
+                if(aux.contentEquals("sucesso")){
+                    btnItemCabecaVampiroAmbiente.setVisible(false);
+                    btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                    btnItemCabecaVampiroMochila.setEnabled(true);
+                    btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
+                }
             }
         });
         
@@ -1077,11 +1105,14 @@ public class TelaJogo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 comando = analisador.pegarComando("pegar Carta");
+                String aux = regraNegocio.processarComando(comando);
                 textoDinamico.setText(regraNegocio.processarComando(comando));
-                btnItemCartaAmbiente.setVisible(false);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCartaMochila.setEnabled(true);
-                btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
+                if(aux.contentEquals("sucesso")){
+                    btnItemCartaAmbiente.setVisible(false);
+                    btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                    btnItemCartaMochila.setEnabled(true);
+                    btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
+                }
             }
         });
         
@@ -1090,11 +1121,14 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Dente");
+                String aux = regraNegocio.processarComando(comando);
                 textoDinamico.setText(regraNegocio.processarComando(comando));
-                btnItemDenteLoboAmbiente.setVisible(false);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemDenteLoboMochila.setEnabled(true);
-                btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
+                if(aux.contentEquals("sucesso")){
+                    btnItemDenteLoboAmbiente.setVisible(false);
+                    btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                    btnItemDenteLoboMochila.setEnabled(true);
+                    btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
+                }
             }
         });
         
@@ -1103,11 +1137,14 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Pena");
+                String aux = regraNegocio.processarComando(comando);
                 textoDinamico.setText(regraNegocio.processarComando(comando));
-                btnItemPenaAmbiente.setVisible(false);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPenaMochila.setEnabled(true);
-                btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
+                if(aux.contentEquals("sucesso")){
+                    btnItemPenaAmbiente.setVisible(false);
+                    btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                    btnItemPenaMochila.setEnabled(true);
+                    btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
+                }
             }
         });
         
@@ -1116,11 +1153,14 @@ public class TelaJogo {
             public void actionPerformed(ActionEvent e) {
             
                 comando = analisador.pegarComando("pegar Almas");
+                String aux = regraNegocio.processarComando(comando);
                 textoDinamico.setText(regraNegocio.processarComando(comando));
-                btnItemPortadorAlmasAmbiente.setVisible(false);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPortadorAlmasMochila.setEnabled(true);
-                btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
+                if(aux.contentEquals("sucesso")){
+                    btnItemPortadorAlmasAmbiente.setVisible(false);
+                    btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                    btnItemPortadorAlmasMochila.setEnabled(true);
+                    btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
+                }
             }
         });
         

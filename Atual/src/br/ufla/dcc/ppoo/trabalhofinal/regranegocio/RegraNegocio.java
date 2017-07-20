@@ -380,9 +380,11 @@ public class RegraNegocio  {
                     return "\n Item: " + itemAux.getNomeItem() + " guardado com sucesso\n"; 
                 }
                 else{
+                    dean.inserirItensMochila(itemAux);
                     return "erro " + itemAux.getNomeItem() + " nao inserido";
                 }
             }else{
+                dean.inserirItensMochila(itemAux);
                 return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite guardar nenhum item. \n";
             }
         }
@@ -416,17 +418,9 @@ public class RegraNegocio  {
                 return "\n Item: " + nomeItem + " nao esta no armario\n";
             }
         }else{
-            return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite coletar nenhum item. \n";
+            String verificacao = ambienteAtual.pegarItemAmbiente(dean);
+            return verificacao;
         }
-    }
-    
-    /**
-     * Metodo que pega um item passado um ambiente
-     * @return Uma String para verificacao se coletado ou nao
-     */
-    public String pegarItemAmbiente(){
-        String verificacao = ambienteAtual.pegarItemAmbiente(dean);
-        return verificacao;
     }
     
     /**

@@ -1,6 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
 import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
+import br.ufla.dcc.ppoo.trabalhofinal.itens.PortadorAlmas;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -29,13 +30,12 @@ public class AmbientePurgatorio extends Ambiente {
     /**
      * Constroi um ambiente "AmbientePurgatorio"
      * @param nomeAmbiente  passando seu nome por parametro
-     * @param portadorAlmas recebe este item como um parametro
      */
-    public AmbientePurgatorio(String nomeAmbiente, Item portadorAlmas)  {
+    public AmbientePurgatorio(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
-        this.portadorAlmas = portadorAlmas;
+        portadorAlmas = new PortadorAlmas("Almas", "Armazena 10 almas em seu interior.");
     }
     
     /**

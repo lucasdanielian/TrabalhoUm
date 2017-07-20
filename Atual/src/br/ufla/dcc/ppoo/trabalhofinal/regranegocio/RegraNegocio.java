@@ -37,7 +37,7 @@ public class RegraNegocio  {
     private Ambiente ambienteAtual;
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
-    private Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
+    //private Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
     private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
     private AmbienteCasaWinchester casaWinchester;
     
@@ -49,8 +49,6 @@ public class RegraNegocio  {
         analisador = new Analisador();
         contador = 1;
         dean = new JogadorDean();
-        carta = new Item("Carta de reconhecimento", "Carta de Bob para Caim, que"
-                + "que cobra um favor que caim devia a Bob");
     }
     
     /**
@@ -62,34 +60,28 @@ public class RegraNegocio  {
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
         
         //Inserção do Ambiente Denver
-        denteLobo = new Item("Dente","O dente de lobisomem representa o mal do mundo");
-        denver = new AmbienteDenver("Denver", denteLobo);
+        denver = new AmbienteDenver("Denver");
         
         
         //Inserção do Ambiente Houston
-        cabecaVampiro = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
-        houston = new AmbienteHouston("Houston", cabecaVampiro);
+        houston = new AmbienteHouston("Houston");
         
         
         casaCaim = new AmbienteCasaCaim("CasaCaim");
         
         //Iserção casa bob
-        carta = new Item("Carta", "Carta de Bob para Caim, que"
-                + "cedida pelo mesmo para ajudar Dean.");
-        casaBob = new AmbienteCasaBob("CasaBob", carta);
+        casaBob = new AmbienteCasaBob("CasaBob");
         
         
         //Inserção do Ambiente Inferno
         inferno = new AmbienteInferno("PortalInferno");
         
         //Inserção do Ambiente Purgatorio
-        portadorAlmas = new Item("Almas", "Armazena 10 almas em seu interior.");
-        purgatorio = new AmbientePurgatorio("Purgatorio", portadorAlmas);
+        purgatorio = new AmbientePurgatorio("Purgatorio");
         
         
         //Inserção do Ambiente Ceu
-        pena = new Item("Pena", "pena do anjo Castiel");
-        ceu = new AmbienteCeu("Ceu", pena);
+        ceu = new AmbienteCeu("Ceu");
         
         // inicializa as saidas do ambiente casaWinchester
         casaWinchester.ajustarSaidas(ceu);

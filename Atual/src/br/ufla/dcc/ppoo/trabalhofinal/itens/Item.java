@@ -10,7 +10,7 @@ package br.ufla.dcc.ppoo.trabalhofinal.itens;
  * Classe responsavel por ser os objetos que o jogador ira portar, ou conquistar.
  * @author junior
  */
-public class Item {
+public abstract class Item {
     //Nome objeto
     private String nomeItem;
     //Descrição Objeto

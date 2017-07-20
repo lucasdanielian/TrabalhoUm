@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Carta;
 import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
@@ -28,12 +29,12 @@ public class AmbienteCasaBob extends Ambiente {
     /**
      * Constroi um ambiente CasaBob 
      * @param nomeAmbiente passando seu nome por parametro
-     * @param carta passa o Item carta como parametro
      */
-    public AmbienteCasaBob(String nomeAmbiente, Item carta)  {
+    public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
         foiCeu = false;
-        this.carta = carta;
+        carta = new Carta("Carta", "Carta de Bob para Caim, que"
+                + "cedida pelo mesmo para ajudar Dean.");
     }
     
     /**

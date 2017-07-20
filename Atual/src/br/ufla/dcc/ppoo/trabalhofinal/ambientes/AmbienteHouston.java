@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.CabecaVampiro;
 import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
@@ -29,13 +30,12 @@ public class AmbienteHouston extends Ambiente {
     /**
      * Constroi um ambiente "Houston"
      * @param nomeAmbiente  passando seu nome por parametro
-     * @param cabecaVampiro recebe este Item como parâmetro
      */
-    public AmbienteHouston(String nomeAmbiente, Item cabecaVampiro)  {
+    public AmbienteHouston(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCaim = false;
-        this.cabecaVampiro = cabecaVampiro;
+        cabecaVampiro = new CabecaVampiro("CabecaVampiro", "Cabeca do vampiro oiginal");
     }
     
     /**

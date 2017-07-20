@@ -1105,8 +1105,6 @@ public class TelaJogo {
                     btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
                     btnItemCartaAmbiente.setEnabled(true);
-                    
-                    
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
@@ -1156,7 +1154,7 @@ public class TelaJogo {
                 String textoExibicao;
                 comando = analisador.pegarComando("guardar PortadorAlmas");
                 textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.indexOf("Item: PortadorAlmas guardado com sucesso")>=0){
+                if(textoExibicao.contains("Item: PortadorAlmas guardado com sucesso")){
                     textoDinamico.setText(textoExibicao);
                     btnItemPortadorAlmasMochila.setVisible(false);
                     btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.CANCELAR);
@@ -1171,10 +1169,11 @@ public class TelaJogo {
         btnItemCabecaVampiroAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String item = regraNegocio.pegarItemAmbiente();
+                comando = analisador.pegarComando("pegar CabecaVampiro");
+                String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")){
-                    btnItemCabecaVampiroAmbiente.setVisible(false);
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
+                    btnItemCabecaVampiroAmbiente.setEnabled(false);
                     btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCabecaVampiroMochila.setEnabled(true);
                     btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
@@ -1185,9 +1184,10 @@ public class TelaJogo {
         btnItemCartaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String item = regraNegocio.pegarItemAmbiente();
+                comando = analisador.pegarComando("pegar Carta");
+                String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")){
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
                     btnItemCartaAmbiente.setEnabled(false);
                     btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCartaMochila.setEnabled(true);
@@ -1199,10 +1199,11 @@ public class TelaJogo {
         btnItemDenteLoboAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String item = regraNegocio.pegarItemAmbiente();
+                comando = analisador.pegarComando("pegar DenteLoboAmbiente");
+                String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")){
-                    btnItemDenteLoboAmbiente.setVisible(false);
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
+                    btnItemDenteLoboAmbiente.setEnabled(false);
                     btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemDenteLoboMochila.setEnabled(true);
                     btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
@@ -1213,10 +1214,11 @@ public class TelaJogo {
         btnItemPenaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String item = regraNegocio.pegarItemAmbiente();
+                comando = analisador.pegarComando("pegar Pena");
+                String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")){
-                    btnItemPenaAmbiente.setVisible(false);
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
+                    btnItemPenaAmbiente.setEnabled(false);
                     btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPenaMochila.setEnabled(true);
                     btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
@@ -1227,10 +1229,11 @@ public class TelaJogo {
         btnItemPortadorAlmasAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String item = regraNegocio.pegarItemAmbiente();
+                comando = analisador.pegarComando("pegar PortadorAlmas");
+                String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")){
-                    btnItemPortadorAlmasAmbiente.setVisible(false);
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
+                    btnItemPortadorAlmasAmbiente.setEnabled(false);
                     btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPortadorAlmasMochila.setEnabled(true);
                     btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);

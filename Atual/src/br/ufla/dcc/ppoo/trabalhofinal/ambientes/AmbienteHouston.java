@@ -115,7 +115,7 @@ public class AmbienteHouston extends Ambiente {
      * Metodo que retorna o item do Ambiente
      * @return String com os itens contidos nos ambientes
      */
-    public String retornaItenAmbienteCasaBob() {
+    public String retornaItenAmbienteHouston() {
        if (cabecaVampiro == null){
            return "Nao ha item neste ambiente";
        }else{

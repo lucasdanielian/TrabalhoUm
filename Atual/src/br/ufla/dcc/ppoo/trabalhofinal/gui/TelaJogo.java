@@ -10,11 +10,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +21,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -111,6 +108,8 @@ public class TelaJogo {
     private JTextArea tituloBotoesAmbientes;
     private JTextArea tituloBotoesPrincipais;
     private JTextArea tituloBotoesVerItens;
+    private JTextArea diasCorridos;
+    private JTextArea diasRestantes;
     
     //Entradas do usuario
     private JTextField txtEntradaComandos;
@@ -506,7 +505,7 @@ public class TelaJogo {
     /**
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
-    private void adicionarComponentes(){
+    private void adicionarComponentesTelaJogo(){
         diretorio = "/br/ufla/dcc/ppoo/trabalhofinal/imagens/principal.jpeg";
         adicionarImagem(diretorio);
 
@@ -516,7 +515,31 @@ public class TelaJogo {
         //Analisador de comandos do jogo
         analisador = new Analisador();
 
-        //Imprime o texto na tela
+        //Imprime os dias corridos do jagador na tela
+        diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getContador());
+        diasCorridos.setFont(new Font("Serif", Font.ITALIC, 18));
+        diasCorridos.setBackground(Color.GRAY);
+        diasCorridos.setForeground(Color.WHITE);
+        diasCorridos.setEditable(false);
+        //Adiciona dias corridos na tela
+        adicionarComponentePainelNorte(diasCorridos,
+                GridBagConstraints.WEST,
+                GridBagConstraints.HORIZONTAL,
+                0, 1, 2, 2);
+        
+        //Imprime os dias restantes do jagador na tela
+        diasRestantes = new JTextArea("Dias Restantes: " + regraNegocio.diasRestantes());
+        diasRestantes.setFont(new Font("Serif", Font.ITALIC, 18));
+        diasRestantes.setBackground(Color.GRAY);
+        diasRestantes.setForeground(Color.WHITE);
+        diasRestantes.setEditable(false);        
+        //Adiciona dias restantes na tela
+        adicionarComponentePainelNorte(diasRestantes,
+                GridBagConstraints.EAST,
+                GridBagConstraints.HORIZONTAL,
+                0, 9, 2, 2);
+        
+        //Imprime os textos da regra de negocios
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
         textoDinamico.setEditable(false);
         
@@ -529,7 +552,7 @@ public class TelaJogo {
         //jScrollPaneSaida.setMaximumSize(new Dimension(500, 400));
         jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
         
-        //Adiciona o texto na tela
+        //Adiciona o JScrollPane do texto dinamico da tela
         adicionarComponentePainelCentral(jScrollPaneSaida,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.NONE,
@@ -741,7 +764,7 @@ public class TelaJogo {
         
         //Botoes de Manipulação de itens
         btnItemCartaMochila = new JButton(I18N.obterBotaoItenCarta(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemCartaMochila,
                 GridBagConstraints.CENTER,
@@ -749,7 +772,7 @@ public class TelaJogo {
                 22, 0, 1, 1);
         
         btnItemPenaMochila = new JButton(I18N.obterBotaoItenPena(),
-            GerenciadorDeImagens.OK);
+            GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemPenaMochila,
                 GridBagConstraints.CENTER,
@@ -757,7 +780,7 @@ public class TelaJogo {
                 24, 0, 1, 1);
         
         btnItemDenteLoboMochila = new JButton(I18N.obterBotaoItenDenteLobo(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemDenteLoboMochila,
                 GridBagConstraints.CENTER,
@@ -765,7 +788,7 @@ public class TelaJogo {
                 26, 0, 1, 1);
         
         btnItemCabecaVampiroMochila = new JButton(I18N.obterBotaoItenCabecaVampiro(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemCabecaVampiroMochila,
                 GridBagConstraints.CENTER,
@@ -773,7 +796,7 @@ public class TelaJogo {
                 28, 0, 1, 1);
         
         btnItemPortadorAlmasMochila = new JButton(I18N.obterBotaoItemPortadorAlmas(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemPortadorAlmasMochila,
                 GridBagConstraints.CENTER,
@@ -794,12 +817,14 @@ public class TelaJogo {
                 String validaAmbiente;
                 comando = analisador.pegarComando("ir Ceu");
                 validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialCeu();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -816,6 +841,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialCasaWinchester();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -832,6 +859,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialDenver();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -848,6 +877,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialHouston();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -864,6 +895,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialPortalInferno();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -880,6 +913,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialPurgatorio();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -896,6 +931,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialCasaCaim();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -912,6 +949,8 @@ public class TelaJogo {
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
                     prepararComponentesEstadoInicialCasaBob();
+                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -939,7 +978,9 @@ public class TelaJogo {
                 if(textoExibicao.indexOf("Item: CabecaVampiro guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
                     btnItemCabecaVampiroMochila.setVisible(false);
+                    btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCabecaVampiroAmbiente.setVisible(true);
+                    btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
@@ -955,7 +996,10 @@ public class TelaJogo {
                 if(textoExibicao.indexOf("Item: Carta guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
                     btnItemCartaMochila.setVisible(false);
+                    btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCartaAmbiente.setVisible(true);
+                    btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                    
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
@@ -971,7 +1015,9 @@ public class TelaJogo {
                 if(textoExibicao.indexOf("Item: CabecaVampiro guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
                     btnItemDenteLoboMochila.setVisible(false);
+                    btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemDenteLoboAmbiente.setVisible(true);
+                    btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
                     
                 }else{
                     textoDinamico.setText(textoExibicao);
@@ -988,7 +1034,9 @@ public class TelaJogo {
                 if(textoExibicao.indexOf("Item: Carta guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
                     btnItemPenaMochila.setVisible(false);
+                    btnItemPenaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPenaAmbiente.setVisible(true);
+                    btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
@@ -1004,7 +1052,9 @@ public class TelaJogo {
                 if(textoExibicao.indexOf("Item: PortadorAlmas guardado com sucesso")>=0){
                     textoDinamico.setText(textoExibicao);
                     btnItemPortadorAlmasMochila.setVisible(false);
+                    btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPortadorAlmasAmbiente.setVisible(true);
+                    btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
@@ -1017,7 +1067,9 @@ public class TelaJogo {
                 comando = analisador.pegarComando("pegar CabecaVampiro");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 btnItemCabecaVampiroAmbiente.setVisible(false);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                 btnItemCabecaVampiroMochila.setEnabled(true);
+                btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
             }
         });
         
@@ -1027,7 +1079,9 @@ public class TelaJogo {
                 comando = analisador.pegarComando("pegar Carta");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 btnItemCartaAmbiente.setVisible(false);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                 btnItemCartaMochila.setEnabled(true);
+                btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
             }
         });
         
@@ -1038,7 +1092,9 @@ public class TelaJogo {
                 comando = analisador.pegarComando("pegar Dente");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 btnItemDenteLoboAmbiente.setVisible(false);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                 btnItemDenteLoboMochila.setEnabled(true);
+                btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
             }
         });
         
@@ -1049,7 +1105,9 @@ public class TelaJogo {
                 comando = analisador.pegarComando("pegar Pena");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 btnItemPenaAmbiente.setVisible(false);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                 btnItemPenaMochila.setEnabled(true);
+                btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
             }
         });
         
@@ -1060,19 +1118,24 @@ public class TelaJogo {
                 comando = analisador.pegarComando("pegar Almas");
                 textoDinamico.setText(regraNegocio.processarComando(comando));
                 btnItemPortadorAlmasAmbiente.setVisible(false);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                 btnItemPortadorAlmasMochila.setEnabled(true);
+                btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
             }
         });
         
         btnEnviarComando.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
-                comando = analisador.pegarComando(txtEntradaComandos.getText());
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                trocaImagem(regraNegocio.imagemAmbienteAtual());
-                txtEntradaComandos.setText("Entrada de Comandos:");
-            
+                String validaTexto = txtEntradaComandos.getText();
+                if(validaTexto.equals("sair")){
+                    janela.dispose();
+                }else{
+                    comando = analisador.pegarComando(validaTexto);
+                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    txtEntradaComandos.setText("Entrada de Comandos:");
+                }
             }
         });
         
@@ -1131,7 +1194,7 @@ public class TelaJogo {
         janela.add(painelCentral, BorderLayout.CENTER);
         
         //
-        adicionarComponentes();
+        adicionarComponentesTelaJogo();
         janela.pack();
         
     }

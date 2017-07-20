@@ -67,13 +67,12 @@ public class AmbienteHouston extends Ambiente {
             if(foiCaim == true){
                 setJaVisitada(true);
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(cabecaVampiro);
-                    itemFoiColetado = true;
-                    return texto1 + "\nO item. 'CabecaVampiro' foi coletado\n";
+                    return texto1 + "\nO item 'CabecaVampiro' agora esta disponivel para ser coletado\n";
                 }
             
                 else{
-                    return texto1 + "\nSua mochila está cheia, não há espaço para coletar o item\n";
+                    return texto1 + "\nO item 'CabecaVampiro' nao esta disponivel para ser coletado"
+                            + "pois nao ha espaco na mochila\n";
                 }
                 
             }
@@ -85,12 +84,11 @@ public class AmbienteHouston extends Ambiente {
         else{// caso o jogador ja tenha vindo a esse ambiente
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(cabecaVampiro);
-                    itemFoiColetado = true;
-                    return "O item 'CabecaVampiro' foi coletado\n";
+                    return "\nO item 'CabecaVampiro' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                    return "Sua mochila está cheia, não há espaço para coletar o item\n";
+                    return "\nO item 'CabecaVampiro' nao esta disponivel para ser coletado"
+                            + "pois nao ha espaco na mochila\n";
                 }
             }
             else{
@@ -119,35 +117,24 @@ public class AmbienteHouston extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean){
-//        if(getJaVisitada() == false){
-//            
-//            for (int i = 0; i < dean.tamanhoDiario(); i++) {
-//                
-//                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
-//                        + "buscar as almas no Purgatório.")>=0){
-//                    
-//                    foiCeu = true;
-//                }
-//            }
-//            if(foiCeu == true){
-//                setJaVisitada(true);
-//                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
-//                return "carta disponivel";
-//            }
-//            else{
-//                return "carta indisponivel";
-//            }
-//        }
-//        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-//            if(itemFoiColetado == true){    
-//                return "carta indisponivel";
-//            }
-//            else{
-//                return "carta disponivel";
-//            }
-//        }
-        return "item indisponivel";
+        if(getJaVisitada() == false){
+            if(foiCaim == true){ 
+                return "CabecaVampiro disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == false && foiCaim == true){    
+                return "CabecaVampiro disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        } 
     }
+        
     
     /**
      * Metodo que pega um Item do ambiente

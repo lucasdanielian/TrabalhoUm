@@ -77,29 +77,22 @@ public class AmbienteCeu extends Ambiente {
             dean.adicionarPaginaDiario("Você pode, mas não deve buscar as almas no Purgatório.");
             dean.adicionarPaginaDiario("Existe um grupo de lobisomens em Denver");
             if(dean.espacoDisponivelMochila()){
-                if(dean.inserirItensMochila(pena).contains("adicionado")){
-                    itemFoiColetado = true;
-                    return texto1 + "O item " + pena.getNomeItem() + " foi adicionado na mochila\n";
-                }
-                else{
-                    return texto1 + "O item " + pena.getNomeItem() + " nao foi adicionado na mochila";
-                }
+                return texto1 + "O item 'Pena' agora esta disponivel para ser coletado\n";
             }
             else{
-                return texto1 + "Você nao possui espaço na mochila disponivel.\n"
-                    + "Você deve liberar espaço para coletar o item.\n";
+                return texto1 + "O item 'Pena' nao esta disponivel para ser coletado pois nao"
+                        + "ha espaco na mochila";
             }
+           
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(pena);
-                    itemFoiColetado = true;
-                    return "O item 'Pena' foi adicionado na mochila";
+                    return "O item 'Pena' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                     return "Você nao possui espaço na mochila disponivel."
-                            + "\n Você deve liberar espaço para coletar o item";
+                     return "O item 'Pena' nao esta disponivel para ser coletado pois nao"
+                        + "ha espaco na mochila";
                 }
             }
             else{
@@ -128,34 +121,17 @@ public class AmbienteCeu extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean){
-//        if(getJaVisitada() == false){
-//            
-//            for (int i = 0; i < dean.tamanhoDiario(); i++) {
-//                
-//                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
-//                        + "buscar as almas no Purgatório.")>=0){
-//                    
-//                    foiCeu = true;
-//                }
-//            }
-//            if(foiCeu == true){
-//                setJaVisitada(true);
-//                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
-//                return "carta disponivel";
-//            }
-//            else{
-//                return "carta indisponivel";
-//            }
-//        }
-//        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-//            if(itemFoiColetado == true){    
-//                return "carta indisponivel";
-//            }
-//            else{
-//                return "carta disponivel";
-//            }
-//        }
-        return "item indisponivel";
+         if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
+            return "Pena disponivel";
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == false){    
+                return "Pena disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
     }
     
     /**

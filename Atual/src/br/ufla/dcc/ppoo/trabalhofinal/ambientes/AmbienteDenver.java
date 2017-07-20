@@ -68,13 +68,11 @@ public class AmbienteDenver extends Ambiente {
                 
                 // se ha espaco disponivel para armazenar o item
                 if(dean.espacoDisponivelMochila()){ 
-                    dean.inserirItensMochila(denteLobo);
-                    itemFoiColetado = true;
-                    return texto1 + "O item 'Dente' foi colocado na mochila\n";
+                    return texto1 + "O item 'Dente' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                    return texto1 + "Você não pode coletar o dente de lobo,pois\n"
-                        + "nao há espaço disponível na sua mochila\n";
+                    return texto1 + "O item 'Dente' nao esta disponivel para ser coletado"
+                            + "pois nao ha espaco na mochila\n";
                 }
             }
             else{
@@ -85,13 +83,11 @@ public class AmbienteDenver extends Ambiente {
         else{ // caso ele ja tenha vindo no ambiente
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(denteLobo);
-                    itemFoiColetado = true;
-                    return "O item 'Dente' foi adicionado na mochila\n";
+                    return "O item 'Dente' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                    return "Você não pode coletar o dente de lobo,\n"
-                            + "pois nao há espaço disponível na sua mochila";
+                    return "O item 'Dente' nao esta disponivel para ser coletado"
+                            + "pois nao ha espaco na mochila\n";
                 }
             }
             else{ // caso ele ja tenha realizado todas as açoes possiveis neste ambiente
@@ -119,34 +115,22 @@ public class AmbienteDenver extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean){
-//        if(getJaVisitada() == false){
-//            
-//            for (int i = 0; i < dean.tamanhoDiario(); i++) {
-//                
-//                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
-//                        + "buscar as almas no Purgatório.")>=0){
-//                    
-//                    foiCeu = true;
-//                }
-//            }
-//            if(foiCeu == true){
-//                setJaVisitada(true);
-//                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
-//                return "carta disponivel";
-//            }
-//            else{
-//                return "carta indisponivel";
-//            }
-//        }
-//        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-//            if(itemFoiColetado == true){    
-//                return "carta indisponivel";
-//            }
-//            else{
-//                return "carta disponivel";
-//            }
-//        }
-        return "item indisponivel";
+        if(getJaVisitada() == false){
+            if(foiCeu == true){ 
+                return "Dente disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == false && foiCeu == true){    
+                return "Dente disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        } 
     }
     
     /**

@@ -67,13 +67,11 @@ public class AmbientePurgatorio extends Ambiente {
                 setJaVisitada(true);
 
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(portadorAlmas);
-                    itemFoiColetado = true;
-                    return texto1 + "\nO item 'Almas' foi adicionado na mochila\n";
+                    return texto1 + "\nO item 'Almas' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                    return texto1 + "\nEntretanto, você não possui espaço\n"
-                            + "suficiente na mochila para pegar o item\n";
+                    return texto1 + "\nO item 'Almas' nao esta disponivel para ser coletado "
+                            + "pois nao ha espaco suficiente na mochila";
                 }
             }
             else{
@@ -83,12 +81,11 @@ public class AmbientePurgatorio extends Ambiente {
         else{ // caso o jogador ja tenha passado por este ambiente antes
             if(itemFoiColetado == false){
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(portadorAlmas);
-                    itemFoiColetado = true;
-                    return "O item 'Almas' foi adicionado na mochila";
+                    return "\nO item 'Almas' agora esta disponivel para ser coletado\n";
                 }
                 else{
-                    return "Você não possui espaço suficiente na mochila para pegar o item";
+                    return "\nO item 'Almas' nao esta disponivel para ser coletado "
+                            + "pois nao ha espaco suficiente na mochila";
                 }
             }
             else{
@@ -116,34 +113,22 @@ public class AmbientePurgatorio extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean){
-//        if(getJaVisitada() == false){
-//            
-//            for (int i = 0; i < dean.tamanhoDiario(); i++) {
-//                
-//                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
-//                        + "buscar as almas no Purgatório.")>=0){
-//                    
-//                    foiCeu = true;
-//                }
-//            }
-//            if(foiCeu == true){
-//                setJaVisitada(true);
-//                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
-//                return "carta disponivel";
-//            }
-//            else{
-//                return "carta indisponivel";
-//            }
-//        }
-//        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-//            if(itemFoiColetado == true){    
-//                return "carta indisponivel";
-//            }
-//            else{
-//                return "carta disponivel";
-//            }
-//        }
-        return "item indisponivel";
+         if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
+            if(foiCeu == true){
+                return "Almas disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == false && foiCeu == true){    
+                return "Almas disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
     }
     
     /**

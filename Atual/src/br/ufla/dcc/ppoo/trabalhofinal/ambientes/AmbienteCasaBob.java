@@ -126,7 +126,7 @@ public class AmbienteCasaBob extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean){
-        if(getJaVisitada() == false){
+        if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
             if(foiCeu == true){
                 return "Carta disponivel";
             }

@@ -109,50 +109,9 @@ public class AmbienteCasaBob extends Ambiente {
         }
     }
 
-    public String disponibilizaItem(JogadorDean dean){
-        if(getJaVisitada() == false){
-            
-            for (int i = 0; i < dean.tamanhoDiario(); i++) {
-                
-                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
-                        + "buscar as almas no Purgatório.")>=0){
-                    
-                    foiCeu = true;
-                }
-            }
-            if(foiCeu == true){
-                setJaVisitada(true);
-                //dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
-                if(dean.espacoDisponivelMochila()){
-                    return "carta disponivel";
-                }
-                else{
-                    return "carta indisponivel";
-                }
-            }
-            else{
-                return "carta indisponivel";
-            }
-        }
-        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-            if(itemFoiColetado == true){    
-                return "carta indisponivel";
-            }
-            else{
-                if(dean.espacoDisponivelMochila()){
-                    return "carta disponivel";
-                }
-                else{
-                    return "carta indisponivel";
-                }
-            }
-        }
-    }
-    
     /**
-     * 
-     * @return String
-     * retorna uma String com o endereco da imagem
+     * Metodo que seta a imagem do ambiente
+     * @return String com o endereco da imagem
      */
     @Override
     public String imagemDoAmbiente() {
@@ -160,15 +119,48 @@ public class AmbienteCasaBob extends Ambiente {
     }
     
     /**
-     * 
-     * @param dean
-     * @return 
+     * Metodo que verifica se um item do ambiente está disponivel ou não
+     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
+     * ambiente
+     * @return uma string para verificacao de adicao
      */
-    public String pegarItem(JogadorDean dean) {
-       itemFoiColetado = dean.inserirItensMochila(carta);
-       if (itemFoiColetado == true){
-           return "coletado";
-       }
-       return "nao coeltado";
+    @Override
+    public String disponibilizarItemAmbiente(JogadorDean dean){
+        if(getJaVisitada() == false){
+            if(foiCeu == true){
+                return "Carta disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == false && foiCeu == true){    
+                return "Carta disponivel";
+            }
+            else{
+                return "indisponivel";
+            }
+        }
+    }
+    
+    /**
+     * Metodo que pega um Item do ambiente
+     * @param dean e passado para que possa ser inserido em sua mochila
+     * @return String para verificacao se pego ou nao
+     */
+    @Override
+    public String pegarItemAmbiente(JogadorDean dean) {
+        String insercaoMochila = dean.inserirItensMochila(carta);
+        if(insercaoMochila.contains("adicionado")){
+            itemFoiColetado = true;
+            return "item coletado";
+        }else if(insercaoMochila.contains("nao adicionado")){
+            itemFoiColetado = false;
+            return insercaoMochila;
+        }else{
+            itemFoiColetado = false;
+            return insercaoMochila;
+        }
     }
 }

@@ -110,21 +110,62 @@ public class AmbienteDenver extends Ambiente {
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/Denver.jpg";
     }
+
+    /**
+     * Metodo que verifica se um item do ambiente está disponivel ou não
+     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
+     * ambiente
+     * @return uma string para verificacao de adicao
+     */
+    @Override
+    public String disponibilizarItemAmbiente(JogadorDean dean){
+//        if(getJaVisitada() == false){
+//            
+//            for (int i = 0; i < dean.tamanhoDiario(); i++) {
+//                
+//                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
+//                        + "buscar as almas no Purgatório.")>=0){
+//                    
+//                    foiCeu = true;
+//                }
+//            }
+//            if(foiCeu == true){
+//                setJaVisitada(true);
+//                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
+//                return "carta disponivel";
+//            }
+//            else{
+//                return "carta indisponivel";
+//            }
+//        }
+//        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+//            if(itemFoiColetado == true){    
+//                return "carta indisponivel";
+//            }
+//            else{
+//                return "carta disponivel";
+//            }
+//        }
+        return "item indisponivel";
+    }
     
     /**
-     * Metodo que retorna o item do Ambiente
-     * @return String com os itens contidos nos ambientes
+     * Metodo que pega um Item do ambiente
+     * @param dean e passado para que possa ser inserido em sua mochila
+     * @return String para verificacao se pego ou nao
      */
-    public String retornaItenAmbienteDenver() {
-       if (denteLobo == null){
-           return "Nao ha item neste ambiente";
-       }else{
-           return "Item: " + denteLobo.getNomeItem();
-       }
-    }
-
     @Override
-    public String disponibilizaItem(JogadorDean dean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String pegarItemAmbiente(JogadorDean dean) {
+        String insercaoMochila = dean.inserirItensMochila(denteLobo);
+        if(insercaoMochila.contains("adicionado")){
+            itemFoiColetado = true;
+            return "item coletado";
+        }else if(insercaoMochila.contains("nao adicionado")){
+            itemFoiColetado = false;
+            return insercaoMochila;
+        }else{
+            itemFoiColetado = false;
+            return insercaoMochila;
+        }
     }
 }

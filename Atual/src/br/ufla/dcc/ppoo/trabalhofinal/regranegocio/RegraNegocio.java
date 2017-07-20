@@ -47,7 +47,7 @@ public class RegraNegocio  {
     public RegraNegocio() {
         criarAmbientes();
         analisador = new Analisador();
-        contador = 1;
+        contador = 0;
         dean = new JogadorDean();
     }
     
@@ -301,7 +301,12 @@ public class RegraNegocio  {
             proximoAmbiente = ambienteAtual.irProximoAmbiente(direcao);
 
             if (proximoAmbiente == null) {
-                return "\nNao ha passagem!\n";
+                if(ambienteAtual.getNomeAmbiente().equals("PortalInferno")){
+                    return "\nVocê está preso em: " + ambienteAtual.getNomeAmbiente() + 
+                        "\n Digite sair para finalisar e tente novamente.";
+                }else{
+                    return "\n Nao ha passagem!";
+                }
             }
             else { 
                 ambienteAtual = proximoAmbiente;
@@ -400,8 +405,8 @@ public class RegraNegocio  {
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             Item aux = casaWinchester.removerPeloNomeNoArmario(nomeItem);
             if(aux != null){
-                boolean verificacao = dean.inserirItensMochila(aux);
-                if (verificacao == true){
+                String verificacao = dean.inserirItensMochila(aux);
+                if (verificacao.contains("adicionado")){
                     return "\n Item: " + nomeItem + " coletado com sucesso\n";
                 }else{
                     return "\n Item " + nomeItem + " não foi coletado\n";
@@ -415,14 +420,22 @@ public class RegraNegocio  {
         }
     }
     
+    /**
+     * Metodo que pega um item passado um ambiente
+     * @return Uma String para verificacao se coletado ou nao
+     */
     public String pegarItemAmbiente(){
-        String teste = ambienteAtual.pegarItem(dean);
-        return teste;
+        String verificacao = ambienteAtual.pegarItemAmbiente(dean);
+        return verificacao;
     }
     
-    public String verificaItemAmbiente(){
-        String teste = ambienteAtual.disponibilizaItem(dean);
-        return teste;
+    /**
+     * Metodo qu verifica se um Item está disponível em um Ambiente
+     * @return string para que quem chamou o metodo possa realizar a verificacao
+     */
+    public String verificaDisponibilidadeItemAmbiente(){
+        String verificacao = ambienteAtual.disponibilizarItemAmbiente(dean);
+        return verificacao;
     }
     
     /**

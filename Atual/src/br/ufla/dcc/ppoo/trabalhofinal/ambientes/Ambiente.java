@@ -65,15 +65,21 @@ public abstract class Ambiente  {
     public abstract String mensagemDeEntrada(JogadorDean dean);
     
     /**
-     * 
-     * @param dean
-     * @return 
+     * Metodo para verificar se um ambiente possui um item disponivel ou nao
+     * @param dean Jogador e passado para verificacao se e possivel adicionar o
+     * item na mochila ou nao
+     * @return String contendo disponivel ou indisponivel de acordo com a
+     * disponibilidade do item
      */
-    public abstract String disponibilizaItem(JogadorDean dean);
+    public abstract String disponibilizarItemAmbiente(JogadorDean dean);
     
-    public String pegarItem(JogadorDean dean){
-        return null;
-    };
+    /**
+     * Metodo que pega um Item do ambiente
+     * @param dean Jogador e passado para verificacao se e possivel adicionar o
+     * item na mochila ou nao
+     * @return String para verificaco se pegou o item ou nao
+     */
+    public abstract String pegarItemAmbiente(JogadorDean dean);
     
     /**
      *  Metodo que retornará uma string com a localização da imagem.

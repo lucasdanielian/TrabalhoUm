@@ -65,6 +65,17 @@ public abstract class Ambiente  {
     public abstract String mensagemDeEntrada(JogadorDean dean);
     
     /**
+     * 
+     * @param dean
+     * @return 
+     */
+    public abstract String disponibilizaItem(JogadorDean dean);
+    
+    public String pegarItem(JogadorDean dean){
+        return null;
+    };
+    
+    /**
      *  Metodo que retornará uma string com a localização da imagem.
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @return String

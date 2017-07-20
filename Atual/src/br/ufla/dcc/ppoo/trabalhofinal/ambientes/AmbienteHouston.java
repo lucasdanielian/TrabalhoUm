@@ -122,4 +122,9 @@ public class AmbienteHouston extends Ambiente {
            return "Item: " + cabecaVampiro.getNomeItem();
        }
     }
+
+    @Override
+    public String disponibilizaItem(JogadorDean dean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

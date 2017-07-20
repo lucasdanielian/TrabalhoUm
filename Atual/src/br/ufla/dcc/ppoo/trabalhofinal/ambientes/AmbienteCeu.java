@@ -131,4 +131,9 @@ public class AmbienteCeu extends Ambiente {
            return "Item: " + pena.getNomeItem();
        }
     }
+
+    @Override
+    public String disponibilizaItem(JogadorDean dean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

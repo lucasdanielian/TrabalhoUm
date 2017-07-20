@@ -844,23 +844,23 @@ public class TelaJogo {
                         btnVerItensArmario.setEnabled(false);
                     }
                     else{
-                        if(aux.contentEquals("Dente")){
+                        if(aux.contains("Dente")){
                             btnItemDenteLoboAmbiente.setEnabled(true);
                         }
                         
-                        if(aux.contentEquals("CabecaVampiro")){
+                        if(aux.contains("CabecaVampiro")){
                             btnItemCabecaVampiroAmbiente.setEnabled(true);
                         }
                         
-                        if(aux.contentEquals("Carta")){
+                        if(aux.contains("Carta")){
                             btnItemCartaAmbiente.setEnabled(true);
                         }
                         
-                        if(aux.contentEquals("Almas")){
+                        if(aux.contains("Almas")){
                             btnItemPortadorAlmasAmbiente.setEnabled(true);
                         }
                         
-                        if(aux.contentEquals("Pena")){
+                        if(aux.contains("Pena")){
                             btnItemPenaAmbiente.setEnabled(true);
                         }
                     }
@@ -968,12 +968,27 @@ public class TelaJogo {
                 String validaAmbiente;
                 comando = analisador.pegarComando("ir CasaBob");
                 validaAmbiente = regraNegocio.processarComando(comando);
+                String teste = regraNegocio.verificaItemAmbiente();
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
+                    if(teste.contains("disponivel")){
+                        btnVerItensArmario.setEnabled(false);
+                        btnItemPenaAmbiente.setEnabled(false);
+                        btnItemCabecaVampiroAmbiente.setEnabled(false);
+                        btnItemDenteLoboAmbiente.setEnabled(false);
+                        btnItemCartaAmbiente.setEnabled(true);
+                        btnItemPortadorAlmasAmbiente.setVisible(false);                        
+                    }else{
+                        btnVerItensArmario.setEnabled(false);
+                        btnItemPenaAmbiente.setEnabled(false);
+                        btnItemCabecaVampiroAmbiente.setEnabled(false);
+                        btnItemDenteLoboAmbiente.setEnabled(false);
+                        btnItemCartaAmbiente.setEnabled(false);
+                        btnItemPortadorAlmasAmbiente.setVisible(false);
+                    }
                     textoDinamico.setText(validaAmbiente);
                     trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialCasaBob();
                     diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
                     diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
@@ -1104,11 +1119,10 @@ public class TelaJogo {
         btnItemCartaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar Carta");
-                String aux = regraNegocio.processarComando(comando);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                if(aux.contentEquals("sucesso")){
-                    btnItemCartaAmbiente.setVisible(false);
+                String aux = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(aux);
+                if(aux.contains("coletado")){
+                    btnItemCartaAmbiente.setEnabled(false);
                     btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCartaMochila.setEnabled(true);
                     btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);

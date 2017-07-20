@@ -102,4 +102,9 @@ public class AmbienteInferno extends Ambiente {
     public String imagemDoAmbiente() {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/inferno.png";
     }
+
+    @Override
+    public String disponibilizaItem(JogadorDean dean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

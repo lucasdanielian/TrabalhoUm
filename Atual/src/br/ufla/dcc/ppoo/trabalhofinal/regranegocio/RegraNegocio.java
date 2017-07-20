@@ -415,6 +415,16 @@ public class RegraNegocio  {
         }
     }
     
+    public String pegarItemAmbiente(){
+        String teste = ambienteAtual.pegarItem(dean);
+        return teste;
+    }
+    
+    public String verificaItemAmbiente(){
+        String teste = ambienteAtual.disponibilizaItem(dean);
+        return teste;
+    }
+    
     /**
      * Metodo que Lê o Diario que o jogador Dean carrega consigo.
      * @param comando e passado por parametro para ser avaliado

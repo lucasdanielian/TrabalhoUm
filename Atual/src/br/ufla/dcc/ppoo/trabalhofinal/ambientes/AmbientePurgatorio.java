@@ -119,4 +119,9 @@ public class AmbientePurgatorio extends Ambiente {
            return "Item: " + portadorAlmas.getNomeItem();
        }
     }
+
+    @Override
+    public String disponibilizaItem(JogadorDean dean) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

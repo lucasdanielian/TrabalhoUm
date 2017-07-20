@@ -127,4 +127,9 @@ public class AmbienteCasaCaim extends Ambiente {
         return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/casaCaim.jpg";
     }
 
+    @Override
+    public String disponibilizaItem(JogadorDean dean) {
+        return "indisponivel";
+    }
+
 }

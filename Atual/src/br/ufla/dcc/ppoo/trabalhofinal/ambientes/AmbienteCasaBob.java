@@ -48,12 +48,10 @@ public class AmbienteCasaBob extends Ambiente {
     @Override
     public String mensagemDeEntrada(JogadorDean dean){
         //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
-        String texto1 = "\nDean se direciona para Boulder, no estado do\n"
+        String mensagemEntrada1 = "\nDean se direciona para Boulder, no estado do\n"
             + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
             + "que se tornou como um pai para os garotos.\n";
-        String texto2 = "\nDean se direciona para Boulder, no estado do\n"
-            + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
-            + "que se tornou como um pai para os garotos. Chegando à\n"
+        String mensagemEntrada2 = "\nChegando à\n"
             + "casa de Bob, Dean explica toda a situação ocorrida para\n"
             + "o mesmo.Em seguida, Bob diz : “Você não pode, de forma\n"
             + "alguma, entregar as almas requeridas pelo demônio, seri\n"
@@ -78,38 +76,79 @@ public class AmbienteCasaBob extends Ambiente {
                 setJaVisitada(true);
                 dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(carta);
-                    itemFoiColetado = true;
-                    return texto2 + "\nO item 'Carta' foi adicionado na mochila\n";
+                    return mensagemEntrada1 + mensagemEntrada2 + "O item carta "
+                            + "agora esta disponivel para ser coletado";
                 }
                 else{
-                    return texto2 + "\nPorem voce nao possui espaco na mochila para guardar o item\n";
+                    return mensagemEntrada1 + mensagemEntrada2 + "O item carta "
+                            + "nao esta disponivel para ser coletado pois na ha"
+                            + " espaco suficiente na mochila";
                 }
             }
             else{
-                return texto1 + "Entretanto,\n por mais que Bob queira ajudar,"
+                return mensagemEntrada1 + "Entretanto,\n por mais que Bob queira ajudar,"
                         + "Dean não possui informações\n suficientes para que possa ser ajudado\n";
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(itemFoiColetado == true){    
-            return texto1 + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente"
+            return mensagemEntrada1 + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente"
                     + "garoto, eu já não posso\n fazer mais nada por você”\n";
             }
             else{
                 if(dean.espacoDisponivelMochila()){
-                    dean.inserirItensMochila(carta);
-                    itemFoiColetado = true;
-                    return "O item 'Carta' foi adicionado no mochila";
+                    return mensagemEntrada1 + "O item carta "
+                            + "agora esta disponivel para ser coletado";
                 }
                 else{
-                    return "Voce nao possui espaco na mochila para guardar"
-                        + " o item";
+                    return mensagemEntrada1 + "O item carta "
+                            + "nao esta disponivel para ser coletado pois na ha"
+                            + " espaco suficiente na mochila";
                 }
             }
         }
     }
 
+    public String disponibilizaItem(JogadorDean dean){
+        if(getJaVisitada() == false){
+            
+            for (int i = 0; i < dean.tamanhoDiario(); i++) {
+                
+                if(dean.lerPaginasDiario().indexOf("Você pode, mas não deve "
+                        + "buscar as almas no Purgatório.")>=0){
+                    
+                    foiCeu = true;
+                }
+            }
+            if(foiCeu == true){
+                setJaVisitada(true);
+                //dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
+                if(dean.espacoDisponivelMochila()){
+                    return "carta disponivel";
+                }
+                else{
+                    return "carta indisponivel";
+                }
+            }
+            else{
+                return "carta indisponivel";
+            }
+        }
+        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
+            if(itemFoiColetado == true){    
+                return "carta indisponivel";
+            }
+            else{
+                if(dean.espacoDisponivelMochila()){
+                    return "carta disponivel";
+                }
+                else{
+                    return "carta indisponivel";
+                }
+            }
+        }
+    }
+    
     /**
      * 
      * @return String
@@ -121,14 +160,15 @@ public class AmbienteCasaBob extends Ambiente {
     }
     
     /**
-     * Metodo que retorna o item do Ambiente
-     * @return String com os itens contidos nos ambientes
+     * 
+     * @param dean
+     * @return 
      */
-    public String retornaItenAmbienteCasaBob() {
-       if (carta == null){
-           return "Nao ha item neste ambiente";
-       }else{
-           return "Item: " + carta.getNomeItem();
+    public String pegarItem(JogadorDean dean) {
+       itemFoiColetado = dean.inserirItensMochila(carta);
+       if (itemFoiColetado == true){
+           return "coletado";
        }
+       return "nao coeltado";
     }
 }

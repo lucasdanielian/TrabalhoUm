@@ -1,0 +1,15 @@
+br.ufla.dcc.ppoo.trabalhofinal.ambientes
+br.ufla.dcc.ppoo.trabalhofinal.comandos
+br.ufla.dcc.ppoo.trabalhofinal.dao
+br.ufla.dcc.ppoo.trabalhofinal.dao.lista
+br.ufla.dcc.ppoo.trabalhofinal.gui
+br.ufla.dcc.ppoo.trabalhofinal.i18n
+br.ufla.dcc.ppoo.trabalhofinal.imagens
+br.ufla.dcc.ppoo.trabalhofinal.interacaousuario
+br.ufla.dcc.ppoo.trabalhofinal.itens
+br.ufla.dcc.ppoo.trabalhofinal.jogador
+br.ufla.dcc.ppoo.trabalhofinal.modelo
+br.ufla.dcc.ppoo.trabalhofinal.regranegocio
+br.ufla.dcc.ppoo.trabalhofinal.seguranca
+br.ufla.dcc.ppoo.trabalhofinal.servicos
+br.ufla.dcc.ppoo.trabalhofinal.util

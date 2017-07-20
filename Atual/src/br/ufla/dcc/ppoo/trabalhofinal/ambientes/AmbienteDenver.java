@@ -1,5 +1,6 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
+import br.ufla.dcc.ppoo.trabalhofinal.itens.DenteLobo;
 import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
@@ -29,13 +30,12 @@ public class AmbienteDenver extends Ambiente {
     /**
      * Constroi um ambiente "AmbienteDenver" 
      * @param nomeAmbiente  passando seu nome por parametro
-     * @param denteLobo recebe este Item como parâmetro
      */
-    public AmbienteDenver(String nomeAmbiente, Item denteLobo)  {
+    public AmbienteDenver(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
-        this.denteLobo = denteLobo;
+        denteLobo = new DenteLobo("Dente","O dente de lobisomem representa o mal do mundo");
     }
     
     /**

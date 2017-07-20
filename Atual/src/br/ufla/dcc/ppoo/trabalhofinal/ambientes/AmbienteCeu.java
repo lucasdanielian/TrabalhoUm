@@ -1,6 +1,7 @@
 package br.ufla.dcc.ppoo.trabalhofinal.ambientes;
 
 import br.ufla.dcc.ppoo.trabalhofinal.itens.Item;
+import br.ufla.dcc.ppoo.trabalhofinal.itens.Pena;
 import br.ufla.dcc.ppoo.trabalhofinal.jogador.JogadorDean;
 
 /**
@@ -28,12 +29,11 @@ public class AmbienteCeu extends Ambiente {
     /**
      * Constroi um ambiente "Ceu"
      * @param nomeAmbiente passando seu nome por parametro
-     * @param pena o item pena é passado por parâmetro
      */
-    public AmbienteCeu(String nomeAmbiente, Item pena)  {
+    public AmbienteCeu(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
-        this.pena = pena;
+        pena = new Pena("Pena", "pena do anjo Castiel");
     }
     
     /**

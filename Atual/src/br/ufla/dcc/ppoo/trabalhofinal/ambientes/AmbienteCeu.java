@@ -124,7 +124,7 @@ public class AmbienteCeu extends Ambiente {
      * Metodo que retorna o item do Ambiente
      * @return String com os itens contidos nos ambientes
      */
-    public String retornaItenAmbienteCasaBob() {
+    public String retornaItenAmbienteCeu() {
        if (pena == null){
            return "Nao ha item neste ambiente";
        }else{

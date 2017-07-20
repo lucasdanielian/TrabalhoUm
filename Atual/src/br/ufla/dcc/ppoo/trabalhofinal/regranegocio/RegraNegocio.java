@@ -216,9 +216,10 @@ public class RegraNegocio  {
      * @return String contendo o ambiente
      */
     public String descricaoAmbienteAtual() {
-        return "\n Voce esta " + ambienteAtual.getNomeAmbiente() + " no dia "
-                + contador + "\n" + ambienteAtual.mensagemDeEntrada(dean)
-                + "Saidas: " + ambienteAtual.saidasValidas() + "\n";
+        return "\n Voce esta " + ambienteAtual.getNomeAmbiente() +
+               "\n" + ambienteAtual.mensagemDeEntrada(dean) +
+               "\n Saidas: " + ambienteAtual.saidasValidas() +
+               "\n";
     }
     
     /**
@@ -318,7 +319,7 @@ public class RegraNegocio  {
                     return descricaoAmbienteAtual();
                 }
                 else{
-                    return "\nVoce excedeu o tempo limite. Sam Winchester está"
+                    return "\nVoce excedeu o tempo limite. Sam Winchester está "
                             + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
                 }
             }
@@ -434,5 +435,24 @@ public class RegraNegocio  {
             return "\n Este item nao e o diario, logo nao pode ser lido";
         }
         
+    }
+    
+    /**
+     * Metodo que informa quantos dias corridos ao longo do jogo
+     * @return Inteiro contendo o numero de dias
+     */
+    public int getContador() {
+        return contador;
+    }
+    
+    /**
+     * Metodo que informa quantos dias faltam para terminar o jogo
+     * @return Inteiro contendo o numero de dias
+     */
+    public int diasRestantes() {
+        if (contador<=30){
+            return 30 - contador;
+        }
+        return 0;
     }
 }

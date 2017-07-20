@@ -62,8 +62,19 @@ public class JogadorDean {
      * @param item o objeto que sera inserido na mochila
      * @return booleano para informar se foi inserido ou não
      */
-    public boolean inserirItensMochila(Item item){
-        return  mochila.inserirItens(item);
+    public String inserirItensMochila(Item item){
+        if(espacoDisponivelMochila()){
+            boolean adicionado = mochila.inserirItens(item);
+            if (adicionado == true){
+                return "adicionado";
+            }else{
+                return "nao adicionado";
+            }
+        }
+        else{
+            return "Você nao possui espaço na mochila disponivel."
+                            + "\n Você deve liberar espaço para coletar o item";
+        }
     }
     
     /**
@@ -94,9 +105,17 @@ public class JogadorDean {
     /**
      * Adiciona a pagina ao diario do jogador
      * @param pagina é uma string que irá compor as paginas.
+     * @return true se adicionado ou false caso ao contrario.
      */
-    public void adicionarPaginaDiario(String pagina){
-        diario.adicionarPagina(pagina);
+    public boolean adicionarPaginaDiario(String pagina){
+        boolean adicionou;
+        if(diario.getPaginas().contains(pagina)){
+            adicionou = false;
+        }else{
+            diario.adicionarPagina(pagina);
+            adicionou = true;
+        }
+        return adicionou;
     }
     
     /**

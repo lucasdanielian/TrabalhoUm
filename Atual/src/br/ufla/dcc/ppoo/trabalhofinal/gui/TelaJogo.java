@@ -85,9 +85,6 @@ public class TelaJogo {
     private JButton btnIrPurgatorio;
     private JButton btnIrCeu;
     
-    //Botao que mostra os itens do armario na casa Winchester
-    private JButton btnVerItensArmario;
-    
     //Botao que mostra os itens dos ambientes
     private JButton btnItemCartaAmbiente;
     private JButton btnItemPenaAmbiente;
@@ -167,15 +164,12 @@ public class TelaJogo {
         btnIrPurgatorio.setEnabled(true);
         btnIrCeu.setEnabled(true);
         
-        //Botao que mostra os itens contidos no armario da casaWinchester
-        btnVerItensArmario.setEnabled(true);
-        
         //Botoes Itens Ambientes
-        btnItemCartaAmbiente.setEnabled(true);
-        btnItemPenaAmbiente.setEnabled(true);
-        btnItemDenteLoboAmbiente.setEnabled(true);
-        btnItemCabecaVampiroAmbiente.setEnabled(true);
-        btnItemPortadorAlmasAmbiente.setEnabled(true);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
         
         //Botões Itens mochila
         btnItemCartaMochila.setEnabled(false);
@@ -183,198 +177,6 @@ public class TelaJogo {
         btnItemDenteLoboMochila.setEnabled(false);
         btnItemCabecaVampiroMochila.setEnabled(false);
         btnItemPortadorAlmasMochila.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente Casa Bob
-     */
-    private void prepararComponentesEstadoInicialCasaBob() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente Casa Caim
-     */
-    private void prepararComponentesEstadoInicialCasaCaim() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente Casa Winchester
-     */
-    private void prepararComponentesEstadoInicialCasaWinchester() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(true);
-        btnItemCartaAmbiente.setEnabled(true);
-        btnItemPenaAmbiente.setEnabled(true);
-        btnItemDenteLoboAmbiente.setEnabled(true);
-        btnItemCabecaVampiroAmbiente.setEnabled(true);
-        btnItemPortadorAlmasAmbiente.setEnabled(true);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente CasaBob
-     */
-    private void prepararComponentesEstadoInicialCeu() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente CasaBob
-     */
-    private void prepararComponentesEstadoInicialDenver() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente CasaBob
-     */
-    private void prepararComponentesEstadoInicialHouston() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-
-    /**
-     * Trata o estado inicial do ambiente CasaBob
-     */
-    private void prepararComponentesEstadoInicialPortalInferno() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-    }
-    
-    /**
-     * Trata o estado inicial do ambiente CasaBob
-     */
-    private void prepararComponentesEstadoInicialPurgatorio() {
-
-        btnSalvarJogo.setEnabled(true);
-        btnCancelarJogo.setEnabled(true);
-        btnEnviarComando.setEnabled(true);
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        btnVerItensArmario.setEnabled(false);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
     }
     
     /**
@@ -387,6 +189,7 @@ public class TelaJogo {
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
             imagensJogo = new JLabel(logo);
+            imagensJogo.setPreferredSize(new Dimension(500, 240));
             //Adicão dos botoes Ambientes no painei Oeste
             adicionarComponentePainelNorte(imagensJogo,
                     GridBagConstraints.CENTER,
@@ -545,11 +348,8 @@ public class TelaJogo {
         
         //Adiciona barra de rolagem ao texto
         jScrollPaneSaida = new JScrollPane(textoDinamico);
-        //textoDinamico.setMinimumSize(new Dimension(200, 100));
-        //textoDinamico.setMaximumSize(new Dimension(500, 400));
-        //textoDinamico.setPreferredSize(new Dimension(200, 100));
-        //jScrollPaneSaida.setMinimumSize(new Dimension(200, 100));
-        //jScrollPaneSaida.setMaximumSize(new Dimension(500, 400));
+        
+        //seta o tamanho do campo de texto
         jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
         
         //Adiciona o JScrollPane do texto dinamico da tela
@@ -702,7 +502,7 @@ public class TelaJogo {
         
         //Botoes de Manipulação de itens do ambiente
         btnItemCartaAmbiente = new JButton(I18N.obterBotaoItenCarta(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemCartaAmbiente,
                 GridBagConstraints.NORTH,
@@ -710,7 +510,7 @@ public class TelaJogo {
                 2, 0, 1, 1);
         
         btnItemPenaAmbiente = new JButton(I18N.obterBotaoItenPena(),
-            GerenciadorDeImagens.OK);
+            GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemPenaAmbiente,
                 GridBagConstraints.NORTH,
@@ -718,7 +518,7 @@ public class TelaJogo {
                 4, 0, 1, 1);
         
         btnItemDenteLoboAmbiente = new JButton(I18N.obterBotaoItenDenteLobo(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemDenteLoboAmbiente,
                 GridBagConstraints.NORTH,
@@ -726,7 +526,7 @@ public class TelaJogo {
                 6, 0, 1, 1);
         
         btnItemCabecaVampiroAmbiente = new JButton(I18N.obterBotaoItenCabecaVampiro(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemCabecaVampiroAmbiente,
                 GridBagConstraints.NORTH,
@@ -734,21 +534,12 @@ public class TelaJogo {
                 8, 0, 1, 1);
         
         btnItemPortadorAlmasAmbiente = new JButton(I18N.obterBotaoItemPortadorAlmas(),
-                GerenciadorDeImagens.OK);
+                GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes de jogo no painei Oeste
         adicionarComponentePainelLeste(btnItemPortadorAlmasAmbiente,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
                 10, 0, 1, 1);
-        
-        //Botoes de Exibicao de itens
-        btnVerItensArmario = new JButton(I18N.obterBotaoVerItensAmbiente(),
-                GerenciadorDeImagens.OK);
-        //Adicão do botao VerItensArmario no painei Oeste
-        adicionarComponentePainelLeste(btnVerItensArmario,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                12, 0, 1, 1);
 
         //Imprime o titulo dos botoes de itens da mochila na tela
         tituloBotoesVerItens = new JTextArea(" ITENS MOCHILA ");
@@ -820,11 +611,52 @@ public class TelaJogo {
                 if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialCeu();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -838,36 +670,53 @@ public class TelaJogo {
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    Comando auxComando = analisador.pegarComando("analisar armario");
-                    String aux = regraNegocio.processarComando(auxComando);
-                    if(aux == null || aux.equals(" ")){
-                        btnVerItensArmario.setEnabled(false);
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        Comando auxComando = analisador.pegarComando("analisar armario");
+                        String aux = regraNegocio.processarComando(auxComando);
+                        if(aux == null || aux.equals(" ")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                     }
-                    else{
-                        if(aux.contains("Dente")){
-                            btnItemDenteLoboAmbiente.setEnabled(true);
-                        }
-                        
-                        if(aux.contains("CabecaVampiro")){
-                            btnItemCabecaVampiroAmbiente.setEnabled(true);
-                        }
-                        
-                        if(aux.contains("Carta")){
-                            btnItemCartaAmbiente.setEnabled(true);
-                        }
-                        
-                        if(aux.contains("Almas")){
-                            btnItemPortadorAlmasAmbiente.setEnabled(true);
-                        }
-                        
-                        if(aux.contains("Pena")){
-                            btnItemPenaAmbiente.setEnabled(true);
-                        }
-                    }
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                 }
             }
         });
@@ -881,11 +730,52 @@ public class TelaJogo {
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialDenver();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -896,14 +786,55 @@ public class TelaJogo {
                 String validaAmbiente;
                 comando = analisador.pegarComando("ir Houston");
                 validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialHouston();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -914,14 +845,55 @@ public class TelaJogo {
                 String validaAmbiente;
                 comando = analisador.pegarComando("ir PortalInferno");
                 validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
+                if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialPortalInferno();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -935,11 +907,52 @@ public class TelaJogo {
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialPurgatorio();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -953,11 +966,52 @@ public class TelaJogo {
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    prepararComponentesEstadoInicialCasaCaim();
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
+                    }else{
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                    }
                 }
             }
         });
@@ -968,43 +1022,55 @@ public class TelaJogo {
                 String validaAmbiente;
                 comando = analisador.pegarComando("ir CasaBob");
                 validaAmbiente = regraNegocio.processarComando(comando);
-                String teste = regraNegocio.verificaItemAmbiente();
                 if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
-                    if(teste.contains("disponivel")){
-                        btnVerItensArmario.setEnabled(false);
-                        btnItemPenaAmbiente.setEnabled(false);
-                        btnItemCabecaVampiroAmbiente.setEnabled(false);
-                        btnItemDenteLoboAmbiente.setEnabled(false);
-                        btnItemCartaAmbiente.setEnabled(true);
-                        btnItemPortadorAlmasAmbiente.setVisible(false);                        
+                    if(regraNegocio.diasRestantes()==0){
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+                            + "\nTente Jogar Novamente!");
+                        janela.dispose();
                     }else{
-                        btnVerItensArmario.setEnabled(false);
-                        btnItemPenaAmbiente.setEnabled(false);
-                        btnItemCabecaVampiroAmbiente.setEnabled(false);
-                        btnItemDenteLoboAmbiente.setEnabled(false);
-                        btnItemCartaAmbiente.setEnabled(false);
-                        btnItemPortadorAlmasAmbiente.setVisible(false);
+                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        if(aux.contains("indisponivel")){
+                            btnItemDenteLoboAmbiente.setEnabled(false);
+                            btnItemCabecaVampiroAmbiente.setEnabled(false);
+                            btnItemCartaAmbiente.setEnabled(false);
+                            btnItemPortadorAlmasAmbiente.setEnabled(false);
+                            btnItemPenaAmbiente.setEnabled(false);
+                        }
+                        else{
+                            if(aux.contains("Dente")){
+                                btnItemDenteLoboAmbiente.setEnabled(true);
+                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("CabecaVampiro")){
+                                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Carta")){
+                                btnItemCartaAmbiente.setEnabled(true);
+                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Almas")){
+                                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+
+                            if(aux.contains("Pena")){
+                                btnItemPenaAmbiente.setEnabled(true);
+                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                            }
+                        }
+                        textoDinamico.setText(validaAmbiente);
+                        trocaImagem(regraNegocio.imagemAmbienteAtual());
+                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
                     }
-                    textoDinamico.setText(validaAmbiente);
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
-                    diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                    diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                }
-            }
-        });
-        
-        btnVerItensArmario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("analisar armario");
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao != null){
-                    textoDinamico.setText(textoExibicao);
-                }else{
-                    textoDinamico.setText("Nao ha intens guardados no armario");
                 }
             }
         });
@@ -1033,12 +1099,13 @@ public class TelaJogo {
                 String textoExibicao;
                 comando = analisador.pegarComando("guardar Carta");
                 textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.indexOf("Item: Carta guardado com sucesso")>=0){
+                if(textoExibicao.contains("Item: Carta guardado com sucesso")){
                     textoDinamico.setText(textoExibicao);
-                    btnItemCartaMochila.setVisible(false);
+                    btnItemCartaMochila.setEnabled(false);
                     btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemCartaAmbiente.setVisible(true);
                     btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                    btnItemCartaAmbiente.setEnabled(true);
+                    
                     
                 }else{
                     textoDinamico.setText(textoExibicao);
@@ -1104,10 +1171,9 @@ public class TelaJogo {
         btnItemCabecaVampiroAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar CabecaVampiro");
-                String aux = regraNegocio.processarComando(comando);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                if(aux.contentEquals("sucesso")){
+                String item = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")){
                     btnItemCabecaVampiroAmbiente.setVisible(false);
                     btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCabecaVampiroMochila.setEnabled(true);
@@ -1119,9 +1185,9 @@ public class TelaJogo {
         btnItemCartaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String aux = regraNegocio.pegarItemAmbiente();
-                textoDinamico.setText(aux);
-                if(aux.contains("coletado")){
+                String item = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")){
                     btnItemCartaAmbiente.setEnabled(false);
                     btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemCartaMochila.setEnabled(true);
@@ -1133,11 +1199,9 @@ public class TelaJogo {
         btnItemDenteLoboAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
-                comando = analisador.pegarComando("pegar Dente");
-                String aux = regraNegocio.processarComando(comando);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                if(aux.contentEquals("sucesso")){
+                String item = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")){
                     btnItemDenteLoboAmbiente.setVisible(false);
                     btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemDenteLoboMochila.setEnabled(true);
@@ -1149,11 +1213,9 @@ public class TelaJogo {
         btnItemPenaAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
-                comando = analisador.pegarComando("pegar Pena");
-                String aux = regraNegocio.processarComando(comando);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                if(aux.contentEquals("sucesso")){
+                String item = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")){
                     btnItemPenaAmbiente.setVisible(false);
                     btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPenaMochila.setEnabled(true);
@@ -1165,11 +1227,9 @@ public class TelaJogo {
         btnItemPortadorAlmasAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            
-                comando = analisador.pegarComando("pegar Almas");
-                String aux = regraNegocio.processarComando(comando);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
-                if(aux.contentEquals("sucesso")){
+                String item = regraNegocio.pegarItemAmbiente();
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")){
                     btnItemPortadorAlmasAmbiente.setVisible(false);
                     btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
                     btnItemPortadorAlmasMochila.setEnabled(true);

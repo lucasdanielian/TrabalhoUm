@@ -83,8 +83,27 @@ public class AmbienteCasaWinchester extends Ambiente {
         return armario.inserirItens(item);
     }
 
+    /**
+     * Metodo utilizado para verificar se um ambiente possui itens disponiveis
+     * para captura
+     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
+     * ambiente
+     * @return String informando que nao é possivel coletar itens neste ambiente
+     */
     @Override
-    public String disponibilizaItem(JogadorDean dean) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String disponibilizarItemAmbiente(JogadorDean dean) {
+        return "item indisponivel";
+    }
+
+    /**
+     * Metodo utilizado para informar que o jagador nao pegou o item, uma vez
+     * que este ambiente nao possui itens disponiveis para captura
+     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
+     * ambiente
+     * @return String informando que nao pegou nada
+     */
+    @Override
+    public String pegarItemAmbiente(JogadorDean dean) {
+        return "item nao coletado";
     }
 }

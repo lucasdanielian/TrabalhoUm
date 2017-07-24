@@ -93,38 +93,38 @@ public class RegraNegocio  {
         casaWinchester.ajustarSaidas(purgatorio);
         
         // inicializa as saidas do ambiente denver
-        denver.ajustarSaidas(ceu);
+        //denver.ajustarSaidas(ceu);
         denver.ajustarSaidas(inferno);
         denver.ajustarSaidas(casaBob);
-        denver.ajustarSaidas(houston);
-        denver.ajustarSaidas(casaCaim);
+        //denver.ajustarSaidas(houston);
+        //denver.ajustarSaidas(casaCaim);
         denver.ajustarSaidas(purgatorio);
-        denver.ajustarSaidas(casaWinchester);
+        //denver.ajustarSaidas(casaWinchester);
         
         // inicializa as saidas do ambiente houston
-        houston.ajustarSaidas(ceu);
-        houston.ajustarSaidas(inferno);
-        houston.ajustarSaidas(casaBob);
-        houston.ajustarSaidas(casaCaim);
+        //houston.ajustarSaidas(ceu);
+        //houston.ajustarSaidas(inferno);
+        //houston.ajustarSaidas(casaBob);
+        //houston.ajustarSaidas(casaCaim);
         houston.ajustarSaidas(casaWinchester);
         houston.ajustarSaidas(purgatorio);
-        houston.ajustarSaidas(denver);
+        //houston.ajustarSaidas(denver);
         
         // inicializa as saidas do ambiente casaCaim
         casaCaim.ajustarSaidas(houston);
-        casaCaim.ajustarSaidas(ceu);
-        casaCaim.ajustarSaidas(casaBob);
-        casaCaim.ajustarSaidas(casaWinchester);
+        //casaCaim.ajustarSaidas(ceu);
+        //casaCaim.ajustarSaidas(casaBob);
+        //casaCaim.ajustarSaidas(casaWinchester);
         casaCaim.ajustarSaidas(denver);
-        casaCaim.ajustarSaidas(purgatorio);
+        //casaCaim.ajustarSaidas(purgatorio);
         casaCaim.ajustarSaidas(inferno);
         
         // inicializa as saidas do ambiente casaBob
-        casaBob.ajustarSaidas(ceu);
-        casaBob.ajustarSaidas(denver);
+        //casaBob.ajustarSaidas(ceu);
+        //casaBob.ajustarSaidas(denver);
         casaBob.ajustarSaidas(casaWinchester);
         casaBob.ajustarSaidas(casaCaim);
-        casaBob.ajustarSaidas(inferno);
+        //casaBob.ajustarSaidas(inferno);
         casaBob.ajustarSaidas(purgatorio);
         casaBob.ajustarSaidas(houston);
         
@@ -139,22 +139,22 @@ public class RegraNegocio  {
         */
         
         // inicializa as saidas do ambiente purgatorio
-        purgatorio.ajustarSaidas(ceu);
-        purgatorio.ajustarSaidas(denver);
+        //purgatorio.ajustarSaidas(ceu);
+        //purgatorio.ajustarSaidas(denver);
         purgatorio.ajustarSaidas(casaWinchester);
-        purgatorio.ajustarSaidas(casaBob);
-        purgatorio.ajustarSaidas(casaCaim);
+        //purgatorio.ajustarSaidas(casaBob);
+        //purgatorio.ajustarSaidas(casaCaim);
         purgatorio.ajustarSaidas(inferno);
-        purgatorio.ajustarSaidas(houston);
+        //purgatorio.ajustarSaidas(houston);
         
         // inicializa as saidas do ambiente ceu
-        ceu.ajustarSaidas(houston);
-        ceu.ajustarSaidas(inferno);
-        ceu.ajustarSaidas(casaCaim);
+        //ceu.ajustarSaidas(houston);
+        //ceu.ajustarSaidas(inferno);
+        //ceu.ajustarSaidas(casaCaim);
         ceu.ajustarSaidas(casaBob);
         ceu.ajustarSaidas(casaWinchester);
         ceu.ajustarSaidas(denver);
-        ceu.ajustarSaidas(purgatorio);
+        //ceu.ajustarSaidas(purgatorio);
      
         // o jogo comeca do lado de fora
         ambienteAtual = casaWinchester;

@@ -102,6 +102,30 @@ public class AmbienteCasaCaim extends Ambiente {
                         + " nao há mais nada a ser feito neste ambiente. \nVocê "
                         + "está perdendo tempo aqui";
             }
+            
+            else if(recebeuTask == false && dean.buscarItemPeloNomeNaMochila("Carta") != null){
+            
+                visitouBob = true;
+                dean.adicionarPaginaDiario("Em Houston, existe um grupo de"
+                        + " vampiros que Caim o pediu para que fossem eliminados.");
+                return "Dean se direciona para a casa de caim.\n"
+                        + "Chegando lá, Dean apresenta a ele a carta entregue\n"
+                        + "por Bob. Caim, com muita fúria afirma que ele era um\n"
+                        + "rapaz muito ousado para encarar face a face o primeiro\n"
+                        + "assassino da história. Entretanto, Caim decide ajudar\n"
+                        + "Dean pelo pedido de Bob. Ele diz : “Para que você\n"
+                        + "receba o poder da marca de Caim, que será necessário\n"
+                        + "para derrotar o demônio que aprisionou seu irmão,\n"
+                        + "você precisará fazer algo para mim também. Atualmente,\n"
+                        + "um dos meus negócios é a venda ilegal de orgãos.\n"
+                        + "Entretanto, existe um grupo de vampiros em Houston\n"
+                        + "que está drenando os corpos dos cadáveres, inutilizando\n"
+                        + "meus preciosos corpos.Preciso que você mate todos\n"
+                        + "para mim, e me traga a cabeça de um deles como prova.\n"
+                        + "Após isto, volte até mim e eu o darei o que precisa.\n";
+            
+            }
+            
             //ainda nao foi em Bob
             else{
                 return "Dean se direciona para a casa de caim.\n"

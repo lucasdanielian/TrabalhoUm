@@ -47,7 +47,6 @@ public class AmbienteCasaCaim extends Ambiente {
                 visitouBob = true;
             }
             if(visitouBob == true){ // se ele passou por Bob
-                dean.removerPeloNomeDaMochila("Carta");
                 recebeuTask = true;
                 dean.adicionarPaginaDiario("Em Houston, existe um grupo de"
                         + " vampiros que Caim o pediu para que fossem eliminados.");

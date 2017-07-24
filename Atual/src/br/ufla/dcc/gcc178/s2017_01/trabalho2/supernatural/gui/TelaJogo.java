@@ -179,6 +179,10 @@ public class TelaJogo {
         btnItemPortadorAlmasMochila.setEnabled(false);
     }
     
+    /**
+     * Metodo que trata os itens disponiveis em cada ambiente
+     * @param itensDisponiveis 
+     */
     private void prepararItensAmbientes(String itensDisponiveis){
         if(itensDisponiveis.contains("indisponivel")){
             btnItemDenteLoboAmbiente.setEnabled(false);
@@ -260,6 +264,9 @@ public class TelaJogo {
         }
     }
     
+    /**
+     * Metodo responsavel por finalizar o jogo caso o tempo estoure
+     */
     private void gameOver(){
         diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
@@ -268,6 +275,9 @@ public class TelaJogo {
         janela.dispose();
     }
     
+    /**
+     * Metodo que atualiza o paine de pontos do jogador
+     */
     private void atualizaPainel(){
         diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());

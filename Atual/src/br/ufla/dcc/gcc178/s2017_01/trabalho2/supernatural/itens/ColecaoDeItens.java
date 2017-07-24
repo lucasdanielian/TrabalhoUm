@@ -48,7 +48,7 @@ public class ColecaoDeItens {
             }
             return itensRetorno;
         }else{
-            return null;
+            return "Não existem itens a serem mostrados";
         }
     }
     

@@ -305,7 +305,7 @@ public class RegraNegocio  {
                     return "\nVocê está preso em: " + ambienteAtual.getNomeAmbiente() + 
                         "\n Digite sair para finalisar e tente novamente.";
                 }else{
-                    return "\n Nao ha passagem!";
+                    return "\n Nao ha passagem para o ambiente: " + direcao;
                 }
             }
             else { 

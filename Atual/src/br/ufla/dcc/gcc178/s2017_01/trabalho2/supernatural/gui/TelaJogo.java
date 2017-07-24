@@ -179,6 +179,100 @@ public class TelaJogo {
         btnItemPortadorAlmasMochila.setEnabled(false);
     }
     
+    private void prepararItensAmbientes(String itensDisponiveis){
+        if(itensDisponiveis.contains("indisponivel")){
+            btnItemDenteLoboAmbiente.setEnabled(false);
+            btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemCabecaVampiroAmbiente.setEnabled(false);
+            btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemCartaAmbiente.setEnabled(false);
+            btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemPortadorAlmasAmbiente.setEnabled(false);
+            btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemPenaAmbiente.setEnabled(false);
+            btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+        }
+        else{
+            if(itensDisponiveis.contains("Dente")){
+                btnItemDenteLoboAmbiente.setEnabled(true);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                btnItemCabecaVampiroAmbiente.setEnabled(false);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCartaAmbiente.setEnabled(false);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPortadorAlmasAmbiente.setEnabled(false);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPenaAmbiente.setEnabled(false);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            }
+
+            if(itensDisponiveis.contains("CabecaVampiro")){
+                btnItemDenteLoboAmbiente.setEnabled(false);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCabecaVampiroAmbiente.setEnabled(true);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+                btnItemCartaAmbiente.setEnabled(false);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPortadorAlmasAmbiente.setEnabled(false);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPenaAmbiente.setEnabled(false);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            }
+
+            if(itensDisponiveis.contains("Carta")){
+                btnItemDenteLoboAmbiente.setEnabled(false);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCabecaVampiroAmbiente.setEnabled(false);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCartaAmbiente.setEnabled(true);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                btnItemPortadorAlmasAmbiente.setEnabled(false);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPenaAmbiente.setEnabled(false);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            }
+
+            if(itensDisponiveis.contains("Almas")){
+                btnItemDenteLoboAmbiente.setEnabled(false);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCabecaVampiroAmbiente.setEnabled(false);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCartaAmbiente.setEnabled(false);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPortadorAlmasAmbiente.setEnabled(true);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+                btnItemPenaAmbiente.setEnabled(false);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+            }
+
+            if(itensDisponiveis.contains("Pena")){
+                btnItemDenteLoboAmbiente.setEnabled(false);
+                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCabecaVampiroAmbiente.setEnabled(false);
+                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCartaAmbiente.setEnabled(false);
+                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPortadorAlmasAmbiente.setEnabled(false);
+                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPenaAmbiente.setEnabled(true);
+                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+            }
+        }
+    }
+    
+    private void gameOver(){
+        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
+            + "\nTente Jogar Novamente!");
+        janela.dispose();
+    }
+    
+    private void atualizaPainel(){
+        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+    }
+    
     /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
@@ -612,50 +706,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -671,51 +728,14 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
                         Comando auxComando = analisador.pegarComando("analisar armario");
-                        String aux = regraNegocio.processarComando(auxComando);
-                        if(aux == null || aux.equals(" ")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.processarComando(comando);
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -731,50 +751,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -790,50 +773,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -849,50 +795,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -908,50 +817,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -967,50 +839,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }
@@ -1026,50 +861,13 @@ public class TelaJogo {
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
                     if(regraNegocio.diasRestantes()==0){
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
-                        JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
-                            + "\nTente Jogar Novamente!");
-                        janela.dispose();
+                        gameOver();
                     }else{
-                        String aux = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        if(aux.contains("indisponivel")){
-                            btnItemDenteLoboAmbiente.setEnabled(false);
-                            btnItemCabecaVampiroAmbiente.setEnabled(false);
-                            btnItemCartaAmbiente.setEnabled(false);
-                            btnItemPortadorAlmasAmbiente.setEnabled(false);
-                            btnItemPenaAmbiente.setEnabled(false);
-                        }
-                        else{
-                            if(aux.contains("Dente")){
-                                btnItemDenteLoboAmbiente.setEnabled(true);
-                                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("CabecaVampiro")){
-                                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Carta")){
-                                btnItemCartaAmbiente.setEnabled(true);
-                                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Almas")){
-                                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-
-                            if(aux.contains("Pena")){
-                                btnItemPenaAmbiente.setEnabled(true);
-                                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                            }
-                        }
+                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+                        prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
                         trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
-                        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+                        atualizaPainel();
                     }
                 }
             }

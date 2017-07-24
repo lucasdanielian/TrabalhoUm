@@ -47,6 +47,9 @@ public class ItemDiario extends Item{
         for(String aux : this.paginas){
             resposta += aux + "\n";
         }
+        if(resposta.equals("")){
+            return "Não há paginas escritas no diario";
+        }
         return resposta;
     }
     

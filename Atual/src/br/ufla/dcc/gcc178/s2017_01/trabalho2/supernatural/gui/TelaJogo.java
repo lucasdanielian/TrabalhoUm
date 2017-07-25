@@ -34,16 +34,9 @@ import javax.swing.JTextField;
 /**
  *  Essa eh a classe principal(Para iniciar com interface Grafica) do RegraNegocio "SuperNatural".
  *  "SuperNatural" eh um jogo de aventura muito simples, baseado em texto.
-  Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
-  comprir a missão que é salvar seu irmão do inferno.
-  Para isto o mesmo deve realizar a tarefa em um tempo inferior a 30. 
- 
-  Para iniciar esse jogo, crie uma instancia dessa classe e chame o metodo
-  "iniciar".
- 
-  Essa classe principal cria e inicializa todas as outras: ela cria os
-  ambientes, cria o analisador e comeca o jogo. Ela tambeme avalia e 
-  executa os comandos que o analisador retorna.
+ * Usuarios podem caminhar em um cenario, e precisam consquitar objetos para
+ *  comprir a missão que é salvar seu irmão do inferno.
+ *  Para isto o mesmo deve realizar a tarefa em um tempo inferior a 30. 
  * 
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * Modificado: Valdeci Soares da Silva Junior e Lucas Danielian 

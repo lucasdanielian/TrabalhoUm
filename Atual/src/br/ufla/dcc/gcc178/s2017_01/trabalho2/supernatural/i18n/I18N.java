@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 public class I18N {
 
     // caminho base para os arquivos de internacionalização
-    private static final String CAMINHO_ARQUIVOBASE_I18N = "br/ufla/dcc/ppoo/trabalhofinal/i18n/Strings";
+    private static final String CAMINHO_ARQUIVOBASE_I18N = "br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/i18n/Strings";
     // objeto utilizado para carregar os textos do sistema de acordo com a localidade
     private static ResourceBundle rb = ResourceBundle.getBundle(CAMINHO_ARQUIVOBASE_I18N, Locale.getDefault());
     // indica a localidade (idioma) Português - Brasil

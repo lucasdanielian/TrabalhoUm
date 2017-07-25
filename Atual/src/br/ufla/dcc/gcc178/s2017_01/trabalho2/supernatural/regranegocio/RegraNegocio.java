@@ -1,3 +1,4 @@
+//teste
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaBob;

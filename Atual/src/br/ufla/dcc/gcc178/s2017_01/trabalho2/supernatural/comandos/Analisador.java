@@ -1,5 +1,6 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
  * @version 2011.07.31 (2017.05.16)
  */
-public class Analisador  {
+public class Analisador implements Serializable{
     private PalavrasComando palavrasDeComando;  // guarda todas as palavras de comando validas
 
     /**

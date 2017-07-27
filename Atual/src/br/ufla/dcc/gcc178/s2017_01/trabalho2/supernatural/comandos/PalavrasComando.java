@@ -1,5 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos;
 
+import java.io.Serializable;
+
 /**
  * Esta classe eh parte da aplicacao "World of Zuul".
  * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
@@ -11,7 +13,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos;
  * @version 2011.07.31 (2017.05.16)
  */
 
-public class PalavrasComando {
+public class PalavrasComando implements Serializable{
     // um vetor constante que guarda todas as palavras de comandos validas
     private static final String[] comandosValidos = {
         "ir", "sair", "ajuda", "guardar", "pegar", "analisar", "ler"

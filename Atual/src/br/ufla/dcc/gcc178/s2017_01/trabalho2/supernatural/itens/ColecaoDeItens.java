@@ -1,6 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * 
  * @author Lucas Danielian
  */
-public class ColecaoDeItens {
+public class ColecaoDeItens implements Serializable{
     
     private int capacidade;
     private int quantidadeAtual;

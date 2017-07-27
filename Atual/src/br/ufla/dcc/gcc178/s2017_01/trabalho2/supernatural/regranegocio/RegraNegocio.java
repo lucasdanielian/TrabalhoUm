@@ -14,6 +14,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaCaim;
+import java.io.Serializable;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -33,7 +34,8 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasa
  * Modificado: Valdeci Soares da Silva Junior e Lucas Danielian 
  * @version 2011.07.31 (2017.05.16)
  */
-public class RegraNegocio  {
+public class RegraNegocio implements Serializable{
+    
     private Analisador analisador;
     private Ambiente ambienteAtual;
     private int contador; //variavel que conta quantas ações o jogador ja fez
@@ -457,6 +459,14 @@ public class RegraNegocio  {
      */
     public int getContador() {
         return contador;
+    }
+    
+    /**
+     * Metodo para exibir o nome do ambiente em que se está no momento do jogo
+     * @return uma string com o nome do ambiente atual
+     */
+    public String getNomeAmbienteAtual(){
+        return ambienteAtual.getNomeAmbiente();
     }
     
     /**

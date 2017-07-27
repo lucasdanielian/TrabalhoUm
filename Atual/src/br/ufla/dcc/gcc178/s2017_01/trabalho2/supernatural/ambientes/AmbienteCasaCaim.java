@@ -147,7 +147,7 @@ public class AmbienteCasaCaim extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/casaCaim.jpg";
+        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/casaCaim.jpg";
     }
 
     /**

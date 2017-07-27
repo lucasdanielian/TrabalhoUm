@@ -5,6 +5,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +17,16 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -30,6 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  *  Essa eh a classe principal(Para iniciar com interface Grafica) do RegraNegocio "SuperNatural".
@@ -42,7 +51,7 @@ import javax.swing.JTextField;
  * Modificado: Valdeci Soares da Silva Junior e Lucas Danielian 
  * @version 2011.07.31 (2017.05.16)
  */
-public class TelaJogo {
+public class TelaJogo implements Serializacao {
 
     // referência para a tela principal
     private final TelaPrincipal telaPrincipal;
@@ -67,6 +76,7 @@ public class TelaJogo {
     //Botoes principais
     private JButton btnSalvarJogo;
     private JButton btnCancelarJogo;
+    private JButton btnRecuperarJogo;
     
     //Botoes para navegacao entre os ambientes
     private JButton btnIrCasaWinchester;
@@ -100,12 +110,13 @@ public class TelaJogo {
     private JTextArea tituloBotoesVerItens;
     private JTextArea diasCorridos;
     private JTextArea diasRestantes;
+    private JTextArea ambienteAtual;
     
     //Entradas do usuario
     private JTextField txtEntradaComandos;
     
     //Outros
-    private RegraNegocio regraNegocio;
+    private static RegraNegocio regraNegocio;
     private Comando comando;
     private Analisador analisador;
     private JScrollPane jScrollPaneSaida;
@@ -114,7 +125,8 @@ public class TelaJogo {
     private JLabel rotuloTxtEntradaComandos;
     private File file;
     private URL resource;
-    private String diretorio;
+    private String imagemPrincipal;
+    private String diretorioPersistencia;
 
      /**
      * Constrói a tela Meus Filmes guardando a referência da tela principal.
@@ -172,6 +184,12 @@ public class TelaJogo {
         btnItemPortadorAlmasMochila.setEnabled(false);
     }
     
+    /**
+     * Metodo responsvel por verificar a disponibilidade de cada iten
+     * em seu respectivo ambiente
+     * @param itensDisponiveis O item é passado por referencia, caso esteja
+     * indisponivel todos são setados como enable false, se não enable true
+     */
     private void prepararItensAmbientes(String itensDisponiveis){
         if(itensDisponiveis.contains("indisponivel")){
             btnItemDenteLoboAmbiente.setEnabled(false);
@@ -253,6 +271,9 @@ public class TelaJogo {
         }
     }
     
+    /**
+     * Metodo que finaliza o jogo
+     */
     private void gameOver(){
         diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
@@ -261,23 +282,28 @@ public class TelaJogo {
         janela.dispose();
     }
     
-    private void atualizaPainel(){
+    /**
+     * Metodo que atualiza o painel de visualizacao da quantidade de dias corridos
+     */
+    private void atualizaPainelPontuacao(){
         diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+        ambienteAtual.setText("Você está em: " + regraNegocio.getNomeAmbienteAtual());
+        
     }
     
     /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void adicionarImagem(String diretorio){
+    private void adicionarImagemAmbiente(String diretorio){
         try{
             URL resource = getClass().getResource(diretorio);
             file = new File(resource.toURI());
             logo = new ImageIcon(file.getPath());
             imagensJogo = new JLabel(logo);
-            imagensJogo.setPreferredSize(new Dimension(500, 240));
-            //Adicão dos botoes Ambientes no painei Oeste
+            imagensJogo.setPreferredSize(new Dimension(500, 200));
+            //Adicao da imagem no painei Oeste
             adicionarComponentePainelNorte(imagensJogo,
                     GridBagConstraints.CENTER,
                     GridBagConstraints.HORIZONTAL,
@@ -294,7 +320,7 @@ public class TelaJogo {
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void trocaImagem(String diretorio){
+    private void trocaImagemAmbiente(String diretorio){
         try{
            URL resource = getClass().getResource(diretorio);
             file = new File(resource.toURI());
@@ -320,7 +346,7 @@ public class TelaJogo {
         gbc.gridx = coluna;
         gbc.gridwidth = largura;
         gbc.gridheight = altura;
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(3, 3, 3, 3);
         layoutNorte.setConstraints(c, gbc);
         painelNorte.add(c);
     }
@@ -396,8 +422,8 @@ public class TelaJogo {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentesTelaJogo(){
-        diretorio = "/br/ufla/dcc/ppoo/trabalhofinal/imagens/principal.jpeg";
-        adicionarImagem(diretorio);
+        imagemPrincipal = "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/principal.jpeg";
+        adicionarImagemAmbiente(imagemPrincipal);
 
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
@@ -428,6 +454,19 @@ public class TelaJogo {
                 GridBagConstraints.EAST,
                 GridBagConstraints.HORIZONTAL,
                 0, 9, 2, 2);
+        
+        //Imprime os dias restantes do jagador na tela
+        ambienteAtual = new JTextArea("Você está em: " + regraNegocio.getNomeAmbienteAtual());
+        ambienteAtual.setFont(new Font("Serif", Font.ITALIC, 18));
+        ambienteAtual.setBackground(Color.GRAY);
+        ambienteAtual.setForeground(Color.WHITE);
+        ambienteAtual.setLineWrap(true);
+        ambienteAtual.setEditable(false);        
+        //Adiciona dias restantes na tela
+        adicionarComponentePainelNorte(ambienteAtual,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.HORIZONTAL,
+                1, 5, 1, 1);
         
         //Imprime os textos da regra de negocios
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
@@ -497,6 +536,14 @@ public class TelaJogo {
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 4, 0, 1, 1);
+        
+        btnRecuperarJogo = new JButton(I18N.obterBotaoRecuperarjogo(),
+                GerenciadorDeImagens.OK);
+        //Adicão dos botoes Ambientes no painei Oeste
+        adicionarComponentePainelOeste(btnRecuperarJogo,
+                GridBagConstraints.CENTER,
+                GridBagConstraints.VERTICAL,
+                6, 0, 1, 1);
         
         //Imprime o texto na tela
         tituloBotoesAmbientes = new JTextArea(" NAVEGACAO ENTRE\n       AMBIENTES ");
@@ -704,8 +751,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -731,8 +778,8 @@ public class TelaJogo {
                             prepararItensAmbientes(itensDisponiveis);
                         }
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -753,8 +800,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -775,8 +822,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -797,8 +844,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -819,8 +866,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -841,8 +888,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -863,8 +910,8 @@ public class TelaJogo {
                         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
                         prepararItensAmbientes(itensDisponiveis);
                         textoDinamico.setText(validaAmbiente);
-                        trocaImagem(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainel();
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
                     }
                 }
             }
@@ -1045,7 +1092,7 @@ public class TelaJogo {
                 }else{
                     comando = analisador.pegarComando(validaTexto);
                     textoDinamico.setText(regraNegocio.processarComando(comando));
-                    trocaImagem(regraNegocio.imagemAmbienteAtual());
+                    trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                     txtEntradaComandos.setText("Entrada de Comandos:");
                 }
             }
@@ -1061,8 +1108,44 @@ public class TelaJogo {
         btnSalvarJogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(janela, "Persistencia ainda nao foi implementada, Aguarde pela nova versao");
+                escritaArquivo();
+                JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
             }
+        });
+        
+        btnRecuperarJogo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                leituraArquivo();
+                atualizaPainelPontuacao();
+                JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
+            }
+        });
+        
+        txtEntradaComandos.addKeyListener(new KeyListener() {
+            // Chamado logo após o usuário digitar um caractere Unicode
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            
+            //Chamado logo após o usuário pressionar uma tecla 
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+                    String validaTexto = txtEntradaComandos.getText();
+                    if(validaTexto.equals("sair")){
+                        janela.dispose();
+                    }else{
+                        comando = analisador.pegarComando(validaTexto);
+                        textoDinamico.setText(regraNegocio.processarComando(comando));
+                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        txtEntradaComandos.setText("Entrada de Comandos:");
+                    }
+                }
+            }   
+            
+            //Chamado logo após o usuário soltar uma tecla
+            @Override
+            public void keyReleased(KeyEvent e) {}
         });
     }
 
@@ -1109,6 +1192,9 @@ public class TelaJogo {
         adicionarComponentesTelaJogo();
         janela.pack();
         
+        //Nome do arquivo para serializacao
+        diretorioPersistencia = "superNatural.dat";
+        
     }
 
     /**
@@ -1119,5 +1205,38 @@ public class TelaJogo {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setVisible(true);
         janela.setResizable(false);
+    }
+    
+    /**
+     * Salva o estado atual do jogo serializando o arquivo
+     */
+    @Override
+    public void escritaArquivo() {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+            new FileOutputStream(diretorioPersistencia));
+            oos.writeObject(regraNegocio);
+            oos.close();
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(janela, e.getMessage());
+        }
+    }
+
+    /**
+     * Recupera o estado do ultimo jogo salvo
+     */
+    @Override
+    public void leituraArquivo() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(diretorioPersistencia));
+            regraNegocio = (RegraNegocio)ois.readObject();
+            ois.close();
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(janela, e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(janela, ex.getMessage());
+        }
     }
 }

@@ -110,7 +110,7 @@ public class AmbienteCeu extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/ceu.jpg";
+        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/ceu.jpg";
     }
 
     /**

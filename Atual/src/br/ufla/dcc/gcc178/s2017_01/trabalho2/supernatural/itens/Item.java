@@ -1,5 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +12,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens;
  * Classe responsavel por ser os objetos que o jogador ira portar, ou conquistar.
  * @author junior
  */
-public abstract class Item {
+public abstract class Item implements Serializable{
     //Nome objeto
     private String nomeItem;
     //Descrição Objeto

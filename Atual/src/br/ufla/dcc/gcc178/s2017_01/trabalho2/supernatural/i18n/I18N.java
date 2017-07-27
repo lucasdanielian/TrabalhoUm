@@ -516,4 +516,12 @@ public class I18N {
     public static String obterBotaoItemPortadorAlmas() {
         return rb.getString("botao.iten_portadorAlma");
     }
+
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao Recuperarjogo
+     */
+    public static String obterBotaoRecuperarjogo() {
+        return rb.getString("botao.recuperar_jogo");
+    }
 }

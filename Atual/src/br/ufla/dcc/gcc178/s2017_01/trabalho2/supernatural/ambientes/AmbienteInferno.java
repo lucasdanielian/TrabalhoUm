@@ -100,7 +100,7 @@ public class AmbienteInferno extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/ppoo/trabalhofinal/imagens/inferno.png";
+        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/inferno.png";
     }
 
     /**

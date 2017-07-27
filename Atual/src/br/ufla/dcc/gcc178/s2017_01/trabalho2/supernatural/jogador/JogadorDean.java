@@ -3,6 +3,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ItemDiario;
+import java.io.Serializable;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ItemDiario;
  * Classe que representa o jogador
  * @author Lucas Danielian
  */
-public class JogadorDean {
+public class JogadorDean implements Serializable{
     
     private ColecaoDeItens mochila;
     private boolean marcaCaim;

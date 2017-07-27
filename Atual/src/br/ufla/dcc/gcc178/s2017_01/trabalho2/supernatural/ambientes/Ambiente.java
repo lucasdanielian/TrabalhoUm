@@ -4,6 +4,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -20,7 +21,7 @@ import java.util.HashMap;
  * Versao Winchester feita por Lucas Danielian e Valdeci como atividade academica
  * @version 2011.07.31 (2017.05.16)
  */
-public abstract class Ambiente  {
+public abstract class Ambiente implements Serializable{
     //Atributos
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador

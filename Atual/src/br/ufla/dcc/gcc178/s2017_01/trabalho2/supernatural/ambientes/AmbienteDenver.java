@@ -1,6 +1,5 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.DenteLobo;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 
@@ -35,7 +34,7 @@ public class AmbienteDenver extends Ambiente {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
-        denteLobo = new DenteLobo("Dente","O dente de lobisomem representa o mal do mundo");
+        denteLobo = new Item("Dente","O dente de lobisomem representa o mal do mundo");
     }
     
     /**
@@ -134,22 +133,32 @@ public class AmbienteDenver extends Ambiente {
     }
     
     /**
-     * Metodo que pega um Item do ambiente
-     * @param dean e passado para que possa ser inserido em sua mochila
-     * @return String para verificacao se pego ou nao
+     * Remove um objeto contido no armario.
+     * @param nome criterio de remoção
+     * @return Item removido é retornado para tratamento
      */
     @Override
-    public String pegarItemAmbiente(JogadorDean dean) {
-        String insercaoMochila = dean.inserirItensMochila(denteLobo);
-        if(insercaoMochila.contains("adicionado")){
+    public Item pegarItemAmbiente(String nome) {
+        if(nome.equals(denteLobo.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return "item coletado";
-        }else if(insercaoMochila.contains("nao adicionado")){
-            itemFoiColetado = false;
-            return insercaoMochila;
+            return denteLobo;
         }else{
+            return null;
+        }
+    }
+
+    /**
+     * Insere o item passado no ambiente
+     * @param item objeto do tipo Item
+     * @return true caso o item foi inserido e false caso ao contrario
+     */
+    @Override
+    public boolean inserirItensAmbiente(Item item) {
+        if(item.getNomeItem().equals("Dente")){
             itemFoiColetado = false;
-            return insercaoMochila;
+            return true;
+        }else{
+            return false;
         }
     }
 }

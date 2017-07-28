@@ -1,6 +1,5 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Carta;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 
@@ -33,7 +32,7 @@ public class AmbienteCasaBob extends Ambiente {
     public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
         foiCeu = false;
-        carta = new Carta("Carta", "Carta de Bob para Caim, que"
+        carta = new Item("Carta", "Carta de Bob para Caim, que"
                 + "cedida pelo mesmo para ajudar Dean.");
     }
     
@@ -145,22 +144,32 @@ public class AmbienteCasaBob extends Ambiente {
     }
     
     /**
-     * Metodo que pega um Item do ambiente
-     * @param dean e passado para que possa ser inserido em sua mochila
-     * @return String para verificacao se pego ou nao
+     * Remove um objeto contido no armario.
+     * @param nome criterio de remoção
+     * @return Item removido é retornado para tratamento
      */
     @Override
-    public String pegarItemAmbiente(JogadorDean dean) {
-        String insercaoMochila = dean.inserirItensMochila(carta);
-        if(insercaoMochila.contains("adicionado")){
+    public Item pegarItemAmbiente(String nome) {
+        if(nome.equals(carta.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return "item coletado";
-        }else if(insercaoMochila.contains("nao adicionado")){
-            itemFoiColetado = false;
-            return insercaoMochila;
+            return carta;
         }else{
+            return null;
+        }
+    }
+
+    /**
+     * Insere o item passado no ambiente
+     * @param item objeto do tipo Item
+     * @return true caso o item foi inserido e false caso ao contrario
+     */
+    @Override
+    public boolean inserirItensAmbiente(Item item) {
+        if(item.getNomeItem().equals("Carta")){
             itemFoiColetado = false;
-            return insercaoMochila;
+            return true;
+        }else{
+            return false;
         }
     }
 }

@@ -23,6 +23,7 @@ import java.util.HashMap;
  */
 public abstract class Ambiente implements Serializable{
     //Atributos
+    private static final long serialVersionUID = 1L;
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;

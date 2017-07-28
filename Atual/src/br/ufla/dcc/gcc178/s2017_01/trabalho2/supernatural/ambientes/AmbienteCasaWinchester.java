@@ -92,7 +92,8 @@ public class AmbienteCasaWinchester extends Ambiente {
      */
     @Override
     public String disponibilizarItemAmbiente(JogadorDean dean) {
-        return "item indisponivel";
+        
+        return retornaItensDoArmario();
     }
 
     /**

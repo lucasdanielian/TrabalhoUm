@@ -14,6 +14,8 @@ import java.io.Serializable;
  */
 
 public class PalavrasComando implements Serializable{
+    //Atributo para Serializacao
+    private static final long serialVersionUID = 1L;
     // um vetor constante que guarda todas as palavras de comandos validas
     private static final String[] comandosValidos = {
         "ir", "sair", "ajuda", "guardar", "pegar", "analisar", "ler"

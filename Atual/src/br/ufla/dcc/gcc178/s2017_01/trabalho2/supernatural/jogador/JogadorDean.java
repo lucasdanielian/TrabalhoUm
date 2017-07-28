@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author Lucas Danielian
  */
 public class JogadorDean implements Serializable{
-    
+    private static final long serialVersionUID = 1L;
     private ColecaoDeItens mochila;
     private boolean marcaCaim;
     private ItemDiario diario;

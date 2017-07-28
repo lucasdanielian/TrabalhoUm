@@ -13,6 +13,8 @@ import java.io.Serializable;
  * @author junior
  */
 public abstract class Item implements Serializable{
+    //Atributo para Serializacao
+    private static final long serialVersionUID = 1L;
     //Nome objeto
     private String nomeItem;
     //Descrição Objeto

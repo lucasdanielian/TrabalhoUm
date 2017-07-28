@@ -35,7 +35,7 @@ import java.io.Serializable;
  * @version 2011.07.31 (2017.05.16)
  */
 public class RegraNegocio implements Serializable{
-    
+    private static final long serialVersionUID = 1L;
     private Analisador analisador;
     private Ambiente ambienteAtual;
     private int contador; //variavel que conta quantas ações o jogador ja fez

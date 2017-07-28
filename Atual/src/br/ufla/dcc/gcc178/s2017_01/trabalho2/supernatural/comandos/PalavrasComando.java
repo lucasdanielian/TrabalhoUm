@@ -1,6 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * Esta classe eh parte da aplicacao "World of Zuul".
@@ -48,7 +49,7 @@ public class PalavrasComando implements Serializable{
      * Retorna uma String contendo todas as palavras de comando
      */
     public String[] comandos() {
-        return this.comandosValidos;
+        return comandosValidos;
     }
     
 }

@@ -77,11 +77,12 @@ public abstract class Ambiente implements Serializable{
     
     /**
      * Metodo que pega um Item do ambiente
-     * @param dean Jogador e passado para verificacao se e possivel adicionar o
-     * item na mochila ou nao
-     * @return String para verificaco se pegou o item ou nao
+     * @param nome passa o nome do item a ser coletado
+     * @return o item para que possa ser adicionado na mochila
      */
-    public abstract String pegarItemAmbiente(JogadorDean dean);
+    public abstract Item pegarItemAmbiente(String nome);
+    
+    public abstract boolean inserirItensAmbiente(Item item);
     
     /**
      *  Metodo que retornará uma string com a localização da imagem.

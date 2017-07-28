@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Classe responsavel por ser os objetos que o jogador ira portar, ou conquistar.
  * @author junior
  */
-public abstract class Item implements Serializable{
+public class Item implements Serializable{
     //Atributo para Serializacao
     private static final long serialVersionUID = 1L;
     //Nome objeto

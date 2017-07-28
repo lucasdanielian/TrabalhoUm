@@ -41,8 +41,7 @@ public class RegraNegocio implements Serializable{
     private int contador; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
     //private Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
-    private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu;
-    private AmbienteCasaWinchester casaWinchester;
+    private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu, casaWinchester;
     
     /**
      * Cria o jogo e incializa seu mapa interno.
@@ -57,7 +56,7 @@ public class RegraNegocio implements Serializable{
     /**
      * Cria todos os ambientes
      */
-    public void criarAmbientes() {
+    private void criarAmbientes() {
       
         //Inserção do Ambiente casa Winchester
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
@@ -272,18 +271,22 @@ public class RegraNegocio implements Serializable{
      * @return String contendo a lista de comandos
      */
     public String imprimirAjuda() {
-        return "\nVoce é Dean. Voce precisa salvar seu irmao. Voce\n "
-                + "deve descobrir como isso será possivel.\n"
-                + "\nPara utilizar o comando 'ir' voce deve digitar em\n"
-                + "seguida qual o ambiente a seguir\n"
-                + "\nPara utilizar o comando 'guardar' você deve estar em\n"
-                + "CasaWinchester e colocar o nome do item que vai ser guardada\n"
-                + "\nPara utilizar o comando 'analisar', você deve colocar\n"
-                + "em sequencia se quer listar os itens de 'mochila' ou 'armario'\n"
-                + "\nPara utilizar o comando 'pegar' voce deve estar em\n"
-                + "CasaWinchester e colocar o nome do item que será recolhido\n"
-                + "\nPara utilizar o comando 'ler' você deve colocar em\n"
-                + "sequencia a palavra 'diario'\n";
+        return "\nVoce é Dean. Voce precisa salvar seu irmao."
+                + "\nVoce deve descobrir como isso será possivel."
+                + "\nSuas palavras de comando sao: " + comandosDisponiveis();
+    }
+    
+    /**
+     * Metodo utilizado para retornar os comandos disponiveis
+     * @return uma string com os respectivos comandos
+     */
+    private String comandosDisponiveis(){
+        String retornaComandos = "\n\t";
+        String [] comando = analisador.comandosDisponiveis();
+        for(int i = 0; i < comando.length; i++){
+            retornaComandos += comando[i] + " ";
+        }
+        return retornaComandos;
     }
 
     /** 
@@ -356,7 +359,7 @@ public class RegraNegocio implements Serializable{
             return dean.exibirItensMochila();
                         
         }else if (itens.equals("armario")){
-            return casaWinchester.retornaItensDoArmario();
+            return casaWinchester.disponibilizarItemAmbiente(dean);
         }else{
             return "\nPalavra Invalida\n";
         }
@@ -378,7 +381,7 @@ public class RegraNegocio implements Serializable{
         Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
         if(itemAux != null){
             if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-                boolean foi = casaWinchester.inserirItensArmario(itemAux);
+                boolean foi = casaWinchester.inserirItensAmbiente(itemAux);
                 if(foi){
                     return "\n Item: " + itemAux.getNomeItem() + " guardado com sucesso\n"; 
                 }
@@ -407,23 +410,47 @@ public class RegraNegocio implements Serializable{
            return "\n Pegar o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
+        Item aux = ambienteAtual.pegarItemAmbiente(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            Item aux = casaWinchester.removerPeloNomeNoArmario(nomeItem);
             if(aux != null){
                 String verificacao = dean.inserirItensMochila(aux);
                 if (verificacao.contains("adicionado")){
                     return "\n Item: " + nomeItem + " coletado com sucesso\n";
                 }else{
-                    return "\n Item " + nomeItem + " não foi coletado\n";
+                    boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);
+                    if(retornaItem){
+                        return "\n Item " + nomeItem + " não foi coletado\n"
+                                + "O item continua no ambiente";
+                    }else{
+                        return "\n Item " + nomeItem + " não foi coletado\n"
+                                + "O item se perdeu e não retornou ao ambiente";
+                    }
                 }
             }
             else{
                 return "\n Item: " + nomeItem + " nao esta no armario\n";
             }
         }else{
-            String verificacao = ambienteAtual.pegarItemAmbiente(dean);
-            return verificacao;
-        }
+            if(aux != null){
+                String verificacao = dean.inserirItensMochila(aux);
+                if (verificacao.contains("adicionado")){
+                    return "\n Item: " + nomeItem + " coletado com sucesso\n";
+                }else{
+                    boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);
+                    if(retornaItem){
+                        return "\n Item " + nomeItem + " não foi coletado\n"
+                                + "O item continua no ambiente";
+                    }else{
+                        return "\n Item " + nomeItem + " não foi coletado\n"
+                                + "O item se perdeu e não retornou ao ambiente";
+                    }
+                }
+            }
+            else{
+                return "\n Item: " + nomeItem + " nao esta neste ambiente\n";
+            }
+        }    
+
     }
     
     /**

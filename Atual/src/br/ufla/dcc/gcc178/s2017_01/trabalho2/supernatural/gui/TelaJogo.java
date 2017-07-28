@@ -1077,7 +1077,7 @@ public class TelaJogo implements Serializacao {
         btnItemPortadorAlmasAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar PortadorAlmas");
+                comando = analisador.pegarComando("pegar Almas");
                 String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
                 if(item.contains("item coletado")||item.contains("coletado com sucesso")){

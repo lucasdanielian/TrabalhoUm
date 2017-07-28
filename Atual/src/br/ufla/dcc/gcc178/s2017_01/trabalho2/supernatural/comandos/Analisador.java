@@ -22,6 +22,9 @@ import javax.swing.JOptionPane;
  * @version 2011.07.31 (2017.05.16)
  */
 public class Analisador implements Serializable{
+    //Atributo para Serializacao
+    private static final long serialVersionUID = 1L;
+    
     private PalavrasComando palavrasDeComando;  // guarda todas as palavras de comando validas
 
     /**

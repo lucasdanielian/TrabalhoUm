@@ -55,6 +55,9 @@ public class TelaJogo implements Serializacao {
 
     // referência para a tela principal
     private final TelaPrincipal telaPrincipal;
+    
+    //atributo para Serializacao
+    private static final long serialVersionUID = 1L;
             
     // componentes da tela
     private JFrame janela;
@@ -190,85 +193,93 @@ public class TelaJogo implements Serializacao {
      * @param itensDisponiveis O item é passado por referencia, caso esteja
      * indisponivel todos são setados como enable false, se não enable true
      */
-    private void prepararItensAmbientes(String itensDisponiveis){
-        if(itensDisponiveis.contains("indisponivel")){
-            btnItemDenteLoboAmbiente.setEnabled(false);
-            btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemCabecaVampiroAmbiente.setEnabled(false);
-            btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemCartaAmbiente.setEnabled(false);
-            btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemPortadorAlmasAmbiente.setEnabled(false);
-            btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemPenaAmbiente.setEnabled(false);
-            btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+    private void atualizarItensAmbiente(){
+        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
+        btnItemDenteLoboAmbiente.setEnabled(false);
+        btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+        btnItemCabecaVampiroAmbiente.setEnabled(false);
+        btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+        btnItemCartaAmbiente.setEnabled(false);
+        btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+        btnItemPortadorAlmasAmbiente.setEnabled(false);
+        btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+        btnItemPenaAmbiente.setEnabled(false);
+        btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+
+        if(itensDisponiveis.contains("Dente")){
+            btnItemDenteLoboAmbiente.setEnabled(true);
+            btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
         }
-        else{
+
+        if(itensDisponiveis.contains("CabecaVampiro")){
+            btnItemCabecaVampiroAmbiente.setEnabled(true);
+            btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
+
+        }
+
+        if(itensDisponiveis.contains("Carta")){
+            btnItemCartaAmbiente.setEnabled(true);
+            btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
+        }
+
+        if(itensDisponiveis.contains("Almas")){
+            btnItemPortadorAlmasAmbiente.setEnabled(true);
+            btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
+
+        }
+
+        if(itensDisponiveis.contains("Pena")){
+            btnItemPenaAmbiente.setEnabled(true);
+            btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+        }
+
+    }
+    
+    /**
+     * Metodo responsvel por verificar a disponibilidade de cada iten
+     * na mochila do jogador
+     */
+    private void atualizarItensJogador(){
+        Comando auxComando = analisador.pegarComando("analisar mochila");
+        String itensDisponiveis = regraNegocio.processarComando(auxComando);
+        
+            btnItemDenteLoboMochila.setEnabled(false);
+            btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemCabecaVampiroMochila.setEnabled(false);
+            btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemCartaMochila.setEnabled(false);
+            btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemPortadorAlmasMochila.setEnabled(false);
+            btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.CANCELAR);
+            btnItemPenaMochila.setEnabled(false);
+            btnItemPenaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
+
             if(itensDisponiveis.contains("Dente")){
-                btnItemDenteLoboAmbiente.setEnabled(true);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-                btnItemCabecaVampiroAmbiente.setEnabled(false);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCartaAmbiente.setEnabled(false);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPortadorAlmasAmbiente.setEnabled(false);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPenaAmbiente.setEnabled(false);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemDenteLoboMochila.setEnabled(true);
+                btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
             }
 
             if(itensDisponiveis.contains("CabecaVampiro")){
-                btnItemDenteLoboAmbiente.setEnabled(false);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCabecaVampiroAmbiente.setEnabled(true);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-                btnItemCartaAmbiente.setEnabled(false);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPortadorAlmasAmbiente.setEnabled(false);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPenaAmbiente.setEnabled(false);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCabecaVampiroMochila.setEnabled(true);
+                btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
+
             }
 
             if(itensDisponiveis.contains("Carta")){
-                btnItemDenteLoboAmbiente.setEnabled(false);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCabecaVampiroAmbiente.setEnabled(false);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCartaAmbiente.setEnabled(true);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                btnItemPortadorAlmasAmbiente.setEnabled(false);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPenaAmbiente.setEnabled(false);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemCartaMochila.setEnabled(true);
+                btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
             }
 
             if(itensDisponiveis.contains("Almas")){
-                btnItemDenteLoboAmbiente.setEnabled(false);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCabecaVampiroAmbiente.setEnabled(false);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCartaAmbiente.setEnabled(false);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPortadorAlmasAmbiente.setEnabled(true);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                btnItemPenaAmbiente.setEnabled(false);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
+                btnItemPortadorAlmasMochila.setEnabled(true);
+                btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
+                
             }
 
             if(itensDisponiveis.contains("Pena")){
-                btnItemDenteLoboAmbiente.setEnabled(false);
-                btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCabecaVampiroAmbiente.setEnabled(false);
-                btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemCartaAmbiente.setEnabled(false);
-                btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPortadorAlmasAmbiente.setEnabled(false);
-                btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                btnItemPenaAmbiente.setEnabled(true);
-                btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
+                btnItemPenaMochila.setEnabled(true);
+                btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
             }
-        }
     }
     
     /**
@@ -748,8 +759,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -770,13 +781,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        Comando auxComando = analisador.pegarComando("analisar armario");
-                        String itensDisponiveis = regraNegocio.processarComando(auxComando);
-                        if(itensDisponiveis == null || itensDisponiveis.contains("Não existem itens a serem mostrados")){
-                            prepararItensAmbientes("indisponivel");
-                        }else{
-                            prepararItensAmbientes(itensDisponiveis);
-                        }
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -797,8 +803,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -819,8 +825,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -841,8 +847,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -863,8 +869,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -885,8 +891,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -907,8 +913,8 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-                        prepararItensAmbientes(itensDisponiveis);
+                        
+                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -957,9 +963,9 @@ public class TelaJogo implements Serializacao {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String textoExibicao;
-                comando = analisador.pegarComando("guardar DenteLobo");
+                comando = analisador.pegarComando("guardar Dente");
                 textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: DenteLobo guardado com sucesso")){
+                if(textoExibicao.contains("Item: Dente guardado com sucesso")){
                     textoDinamico.setText(textoExibicao);
                     btnItemDenteLoboMochila.setEnabled(false);
                     btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.CANCELAR);
@@ -1041,7 +1047,7 @@ public class TelaJogo implements Serializacao {
         btnItemDenteLoboAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar DenteLoboAmbiente");
+                comando = analisador.pegarComando("pegar Dente");
                 String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
                 if(item.contains("item coletado")||item.contains("coletado com sucesso")){
@@ -1118,6 +1124,9 @@ public class TelaJogo implements Serializacao {
             public void actionPerformed(ActionEvent e) {
                 leituraArquivo();
                 atualizaPainelPontuacao();
+                atualizarItensJogador();
+                atualizarItensAmbiente();
+                textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
                 JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
             }
         });

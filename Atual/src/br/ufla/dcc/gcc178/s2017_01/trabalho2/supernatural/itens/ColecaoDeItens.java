@@ -17,7 +17,8 @@ import java.util.List;
  * @author Lucas Danielian
  */
 public class ColecaoDeItens implements Serializable{
-    
+    //Atributo para Serializacao
+    private static final long serialVersionUID = 1L;
     private int capacidade;
     private int quantidadeAtual;
     private List<Item> itens; 

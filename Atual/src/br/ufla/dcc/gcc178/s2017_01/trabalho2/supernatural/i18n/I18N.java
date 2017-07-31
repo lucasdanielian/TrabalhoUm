@@ -55,6 +55,15 @@ public class I18N {
     public static String obterMenuInicio() {
         return rb.getString("menu.inicio");
     }
+    
+    /**
+     * Retorna o texto do menu Cadastar Item.
+     *
+     * @return Texto do menu Cadastrar Item.
+     */
+    public static String obterMenuCadastrarItem() {
+        return rb.getString("menu.cadastrar_item");
+    }
 
     /**
      * Retorna o mnemônico do menu Início.
@@ -79,8 +88,8 @@ public class I18N {
      *
      * @return Texto do menu Meus Filmes.
      */
-    public static String obterMenuMeuJogo() {
-        return rb.getString("menu.inicio.meu_jogo");
+    public static String obterMenuMorteSubita() {
+        return rb.getString("menu.inicio.morte_subita");
     }
 
     /**

@@ -91,6 +91,15 @@ public class I18N {
     public static String obterMenuMorteSubita() {
         return rb.getString("menu.inicio.morte_subita");
     }
+    
+    /**
+     * Retorna o texto do menu RankingJogadores.
+     *
+     * @return Texto do menu Ranking Jogadores.
+     */
+    public static String obterMenuRankingJogadores() {
+        return rb.getString("menu.inicio.ranking_Jogadores");
+    }
 
     /**
      * Retorna o texto do menu Cadastrar Usuário.
@@ -533,4 +542,5 @@ public class I18N {
     public static String obterBotaoRecuperarjogo() {
         return rb.getString("botao.recuperar_jogo");
     }
+
 }

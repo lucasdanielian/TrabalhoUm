@@ -4,6 +4,8 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaP
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.servicos.GerenciadorUsuarios;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.util.Utilidades;
 import java.awt.Component;
@@ -12,11 +14,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -231,4 +239,5 @@ public class TelaCadastroUsuario {
         janela.setVisible(true);
         janela.setResizable(false);
     }
+    
 }

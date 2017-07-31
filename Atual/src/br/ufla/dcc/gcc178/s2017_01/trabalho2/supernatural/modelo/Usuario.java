@@ -1,5 +1,6 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -7,7 +8,8 @@ import java.util.Arrays;
  * 
  * @author Paulo Jr. e Julio Alves
  */
-public class Usuario {
+public class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     // login do usuário
     private String login;
     // senha do usuário

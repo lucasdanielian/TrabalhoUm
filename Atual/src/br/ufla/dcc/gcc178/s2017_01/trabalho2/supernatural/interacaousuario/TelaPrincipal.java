@@ -4,6 +4,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui.TelaAutenticacao;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui.TelaCadastrarItem;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui.TelaCadastroUsuario;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui.TelaJogo;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui.TelaRankingJogadores;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
@@ -34,6 +35,8 @@ public class TelaPrincipal {
     private final TelaJogo telaMorteSubita;
     
     private final TelaCadastrarItem telaCadastrarItem;
+    
+    private final TelaRankingJogadores telaRankingJogadores;
 
     // janela da tela principal
     private JFrame janela;
@@ -56,6 +59,7 @@ public class TelaPrincipal {
     private JMenuItem menuLogout;
     private JMenuItem menuMorteSubita;
     private JMenuItem menuCadastrarItem;
+    private JMenuItem menuRankingJogadores;
 
     /**
      * Construtor; incializa as demais telas e sessão de usuário.
@@ -65,6 +69,7 @@ public class TelaPrincipal {
         telaCadastroUsuario = new TelaCadastroUsuario(this);
         telaMorteSubita = new TelaJogo(this);
         telaCadastrarItem = new TelaCadastrarItem(this);
+        telaRankingJogadores = new TelaRankingJogadores(this);
         sessaoUsuario = SessaoUsuario.obterInstancia();
     }
 
@@ -133,6 +138,13 @@ public class TelaPrincipal {
             }
         });
         
+        menuRankingJogadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                telaRankingJogadores.inicializar();
+            }
+        });
+        
         menuCadastrarItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -175,6 +187,7 @@ public class TelaPrincipal {
         menuLogout = new JMenuItem(I18N.obterMenuLogout(), GerenciadorDeImagens.LOGOUT);
         menuMorteSubita = new JMenuItem(I18N.obterMenuMorteSubita(), GerenciadorDeImagens.MEU_JOGO);
         menuCadastrarItem = new JMenuItem(I18N.obterMenuCadastrarItem(), GerenciadorDeImagens.NOVO);
+        menuRankingJogadores = new JMenuItem(I18N.obterMenuRankingJogadores(), GerenciadorDeImagens.CADASTRAR_USUARIO);
 
         if (!sessaoUsuario.estahLogado()) {
             menuInicio.add(menuEntrar);
@@ -185,6 +198,7 @@ public class TelaPrincipal {
             menuInicio.add(menuMorteSubita);
             menuInicio.add(menuLogout);
             menuInicio.add(menuCadastrarItem);
+            menuInicio.add(menuRankingJogadores);
         }
 
         menuSair = new JMenuItem(I18N.obterMenuSair(), GerenciadorDeImagens.SAIR);
@@ -274,5 +288,6 @@ public class TelaPrincipal {
     public JFrame obterJanela() {
         return this.janela;
     }
+
 
 }

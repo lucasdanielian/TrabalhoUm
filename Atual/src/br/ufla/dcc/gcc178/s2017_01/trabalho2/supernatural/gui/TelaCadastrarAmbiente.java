@@ -5,6 +5,7 @@
  */
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -24,6 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class TelaCadastrarAmbiente {
     
+    private final TelaPrincipal telaPrincipal;
     private JFrame tela;
  
         private JLabel labelNome;
@@ -51,9 +53,14 @@ public class TelaCadastrarAmbiente {
         private JButton botaoSalvar;
         private JButton botaoCancelar;
         
-        public TelaCadastrarAmbiente(){
+        public TelaCadastrarAmbiente(TelaPrincipal telaPrincipal) {
+            this.telaPrincipal = telaPrincipal;
+        }
+        
+        public void inicializar(){
             criarComponentes();
             montarJanela();
+            exibirTela();
         }
         
         private void criarComponentes(){

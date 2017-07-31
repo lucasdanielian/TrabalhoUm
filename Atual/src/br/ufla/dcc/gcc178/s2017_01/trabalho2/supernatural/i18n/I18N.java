@@ -154,6 +154,14 @@ public class I18N {
     public static String obterMenuIdiomaPortugues() {
         return rb.getString("menu.idioma.pt_br");
     }
+    
+    /**
+     * Retorna o texto do menu Cadastrar Ambiente
+     * @return texto do menu cadastrar ambiente
+     */
+    public static String obterMenuCadastrarAmbiente() {
+        return rb.getString("menu.cadastrar_ambiente");
+    }
 
     /**
      * Retorna o texto do menu Idioma Inglês.

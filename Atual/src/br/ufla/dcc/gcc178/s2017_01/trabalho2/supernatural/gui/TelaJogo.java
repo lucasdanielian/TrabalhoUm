@@ -1126,6 +1126,7 @@ public class TelaJogo implements Serializacao {
                 atualizaPainelPontuacao();
                 atualizarItensJogador();
                 atualizarItensAmbiente();
+                trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                 textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
                 JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
             }
@@ -1147,6 +1148,9 @@ public class TelaJogo implements Serializacao {
                         comando = analisador.pegarComando(validaTexto);
                         textoDinamico.setText(regraNegocio.processarComando(comando));
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                        atualizaPainelPontuacao();
+                        atualizarItensJogador();
+                        atualizarItensAmbiente();
                         txtEntradaComandos.setText("Entrada de Comandos:");
                     }
                 }

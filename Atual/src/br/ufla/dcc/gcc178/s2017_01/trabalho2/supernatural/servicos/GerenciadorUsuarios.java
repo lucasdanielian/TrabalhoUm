@@ -24,10 +24,8 @@ public class GerenciadorUsuarios {
      * dados e de sessão.
      */
     public GerenciadorUsuarios() {
-        repositorioUsuario
-                = UsuarioDAOLista.obterInstancia();
-        sessaoUsuario
-                = SessaoUsuario.obterInstancia();
+        repositorioUsuario = UsuarioDAOLista.obterInstancia();
+        sessaoUsuario = SessaoUsuario.obterInstancia();
     }
 
     /**

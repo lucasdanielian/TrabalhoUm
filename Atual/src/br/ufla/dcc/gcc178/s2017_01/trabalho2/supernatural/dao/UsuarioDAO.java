@@ -1,6 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
+import java.io.Serializable;
 
 /**
  * Interface do Data Access Object (Padrão de Projeto) do Usuário

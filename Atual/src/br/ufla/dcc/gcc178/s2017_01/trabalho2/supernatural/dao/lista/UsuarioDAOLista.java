@@ -2,8 +2,16 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.UsuarioDAO;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * Implementação do Data Access Object (Padrão de Projeto) do Usuário através de
@@ -11,25 +19,23 @@ import java.util.List;
  * 
  * @author Paulo Jr. e Julio Alves
  */
-public class UsuarioDAOLista implements UsuarioDAO {
+public class UsuarioDAOLista implements UsuarioDAO, Serializacao{
 
     // instância única da classe (Padrão de Projeto Singleton)
     private static UsuarioDAOLista instancia;
     
     // lista em em memória dos usuários cadastrados
-    private final List<Usuario> listaUsuario;
+    private static List<Usuario> listaUsuario;
+    
+    private String diretorioPersistencia;
 
     /**
      * Constrói o objeto já definindo 5 usuários padrões
      */
     private UsuarioDAOLista() {
         listaUsuario = new ArrayList<Usuario>();
-
-        // Cadastrei alguns usuários para testar o programa.
-        char[] senha = new char[]{'1', '2', '3'};
-        listaUsuario.add(new Usuario("valdeci", senha, "Valdeci"));
-        listaUsuario.add(new Usuario("lucas", senha, "Lucas"));
-        listaUsuario.add(new Usuario("julio", senha, "Julio"));
+        diretorioPersistencia = "usuarios.dat";
+        leituraArquivo();
 
     }
 
@@ -69,5 +75,40 @@ public class UsuarioDAOLista implements UsuarioDAO {
     @Override
     public void adicionarUsuario(Usuario usuario) {
         listaUsuario.add(usuario);
+        escritaArquivo();
+        
+    }
+    
+    /**
+     * Salva o estado atual do jogo serializando o arquivo
+     */
+    @Override
+    public void escritaArquivo() {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+            new FileOutputStream(diretorioPersistencia));
+            oos.writeObject(listaUsuario);
+            oos.close();
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    /**
+     * Recupera o estado do ultimo jogo salvo
+     */
+    @Override
+    public void leituraArquivo() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(diretorioPersistencia));
+            listaUsuario = (ArrayList<Usuario>)ois.readObject();
+            ois.close();
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 }

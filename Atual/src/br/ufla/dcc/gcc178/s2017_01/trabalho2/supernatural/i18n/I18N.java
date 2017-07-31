@@ -397,6 +397,14 @@ public class I18N {
     public static String obterTituloTelaMeuJogo() {
         return rb.getString("tela.meujogo.titulo");
     }
+    
+    /**
+     * Retorna o texto do rótulo com o nome do botao
+     * @return Texto do rótulo botao ItemPortadorAlmas
+     */
+    public static String obterTituloTelaRankingJogadores() {
+        return rb.getString("tela.ranking.titulo");
+    }
 
     /**
      * Retorna o texto do rótulo nome do usuário.
@@ -541,6 +549,33 @@ public class I18N {
      */
     public static String obterBotaoRecuperarjogo() {
         return rb.getString("botao.recuperar_jogo");
+    }
+
+    /**
+     * Retorna o titulo da linha da tabela de ranking.
+     *
+     * @return Retorna o titulo da linha da tabela de ranking.
+     */
+    public static String obterRotuloDiasRestantes() {
+        return rb.getString("tabela.dias_restantes");
+    }
+
+    /**
+     * Retorna o titulo da linha da tabela de ranking.
+     *
+     * @return Retorna o titulo da linha da tabela de ranking.
+     */
+    public static String obterRotuloDiasCorridos() {
+        return rb.getString("tabela.dias_corridos");
+    }
+
+    /**
+     * Retorna o titulo da linha da tabela de ranking.
+     *
+     * @return Retorna o titulo da linha da tabela de ranking.
+     */
+    public static String obterRotuloJogador() {
+        return rb.getString("tabela.jogador");
     }
 
 }

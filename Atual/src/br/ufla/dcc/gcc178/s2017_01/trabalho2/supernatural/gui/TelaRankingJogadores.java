@@ -157,7 +157,7 @@ public class TelaRankingJogadores {
         
         //lista com os rotulos das colunas
         private String[] colunas = new String []{I18N.obterRotuloJogador(),
-            I18N.obterRotuloDiasCorridos(), I18N.obterRotuloDiasRestantes()};
+            I18N.obterRotuloDiasRestantes(), I18N.obterRotuloDiasCorridos()};
         
         private static final int NOME = 0;
         private static final int DIAS_RESTANTES = 1;

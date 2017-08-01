@@ -15,7 +15,6 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaCaim;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
 import java.io.Serializable;
 
@@ -44,8 +43,8 @@ public class RegraNegocio implements Serializable{
     private int diasCorridos; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
     private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu, casaWinchester;
-    private UsuarioDAOLista usuarioDAOLista;
     private SessaoUsuario sessaoUsuario;
+    private UsuarioDAOLista usuarioDAOLista;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
@@ -54,10 +53,20 @@ public class RegraNegocio implements Serializable{
         analisador = new Analisador();
         diasCorridos = 0;
         dean = new JogadorDean();
+        sessaoUsuario = SessaoUsuario.obterInstancia();
+        usuarioDAOLista =  UsuarioDAOLista.obterInstancia();
         
     }
     
+    /**
+     * Metodo que atualiza a pontuação dos jogadores
+     */
     public void rankingJogadores(){
+        if(sessaoUsuario.obterUsuario().getDiasCorridos() < diasCorridos){
+            sessaoUsuario.obterUsuario().setDiasRestantes(diasRestantes());
+            sessaoUsuario.obterUsuario().setDiasCorridos(getDiasCorridos());
+            usuarioDAOLista.escritaArquivo();
+        }
         
     }
     

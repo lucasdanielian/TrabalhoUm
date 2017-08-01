@@ -286,7 +286,7 @@ public class TelaJogo implements Serializacao {
      * Metodo que finaliza o jogo
      */
     private void gameOver(){
-        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+        diasCorridos.setText("Dias Corridos: " + regraNegocio.getDiasCorridos());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
         JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
             + "\nTente Jogar Novamente!");
@@ -297,7 +297,7 @@ public class TelaJogo implements Serializacao {
      * Metodo que atualiza o painel de visualizacao da quantidade de dias corridos
      */
     private void atualizaPainelPontuacao(){
-        diasCorridos.setText("Dias Corridos: " + regraNegocio.getContador());
+        diasCorridos.setText("Dias Corridos: " + regraNegocio.getDiasCorridos());
         diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
         ambienteAtual.setText("Você está em: " + regraNegocio.getNomeAmbienteAtual());
         
@@ -443,7 +443,7 @@ public class TelaJogo implements Serializacao {
         analisador = new Analisador();
 
         //Imprime os dias corridos do jagador na tela
-        diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getContador());
+        diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getDiasCorridos());
         diasCorridos.setFont(new Font("Serif", Font.ITALIC, 18));
         diasCorridos.setBackground(Color.GRAY);
         diasCorridos.setForeground(Color.WHITE);
@@ -1115,6 +1115,7 @@ public class TelaJogo implements Serializacao {
             @Override
             public void actionPerformed(ActionEvent e) {
                 escritaArquivo();
+                regraNegocio.rankingJogadores();
                 JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
             }
         });

@@ -18,6 +18,13 @@ public interface UsuarioDAO {
     public Usuario obterUsuarioPeloLogin(String login);
     
     /**
+     * Retorna o usuário a partir de seu nome
+     * @param nome Nome do usurio que sera retornado
+     * @return Usuário correspondente ao nome passado
+     */
+    public Usuario obterUsuarioPeloNome(String nome);
+    
+    /**
      * Cadastra o usuário passado.
      * 
      * @param usuario Usuário a ser cadastrado.

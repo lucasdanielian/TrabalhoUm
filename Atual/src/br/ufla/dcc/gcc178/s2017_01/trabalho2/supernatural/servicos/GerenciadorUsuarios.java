@@ -2,6 +2,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.servicos;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.UsuarioDAO;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.excecoes.CaracteresUsuarioException;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
@@ -49,10 +50,13 @@ public class GerenciadorUsuarios {
      * @throws Exception Exceção gerada caso o usuário já esteja cadastrado.
      */
     public void cadastrarUsuario(Usuario usuario) throws Exception {
-        Usuario ret = repositorioUsuario.obterUsuarioPeloLogin(usuario.obterLogin());
-        if (ret != null) {
+        Usuario ret = repositorioUsuario.obterUsuarioPeloNome(usuario.obterNome());
+        if (ret != null ) {
             throw new Exception(I18N.obterErroUsuarioJaCadastrado());
-        }
-        repositorioUsuario.adicionarUsuario(usuario);
+        }else if(usuario.obterNome().length() < 4 || usuario.obterNome().length() > 19){
+            throw new CaracteresUsuarioException();
+        }else{
+            repositorioUsuario.adicionarUsuario(usuario);
+        }   
     }
 }

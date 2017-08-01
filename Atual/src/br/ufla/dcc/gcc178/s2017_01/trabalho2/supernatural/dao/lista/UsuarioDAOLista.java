@@ -1,9 +1,9 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.UsuarioDAO;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.excecoes.CaracteresUsuarioException;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -68,6 +68,30 @@ public class UsuarioDAOLista implements UsuarioDAO, Serializacao{
     }
 
     /**
+     * Metodo que retorna os usuarios cadastrados no sistema
+     * @return uma lista contendo os usuarios cadastrados
+     */
+    public static List<Usuario> getListaUsuario() {
+        return listaUsuario;
+    }
+    
+    /**
+     * Retorna o usuário a partir de seu nome
+     * 
+     * @param login Nome do usuário a ser retornado.
+     * @return Usuário correspondente ao nome passado.
+     */
+    @Override
+    public Usuario obterUsuarioPeloNome(String nome) {
+        for (Usuario u : listaUsuario) {
+            if (nome.equals(u.obterNome())) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Cadastra o usuário passado.
      * 
      * @param usuario Usuário a ser cadastrado.
@@ -76,7 +100,6 @@ public class UsuarioDAOLista implements UsuarioDAO, Serializacao{
     public void adicionarUsuario(Usuario usuario) {
         listaUsuario.add(usuario);
         escritaArquivo();
-        
     }
     
     /**

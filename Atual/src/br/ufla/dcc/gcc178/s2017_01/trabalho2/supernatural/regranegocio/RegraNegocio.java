@@ -14,6 +14,9 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaCaim;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
 import java.io.Serializable;
 
 /**
@@ -38,19 +41,24 @@ public class RegraNegocio implements Serializable{
     private static final long serialVersionUID = 1L;
     private Analisador analisador;
     private Ambiente ambienteAtual;
-    private int contador; //variavel que conta quantas ações o jogador ja fez
+    private int diasCorridos; //variavel que conta quantas ações o jogador ja fez
     private JogadorDean dean;
-    //private Item carta, pena, denteLobo, cabecaVampiro, portadorAlmas;
     private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu, casaWinchester;
-    
+    private UsuarioDAOLista usuarioDAOLista;
+    private SessaoUsuario sessaoUsuario;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public RegraNegocio() {
         criarAmbientes();
         analisador = new Analisador();
-        contador = 0;
+        diasCorridos = 0;
         dean = new JogadorDean();
+        
+    }
+    
+    public void rankingJogadores(){
+        
     }
     
     /**
@@ -316,9 +324,9 @@ public class RegraNegocio implements Serializable{
             }
             else { 
                 ambienteAtual = proximoAmbiente;
-                contador = contador+3;
+                diasCorridos = diasCorridos+3;
 
-                if(contador <=30){
+                if(diasCorridos <=30){
                     return descricaoAmbienteAtual();
                 }
                 else{
@@ -484,8 +492,8 @@ public class RegraNegocio implements Serializable{
      * Metodo que informa quantos dias corridos ao longo do jogo
      * @return Inteiro contendo o numero de dias
      */
-    public int getContador() {
-        return contador;
+    public int getDiasCorridos() {
+        return diasCorridos;
     }
     
     /**
@@ -501,8 +509,8 @@ public class RegraNegocio implements Serializable{
      * @return Inteiro contendo o numero de dias
      */
     public int diasRestantes() {
-        if (contador<=30){
-            return 30 - contador;
+        if (diasCorridos<=30){
+            return 30 - diasCorridos;
         }
         return 0;
     }

@@ -2,6 +2,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Arrays;
  * 
  * @author Paulo Jr. e Julio Alves
  */
-public class SessaoUsuario {
+public class SessaoUsuario implements Serializable{
     // instância única da classe (Padrão de Projeto Singleton)
     private static SessaoUsuario instancia;
     // usuário autenticado

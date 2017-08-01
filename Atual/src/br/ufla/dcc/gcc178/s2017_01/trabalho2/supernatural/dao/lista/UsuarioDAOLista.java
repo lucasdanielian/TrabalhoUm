@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
  * 
  * @author Paulo Jr. e Julio Alves
  */
-public class UsuarioDAOLista implements UsuarioDAO, Serializacao{
+public class UsuarioDAOLista implements Serializable, UsuarioDAO, Serializacao{
 
     // instância única da classe (Padrão de Projeto Singleton)
     private static UsuarioDAOLista instancia;
@@ -74,7 +75,7 @@ public class UsuarioDAOLista implements UsuarioDAO, Serializacao{
     public static List<Usuario> getListaUsuario() {
         return listaUsuario;
     }
-    
+
     /**
      * Retorna o usuário a partir de seu nome
      * 

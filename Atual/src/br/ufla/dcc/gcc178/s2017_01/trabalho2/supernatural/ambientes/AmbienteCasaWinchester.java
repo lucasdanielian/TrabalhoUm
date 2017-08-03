@@ -2,7 +2,7 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaWinchester - um ambiente em um jogo adventure.
@@ -24,6 +24,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 public class AmbienteCasaWinchester extends Ambiente {
     
     private ColecaoDeItens armario;
+    Item item;
     
     /**
      * @param nomeAmbiente 
@@ -32,6 +33,7 @@ public class AmbienteCasaWinchester extends Ambiente {
     public AmbienteCasaWinchester(String nomeAmbiente)  {
         super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
         armario = new ColecaoDeItens(100);
+        item = null;
     }
      
     /**
@@ -42,7 +44,7 @@ public class AmbienteCasaWinchester extends Ambiente {
      * correta do Ambiente Winchester e retornando em uma String
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(Jogador dean) {
         return "Dean está em sua casa. Aqui ele pode guardar itens coletados, e "
                 + "pegar itens que estão em seu armário.\n";
     }
@@ -65,9 +67,9 @@ public class AmbienteCasaWinchester extends Ambiente {
      * @return String informando que nao é possivel coletar itens neste ambiente
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean) {
+    public String disponibilizarItemAmbiente(Jogador dean) {
         
-        return armario.retornaItens();
+        return armario.retornaDescricaoTodosItens();
     }
 
     /**
@@ -88,5 +90,14 @@ public class AmbienteCasaWinchester extends Ambiente {
     @Override
     public boolean inserirItensAmbiente(Item item) {
         return armario.inserirItens(item);
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

@@ -157,13 +157,6 @@ public class TelaPrincipal {
             }
         });
         
-        menuCadastrarItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                telaCadastrarItem.inicializar();
-            }
-        });
-        
         menuCadastrarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -209,10 +202,10 @@ public class TelaPrincipal {
             // Aqui você poderá adicionar outros itens de menu, se necessário.
             
             menuInicio.add(menuMorteSubita);
-            menuInicio.add(menuLogout);
             menuInicio.add(menuCadastrarItem);
-            menuInicio.add(menuRankingJogadores);
             menuInicio.add(menuCadastrarAmbiente);
+            menuInicio.add(menuRankingJogadores);
+            menuInicio.add(menuLogout);
         }
 
         menuSair = new JMenuItem(I18N.obterMenuSair(), GerenciadorDeImagens.SAIR);

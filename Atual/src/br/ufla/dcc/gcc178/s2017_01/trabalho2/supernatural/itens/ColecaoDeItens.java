@@ -21,8 +21,7 @@ public class ColecaoDeItens implements Serializable{
     private static final long serialVersionUID = 1L;
     private int capacidade;
     private int quantidadeAtual;
-    private List<Item> itens; 
-    
+    private List<Item> itens;     
     
     /**
      * @param capacidade
@@ -40,7 +39,7 @@ public class ColecaoDeItens implements Serializable{
      * @return String
      * o metodo exibir() mostra na tela a atual disposicao dos itens na sua 
      */
-    public String retornaItens(){
+    public String retornaDescricaoTodosItens(){
         if(itens.size() > 0){
             String itensRetorno = " ";
             for(Item i:itens){
@@ -139,13 +138,11 @@ public class ColecaoDeItens implements Serializable{
     }
     
     /**
-     * @param i
-     * busca pela posicao do vetor, inteiro "i"
-     * @return Item
-     * Retorna um item, passado sua posicao no vetor.
+     * 
+     * @return 
      */
-    public Item retornaItem(int i){
-        return itens.get(i);
-    } 
+    public List<Item> getItens() {
+        return itens;
+    }
     
 }

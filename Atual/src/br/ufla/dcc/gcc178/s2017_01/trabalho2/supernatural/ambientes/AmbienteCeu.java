@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -23,7 +23,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 public class AmbienteCeu extends Ambiente {
     
     private boolean itemFoiColetado;
-    private Item pena;
+    private Item item;
             
     /**
      * Constroi um ambiente "Ceu"
@@ -32,7 +32,7 @@ public class AmbienteCeu extends Ambiente {
     public AmbienteCeu(String nomeAmbiente)  {
         super(nomeAmbiente);
         itemFoiColetado = false;
-        pena = new Item("Pena", "pena do anjo Castiel");
+        item = new Item("Pena", "pena do anjo Castiel");
     }
     
     /**
@@ -43,7 +43,7 @@ public class AmbienteCeu extends Ambiente {
      * corretas do ambiente Céu e as retorna em uma String
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(Jogador dean){
         //Texto referente a mensagem de entrada do ambiente
         String texto1 = "Dean chega até o portal do céu. Reconhecidamente\n"
                     + "um amigo de Castiel, o mesmo foi chamado para se encontrar\n"
@@ -119,7 +119,7 @@ public class AmbienteCeu extends Ambiente {
      * @return uma string para verificacao de adicao
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean){
+    public String disponibilizarItemAmbiente(Jogador dean){
          if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
             return "Pena disponivel";
         }
@@ -140,9 +140,9 @@ public class AmbienteCeu extends Ambiente {
      */
     @Override
     public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(pena.getNomeItem()) && itemFoiColetado == false){
+        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return pena;
+            return item;
         }else{
             return null;
         }
@@ -161,5 +161,14 @@ public class AmbienteCeu extends Ambiente {
         }else{
             return false;
         }
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

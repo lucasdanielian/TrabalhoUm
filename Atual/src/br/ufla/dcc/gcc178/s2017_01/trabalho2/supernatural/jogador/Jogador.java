@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Classe que representa o jogador
  * @author Lucas Danielian
  */
-public class JogadorDean implements Serializable{
+public class Jogador implements Serializable{
     private static final long serialVersionUID = 1L;
     private ColecaoDeItens mochila;
     private boolean marcaCaim;
@@ -26,7 +26,7 @@ public class JogadorDean implements Serializable{
      * e inicializa as páginas do diario para que o jogador através das dicas 
      * possa assim avançar no jogo.
      */
-    public JogadorDean(){
+    public Jogador(){
         marcaCaim = false;
         diario = new ItemDiario("Diário de John Winchester", "O diário em questão pertencia ao pai dos irmãos antes de morrer. Ele possui diversas informações importantes.");
         mochila = new ColecaoDeItens(3);
@@ -92,7 +92,7 @@ public class JogadorDean implements Serializable{
      * @return String contendo os itens da mochila
      */
     public String exibirItensMochila(){
-        return mochila.retornaItens();
+        return mochila.retornaDescricaoTodosItens();
     }
     
     /**
@@ -134,5 +134,9 @@ public class JogadorDean implements Serializable{
      */
     public Item buscarItemPeloNomeNaMochila(String item){
         return mochila.buscarPeloNome(item);
+    }
+    
+    public ColecaoDeItens getMochila() {
+        return mochila;
     }
 }

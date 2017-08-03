@@ -1,9 +1,8 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -64,7 +63,7 @@ public abstract class Ambiente implements Serializable{
      * @param dean Jogador
      * @return String com as mensagens quando o jogador entra em um novo ambiente.
      */
-    public abstract String mensagemDeEntrada(JogadorDean dean);
+    public abstract String mensagemDeEntrada(Jogador dean);
     
     /**
      * Metodo para verificar se um ambiente possui um item disponivel ou nao
@@ -73,7 +72,7 @@ public abstract class Ambiente implements Serializable{
      * @return String contendo disponivel ou indisponivel de acordo com a
      * disponibilidade do item
      */
-    public abstract String disponibilizarItemAmbiente(JogadorDean dean);
+    public abstract String disponibilizarItemAmbiente(Jogador dean);
     
     /**
      * Metodo que pega um Item do ambiente
@@ -83,6 +82,8 @@ public abstract class Ambiente implements Serializable{
     public abstract Item pegarItemAmbiente(String nome);
     
     public abstract boolean inserirItensAmbiente(Item item);
+    
+    public abstract Item getItem();
     
     /**
      *  Metodo que retornará uma string com a localização da imagem.

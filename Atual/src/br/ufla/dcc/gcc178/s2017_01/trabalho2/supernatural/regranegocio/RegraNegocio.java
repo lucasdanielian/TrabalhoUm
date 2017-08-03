@@ -5,7 +5,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasa
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaWinchester;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCeu;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteHouston;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDenver;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteInferno;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
@@ -17,6 +17,8 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasa
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -41,20 +43,22 @@ public class RegraNegocio implements Serializable{
     private Analisador analisador;
     private Ambiente ambienteAtual;
     private int diasCorridos; //variavel que conta quantas ações o jogador ja fez
-    private JogadorDean dean;
+    private Jogador jogador;
     private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu, casaWinchester;
     private SessaoUsuario sessaoUsuario;
     private UsuarioDAOLista usuarioDAOLista;
+    private List<Ambiente> ambientes;
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public RegraNegocio() {
-        criarAmbientes();
         analisador = new Analisador();
         diasCorridos = 0;
-        dean = new JogadorDean();
+        jogador = new Jogador();
         sessaoUsuario = SessaoUsuario.obterInstancia();
         usuarioDAOLista =  UsuarioDAOLista.obterInstancia();
+        ambientes = new ArrayList<>();
+        criarAmbientes();
         
     }
     
@@ -77,30 +81,34 @@ public class RegraNegocio implements Serializable{
       
         //Inserção do Ambiente casa Winchester
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
+        ambientes.add(casaWinchester);
         
         //Inserção do Ambiente Denver
         denver = new AmbienteDenver("Denver");
-        
+        ambientes.add(denver);
         
         //Inserção do Ambiente Houston
         houston = new AmbienteHouston("Houston");
-        
+        ambientes.add(houston);
         
         casaCaim = new AmbienteCasaCaim("CasaCaim");
+        ambientes.add(casaCaim);
         
         //Iserção casa bob
         casaBob = new AmbienteCasaBob("CasaBob");
-        
+        ambientes.add(casaBob);
         
         //Inserção do Ambiente Inferno
         inferno = new AmbienteInferno("PortalInferno");
+        ambientes.add(inferno);
         
         //Inserção do Ambiente Purgatorio
         purgatorio = new AmbientePurgatorio("Purgatorio");
-        
+        ambientes.add(purgatorio);
         
         //Inserção do Ambiente Ceu
         ceu = new AmbienteCeu("Ceu");
+        ambientes.add(ceu);
         
         // inicializa as saidas do ambiente casaWinchester
         casaWinchester.ajustarSaidas(ceu);
@@ -228,7 +236,7 @@ public class RegraNegocio implements Serializable{
      */
     public String descricaoAmbienteAtual() {
         return "\n Voce esta " + ambienteAtual.getNomeAmbiente() +
-               "\n" + ambienteAtual.mensagemDeEntrada(dean) +
+               "\n" + ambienteAtual.mensagemDeEntrada(jogador) +
                "\n Saidas: " + ambienteAtual.saidasValidas() +
                "\n";
     }
@@ -373,10 +381,10 @@ public class RegraNegocio implements Serializable{
         }
         String itens = comando.getSegundaPalavra();
         if (itens.equals("mochila")){
-            return dean.exibirItensMochila();
+            return jogador.exibirItensMochila();
                         
         }else if (itens.equals("armario")){
-            return casaWinchester.disponibilizarItemAmbiente(dean);
+            return casaWinchester.disponibilizarItemAmbiente(jogador);
         }else{
             return "\nPalavra Invalida\n";
         }
@@ -395,7 +403,7 @@ public class RegraNegocio implements Serializable{
            return "\n Guardar o que? \n";
         }
         String nomeItem = comando.getSegundaPalavra();
-        Item itemAux = dean.removerPeloNomeDaMochila(nomeItem);
+        Item itemAux = jogador.removerPeloNomeDaMochila(nomeItem);
         if(itemAux != null){
             if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
                 boolean foi = casaWinchester.inserirItensAmbiente(itemAux);
@@ -403,11 +411,11 @@ public class RegraNegocio implements Serializable{
                     return "\n Item: " + itemAux.getNomeItem() + " guardado com sucesso\n"; 
                 }
                 else{
-                    dean.inserirItensMochila(itemAux);
+                    jogador.inserirItensMochila(itemAux);
                     return "erro " + itemAux.getNomeItem() + " nao inserido";
                 }
             }else{
-                dean.inserirItensMochila(itemAux);
+                jogador.inserirItensMochila(itemAux);
                 return "\n O ambiente: " + ambienteAtual.getNomeAmbiente() + " nao lhe permite guardar nenhum item. \n";
             }
         }
@@ -430,7 +438,7 @@ public class RegraNegocio implements Serializable{
         Item aux = ambienteAtual.pegarItemAmbiente(nomeItem);
         if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
             if(aux != null){
-                String verificacao = dean.inserirItensMochila(aux);
+                String verificacao = jogador.inserirItensMochila(aux);
                 if (verificacao.contains("adicionado")){
                     return "\n Item: " + nomeItem + " coletado com sucesso\n";
                 }else{
@@ -449,7 +457,7 @@ public class RegraNegocio implements Serializable{
             }
         }else{
             if(aux != null){
-                String verificacao = dean.inserirItensMochila(aux);
+                String verificacao = jogador.inserirItensMochila(aux);
                 if (verificacao.contains("adicionado")){
                     return "\n Item: " + nomeItem + " coletado com sucesso\n";
                 }else{
@@ -475,7 +483,7 @@ public class RegraNegocio implements Serializable{
      * @return string para que quem chamou o metodo possa realizar a verificacao
      */
     public String verificaDisponibilidadeItemAmbiente(){
-        String verificacao = ambienteAtual.disponibilizarItemAmbiente(dean);
+        String verificacao = ambienteAtual.disponibilizarItemAmbiente(jogador);
         return verificacao;
     }
     
@@ -490,7 +498,7 @@ public class RegraNegocio implements Serializable{
         }
         String nomeItem = comando.getSegundaPalavra();
         if(nomeItem.equals("diario")){
-            return dean.lerPaginasDiario();
+            return jogador.lerPaginasDiario();
         }else{
             return "\n Este item nao e o diario, logo nao pode ser lido";
         }
@@ -523,4 +531,14 @@ public class RegraNegocio implements Serializable{
         }
         return 0;
     }
+
+    public List<Ambiente> getAmbientes() {
+        return ambientes;
+    }
+
+    public Jogador getJogador() {
+        return jogador;
+    }
+    
+    
 }

@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -24,6 +24,7 @@ public class AmbienteInferno extends Ambiente {
     private boolean denteLobo;
     private boolean penaAnjo;
     private boolean almas;
+    private Item item;
     
     /**
      * @param nomeAmbiente
@@ -35,6 +36,7 @@ public class AmbienteInferno extends Ambiente {
         denteLobo = false;
         penaAnjo = false;
         almas = false;
+        item = null;
     }
     
     /**
@@ -44,7 +46,7 @@ public class AmbienteInferno extends Ambiente {
      * Metodo que retorna a mensagem de entrada quando se chega ao ambiente inferno
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(Jogador dean) {
         //
         String texto1 = "Dean chega até ao portal do inferno. Com o devido ritual,\n"
                          + "ele oferece o dente e a pena e assim, sua entrada é\n"
@@ -112,7 +114,7 @@ public class AmbienteInferno extends Ambiente {
      * @return String informando que nao é possivel coletar itens neste ambiente
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean) {
+    public String disponibilizarItemAmbiente(Jogador dean) {
         return "item indisponivel";
     }
 
@@ -134,5 +136,14 @@ public class AmbienteInferno extends Ambiente {
     @Override
     public boolean inserirItensAmbiente(Item item) {
         return false;
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

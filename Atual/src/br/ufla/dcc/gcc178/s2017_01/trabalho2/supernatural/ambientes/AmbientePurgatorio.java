@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -24,7 +24,7 @@ public class AmbientePurgatorio extends Ambiente {
 
     private boolean itemFoiColetado;
     private boolean foiCeu;
-    private Item portadorAlmas;
+    private Item item;
     
     /**
      * Constroi um ambiente "AmbientePurgatorio"
@@ -34,7 +34,7 @@ public class AmbientePurgatorio extends Ambiente {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
-        portadorAlmas = new Item("Almas", "Armazena 10 almas em seu interior.");
+        item = new Item("Almas", "Armazena 10 almas em seu interior.");
     }
     
     /**
@@ -45,7 +45,7 @@ public class AmbientePurgatorio extends Ambiente {
      * referente ao ambiente pugatorio
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean) {
+    public String mensagemDeEntrada(Jogador dean) {
         //
         String texto1 = "Dean se direciona para o purgatório. Chegando lá, devido\n"
                             + "à sua enorme experiência como um hunter, ele consegue\n"
@@ -111,7 +111,7 @@ public class AmbientePurgatorio extends Ambiente {
      * @return uma string para verificacao de adicao
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean){
+    public String disponibilizarItemAmbiente(Jogador dean){
          if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
             if(foiCeu == true){
                 return "Almas disponivel";
@@ -137,9 +137,9 @@ public class AmbientePurgatorio extends Ambiente {
      */
     @Override
     public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(portadorAlmas.getNomeItem()) && itemFoiColetado == false){
+        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return portadorAlmas;
+            return item;
         }else{
             return null;
         }
@@ -158,5 +158,14 @@ public class AmbientePurgatorio extends Ambiente {
         }else{
             return false;
         }
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

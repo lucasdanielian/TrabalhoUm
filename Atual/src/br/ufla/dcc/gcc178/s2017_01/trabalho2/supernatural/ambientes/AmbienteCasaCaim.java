@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -23,6 +23,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 public class AmbienteCasaCaim extends Ambiente {
     private boolean visitouBob;
     private boolean recebeuTask;
+    private Item item;
     
     /**
      * @param nomeAmbiente
@@ -32,6 +33,7 @@ public class AmbienteCasaCaim extends Ambiente {
         super(nomeAmbiente);
         visitouBob = false;
         recebeuTask = false;
+        item = null;
     }
     
     /**
@@ -41,7 +43,7 @@ public class AmbienteCasaCaim extends Ambiente {
      * Retorna uma String que devera exibir a mensagem de entrada referente a casa Caim
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(Jogador dean){
         if(getJaVisitada() == false){ // se o jogador nunca veio neste ambiente
             setJaVisitada(true);
             if(dean.buscarItemPeloNomeNaMochila("Carta")!=null){
@@ -159,7 +161,7 @@ public class AmbienteCasaCaim extends Ambiente {
      * @return String informando que nao é possivel coletar itens neste ambiente
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean) {
+    public String disponibilizarItemAmbiente(Jogador dean) {
         return "item indisponivel";
     }
 
@@ -181,6 +183,15 @@ public class AmbienteCasaCaim extends Ambiente {
     @Override
     public boolean inserirItensAmbiente(Item item) {
         return false;
+    }
+
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 
 }

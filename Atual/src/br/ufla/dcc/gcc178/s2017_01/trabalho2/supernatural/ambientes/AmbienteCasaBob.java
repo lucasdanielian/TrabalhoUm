@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaBob - um ambiente em um jogo adventure.
@@ -23,7 +23,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
 public class AmbienteCasaBob extends Ambiente {
     private boolean itemFoiColetado;
     private boolean foiCeu;
-    private Item carta;
+    private Item item;
     
     /**
      * Constroi um ambiente CasaBob 
@@ -32,7 +32,7 @@ public class AmbienteCasaBob extends Ambiente {
     public AmbienteCasaBob(String nomeAmbiente)  {
         super(nomeAmbiente);
         foiCeu = false;
-        carta = new Item("Carta", "Carta de Bob para Caim, que"
+        item = new Item("Carta", "Carta de Bob para Caim, que"
                 + "cedida pelo mesmo para ajudar Dean.");
     }
     
@@ -45,7 +45,7 @@ public class AmbienteCasaBob extends Ambiente {
      * a casa do Bob
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(Jogador dean){
         //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
         String mensagemEntrada1 = "\nDean se direciona para Boulder, no estado do\n"
             + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
@@ -124,7 +124,7 @@ public class AmbienteCasaBob extends Ambiente {
      * @return uma string para verificacao de adicao
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean){
+    public String disponibilizarItemAmbiente(Jogador dean){
         if(getJaVisitada() == false){ //perguntar valdeci se nao tem que colocar a verificacao da mochila aqui
             if(foiCeu == true){
                 return "Carta disponivel";
@@ -150,9 +150,9 @@ public class AmbienteCasaBob extends Ambiente {
      */
     @Override
     public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(carta.getNomeItem()) && itemFoiColetado == false){
+        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return carta;
+            return item;
         }else{
             return null;
         }
@@ -171,5 +171,14 @@ public class AmbienteCasaBob extends Ambiente {
         }else{
             return false;
         }
+    }
+
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

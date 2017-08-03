@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -24,7 +24,7 @@ public class AmbienteHouston extends Ambiente {
 
     private boolean itemFoiColetado;
     private boolean foiCaim;
-    private Item cabecaVampiro;
+    private Item item;
     
     /**
      * Constroi um ambiente "Houston"
@@ -34,7 +34,7 @@ public class AmbienteHouston extends Ambiente {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCaim = false;
-        cabecaVampiro = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
+        item = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
     }
     
     /**
@@ -45,7 +45,7 @@ public class AmbienteHouston extends Ambiente {
      * entrada ao ambiente Houston e fazer a sobrescrita do metodo na classe pai
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(Jogador dean){
         //
         String texto1 = "Dean se direciona para Houston. Ele investiga onde o grupo\n"
                             + "de vampiros citado por Caim está. Após descobrir,\n"
@@ -115,7 +115,7 @@ public class AmbienteHouston extends Ambiente {
      * @return uma string para verificacao de adicao
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean){
+    public String disponibilizarItemAmbiente(Jogador dean){
         if(getJaVisitada() == false){
             if(foiCaim == true){ 
                 return "CabecaVampiro disponivel";
@@ -142,9 +142,9 @@ public class AmbienteHouston extends Ambiente {
      */
     @Override
     public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(cabecaVampiro.getNomeItem()) && itemFoiColetado == false){
+        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return cabecaVampiro;
+            return item;
         }else{
             return null;
         }
@@ -163,5 +163,14 @@ public class AmbienteHouston extends Ambiente {
         }else{
             return false;
         }
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

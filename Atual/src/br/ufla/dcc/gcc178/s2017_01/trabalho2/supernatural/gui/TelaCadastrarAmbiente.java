@@ -8,6 +8,8 @@ package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -60,6 +62,7 @@ public class TelaCadastrarAmbiente {
         public void inicializar(){
             criarComponentes();
             montarJanela();
+            configurarEventosTela();
             exibirTela();
         }
         
@@ -185,6 +188,18 @@ public class TelaCadastrarAmbiente {
             botaoCancelar = new JButton("Cancelar");
             botaoCancelar.setBackground(Color.red);
         }
+        
+        /**
+     * Configura os eventos da tela.
+     */
+    private void configurarEventosTela() {
+        botaoCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tela.dispose();
+            }
+        });
+    }
         
         private void montarJanela(){
             

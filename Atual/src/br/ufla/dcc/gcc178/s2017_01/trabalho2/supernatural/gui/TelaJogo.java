@@ -1,10 +1,13 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
@@ -29,6 +32,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,7 +43,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 /**
  *  Essa eh a classe principal(Para iniciar com interface Grafica) do RegraNegocio "SuperNatural".
@@ -81,29 +85,19 @@ public class TelaJogo implements Serializacao {
     private JButton btnCancelarJogo;
     private JButton btnRecuperarJogo;
     
-    //Botoes para navegacao entre os ambientes
-    private JButton btnIrCasaWinchester;
-    private JButton btnIrDenver;
-    private JButton btnIrHouston;
-    private JButton btnIrCasaCaim;
-    private JButton btnIrCasaBob;
-    private JButton btnIrPortalInferno;
-    private JButton btnIrPurgatorio;
-    private JButton btnIrCeu;
+    //Botoes para navegacao entre os ambientes    
+    private JButton btnAmbiente;
+    private List<JButton> botoesAmbientes;
     
     //Botao que mostra os itens dos ambientes
-    private JButton btnItemCartaAmbiente;
-    private JButton btnItemPenaAmbiente;
-    private JButton btnItemDenteLoboAmbiente;
-    private JButton btnItemCabecaVampiroAmbiente;
-    private JButton btnItemPortadorAlmasAmbiente;
+    private JButton btnItemAmbiente;
+    private List<JButton> botoesItensAmbientes;
+
     
     //Botoes que mostra os itens da mochila
-    private JButton btnItemCartaMochila;
-    private JButton btnItemPenaMochila;
-    private JButton btnItemDenteLoboMochila;
-    private JButton btnItemCabecaVampiroMochila;
-    private JButton btnItemPortadorAlmasMochila;
+    private JButton btnItemJogador;
+    private List<JButton> botoesItensJogador;
+    
     
     //Exibicao de texto
     private JTextArea textoDinamico;
@@ -114,6 +108,7 @@ public class TelaJogo implements Serializacao {
     private JTextArea diasCorridos;
     private JTextArea diasRestantes;
     private JTextArea ambienteAtual;
+    private JLabel labelNaoHaBotoes;
     
     //Entradas do usuario
     private JTextField txtEntradaComandos;
@@ -161,30 +156,6 @@ public class TelaJogo implements Serializacao {
         
         //Botao que envia os comandos
         btnEnviarComando.setEnabled(true);
-        
-        //Botoes para navegar entre os ambientes
-        btnIrCasaWinchester.setEnabled(true);
-        btnIrDenver.setEnabled(true);
-        btnIrHouston.setEnabled(true);
-        btnIrCasaCaim.setEnabled(true);
-        btnIrCasaBob.setEnabled(true);
-        btnIrPortalInferno.setEnabled(true);
-        btnIrPurgatorio.setEnabled(true);
-        btnIrCeu.setEnabled(true);
-        
-        //Botoes Itens Ambientes
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-        
-        //Botões Itens mochila
-        btnItemCartaMochila.setEnabled(false);
-        btnItemPenaMochila.setEnabled(false);
-        btnItemDenteLoboMochila.setEnabled(false);
-        btnItemCabecaVampiroMochila.setEnabled(false);
-        btnItemPortadorAlmasMochila.setEnabled(false);
     }
     
     /**
@@ -195,44 +166,6 @@ public class TelaJogo implements Serializacao {
      */
     private void atualizarItensAmbiente(){
         String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-        btnItemDenteLoboAmbiente.setEnabled(false);
-        btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-        btnItemCabecaVampiroAmbiente.setEnabled(false);
-        btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-        btnItemCartaAmbiente.setEnabled(false);
-        btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-        btnItemPortadorAlmasAmbiente.setEnabled(false);
-        btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-        btnItemPenaAmbiente.setEnabled(false);
-        btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-
-        if(itensDisponiveis.contains("Dente")){
-            btnItemDenteLoboAmbiente.setEnabled(true);
-            btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
-        }
-
-        if(itensDisponiveis.contains("CabecaVampiro")){
-            btnItemCabecaVampiroAmbiente.setEnabled(true);
-            btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
-
-        }
-
-        if(itensDisponiveis.contains("Carta")){
-            btnItemCartaAmbiente.setEnabled(true);
-            btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-        }
-
-        if(itensDisponiveis.contains("Almas")){
-            btnItemPortadorAlmasAmbiente.setEnabled(true);
-            btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-
-        }
-
-        if(itensDisponiveis.contains("Pena")){
-            btnItemPenaAmbiente.setEnabled(true);
-            btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-        }
-
     }
     
     /**
@@ -242,52 +175,13 @@ public class TelaJogo implements Serializacao {
     private void atualizarItensJogador(){
         Comando auxComando = analisador.pegarComando("analisar mochila");
         String itensDisponiveis = regraNegocio.processarComando(auxComando);
-        
-            btnItemDenteLoboMochila.setEnabled(false);
-            btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemCabecaVampiroMochila.setEnabled(false);
-            btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemCartaMochila.setEnabled(false);
-            btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemPortadorAlmasMochila.setEnabled(false);
-            btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-            btnItemPenaMochila.setEnabled(false);
-            btnItemPenaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-
-            if(itensDisponiveis.contains("Dente")){
-                btnItemDenteLoboMochila.setEnabled(true);
-                btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
-            }
-
-            if(itensDisponiveis.contains("CabecaVampiro")){
-                btnItemCabecaVampiroMochila.setEnabled(true);
-                btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
-
-            }
-
-            if(itensDisponiveis.contains("Carta")){
-                btnItemCartaMochila.setEnabled(true);
-                btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
-            }
-
-            if(itensDisponiveis.contains("Almas")){
-                btnItemPortadorAlmasMochila.setEnabled(true);
-                btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
-                
-            }
-
-            if(itensDisponiveis.contains("Pena")){
-                btnItemPenaMochila.setEnabled(true);
-                btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
-            }
     }
     
     /**
      * Metodo que finaliza o jogo
      */
     private void gameOver(){
-        diasCorridos.setText("Dias Corridos: " + regraNegocio.getDiasCorridos());
-        diasRestantes.setText("Dias Restantes: " + regraNegocio.diasRestantes());
+        atualizaPainelPontuacao();
         JOptionPane.showMessageDialog(janela, "GAME OVER! Seu tempo estourou"
             + "\nTente Jogar Novamente!");
         janela.dispose();
@@ -429,19 +323,110 @@ public class TelaJogo implements Serializacao {
         painelCentral.add(c);
     }
     
-    /**
-     * Adiciona os componentes da tela tratando layout e internacionalização
-     */
-    private void adicionarComponentesTelaJogo(){
-        imagemPrincipal = "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/principal.jpeg";
-        adicionarImagemAmbiente(imagemPrincipal);
-
-        //Gerenciador do Jogo
-        regraNegocio = new RegraNegocio();
+    
+    private void criarBotoesAmbientes(List<Ambiente> ambientes){
+       
+        for (Ambiente ambiente : ambientes) {
+            
+            btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
+                    GerenciadorDeImagens.OK);
+            btnAmbiente.setName(ambiente.getNomeAmbiente());
+            botoesAmbientes.add(btnAmbiente);
+        }
+    }
+    
+    private void criarBotoesItensAmbientes(List<Ambiente> ambientes){
+       
+        for (Ambiente ambiente : ambientes) {
+            if(ambiente.getItem() != null){
+                btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
+                        GerenciadorDeImagens.OK);
+                btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
+                botoesItensAmbientes.add(btnItemAmbiente);
+            }
+            
+        }
+    }
+    
+    private void criarBotoesItensJogador(List<Item> itensJogador){
+        for (Item itemJogador : itensJogador) {
+            btnItemJogador = new JButton(itemJogador.getNomeItem(),
+                    GerenciadorDeImagens.OK);
+            btnItemAmbiente.setName(itemJogador.getNomeItem());
+            botoesItensJogador.add(btnItemJogador);
+        }
         
-        //Analisador de comandos do jogo
-        analisador = new Analisador();
+    }
+    
+    
+    private void adicionarBotoesAmbientesNaTela(List<JButton> botoesAmbientes){
+        int linha = 10;
+        if(botoesAmbientes.size() == 0){
 
+            adicionarComponentePainelLeste(labelNaoHaBotoes,
+                    GridBagConstraints.NORTH,
+                    GridBagConstraints.VERTICAL,
+                    linha, 0, 1, 1);
+                linha += 2;
+            
+        }else{
+            for (JButton botaoAmbiente : botoesAmbientes) {
+                //Adicão dos botoes de jogo no painei Oeste
+                adicionarComponentePainelOeste(botaoAmbiente,
+                        GridBagConstraints.CENTER,
+                        GridBagConstraints.NONE,
+                        linha, 0, 1, 1);
+                linha += 2;
+            }
+        }
+    }
+    
+    private void adicionarBotoesItensAmbientesNaTela(List<JButton> botoesItensAmbientes){
+        int linha = 2;
+        if(botoesItensAmbientes.size() == 0){
+
+            adicionarComponentePainelLeste(labelNaoHaBotoes,
+                    GridBagConstraints.NORTH,
+                    GridBagConstraints.VERTICAL,
+                    linha, 0, 1, 1);
+                linha += 2;
+            
+        }else{
+            for (JButton botaoItem : botoesItensAmbientes) {
+                //Adicão dos botoes de jogo no painei Leste
+            adicionarComponentePainelLeste(botaoItem,
+                    GridBagConstraints.NORTH,
+                    GridBagConstraints.VERTICAL,
+                    linha, 0, 1, 1);
+                linha += 2;
+            }  
+        }
+        
+    }
+    
+    private void adicionarBotoesItensJogadorNaTela(List<JButton> botoesItensJogador){
+        int linha = 22;
+        if(botoesItensJogador.size() == 0){
+
+            adicionarComponentePainelLeste(labelNaoHaBotoes,
+                    GridBagConstraints.NORTH,
+                    GridBagConstraints.VERTICAL,
+                    linha, 0, 1, 1);
+                linha += 2;
+            
+        }else{
+            for (JButton botaoItemJogador : botoesItensJogador) {
+                //Adicão dos botoes de jogo no painei Leste
+                adicionarComponentePainelLeste(botaoItemJogador,
+                        GridBagConstraints.CENTER,
+                        GridBagConstraints.VERTICAL,
+                        linha, 0, 1, 1);
+                linha += 2;
+            }
+        }
+    }
+    
+    private void adicionarPainelOrientacaoJogador(){
         //Imprime os dias corridos do jagador na tela
         diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getDiasCorridos());
         diasCorridos.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -478,46 +463,9 @@ public class TelaJogo implements Serializacao {
                 GridBagConstraints.CENTER,
                 GridBagConstraints.HORIZONTAL,
                 1, 5, 1, 1);
-        
-        //Imprime os textos da regra de negocios
-        textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
-        textoDinamico.setEditable(false);
-        
-        //Adiciona barra de rolagem ao texto
-        jScrollPaneSaida = new JScrollPane(textoDinamico);
-        
-        //seta o tamanho do campo de texto
-        jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
-        
-        //Adiciona o JScrollPane do texto dinamico da tela
-        adicionarComponentePainelCentral(jScrollPaneSaida,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.NONE,
-                1, 0, 1, 1);
-        
-        //Recebe a entrada do usuario na tela
-        txtEntradaComandos = new JTextField("Comandos Devem Ser Digitados Aqui:");
-        txtEntradaComandos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-                            txtEntradaComandos.setText("");
-			}
-		});
-        //Adiciona Entrada de comandos na tela
-        adicionarComponentePainelCentral(txtEntradaComandos,
-                GridBagConstraints.SOUTH,
-                GridBagConstraints.NONE,
-                2, 0, 1, 1);
-        
-        //Botao que envia um comando
-        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
-                GerenciadorDeImagens.OK);
-        //Adicão do botao Enviar comando no painei Oeste
-        adicionarComponentePainelCentral(btnEnviarComando,
-                GridBagConstraints.PAGE_END,
-                GridBagConstraints.VERTICAL,
-                4, 0, 1, 1);
-        
+    }
+    
+    private void botoesEstaticos(){
         //Imprime o texto na tela
         tituloBotoesPrincipais = new JTextArea("BOTOES PRINCIPAIS");
         tituloBotoesPrincipais.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -556,83 +504,34 @@ public class TelaJogo implements Serializacao {
                 GridBagConstraints.VERTICAL,
                 6, 0, 1, 1);
         
-        //Imprime o texto na tela
-        tituloBotoesAmbientes = new JTextArea(" NAVEGACAO ENTRE\n       AMBIENTES ");
-        tituloBotoesAmbientes.setFont(new Font("Serif", Font.ITALIC, 18));
-        tituloBotoesAmbientes.setBackground(Color.GRAY);
-        tituloBotoesAmbientes.setForeground(Color.WHITE);
-        tituloBotoesAmbientes.setEditable(false);
+        //Botao que envia um comando
+        btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
+                GerenciadorDeImagens.OK);
+        //Adicão do botao Enviar comando no painei Oeste
+        adicionarComponentePainelCentral(btnEnviarComando,
+                GridBagConstraints.PAGE_END,
+                GridBagConstraints.VERTICAL,
+                4, 0, 1, 1);
+    }
+    
+    private void botoesItensJogador(){
+        //Imprime o titulo dos botoes de itens da mochila na tela
+        tituloBotoesVerItens = new JTextArea(" ITENS JOGADOR ");
+        tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesVerItens.setBackground(Color.GRAY);
+        tituloBotoesVerItens.setForeground(Color.WHITE);
+        tituloBotoesVerItens.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelOeste(tituloBotoesAmbientes,
+        adicionarComponentePainelLeste(tituloBotoesVerItens,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                8, 0, 2, 2);
-
-        //Botoes dos Ambientes
-        btnIrCasaWinchester = new JButton(I18N.obterBotaoWinchester(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes principais no painei Oeste
-        adicionarComponentePainelOeste(btnIrCasaWinchester,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                10, 0, 1, 1);
+                20, 0, 2, 2);
         
-        btnIrDenver = new JButton(I18N.obterBotaoDenver(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelOeste(btnIrDenver,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                12, 0, 1, 1);
-        
-        btnIrHouston = new JButton(I18N.obterBotaoHouston(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes Ambientes no painei Oeste
-        adicionarComponentePainelOeste(btnIrHouston,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                14, 0, 1, 1);
-        
-        btnIrCasaCaim = new JButton(I18N.obterBotaoCasaCaim(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes principais no painei Oeste
-        adicionarComponentePainelOeste(btnIrCasaCaim,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                16, 0, 1, 1);
-        
-        btnIrCasaBob = new JButton(I18N.obterBotaoCasaBob(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelOeste(btnIrCasaBob,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                18, 0, 1, 1);
-        
-        btnIrPortalInferno = new JButton(I18N.obterBotaoInferno(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes Ambientes no painei Oeste
-        adicionarComponentePainelOeste(btnIrPortalInferno,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                20, 0, 1, 1);
-        
-        btnIrPurgatorio = new JButton(I18N.obterBotaoPurgatorio(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes principais no painei Oeste
-        adicionarComponentePainelOeste(btnIrPurgatorio,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                22, 0, 1, 1);
-        
-        btnIrCeu = new JButton(I18N.obterBotaoCeu(),
-                GerenciadorDeImagens.OK);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelOeste(btnIrCeu,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                24, 0, 1, 1);
-        
+        criarBotoesItensJogador(regraNegocio.getJogador().getMochila().getItens());
+        adicionarBotoesItensJogadorNaTela(botoesItensJogador);
+    }
+    
+    private void botoesItensAmbientes(){
         //Imprime o titulo dos botões de itens na tela
         tituloBotoesItens = new JTextArea(" ITENS AMBIENTES ");
         tituloBotoesItens.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -645,100 +544,90 @@ public class TelaJogo implements Serializacao {
                 GridBagConstraints.VERTICAL,
                 0, 0, 2, 2);
         
-        //Botoes de Manipulação de itens do ambiente
-        btnItemCartaAmbiente = new JButton(I18N.obterBotaoItenCarta(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCartaAmbiente,
-                GridBagConstraints.NORTH,
+        criarBotoesItensAmbientes(regraNegocio.getAmbientes());
+        adicionarBotoesItensAmbientesNaTela(botoesItensAmbientes);
+    }
+    
+    private void botoesAmbientes(){
+        //Imprime o texto na tela
+        tituloBotoesAmbientes = new JTextArea(" NAVEGACAO ENTRE\n       AMBIENTES ");
+        tituloBotoesAmbientes.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesAmbientes.setBackground(Color.GRAY);
+        tituloBotoesAmbientes.setForeground(Color.WHITE);
+        tituloBotoesAmbientes.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainelOeste(tituloBotoesAmbientes,
+                GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
+                8, 0, 2, 2);
+
+        criarBotoesAmbientes(regraNegocio.getAmbientes());
+        adicionarBotoesAmbientesNaTela(botoesAmbientes);
+    }
+    
+    /**
+     * Adiciona os componentes da tela tratando layout e internacionalização
+     */
+    private void adicionarComponentesTelaJogo(){
+        imagemPrincipal = "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/principal.jpeg";
+        adicionarImagemAmbiente(imagemPrincipal);
+        
+        Font myFont = new Font("Arial", Font.BOLD, 16);
+
+        botoesAmbientes = new ArrayList<>();
+        
+        botoesItensAmbientes = new ArrayList<>();
+        
+        botoesItensJogador = new ArrayList<>();
+        
+        //Gerenciador do Jogo
+        regraNegocio = new RegraNegocio();
+        
+        //Analisador de comandos do jogo
+        analisador = new Analisador();
+
+        labelNaoHaBotoes = new JLabel("Nao ha itens para "
+                                    + "serem exibidos aqui!");
+        labelNaoHaBotoes.setFont(myFont);
+        
+        
+        //Imprime os textos da regra de negocios
+        textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
+        textoDinamico.setEditable(false);
+        
+        //Adiciona barra de rolagem ao texto
+        jScrollPaneSaida = new JScrollPane(textoDinamico);
+        
+        //seta o tamanho do campo de texto
+        jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
+        
+        //Adiciona o JScrollPane do texto dinamico da tela
+        adicionarComponentePainelCentral(jScrollPaneSaida,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.NONE,
+                1, 0, 1, 1);
+        
+        //Recebe a entrada do usuario na tela
+        txtEntradaComandos = new JTextField("Comandos Devem Ser Digitados Aqui:");
+        txtEntradaComandos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                            txtEntradaComandos.setText("");
+			}
+		});
+        //Adiciona Entrada de comandos na tela
+        adicionarComponentePainelCentral(txtEntradaComandos,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.NONE,
                 2, 0, 1, 1);
         
-        btnItemPenaAmbiente = new JButton(I18N.obterBotaoItenPena(),
-            GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPenaAmbiente,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                4, 0, 1, 1);
         
-        btnItemDenteLoboAmbiente = new JButton(I18N.obterBotaoItenDenteLobo(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemDenteLoboAmbiente,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                6, 0, 1, 1);
         
-        btnItemCabecaVampiroAmbiente = new JButton(I18N.obterBotaoItenCabecaVampiro(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCabecaVampiroAmbiente,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                8, 0, 1, 1);
-        
-        btnItemPortadorAlmasAmbiente = new JButton(I18N.obterBotaoItemPortadorAlmas(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPortadorAlmasAmbiente,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                10, 0, 1, 1);
-
-        //Imprime o titulo dos botoes de itens da mochila na tela
-        tituloBotoesVerItens = new JTextArea(" ITENS MOCHILA ");
-        tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
-        tituloBotoesVerItens.setBackground(Color.GRAY);
-        tituloBotoesVerItens.setForeground(Color.WHITE);
-        tituloBotoesVerItens.setEditable(false);
-        //Adiciona o texto na tela
-        adicionarComponentePainelLeste(tituloBotoesVerItens,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                20, 0, 2, 2);
-        
-        //Botoes de Manipulação de itens
-        btnItemCartaMochila = new JButton(I18N.obterBotaoItenCarta(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCartaMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                22, 0, 1, 1);
-        
-        btnItemPenaMochila = new JButton(I18N.obterBotaoItenPena(),
-            GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPenaMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.NONE,
-                24, 0, 1, 1);
-        
-        btnItemDenteLoboMochila = new JButton(I18N.obterBotaoItenDenteLobo(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemDenteLoboMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                26, 0, 1, 1);
-        
-        btnItemCabecaVampiroMochila = new JButton(I18N.obterBotaoItenCabecaVampiro(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemCabecaVampiroMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                28, 0, 1, 1);
-        
-        btnItemPortadorAlmasMochila = new JButton(I18N.obterBotaoItemPortadorAlmas(),
-                GerenciadorDeImagens.CANCELAR);
-        //Adicão dos botoes de jogo no painei Oeste
-        adicionarComponentePainelLeste(btnItemPortadorAlmasMochila,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                30, 0, 1, 1);
-        
+        botoesAmbientes();
+        botoesItensAmbientes();
+        botoesItensJogador();
+        botoesEstaticos();
+        adicionarPainelOrientacaoJogador();
         prepararComponentesEstadoInicial();        
     }
 
@@ -747,11 +636,13 @@ public class TelaJogo implements Serializacao {
      */
     private void configurarEventosTela() {
         
-        btnIrCeu.addActionListener(new ActionListener(){
+        //Loop responsavel pelas ações dos botões Ambientes
+        for (JButton botaoAmbiente : botoesAmbientes) {
+            botaoAmbiente.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 String validaAmbiente;
-                comando = analisador.pegarComando("ir Ceu");
+                comando = analisador.pegarComando("ir " + botaoAmbiente.getName());
                 validaAmbiente = regraNegocio.processarComando(comando);
                 if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
@@ -759,7 +650,7 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-                        
+
                         atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
@@ -768,330 +659,92 @@ public class TelaJogo implements Serializacao {
                 }
             }
         });
-            
-        btnIrCasaWinchester.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir CasaWinchester");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrDenver.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir Denver");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrHouston.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir Houston");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.contains("Nao ha passagem!")){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrPortalInferno.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir PortalInferno");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.contains("Nao ha passagem!")){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrPurgatorio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir Purgatorio");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrCasaCaim.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir CasaCaim");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnIrCasaBob.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir CasaBob");
-                validaAmbiente = regraNegocio.processarComando(comando);
-                if (validaAmbiente.indexOf("Nao ha passagem!")>=0){
-                    textoDinamico.setText("\nNao ha passagem!\n");
-                }else{
-                    if(regraNegocio.diasRestantes()==0){
-                        gameOver();
-                    }else{
-                        
-                        atualizarItensAmbiente();
-                        textoDinamico.setText(validaAmbiente);
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        atualizaPainelPontuacao();
-                    }
-                }
-            }
-        });
-        
-        btnItemCabecaVampiroMochila.addActionListener(new ActionListener() {
+    }        
+     
+    //Loop responsavel pelas ações dos botões de itens do Jogador
+    for (JButton botaoItemJogador : botoesItensJogador) {
+        botaoItemJogador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String textoExibicao;
-                comando = analisador.pegarComando("guardar CabecaVampiro");
+                comando = analisador.pegarComando("guardar " + botaoItemJogador.getName());
                 textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: CabecaVampiro guardado com sucesso")){
+                if(textoExibicao.contains(botaoItemJogador.getName() + " guardado com sucesso")){
                     textoDinamico.setText(textoExibicao);
-                    btnItemCabecaVampiroMochila.setEnabled(false);
-                    btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemCabecaVampiroAmbiente.setEnabled(true);
-                    btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.OK);
                 }else{
                     textoDinamico.setText(textoExibicao);
                 }
             }
         });
-        
-        btnItemCartaMochila.addActionListener(new ActionListener() {
+    }
+    
+    //Loop responsavel pelas ações dos botões de itens dos ambientes
+    for (JButton botaoItemAmbiente : botoesItensAmbientes) {
+        botaoItemAmbiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar Carta");
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: Carta guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                    btnItemCartaMochila.setEnabled(false);
-                    btnItemCartaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                    btnItemCartaAmbiente.setEnabled(true);
-                }else{
-                    textoDinamico.setText(textoExibicao);
-                }
-            }
-        });
-        
-        btnItemDenteLoboMochila.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar Dente");
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: Dente guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                    btnItemDenteLoboMochila.setEnabled(false);
-                    btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemDenteLoboAmbiente.setEnabled(true);
-                    btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.OK);
+                comando = analisador.pegarComando("pegar " + botaoItemAmbiente.getName());
+                String item = regraNegocio.processarComando(comando);
+                textoDinamico.setText(item);
+                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
                     
-                }else{
-                    textoDinamico.setText(textoExibicao);
                 }
             }
         });
+    }
         
-        btnItemPenaMochila.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar Pena");
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: Pena guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                    btnItemPenaMochila.setEnabled(false);
-                    btnItemPenaMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemPenaAmbiente.setEnabled(true);
-                    btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.OK);
-                }else{
-                    textoDinamico.setText(textoExibicao);
-                }
+    btnEnviarComando.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String validaTexto = txtEntradaComandos.getText();
+            if(validaTexto.equals("sair")){
+                janela.dispose();
+            }else{
+                comando = analisador.pegarComando(validaTexto);
+                textoDinamico.setText(regraNegocio.processarComando(comando));
+                trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                txtEntradaComandos.setText("Entrada de Comandos:");
             }
-        });
+        }
+    });
         
-        btnItemPortadorAlmasMochila.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar PortadorAlmas");
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains("Item: PortadorAlmas guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                    btnItemPortadorAlmasMochila.setEnabled(false);
-                    btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemPortadorAlmasAmbiente.setEnabled(true);
-                    btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.OK);
-                }else{
-                    textoDinamico.setText(textoExibicao);
-                }
-            }
-        });
+    btnCancelarJogo.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            janela.dispose();
+        }
+    });
+
+    btnSalvarJogo.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            escritaArquivo();
+            regraNegocio.rankingJogadores();
+            JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
+        }
+    });
+
+    btnRecuperarJogo.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            leituraArquivo();
+            atualizaPainelPontuacao();
+            atualizarItensJogador();
+            atualizarItensAmbiente();
+            textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
+            JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
+        }
+    });
         
-        btnItemCabecaVampiroAmbiente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar CabecaVampiro");
-                String item = regraNegocio.processarComando(comando);
-                textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    btnItemCabecaVampiroAmbiente.setEnabled(false);
-                    btnItemCabecaVampiroAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemCabecaVampiroMochila.setEnabled(true);
-                    btnItemCabecaVampiroMochila.setIcon(GerenciadorDeImagens.OK);
-                }
-            }
-        });
-        
-        btnItemCartaAmbiente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar Carta");
-                String item = regraNegocio.processarComando(comando);
-                textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    btnItemCartaAmbiente.setEnabled(false);
-                    btnItemCartaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemCartaMochila.setEnabled(true);
-                    btnItemCartaMochila.setIcon(GerenciadorDeImagens.OK);
-                }
-            }
-        });
-        
-        btnItemDenteLoboAmbiente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar Dente");
-                String item = regraNegocio.processarComando(comando);
-                textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    btnItemDenteLoboAmbiente.setEnabled(false);
-                    btnItemDenteLoboAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemDenteLoboMochila.setEnabled(true);
-                    btnItemDenteLoboMochila.setIcon(GerenciadorDeImagens.OK);
-                }
-            }
-        });
-        
-        btnItemPenaAmbiente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar Pena");
-                String item = regraNegocio.processarComando(comando);
-                textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    btnItemPenaAmbiente.setEnabled(false);
-                    btnItemPenaAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemPenaMochila.setEnabled(true);
-                    btnItemPenaMochila.setIcon(GerenciadorDeImagens.OK);
-                }
-            }
-        });
-        
-        btnItemPortadorAlmasAmbiente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar Almas");
-                String item = regraNegocio.processarComando(comando);
-                textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    btnItemPortadorAlmasAmbiente.setEnabled(false);
-                    btnItemPortadorAlmasAmbiente.setIcon(GerenciadorDeImagens.CANCELAR);
-                    btnItemPortadorAlmasMochila.setEnabled(true);
-                    btnItemPortadorAlmasMochila.setIcon(GerenciadorDeImagens.OK);
-                }
-            }
-        });
-        
-        btnEnviarComando.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    txtEntradaComandos.addKeyListener(new KeyListener() {
+        // Chamado logo após o usuário digitar um caractere Unicode
+        @Override
+        public void keyTyped(KeyEvent e) {}
+
+        //Chamado logo após o usuário pressionar uma tecla 
+        @Override
+        public void keyPressed(KeyEvent evt) {
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER){
                 String validaTexto = txtEntradaComandos.getText();
                 if(validaTexto.equals("sair")){
                     janela.dispose();
@@ -1102,63 +755,13 @@ public class TelaJogo implements Serializacao {
                     txtEntradaComandos.setText("Entrada de Comandos:");
                 }
             }
-        });
-        
-        btnCancelarJogo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                janela.dispose();
-            }
-        });
+        }   
 
-        btnSalvarJogo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                escritaArquivo();
-                regraNegocio.rankingJogadores();
-                JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
-            }
-        });
-        
-        btnRecuperarJogo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                leituraArquivo();
-                atualizaPainelPontuacao();
-                atualizarItensJogador();
-                atualizarItensAmbiente();
-                textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
-                JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
-            }
-        });
-        
-        txtEntradaComandos.addKeyListener(new KeyListener() {
-            // Chamado logo após o usuário digitar um caractere Unicode
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            
-            //Chamado logo após o usuário pressionar uma tecla 
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-                    String validaTexto = txtEntradaComandos.getText();
-                    if(validaTexto.equals("sair")){
-                        janela.dispose();
-                    }else{
-                        comando = analisador.pegarComando(validaTexto);
-                        textoDinamico.setText(regraNegocio.processarComando(comando));
-                        trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
-                        txtEntradaComandos.setText("Entrada de Comandos:");
-                    }
-                }
-            }   
-            
-            //Chamado logo após o usuário soltar uma tecla
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-    }
-
+        //Chamado logo após o usuário soltar uma tecla
+        @Override
+        public void keyReleased(KeyEvent e) {}
+    });
+}
     /**
      * Constrói a janela tratando internacionalização, componentes e layout.
      */

@@ -12,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -156,6 +158,30 @@ public class TelaAutenticacao {
             public void actionPerformed(ActionEvent e) {
                 janela.dispose();
             }
+        });
+        
+        txtSenha.addKeyListener(new KeyListener() {
+            // Chamado logo após o usuário digitar um caractere Unicode
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            
+            //Chamado logo após o usuário pressionar uma tecla 
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+                    try {
+                    gerenciadorUsuarios.autenticarUsuario(carregarUsuario());
+                    telaPrincipal.inicializar();
+                    janela.dispose();
+                    } catch (Exception ex) {
+                        Utilidades.msgErro(ex.getMessage());
+                    }
+                }
+            }   
+            
+            //Chamado logo após o usuário soltar uma tecla
+            @Override
+            public void keyReleased(KeyEvent e) {}
         });
     }
 

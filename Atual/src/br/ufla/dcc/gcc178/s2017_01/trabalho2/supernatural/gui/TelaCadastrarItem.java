@@ -6,7 +6,10 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,6 +41,9 @@ public class TelaCadastrarItem {
 
     private JButton botaoSalvar;
     private JButton botaoCancelar;
+    
+    //
+    private Item item;
 
     public TelaCadastrarItem(TelaPrincipal telaPrincipal) {
         this.telaPrincipal = telaPrincipal;
@@ -50,6 +56,7 @@ public class TelaCadastrarItem {
     public void inicializar(){
         criarComponentes();
         montarJanela();
+        configurarEventosTela();
         exibirTela();
     }
     
@@ -82,8 +89,29 @@ public class TelaCadastrarItem {
 
         botaoCancelar = new JButton("Cancelar");
         botaoCancelar.setBackground(Color.red);
+        
+        tela.pack();
     }
 
+    /**
+     * Configura os eventos da tela.
+     */
+    private void configurarEventosTela() {
+        botaoCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tela.dispose();
+            }
+        });
+        
+        botaoSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                item = new Item(caixaNome.getText(), caixaDescricao.getText());
+            }
+        });
+    }
+    
     private void montarJanela(){
 
         tela.setSize(300, 400);

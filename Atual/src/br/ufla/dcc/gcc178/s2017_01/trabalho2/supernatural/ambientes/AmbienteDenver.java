@@ -1,7 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.JogadorDean;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -24,7 +24,7 @@ public class AmbienteDenver extends Ambiente {
     
     private boolean itemFoiColetado;
     private boolean foiCeu;
-    private Item denteLobo;
+    private Item item;
     
     /**
      * Constroi um ambiente "AmbienteDenver" 
@@ -34,7 +34,7 @@ public class AmbienteDenver extends Ambiente {
         super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
-        denteLobo = new Item("Dente","O dente de lobisomem representa o mal do mundo");
+        item = new Item("Dente","O dente de lobisomem representa o mal do mundo");
     }
     
     /**
@@ -46,7 +46,7 @@ public class AmbienteDenver extends Ambiente {
      * uma String
      */
     @Override
-    public String mensagemDeEntrada(JogadorDean dean){
+    public String mensagemDeEntrada(Jogador dean){
         //Mensgem de entrada do ambiente
         String texto1 = "Dean se direciona para a cidade de Denver, no\n"
                         + "estado do Colorado.Há informações de que uma alcateia\n"
@@ -113,7 +113,7 @@ public class AmbienteDenver extends Ambiente {
      * @return uma string para verificacao de adicao
      */
     @Override
-    public String disponibilizarItemAmbiente(JogadorDean dean){
+    public String disponibilizarItemAmbiente(Jogador dean){
         if(getJaVisitada() == false){
             if(foiCeu == true){ 
                 return "Dente disponivel";
@@ -139,9 +139,9 @@ public class AmbienteDenver extends Ambiente {
      */
     @Override
     public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(denteLobo.getNomeItem()) && itemFoiColetado == false){
+        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
             itemFoiColetado = true;
-            return denteLobo;
+            return item;
         }else{
             return null;
         }
@@ -160,5 +160,14 @@ public class AmbienteDenver extends Ambiente {
         }else{
             return false;
         }
+    }
+    
+    /**
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
+     */
+    @Override
+    public Item getItem() {
+        return item;
     }
 }

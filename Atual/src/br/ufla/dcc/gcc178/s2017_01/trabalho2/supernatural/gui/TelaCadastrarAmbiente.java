@@ -6,12 +6,15 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -186,14 +189,37 @@ public class TelaCadastrarAmbiente {
             dropAmbienteEntrada4.addItem("Inferno");
             dropAmbienteEntrada4.addItem("Purgatorio");
             
-            spDescricao =  new JScrollPane(caixaDescricao);
+            try{
+            BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt"));
             
-            botaoSalvar = new JButton("Salvar");
-            botaoSalvar.setBackground(Color.green);
+            String linha = arq.readLine();
             
-            botaoCancelar = new JButton("Cancelar");
-            botaoCancelar.setBackground(Color.red);
-        }
+                while(linha!=null){
+
+                    String aux = linha;
+                    dropAmbienteSaida1.addItem(linha);
+                    dropAmbienteSaida2.addItem(linha);
+                    dropAmbienteSaida3.addItem(linha);
+                    dropAmbienteSaida4.addItem(linha);
+                    dropAmbienteEntrada1.addItem(linha);
+                    dropAmbienteEntrada2.addItem(linha);
+                    dropAmbienteEntrada3.addItem(linha);
+                    dropAmbienteEntrada4.addItem(linha);
+                    linha = arq.readLine();
+                }
+            }
+            catch(Exception e){
+
+            }
+
+                spDescricao =  new JScrollPane(caixaDescricao);
+
+                botaoSalvar = new JButton("Salvar");
+                botaoSalvar.setBackground(Color.green);
+
+                botaoCancelar = new JButton("Cancelar");
+                botaoCancelar.setBackground(Color.red);
+            }
         
         /**
      * Configura os eventos da tela.
@@ -205,44 +231,45 @@ public class TelaCadastrarAmbiente {
                 tela.dispose();
             }
         });
-//        
-//       
-//        
-//        botaoSalvar.addActionListener(new ActionListener(){
-//            @Override
-//            public void actionPerformed(ActionEvent e){
-//                if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length()
-//                        !=0 && !(selecionadorDeImagens.getName().equals("")) &&
-//                        !(dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")) &&
-//                        !(dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente"))){
-//                    
-//                  ambiente = new Ambiente(caixaNome.getText());
-//
-//                    try{
-//                        FileWriter arq = new FileWriter("itens.txt", true);
-//                        arq.write(item.getNomeItem() + "," + item.getDescricao() + "," + dropAmbienteInicial.getSelectedItem() + "\n");
-//                        arq.close();
-//                        
-//                        JOptionPane.showMessageDialog(tela,"Item cadastrado com sucesso" ,"Confirmação" , 2);
-//                        
-//                        caixaNome.setText("");
-//                        caixaDescricao.setText("");
-//                        dropAmbienteInicial.setSelectedItem("Selecione um ambiente");
-//                    }  
-//                    catch(Exception ex){
-//
-//                    }
-//
-//                }
-//                else{
-//                    
-//                    JOptionPane.showMessageDialog(tela, "Preencha todos os campos", "Erro", 0);
-//                }
-//                
-//           
-//        }   
-//                
-//    }); 
+        
+       
+        
+        botaoSalvar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length()
+                        !=0 &&
+                        !(dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")) &&
+                        !(dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente"))){
+                    
+                  ambiente = new AmbienteDefault(caixaNome.getText());
+                  
+
+                    try{
+                        FileWriter arq = new FileWriter("ambientes.txt", true);
+                        arq.write(ambiente.getNomeAmbiente() + "\n");
+                        arq.close();
+                        
+                        JOptionPane.showMessageDialog(tela,"Ambiente cadastrado com sucesso" ,"Confirmação" , 2);
+                        
+                        caixaNome.setText("");
+                        caixaDescricao.setText("");
+                        
+                    }  
+                    catch(Exception ex){
+
+                    }
+
+                }
+                else{
+                    
+                    JOptionPane.showMessageDialog(tela, "Preencha todos os campos", "Erro", 0);
+                }
+                
+           
+        }   
+                
+    }); 
     
     }
         
@@ -250,7 +277,6 @@ public class TelaCadastrarAmbiente {
             
             tela.setSize(800, 600);
             tela.setResizable(false);
-            tela.setDefaultCloseOperation(EXIT_ON_CLOSE);
             tela.setLayout(null);
             
             labelNome.setBounds(10, 20, 60, 20);

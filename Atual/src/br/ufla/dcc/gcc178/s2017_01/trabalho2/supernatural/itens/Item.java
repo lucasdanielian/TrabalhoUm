@@ -48,4 +48,8 @@ public class Item implements Serializable{
     public String getNomeItem(){
         return nomeItem;
     }
+    
+    public String getDescricao(){
+        return descricaoItem;
+    }
 }

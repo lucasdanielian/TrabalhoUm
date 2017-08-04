@@ -5,17 +5,21 @@
  */
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -54,6 +58,8 @@ public class TelaCadastrarAmbiente {
         
         private JButton botaoSalvar;
         private JButton botaoCancelar;
+        
+        private Ambiente ambiente;
         
         public TelaCadastrarAmbiente(TelaPrincipal telaPrincipal) {
             this.telaPrincipal = telaPrincipal;
@@ -199,6 +205,45 @@ public class TelaCadastrarAmbiente {
                 tela.dispose();
             }
         });
+//        
+//       
+//        
+//        botaoSalvar.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e){
+//                if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length()
+//                        !=0 && !(selecionadorDeImagens.getName().equals("")) &&
+//                        !(dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")) &&
+//                        !(dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente"))){
+//                    
+//                  ambiente = new Ambiente(caixaNome.getText());
+//
+//                    try{
+//                        FileWriter arq = new FileWriter("itens.txt", true);
+//                        arq.write(item.getNomeItem() + "," + item.getDescricao() + "," + dropAmbienteInicial.getSelectedItem() + "\n");
+//                        arq.close();
+//                        
+//                        JOptionPane.showMessageDialog(tela,"Item cadastrado com sucesso" ,"Confirmação" , 2);
+//                        
+//                        caixaNome.setText("");
+//                        caixaDescricao.setText("");
+//                        dropAmbienteInicial.setSelectedItem("Selecione um ambiente");
+//                    }  
+//                    catch(Exception ex){
+//
+//                    }
+//
+//                }
+//                else{
+//                    
+//                    JOptionPane.showMessageDialog(tela, "Preencha todos os campos", "Erro", 0);
+//                }
+//                
+//           
+//        }   
+//                
+//    }); 
+    
     }
         
         private void montarJanela(){

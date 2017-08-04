@@ -541,4 +541,8 @@ public class RegraNegocio implements Serializable{
     }
     
     
+    public Ambiente getAmbienteAtual() {
+        return ambienteAtual;
+    }
+    
 }

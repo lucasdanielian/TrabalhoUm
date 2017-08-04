@@ -14,16 +14,18 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
  */
 public class AmbienteDefault extends Ambiente{
     
-    Item item;
+    private String mensagem;
+    private Item item;
 
-    public AmbienteDefault(String nomeAmbiente) {
+    public AmbienteDefault(String nomeAmbiente, String m) {
         super(nomeAmbiente);
         item = null;
+        mensagem = m;
     }
 
     @Override
     public String mensagemDeEntrada(Jogador dean) {
-        return "mensagem teste";
+        return mensagem;
     }
 
     @Override

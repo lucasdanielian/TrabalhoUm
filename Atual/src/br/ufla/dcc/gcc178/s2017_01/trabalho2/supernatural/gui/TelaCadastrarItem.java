@@ -10,11 +10,13 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -107,7 +109,30 @@ public class TelaCadastrarItem {
         botaoSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                item = new Item(caixaNome.getText(), caixaDescricao.getText());
+                if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length() !=0 && !(dropAmbienteInicial.getSelectedItem().equals("Selecione um ambiente"))){
+                    
+                    item = new Item(caixaNome.getText(), caixaDescricao.getText());
+
+                    try{
+                        FileWriter arq = new FileWriter("itens.txt", true);
+                        arq.write(item.getNomeItem() + "," + item.getDescricao() + "," + dropAmbienteInicial.getSelectedItem() + "\n");
+                        arq.close();
+                        
+                        JOptionPane.showMessageDialog(tela,"Item cadastrado com sucesso" ,"Confirmação" , 2);
+                        
+                        caixaNome.setText("");
+                        caixaDescricao.setText("");
+                        dropAmbienteInicial.setSelectedItem("Selecione um ambiente");
+                    }  
+                    catch(Exception ex){
+
+                    }
+
+                }
+                else{
+                    
+                    JOptionPane.showMessageDialog(tela, "Preencha todos os campos", "Erro", 0);
+                }
             }
         });
     }
@@ -132,7 +157,7 @@ public class TelaCadastrarItem {
         tela.getContentPane().add(spDescricao);
         //tela.getContentPane().add(caixaDescricao);
 
-        labelAmbienteInicial.setBounds(10, 200, 100,20);
+        labelAmbienteInicial.setBounds(10, 200, 150,20);
         tela.getContentPane().add(labelAmbienteInicial);
 
         dropAmbienteInicial.setBounds(45, 230, 200, 20);

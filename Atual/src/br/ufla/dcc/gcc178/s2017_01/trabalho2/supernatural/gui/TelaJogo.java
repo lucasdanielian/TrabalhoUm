@@ -281,7 +281,7 @@ public class TelaJogo implements Serializacao {
             }
             //Cria os botoes dos ambientes
             if(botoesAmbientes.size() > 0){
-                if(botoesAmbientes.get(btnAmbiente.getName()) == null){
+                if(botoesAmbientes.get(ambiente.getNomeAmbiente()) == null){
                     btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
                             GerenciadorDeImagens.OK);
                     btnAmbiente.setName(ambiente.getNomeAmbiente());
@@ -295,6 +295,37 @@ public class TelaJogo implements Serializacao {
                 botoesAmbientes.put(btnAmbiente.getName(),btnAmbiente);
             }
         }
+    }
+    
+    private void atualizaBotoesItensAmbientes(){
+        
+        for (JButton botao : botoesItensAmbientes.values()) {
+            if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
+                botao.setVisible(true);
+            }else{
+                botao.setVisible(false);
+            }
+        }
+    }
+    
+    private void atualizaBotoesDeItens(){
+        
+        for (JButton botao : botoesItensJogador.values()) {
+            if(botao.equals(regraNegocio.getJogador().buscarItemPeloNomeNaMochila(botao.getName()))){
+                botao.setVisible(true);
+            }else{
+                botao.setVisible(false);
+            }
+        }
+        
+        for (JButton botao : botoesItensAmbientes.values()) {
+            if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
+                botao.setVisible(true);
+            }else{
+                botao.setVisible(false);
+            }
+        }
+        
     }
     
     private void painelOrientacaoJogador(){
@@ -522,26 +553,26 @@ public class TelaJogo implements Serializacao {
     private void configurarEventosTela() {
         
         //Loop responsavel pelas ações dos botões de itens do Jogador
-    Set<String> chavesItensJogador = botoesItensJogador.keySet();
-    for (String chave : chavesItensJogador) {
-        botoesItensJogador.get(chave).addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar " + chave);
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains(chave + " guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                }else{
-                    textoDinamico.setText(textoExibicao);
+        for (String chave : botoesItensJogador.keySet()) {
+            botoesItensJogador.get(chave).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String textoExibicao;
+                    comando = analisador.pegarComando("guardar " + chave);
+                    textoExibicao = regraNegocio.processarComando(comando);
+                    if(textoExibicao.contains(chave + " guardado com sucesso")){
+                        textoDinamico.setText(textoExibicao);
+                        atualizaBotoesDeItens();
+                    }else{
+                        textoDinamico.setText(textoExibicao);
+                        atualizaBotoesDeItens();
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
         
         //Loop responsavel pelas ações dos botões Ambientes
-        Set<String> chavesbotoesAmbientes = botoesAmbientes.keySet();
-        for (String chave : chavesbotoesAmbientes) {
+        for (String chave : botoesAmbientes.keySet()) {
             botoesAmbientes.get(chave).addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -555,6 +586,8 @@ public class TelaJogo implements Serializacao {
                         gameOver();
                     }else{
                         textoDinamico.setText(validaAmbiente);
+                        atualizaBotoesItensAmbientes();
+                        atualizaBotoesDeItens();
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
                     }
@@ -564,8 +597,7 @@ public class TelaJogo implements Serializacao {
     }        
     
     //Loop responsavel pelas ações dos botões de itens dos ambientes
-    Set<String> chavesItensAmbientes = botoesItensAmbientes.keySet();
-    for (String chave : chavesItensAmbientes) {
+    for (String chave : botoesItensAmbientes.keySet()) {
         botoesItensAmbientes.get(chave).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -573,8 +605,9 @@ public class TelaJogo implements Serializacao {
                 String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
                 if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    
+                    atualizaBotoesDeItens();
                 }
+                atualizaBotoesDeItens();
             }
         });
     }

@@ -7,7 +7,6 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaP
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
 import java.awt.BorderLayout;
@@ -33,7 +32,9 @@ import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -87,17 +88,16 @@ public class TelaJogo implements Serializacao {
     
     //Botoes para navegacao entre os ambientes    
     private JButton btnAmbiente;
-    private List<JButton> botoesAmbientes;
+    private HashMap<String,JButton> botoesAmbientes;
     
     //Botao que mostra os itens dos ambientes
     private JButton btnItemAmbiente;
-    private List<JButton> botoesItensAmbientes;
+    private HashMap<String,JButton> botoesItensAmbientes;
 
     
     //Botoes que mostra os itens da mochila
     private JButton btnItemJogador;
-    private List<JButton> botoesItensJogador;
-    
+    private HashMap<String,JButton> botoesItensJogador;
     
     //Exibicao de texto
     private JTextArea textoDinamico;
@@ -109,6 +109,7 @@ public class TelaJogo implements Serializacao {
     private JTextArea diasRestantes;
     private JTextArea ambienteAtual;
     private JLabel labelNaoHaBotoes;
+    private JLabel labelNaoHaItensAmbientes;
     
     //Entradas do usuario
     private JTextField txtEntradaComandos;
@@ -139,7 +140,7 @@ public class TelaJogo implements Serializacao {
      * Inicializa a tela, construindo seus componentes, configurando os eventos
      * e, ao final, exibe a tela.
      */
-    public void inicializar(){
+    public void inicializar(){        
         construirTela();
         configurarEventosTela();
         exibirTela();
@@ -156,25 +157,6 @@ public class TelaJogo implements Serializacao {
         
         //Botao que envia os comandos
         btnEnviarComando.setEnabled(true);
-    }
-    
-    /**
-     * Metodo responsvel por verificar a disponibilidade de cada iten
-     * em seu respectivo ambiente
-     * @param itensDisponiveis O item é passado por referencia, caso esteja
-     * indisponivel todos são setados como enable false, se não enable true
-     */
-    private void atualizarItensAmbiente(){
-        String itensDisponiveis = regraNegocio.verificaDisponibilidadeItemAmbiente();
-    }
-    
-    /**
-     * Metodo responsvel por verificar a disponibilidade de cada iten
-     * na mochila do jogador
-     */
-    private void atualizarItensJogador(){
-        Comando auxComando = analisador.pegarComando("analisar mochila");
-        String itensDisponiveis = regraNegocio.processarComando(auxComando);
     }
     
     /**
@@ -209,7 +191,7 @@ public class TelaJogo implements Serializacao {
             imagensJogo = new JLabel(logo);
             imagensJogo.setPreferredSize(new Dimension(500, 200));
             //Adicao da imagem no painei Oeste
-            adicionarComponentePainelNorte(imagensJogo,
+            adicionarComponentePainel(imagensJogo, painelNorte, layoutNorte,
                     GridBagConstraints.CENTER,
                     GridBagConstraints.HORIZONTAL,
                     0, 5, 1, 1);
@@ -242,24 +224,7 @@ public class TelaJogo implements Serializacao {
     /**
      * Adiciona um componente à tela.
      */
-    private void adicionarComponentePainelNorte(Component c,
-            int anchor, int fill, int linha,
-            int coluna, int largura, int altura) {
-        gbc.anchor = anchor;
-        gbc.fill = fill;
-        gbc.gridy = linha;
-        gbc.gridx = coluna;
-        gbc.gridwidth = largura;
-        gbc.gridheight = altura;
-        gbc.insets = new Insets(3, 3, 3, 3);
-        layoutNorte.setConstraints(c, gbc);
-        painelNorte.add(c);
-    }
-    
-    /**
-     * Adiciona um componente à tela.
-     */
-    private void adicionarComponentePainelSul(Component c,
+    private void adicionarComponentePainel(Component c, JPanel painel, GridBagLayout layout,
             int anchor, int fill, int linha,
             int coluna, int largura, int altura) {
         gbc.anchor = anchor;
@@ -269,164 +234,70 @@ public class TelaJogo implements Serializacao {
         gbc.gridwidth = largura;
         gbc.gridheight = altura;
         gbc.insets = new Insets(5, 5, 5, 5);
-        layoutSul.setConstraints(c, gbc);
-        painelSul.add(c);
-    }
-    
-    /**
-     * Adiciona um componente à tela.
-     */
-    private void adicionarComponentePainelLeste(Component c,
-            int anchor, int fill, int linha,
-            int coluna, int largura, int altura) {
-        gbc.anchor = anchor;
-        gbc.fill = fill;
-        gbc.gridy = linha;
-        gbc.gridx = coluna;
-        gbc.gridwidth = largura;
-        gbc.gridheight = altura;
-        gbc.insets = new Insets(5, 5, 5, 5);
-        layoutLeste.setConstraints(c, gbc);
-        painelLeste.add(c);
-    }
-    
-    /**
-     * Adiciona um componente à tela.
-     */
-    private void adicionarComponentePainelOeste(Component c, int anchor, 
-            int fill, int linha, int coluna, int largura, int altura) {
-        gbc.anchor = anchor;
-        gbc.fill = fill;
-        gbc.gridy = linha;
-        gbc.gridx = coluna;
-        gbc.gridwidth = largura;
-        gbc.gridheight = altura;
-        gbc.insets = new Insets(5, 5, 5, 5);
-        layoutOeste.setConstraints(c, gbc);
-        painelOeste.add(c);
-    }
-    
-    /**
-     * Adiciona um componente à tela.
-     */
-    private void adicionarComponentePainelCentral(Component c,
-            int anchor, int fill, int linha,
-            int coluna, int largura, int altura) {
-        gbc.anchor = anchor;
-        gbc.fill = fill;
-        gbc.gridy = linha;
-        gbc.gridx = coluna;
-        gbc.gridwidth = largura;
-        gbc.gridheight = altura;
-        gbc.insets = new Insets(5, 5, 5, 5);
-        layoutCentral.setConstraints(c, gbc);
-        painelCentral.add(c);
+        layout.setConstraints(c, gbc);
+        painel.add(c);
     }
     
     
-    private void criarBotoesAmbientes(List<Ambiente> ambientes){
-       
+    private void criarBotoes(List<Ambiente> ambientes){
         for (Ambiente ambiente : ambientes) {
-            
-            btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
-                    GerenciadorDeImagens.OK);
-            btnAmbiente.setName(ambiente.getNomeAmbiente());
-            botoesAmbientes.add(btnAmbiente);
-        }
-    }
-    
-    private void criarBotoesItensAmbientes(List<Ambiente> ambientes){
-       
-        for (Ambiente ambiente : ambientes) {
+            //Cria os botoes item dos ambientes e jogador
             if(ambiente.getItem() != null){
-                btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
-                        GerenciadorDeImagens.OK);
-                btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
-                botoesItensAmbientes.add(btnItemAmbiente);
+                //Cria botoes ambientes
+                if(botoesItensAmbientes.size() > 0){
+                    //Verifica se o botao já existe, caso seja null ele cria o botao
+                    if(botoesItensAmbientes.get(ambiente.getItem().getNomeItem()) == null){
+                        btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
+                                GerenciadorDeImagens.OK);
+                        btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
+                        botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+                    }else{
+                        
+                    }
+                    //Caso seja o primeiro botao entra aqui!    
+                }else{
+                    btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
+                                GerenciadorDeImagens.OK);
+                    btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
+                    botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+                }
+                
+                //cria botoes jogador
+                if(botoesItensJogador.size() > 0){
+                    if(botoesItensJogador.get(ambiente.getItem().getNomeItem()) == null){
+                        btnItemJogador = new JButton(ambiente.getItem().getNomeItem(),
+                            GerenciadorDeImagens.OK);
+                        btnItemJogador.setName(ambiente.getItem().getNomeItem());
+                        botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
+                    }
+                 //Caso seja o primeiro botao entra aqui!   
+                }else{
+                    btnItemJogador = new JButton(ambiente.getItem().getNomeItem(),
+                            GerenciadorDeImagens.OK);
+                    btnItemJogador.setName(ambiente.getItem().getNomeItem());
+                    botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
+                }
+                
             }
-            
-        }
-    }
-    
-    private void criarBotoesItensJogador(List<Item> itensJogador){
-        for (Item itemJogador : itensJogador) {
-            btnItemJogador = new JButton(itemJogador.getNomeItem(),
-                    GerenciadorDeImagens.OK);
-            btnItemAmbiente.setName(itemJogador.getNomeItem());
-            botoesItensJogador.add(btnItemJogador);
-        }
-        
-    }
-    
-    
-    private void adicionarBotoesAmbientesNaTela(List<JButton> botoesAmbientes){
-        int linha = 10;
-        if(botoesAmbientes.size() == 0){
-
-            adicionarComponentePainelLeste(labelNaoHaBotoes,
-                    GridBagConstraints.NORTH,
-                    GridBagConstraints.VERTICAL,
-                    linha, 0, 1, 1);
-                linha += 2;
-            
-        }else{
-            for (JButton botaoAmbiente : botoesAmbientes) {
-                //Adicão dos botoes de jogo no painei Oeste
-                adicionarComponentePainelOeste(botaoAmbiente,
-                        GridBagConstraints.CENTER,
-                        GridBagConstraints.NONE,
-                        linha, 0, 1, 1);
-                linha += 2;
-            }
-        }
-    }
-    
-    private void adicionarBotoesItensAmbientesNaTela(List<JButton> botoesItensAmbientes){
-        int linha = 2;
-        if(botoesItensAmbientes.size() == 0){
-
-            adicionarComponentePainelLeste(labelNaoHaBotoes,
-                    GridBagConstraints.NORTH,
-                    GridBagConstraints.VERTICAL,
-                    linha, 0, 1, 1);
-                linha += 2;
-            
-        }else{
-            for (JButton botaoItem : botoesItensAmbientes) {
-                //Adicão dos botoes de jogo no painei Leste
-            adicionarComponentePainelLeste(botaoItem,
-                    GridBagConstraints.NORTH,
-                    GridBagConstraints.VERTICAL,
-                    linha, 0, 1, 1);
-                linha += 2;
-            }  
-        }
-        
-    }
-    
-    private void adicionarBotoesItensJogadorNaTela(List<JButton> botoesItensJogador){
-        int linha = 22;
-        if(botoesItensJogador.size() == 0){
-
-            adicionarComponentePainelLeste(labelNaoHaBotoes,
-                    GridBagConstraints.NORTH,
-                    GridBagConstraints.VERTICAL,
-                    linha, 0, 1, 1);
-                linha += 2;
-            
-        }else{
-            for (JButton botaoItemJogador : botoesItensJogador) {
-                //Adicão dos botoes de jogo no painei Leste
-                adicionarComponentePainelLeste(botaoItemJogador,
-                        GridBagConstraints.CENTER,
-                        GridBagConstraints.VERTICAL,
-                        linha, 0, 1, 1);
-                linha += 2;
+            //Cria os botoes dos ambientes
+            if(botoesAmbientes.size() > 0){
+                if(botoesAmbientes.get(btnAmbiente.getName()) == null){
+                    btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
+                            GerenciadorDeImagens.OK);
+                    btnAmbiente.setName(ambiente.getNomeAmbiente());
+                    botoesAmbientes.put(btnAmbiente.getName(),btnAmbiente);
+                }
+            //Caso entre aqui é porque é o primeiro botao a ser criado    
+            }else{
+                btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
+                            GerenciadorDeImagens.OK);
+                btnAmbiente.setName(ambiente.getNomeAmbiente());
+                botoesAmbientes.put(btnAmbiente.getName(),btnAmbiente);
             }
         }
     }
     
-    private void adicionarPainelOrientacaoJogador(){
+    private void painelOrientacaoJogador(){
         //Imprime os dias corridos do jagador na tela
         diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getDiasCorridos());
         diasCorridos.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -434,7 +305,7 @@ public class TelaJogo implements Serializacao {
         diasCorridos.setForeground(Color.WHITE);
         diasCorridos.setEditable(false);
         //Adiciona dias corridos na tela
-        adicionarComponentePainelNorte(diasCorridos,
+        adicionarComponentePainel(diasCorridos, painelNorte, layoutNorte,
                 GridBagConstraints.WEST,
                 GridBagConstraints.HORIZONTAL,
                 0, 1, 2, 2);
@@ -446,7 +317,7 @@ public class TelaJogo implements Serializacao {
         diasRestantes.setForeground(Color.WHITE);
         diasRestantes.setEditable(false);        
         //Adiciona dias restantes na tela
-        adicionarComponentePainelNorte(diasRestantes,
+        adicionarComponentePainel(diasRestantes, painelNorte, layoutNorte,
                 GridBagConstraints.EAST,
                 GridBagConstraints.HORIZONTAL,
                 0, 9, 2, 2);
@@ -459,7 +330,7 @@ public class TelaJogo implements Serializacao {
         ambienteAtual.setLineWrap(true);
         ambienteAtual.setEditable(false);        
         //Adiciona dias restantes na tela
-        adicionarComponentePainelNorte(ambienteAtual,
+        adicionarComponentePainel(ambienteAtual, painelNorte, layoutNorte,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.HORIZONTAL,
                 1, 5, 1, 1);
@@ -473,7 +344,7 @@ public class TelaJogo implements Serializacao {
         tituloBotoesPrincipais.setForeground(Color.WHITE);
         tituloBotoesPrincipais.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelOeste(tituloBotoesPrincipais,
+        adicionarComponentePainel(tituloBotoesPrincipais, painelOeste, layoutOeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 0, 0, 1, 1);
@@ -482,7 +353,7 @@ public class TelaJogo implements Serializacao {
         btnSalvarJogo = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botao Salvar jogo no painei Oeste
-        adicionarComponentePainelOeste(btnSalvarJogo,
+        adicionarComponentePainel(btnSalvarJogo, painelOeste, layoutOeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 2, 0, 1, 1);
@@ -491,7 +362,7 @@ public class TelaJogo implements Serializacao {
         btnCancelarJogo = new JButton(I18N.obterBotaoCancelar(),
                 GerenciadorDeImagens.CANCELAR);
         //Adicão dos botoes Ambientes no painei Oeste
-        adicionarComponentePainelOeste(btnCancelarJogo,
+        adicionarComponentePainel(btnCancelarJogo, painelOeste, layoutOeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 4, 0, 1, 1);
@@ -499,7 +370,7 @@ public class TelaJogo implements Serializacao {
         btnRecuperarJogo = new JButton(I18N.obterBotaoRecuperarjogo(),
                 GerenciadorDeImagens.OK);
         //Adicão dos botoes Ambientes no painei Oeste
-        adicionarComponentePainelOeste(btnRecuperarJogo,
+        adicionarComponentePainel(btnRecuperarJogo, painelOeste, layoutOeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
                 6, 0, 1, 1);
@@ -508,13 +379,14 @@ public class TelaJogo implements Serializacao {
         btnEnviarComando = new JButton(I18N.obterBotaoEnviar(),
                 GerenciadorDeImagens.OK);
         //Adicão do botao Enviar comando no painei Oeste
-        adicionarComponentePainelCentral(btnEnviarComando,
+        adicionarComponentePainel(btnEnviarComando, painelCentral, layoutCentral,
                 GridBagConstraints.PAGE_END,
                 GridBagConstraints.VERTICAL,
                 4, 0, 1, 1);
     }
     
-    private void botoesItensJogador(){
+    private void adicionarBotoesItensJogador(){
+        int linha = 20;
         //Imprime o titulo dos botoes de itens da mochila na tela
         tituloBotoesVerItens = new JTextArea(" ITENS JOGADOR ");
         tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -522,16 +394,24 @@ public class TelaJogo implements Serializacao {
         tituloBotoesVerItens.setForeground(Color.WHITE);
         tituloBotoesVerItens.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelLeste(tituloBotoesVerItens,
+        adicionarComponentePainel(tituloBotoesVerItens, painelLeste, layoutLeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                20, 0, 2, 2);
+                linha, 0, 2, 2);
         
-        criarBotoesItensJogador(regraNegocio.getJogador().getMochila().getItens());
-        adicionarBotoesItensJogadorNaTela(botoesItensJogador);
+        for (JButton botao : botoesItensJogador.values()) {
+            adicionarComponentePainel(botao, painelLeste, layoutLeste,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                linha, 0, 2, 2);
+            linha += 2;
+        }
+        
     }
     
-    private void botoesItensAmbientes(){
+    private void adicionaBotoesItensAmbientes(){
+        int linha = 0;
+        
         //Imprime o titulo dos botões de itens na tela
         tituloBotoesItens = new JTextArea(" ITENS AMBIENTES ");
         tituloBotoesItens.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -539,16 +419,22 @@ public class TelaJogo implements Serializacao {
         tituloBotoesItens.setForeground(Color.WHITE);
         tituloBotoesItens.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelLeste(tituloBotoesItens,
+        adicionarComponentePainel(tituloBotoesItens, painelLeste, layoutLeste,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
-                0, 0, 2, 2);
-        
-        criarBotoesItensAmbientes(regraNegocio.getAmbientes());
-        adicionarBotoesItensAmbientesNaTela(botoesItensAmbientes);
+                linha, 0, 2, 2);
+
+        for (JButton botao : botoesItensAmbientes.values()) {
+            adicionarComponentePainel(botao, painelLeste, layoutLeste,
+                GridBagConstraints.NORTH,
+                GridBagConstraints.VERTICAL,
+                linha, 0, 2, 2);
+            linha += 2;
+        }
     }
     
-    private void botoesAmbientes(){
+    private void adicionaBotoesAmbientes(){
+        int linha = 8;
         //Imprime o texto na tela
         tituloBotoesAmbientes = new JTextArea(" NAVEGACAO ENTRE\n       AMBIENTES ");
         tituloBotoesAmbientes.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -556,13 +442,20 @@ public class TelaJogo implements Serializacao {
         tituloBotoesAmbientes.setForeground(Color.WHITE);
         tituloBotoesAmbientes.setEditable(false);
         //Adiciona o texto na tela
-        adicionarComponentePainelOeste(tituloBotoesAmbientes,
+        adicionarComponentePainel(tituloBotoesAmbientes, painelOeste, layoutOeste,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.VERTICAL,
-                8, 0, 2, 2);
-
-        criarBotoesAmbientes(regraNegocio.getAmbientes());
-        adicionarBotoesAmbientesNaTela(botoesAmbientes);
+                linha, 0, 2, 2);
+        linha += 2;
+        
+        for (JButton botao : botoesAmbientes.values()) {
+            adicionarComponentePainel(botao, painelOeste, layoutOeste,
+                    GridBagConstraints.CENTER,
+                    GridBagConstraints.VERTICAL,
+                    linha, 0, 2, 2);
+            linha += 2;
+        }
+        
     }
     
     /**
@@ -572,24 +465,17 @@ public class TelaJogo implements Serializacao {
         imagemPrincipal = "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/principal.jpeg";
         adicionarImagemAmbiente(imagemPrincipal);
         
-        Font myFont = new Font("Arial", Font.BOLD, 16);
-
-        botoesAmbientes = new ArrayList<>();
-        
-        botoesItensAmbientes = new ArrayList<>();
-        
-        botoesItensJogador = new ArrayList<>();
-        
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
         
+        botoesAmbientes = new HashMap<>();
+        
+        botoesItensAmbientes = new HashMap<>();
+        
+        botoesItensJogador = new HashMap<>();
+        
         //Analisador de comandos do jogo
         analisador = new Analisador();
-
-        labelNaoHaBotoes = new JLabel("Nao ha itens para "
-                                    + "serem exibidos aqui!");
-        labelNaoHaBotoes.setFont(myFont);
-        
         
         //Imprime os textos da regra de negocios
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
@@ -602,7 +488,7 @@ public class TelaJogo implements Serializacao {
         jScrollPaneSaida.setPreferredSize(new Dimension(600, 400));
         
         //Adiciona o JScrollPane do texto dinamico da tela
-        adicionarComponentePainelCentral(jScrollPaneSaida,
+        adicionarComponentePainel(jScrollPaneSaida, painelCentral, layoutCentral,
                 GridBagConstraints.NORTH,
                 GridBagConstraints.NONE,
                 1, 0, 1, 1);
@@ -616,18 +502,17 @@ public class TelaJogo implements Serializacao {
 			}
 		});
         //Adiciona Entrada de comandos na tela
-        adicionarComponentePainelCentral(txtEntradaComandos,
+        adicionarComponentePainel(txtEntradaComandos, painelCentral, layoutCentral,
                 GridBagConstraints.SOUTH,
                 GridBagConstraints.NONE,
                 2, 0, 1, 1);
         
-        
-        
-        botoesAmbientes();
-        botoesItensAmbientes();
-        botoesItensJogador();
+        criarBotoes(regraNegocio.getAmbientes());
+        adicionaBotoesAmbientes();
+        adicionaBotoesItensAmbientes();
+        adicionarBotoesItensJogador();
         botoesEstaticos();
-        adicionarPainelOrientacaoJogador();
+        painelOrientacaoJogador();
         prepararComponentesEstadoInicial();        
     }
 
@@ -636,13 +521,32 @@ public class TelaJogo implements Serializacao {
      */
     private void configurarEventosTela() {
         
+        //Loop responsavel pelas ações dos botões de itens do Jogador
+    Set<String> chavesItensJogador = botoesItensJogador.keySet();
+    for (String chave : chavesItensJogador) {
+        botoesItensJogador.get(chave).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textoExibicao;
+                comando = analisador.pegarComando("guardar " + chave);
+                textoExibicao = regraNegocio.processarComando(comando);
+                if(textoExibicao.contains(chave + " guardado com sucesso")){
+                    textoDinamico.setText(textoExibicao);
+                }else{
+                    textoDinamico.setText(textoExibicao);
+                }
+            }
+        });
+    }
+        
         //Loop responsavel pelas ações dos botões Ambientes
-        for (JButton botaoAmbiente : botoesAmbientes) {
-            botaoAmbiente.addActionListener(new ActionListener(){
+        Set<String> chavesbotoesAmbientes = botoesAmbientes.keySet();
+        for (String chave : chavesbotoesAmbientes) {
+            botoesAmbientes.get(chave).addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 String validaAmbiente;
-                comando = analisador.pegarComando("ir " + botaoAmbiente.getName());
+                comando = analisador.pegarComando("ir " + chave);
                 validaAmbiente = regraNegocio.processarComando(comando);
                 if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
@@ -650,8 +554,6 @@ public class TelaJogo implements Serializacao {
                     if(regraNegocio.diasRestantes()==0){
                         gameOver();
                     }else{
-
-                        atualizarItensAmbiente();
                         textoDinamico.setText(validaAmbiente);
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
@@ -660,30 +562,14 @@ public class TelaJogo implements Serializacao {
             }
         });
     }        
-     
-    //Loop responsavel pelas ações dos botões de itens do Jogador
-    for (JButton botaoItemJogador : botoesItensJogador) {
-        botaoItemJogador.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String textoExibicao;
-                comando = analisador.pegarComando("guardar " + botaoItemJogador.getName());
-                textoExibicao = regraNegocio.processarComando(comando);
-                if(textoExibicao.contains(botaoItemJogador.getName() + " guardado com sucesso")){
-                    textoDinamico.setText(textoExibicao);
-                }else{
-                    textoDinamico.setText(textoExibicao);
-                }
-            }
-        });
-    }
     
     //Loop responsavel pelas ações dos botões de itens dos ambientes
-    for (JButton botaoItemAmbiente : botoesItensAmbientes) {
-        botaoItemAmbiente.addActionListener(new ActionListener() {
+    Set<String> chavesItensAmbientes = botoesItensAmbientes.keySet();
+    for (String chave : chavesItensAmbientes) {
+        botoesItensAmbientes.get(chave).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar " + botaoItemAmbiente.getName());
+                comando = analisador.pegarComando("pegar " + chave);
                 String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
                 if(item.contains("item coletado")||item.contains("coletado com sucesso")){
@@ -729,8 +615,6 @@ public class TelaJogo implements Serializacao {
         public void actionPerformed(ActionEvent e) {
             leituraArquivo();
             atualizaPainelPontuacao();
-            atualizarItensJogador();
-            atualizarItensAmbiente();
             textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
             JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
         }

@@ -297,34 +297,34 @@ public class TelaJogo implements Serializacao {
         }
     }
     
-    private void atualizaBotoesItensAmbientes(){
-        
-        for (JButton botao : botoesItensAmbientes.values()) {
-            if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
-                botao.setVisible(true);
-            }else{
-                botao.setVisible(false);
-            }
-        }
-    }
-    
     private void atualizaBotoesDeItens(){
         
-        for (JButton botao : botoesItensJogador.values()) {
-            if(botao.equals(regraNegocio.getJogador().buscarItemPeloNomeNaMochila(botao.getName()))){
-                botao.setVisible(true);
-            }else{
+        if(regraNegocio.getAmbienteAtual().getItem() != null){
+            for (JButton botao : botoesItensAmbientes.values()) {
+                if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
+                    botao.setVisible(true);
+                }else{
+                    botao.setVisible(false);
+                }
+            }    
+        }else{
+            for (JButton botao : botoesItensAmbientes.values()) {
                 botao.setVisible(false);
+            } 
+        }
+        
+        List<Item> objetosMochila = regraNegocio.getJogador().getMochila().getItens();
+        for (Item item : objetosMochila) {
+            if(botoesItensJogador.containsKey(item.getNomeItem())){
+                botoesItensJogador.get(item.getNomeItem()).setVisible(true);
+            }else{
+                for (JButton botao : botoesItensJogador.values()) {
+                    botao.setVisible(false);
+                }
             }
         }
         
-        for (JButton botao : botoesItensAmbientes.values()) {
-            if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
-                botao.setVisible(true);
-            }else{
-                botao.setVisible(false);
-            }
-        }
+         
         
     }
     
@@ -586,7 +586,6 @@ public class TelaJogo implements Serializacao {
                         gameOver();
                     }else{
                         textoDinamico.setText(validaAmbiente);
-                        atualizaBotoesItensAmbientes();
                         atualizaBotoesDeItens();
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();

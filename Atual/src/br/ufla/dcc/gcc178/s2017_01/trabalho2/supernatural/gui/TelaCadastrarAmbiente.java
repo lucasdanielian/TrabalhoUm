@@ -38,7 +38,7 @@ public class TelaCadastrarAmbiente {
     private JFrame tela;
  
         private JLabel labelNome;
-        private JLabel labelDescricao;
+        private JLabel labelMensagem;
         private JLabel labelSaidas;
         private JLabel labelImagem;
         private JLabel labelEntradas;
@@ -48,7 +48,7 @@ public class TelaCadastrarAmbiente {
         private JTextField caixaNome;
         private JTextField caixaImagem;
         private JTextField barreira;
-        private JTextArea caixaDescricao;
+        private JTextArea caixaMensagem;
         private JComboBox dropAmbienteSaida1;
         private JComboBox dropAmbienteSaida2;
         private JComboBox dropAmbienteSaida3;
@@ -83,8 +83,8 @@ public class TelaCadastrarAmbiente {
             tela = new JFrame("Cadastrar Ambiente");
             labelNome = new JLabel("Nome:");
             labelNome.setFont(myFont);
-            labelDescricao = new JLabel("Descrição:");
-            labelDescricao.setFont(myFont);
+            labelMensagem = new JLabel("Mensagem de Entrada:");
+            labelMensagem.setFont(myFont);
             labelSaidas = new JLabel("Saídas:");
             labelSaidas.setFont(myFont);
             labelEntradas = new JLabel("Entradas:");
@@ -97,7 +97,7 @@ public class TelaCadastrarAmbiente {
             caixaNome = new JTextField();
             caixaImagem = new JTextField();
             barreira = new JTextField();
-            caixaDescricao = new JTextArea();
+            caixaMensagem= new JTextArea();
             dropAmbienteSaida1 = new JComboBox();
             dropAmbienteSaida2 = new JComboBox();
             dropAmbienteSaida3 = new JComboBox();
@@ -212,7 +212,7 @@ public class TelaCadastrarAmbiente {
 
             }
 
-                spDescricao =  new JScrollPane(caixaDescricao);
+                spDescricao =  new JScrollPane(caixaMensagem);
 
                 botaoSalvar = new JButton("Salvar");
                 botaoSalvar.setBackground(Color.green);
@@ -237,23 +237,22 @@ public class TelaCadastrarAmbiente {
         botaoSalvar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length()
+                if(caixaNome.getText().length() != 0 && caixaMensagem.getText().length()
                         !=0 &&
                         !(dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")) &&
                         !(dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente"))){
-                    
-                  ambiente = new AmbienteDefault(caixaNome.getText());
                   
-
+                  String aux = caixaNome.getText().replaceAll(" ", "");
+ 
                     try{
                         FileWriter arq = new FileWriter("ambientes.txt", true);
-                        arq.write(ambiente.getNomeAmbiente() + "\n");
+                        arq.write(aux + "," + caixaMensagem.getText() + "\n");
                         arq.close();
                         
                         JOptionPane.showMessageDialog(tela,"Ambiente cadastrado com sucesso" ,"Confirmação" , 2);
                         
                         caixaNome.setText("");
-                        caixaDescricao.setText("");
+                        caixaMensagem.setText("");
                         
                     }  
                     catch(Exception ex){
@@ -296,8 +295,8 @@ public class TelaCadastrarAmbiente {
             barreira.setBounds(445,10,2,550);
             tela.getContentPane().add(barreira);
             
-            labelDescricao.setBounds(460, 240, 100, 20);
-            tela.getContentPane().add(labelDescricao);
+            labelMensagem.setBounds(460, 240, 250, 20);
+            tela.getContentPane().add(labelMensagem);
             
             spDescricao.setBounds(480,280, 300, 150);
             tela.getContentPane().add(spDescricao);

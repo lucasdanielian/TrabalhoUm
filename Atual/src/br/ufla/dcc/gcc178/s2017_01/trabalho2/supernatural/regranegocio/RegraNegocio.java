@@ -17,11 +17,13 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasa
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -119,7 +121,8 @@ public class RegraNegocio implements Serializable{
            String linha = arq.readLine();
            
            while(linha!=null){
-               Ambiente novo = new AmbienteDefault(linha);
+               String termos[] = linha.split(",");
+               Ambiente novo = new AmbienteDefault(termos[0],termos[1]);
                ambientes.add(novo);
                linha = arq.readLine();
            }

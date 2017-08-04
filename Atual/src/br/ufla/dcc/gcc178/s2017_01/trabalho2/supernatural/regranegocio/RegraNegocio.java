@@ -14,8 +14,11 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaCaim;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,78 +113,101 @@ public class RegraNegocio implements Serializable{
         ceu = new AmbienteCeu("Ceu");
         ambientes.add(ceu);
         
-        // inicializa as saidas do ambiente casaWinchester
-        casaWinchester.ajustarSaidas(ceu);
-        casaWinchester.ajustarSaidas(inferno);
-        casaWinchester.ajustarSaidas(denver);
-        casaWinchester.ajustarSaidas(casaBob);
-        casaWinchester.ajustarSaidas(houston);
-        casaWinchester.ajustarSaidas(casaCaim);
-        casaWinchester.ajustarSaidas(purgatorio);
+        try{
+           
+           BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt")); 
+           String linha = arq.readLine();
+           
+           while(linha!=null){
+               Ambiente novo = new AmbienteDefault(linha);
+               ambientes.add(novo);
+               linha = arq.readLine();
+           }
+           
+        }
+        catch(Exception e){
+            
+        }
         
-        // inicializa as saidas do ambiente denver
-        denver.ajustarSaidas(ceu);
-        denver.ajustarSaidas(inferno);
-        denver.ajustarSaidas(casaBob);
-        denver.ajustarSaidas(houston);
-        denver.ajustarSaidas(casaCaim);
-        denver.ajustarSaidas(purgatorio);
-        denver.ajustarSaidas(casaWinchester);
+//        // inicializa as saidas do ambiente casaWinchester
+//        casaWinchester.ajustarSaidas(ceu);
+//        casaWinchester.ajustarSaidas(inferno);
+//        casaWinchester.ajustarSaidas(denver);
+//        casaWinchester.ajustarSaidas(casaBob);
+//        casaWinchester.ajustarSaidas(houston);
+//        casaWinchester.ajustarSaidas(casaCaim);
+//        casaWinchester.ajustarSaidas(purgatorio);
+//        
+//        // inicializa as saidas do ambiente denver
+//        denver.ajustarSaidas(ceu);
+//        denver.ajustarSaidas(inferno);
+//        denver.ajustarSaidas(casaBob);
+//        denver.ajustarSaidas(houston);
+//        denver.ajustarSaidas(casaCaim);
+//        denver.ajustarSaidas(purgatorio);
+//        denver.ajustarSaidas(casaWinchester);
+//        
+//        // inicializa as saidas do ambiente houston
+//        houston.ajustarSaidas(ceu);
+//        houston.ajustarSaidas(inferno);
+//        houston.ajustarSaidas(casaBob);
+//        houston.ajustarSaidas(casaCaim);
+//        houston.ajustarSaidas(casaWinchester);
+//        houston.ajustarSaidas(purgatorio);
+//        houston.ajustarSaidas(denver);
+//        
+//        // inicializa as saidas do ambiente casaCaim
+//        casaCaim.ajustarSaidas(houston);
+//        casaCaim.ajustarSaidas(ceu);
+//        casaCaim.ajustarSaidas(casaBob);
+//        casaCaim.ajustarSaidas(casaWinchester);
+//        casaCaim.ajustarSaidas(denver);
+//        casaCaim.ajustarSaidas(purgatorio);
+//        casaCaim.ajustarSaidas(inferno);
+//        
+//        // inicializa as saidas do ambiente casaBob
+//        casaBob.ajustarSaidas(ceu);
+//        casaBob.ajustarSaidas(denver);
+//        casaBob.ajustarSaidas(casaWinchester);
+//        casaBob.ajustarSaidas(casaCaim);
+//        casaBob.ajustarSaidas(inferno);
+//        casaBob.ajustarSaidas(purgatorio);
+//        casaBob.ajustarSaidas(houston);
+//        
+//        // O ambiente inferno não tem saidas disponíveis
+//        /*inferno.ajustarSaidas(ceu);
+//        inferno.ajustarSaidas(denver);
+//        inferno.ajustarSaidas(casaWinchester);
+//        inferno.ajustarSaidas(casaCaim);
+//        inferno.ajustarSaidas(casaBob);
+//        inferno.ajustarSaidas(houston);
+//        inferno.ajustarSaidas(purgatorio);
+//        */
+//        
+//        // inicializa as saidas do ambiente purgatorio
+//        purgatorio.ajustarSaidas(ceu);
+//        purgatorio.ajustarSaidas(denver);
+//        purgatorio.ajustarSaidas(casaWinchester);
+//        purgatorio.ajustarSaidas(casaBob);
+//        purgatorio.ajustarSaidas(casaCaim);
+//        purgatorio.ajustarSaidas(inferno);
+//        purgatorio.ajustarSaidas(houston);
+//        
+//        // inicializa as saidas do ambiente ceu
+//        ceu.ajustarSaidas(houston);
+//        ceu.ajustarSaidas(inferno);
+//        ceu.ajustarSaidas(casaCaim);
+//        ceu.ajustarSaidas(casaBob);
+//        ceu.ajustarSaidas(casaWinchester);
+//        ceu.ajustarSaidas(denver);
+//        ceu.ajustarSaidas(purgatorio);
         
-        // inicializa as saidas do ambiente houston
-        houston.ajustarSaidas(ceu);
-        houston.ajustarSaidas(inferno);
-        houston.ajustarSaidas(casaBob);
-        houston.ajustarSaidas(casaCaim);
-        houston.ajustarSaidas(casaWinchester);
-        houston.ajustarSaidas(purgatorio);
-        houston.ajustarSaidas(denver);
-        
-        // inicializa as saidas do ambiente casaCaim
-        casaCaim.ajustarSaidas(houston);
-        casaCaim.ajustarSaidas(ceu);
-        casaCaim.ajustarSaidas(casaBob);
-        casaCaim.ajustarSaidas(casaWinchester);
-        casaCaim.ajustarSaidas(denver);
-        casaCaim.ajustarSaidas(purgatorio);
-        casaCaim.ajustarSaidas(inferno);
-        
-        // inicializa as saidas do ambiente casaBob
-        casaBob.ajustarSaidas(ceu);
-        casaBob.ajustarSaidas(denver);
-        casaBob.ajustarSaidas(casaWinchester);
-        casaBob.ajustarSaidas(casaCaim);
-        casaBob.ajustarSaidas(inferno);
-        casaBob.ajustarSaidas(purgatorio);
-        casaBob.ajustarSaidas(houston);
-        
-        // O ambiente inferno não tem saidas disponíveis
-        /*inferno.ajustarSaidas(ceu);
-        inferno.ajustarSaidas(denver);
-        inferno.ajustarSaidas(casaWinchester);
-        inferno.ajustarSaidas(casaCaim);
-        inferno.ajustarSaidas(casaBob);
-        inferno.ajustarSaidas(houston);
-        inferno.ajustarSaidas(purgatorio);
-        */
-        
-        // inicializa as saidas do ambiente purgatorio
-        purgatorio.ajustarSaidas(ceu);
-        purgatorio.ajustarSaidas(denver);
-        purgatorio.ajustarSaidas(casaWinchester);
-        purgatorio.ajustarSaidas(casaBob);
-        purgatorio.ajustarSaidas(casaCaim);
-        purgatorio.ajustarSaidas(inferno);
-        purgatorio.ajustarSaidas(houston);
-        
-        // inicializa as saidas do ambiente ceu
-        ceu.ajustarSaidas(houston);
-        ceu.ajustarSaidas(inferno);
-        ceu.ajustarSaidas(casaCaim);
-        ceu.ajustarSaidas(casaBob);
-        ceu.ajustarSaidas(casaWinchester);
-        ceu.ajustarSaidas(denver);
-        ceu.ajustarSaidas(purgatorio);
+        for (Ambiente ambiente : ambientes) {
+            for(Ambiente aux : ambientes){
+                if(!(ambiente==aux))
+                ambiente.ajustarSaidas(aux);
+            }
+        }
      
         // o jogo comeca do lado de fora
         ambienteAtual = casaWinchester;

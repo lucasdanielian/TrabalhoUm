@@ -10,6 +10,8 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -83,6 +85,22 @@ public class TelaCadastrarItem {
         dropAmbienteInicial.addItem("Houston");
         dropAmbienteInicial.addItem("Inferno");
         dropAmbienteInicial.addItem("Purgatorio");
+        
+        try{
+            BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt"));
+            
+            String linha = arq.readLine();
+            
+            while(linha!=null){
+                
+                String aux = linha;
+                dropAmbienteInicial.addItem(linha);
+                linha = arq.readLine();
+            }
+        }
+        catch(Exception e){
+            
+        }
 
         spDescricao =  new JScrollPane(caixaDescricao);
 
@@ -141,7 +159,6 @@ public class TelaCadastrarItem {
 
         tela.setSize(300, 400);
         tela.setResizable(false);
-        tela.setDefaultCloseOperation(EXIT_ON_CLOSE);
         tela.setLayout(null);
 
         labelNome.setBounds(10, 20, 60, 20);

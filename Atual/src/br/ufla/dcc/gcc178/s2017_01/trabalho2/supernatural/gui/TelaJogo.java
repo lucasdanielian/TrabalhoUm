@@ -323,6 +323,16 @@ public class TelaJogo implements Serializacao {
         }
     }
     
+    private void atualizaBotoesDeAmbientes(){
+        for (JButton botaoAmbiente : botoesAmbientes.values()) {
+            if(regraNegocio.getAmbienteAtual().saidasValidas().contains(botaoAmbiente.getName())){
+                botaoAmbiente.setVisible(true);
+            }else{
+                botaoAmbiente.setVisible(false);
+            }
+        }
+    }
+    
     /**
      * Painel de navegação do jogador, informa os dias corridos os dias restantes
      * e o ambiente atual.
@@ -533,6 +543,7 @@ public class TelaJogo implements Serializacao {
         
         //Recebe a entrada do usuario na tela
         txtEntradaComandos = new JTextField("Comandos Devem Ser Digitados Aqui:");
+        txtEntradaComandos.setSize(10, 100);
         txtEntradaComandos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -594,6 +605,7 @@ public class TelaJogo implements Serializacao {
                     }
                 }
                 atualizaBotoesDeItens();
+                atualizaBotoesDeAmbientes();
             }
         });
     }        
@@ -620,6 +632,8 @@ public class TelaJogo implements Serializacao {
                 String aux = regraNegocio.receberComando(validaTexto);
                 textoDinamico.setText(aux);
                 trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                atualizaBotoesDeItens();
+                atualizaBotoesDeAmbientes();
                 txtEntradaComandos.setText("Entrada de Comandos:");
             }
         }
@@ -647,6 +661,7 @@ public class TelaJogo implements Serializacao {
             leituraArquivo();
             atualizaPainelPontuacao();
             atualizaBotoesDeItens();
+            atualizaBotoesDeAmbientes();
             textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
             JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
         }

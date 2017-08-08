@@ -128,10 +128,13 @@ public class TelaCadastrarItem {
             public void actionPerformed(ActionEvent e) {
                 if(caixaNome.getText().length() != 0 && caixaDescricao.getText().length() !=0 && !(dropAmbienteInicial.getSelectedItem().equals("Selecione um ambiente"))){
                     
-                    item = new Item(caixaNome.getText(), caixaDescricao.getText());
+                    String aux = caixaNome.getText().replaceAll(" ", "");
+                    
+                    item = new Item(aux, caixaDescricao.getText());
 
                     try{
                         FileWriter arq = new FileWriter("persistencias/itens.txt", true);
+                       
                         arq.write(item.getNomeItem() + "," + item.getDescricao() + "," + dropAmbienteInicial.getSelectedItem() + "\n");
                         arq.close();
                         

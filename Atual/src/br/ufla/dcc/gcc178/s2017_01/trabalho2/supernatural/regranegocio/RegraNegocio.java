@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -114,7 +115,9 @@ public class RegraNegocio implements Serializable{
         ceu = new AmbienteCeu("Ceu");
         ambientes.add(ceu);
         
-        try{
+       
+        
+         try{
            
            BufferedReader arq = new BufferedReader(new FileReader("persistencias/ambientes.txt")); 
            String linha = arq.readLine();
@@ -128,13 +131,58 @@ public class RegraNegocio implements Serializable{
            
         }
         catch(Exception e){
-            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+         
+         
+         
+          try{
+           
+           BufferedReader arq = new BufferedReader(new FileReader("persistencias/itens.txt")); 
+           String linha = arq.readLine();
+           
+           while(linha!=null){
+               String termos[] = linha.split(",");
+               Item novo = new Item(termos[0],termos[1]);
+               for(Ambiente aux :ambientes){
+                   if(aux.getNomeAmbiente().equals(termos[2])){
+                       aux.inserirItensAmbiente(novo);
+                   }
+               }
+               linha = arq.readLine();
+           }
+           
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
+        
+          
+          
         for (Ambiente ambiente : ambientes) {
             for(Ambiente aux : ambientes){
-                if(!(ambiente==aux))
-                ambiente.ajustarSaidas(aux);
+                if(!(ambiente==aux)){
+                    try{
+                       
+                        BufferedReader arq = new BufferedReader(new FileReader("persistencias/saidas.txt")); 
+                        String linha = arq.readLine();
+
+                        while(linha!=null){
+                            String termos[] = linha.split(",");
+                            if(ambiente.getNomeAmbiente().equals(termos[0]) && aux.getNomeAmbiente().equals(termos[1])){
+                                ambiente.ajustarSaidas(aux);
+                            }
+                            linha = arq.readLine();
+                        }
+                        
+
+                    }
+                    catch(Exception e){
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
+                }
+                    
             }
         }
         

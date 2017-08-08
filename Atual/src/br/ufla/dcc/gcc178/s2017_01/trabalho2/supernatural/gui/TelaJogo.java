@@ -288,7 +288,7 @@ public class TelaJogo implements Serializacao {
      */
     private void atualizaBotoesDeItens(){
         //Atualiza botoes de itens jogador
-        if(regraNegocio.getJogador().getMochila().getItens() != null){
+        if(regraNegocio.getJogador().getMochila().getItens().size() > 0){
             for (JButton botao : botoesItensJogador.values()) {
                 for (Item item : regraNegocio.getJogador().getMochila().getItens()) {
                     if(botao.getName().equals(item.getNomeItem())){
@@ -306,7 +306,7 @@ public class TelaJogo implements Serializacao {
         }
         
         //Atualiza botoes de itens dos Ambientes
-        if(regraNegocio.getAmbienteAtual().getItens() != null){
+        if(regraNegocio.getAmbienteAtual().getItens().size() > 0){
             for (JButton botao : botoesItensAmbientes.values()) {
                 for (Item item : regraNegocio.getAmbienteAtual().getItens()) {
                     if(botao.getName().equals(item.getNomeItem())){

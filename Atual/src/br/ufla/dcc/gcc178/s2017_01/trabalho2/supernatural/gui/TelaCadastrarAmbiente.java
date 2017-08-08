@@ -248,37 +248,38 @@ public class TelaCadastrarAmbiente {
                         arq.close();
                         
                         FileWriter arq2 = new FileWriter("persistencias/saidas.txt",true);
+                        arq2.write("\n");
                         
                         if(!dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(dropAmbienteEntrada1.getSelectedItem() + "," + aux);
+                            arq2.write(dropAmbienteEntrada1.getSelectedItem() + "," + aux + "\n");
                         }
                         
                         if(!dropAmbienteEntrada2.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(dropAmbienteEntrada2.getSelectedItem() + "," + aux);
+                            arq2.write(dropAmbienteEntrada2.getSelectedItem() + "," + aux + "\n");
                         }
                         
                         if(!dropAmbienteEntrada3.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(dropAmbienteEntrada3.getSelectedItem() + "," + aux);
+                            arq2.write(dropAmbienteEntrada3.getSelectedItem() + "," + aux + "\n");
                         }
                         
                         if(!dropAmbienteEntrada4.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(dropAmbienteEntrada4.getSelectedItem() + "," + aux);
+                            arq2.write(dropAmbienteEntrada4.getSelectedItem() + "," + aux + "\n");
                         }
                         
                         if(!dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(aux + "," + dropAmbienteSaida1.getSelectedItem());
+                            arq2.write(aux + "," + dropAmbienteSaida1.getSelectedItem() + "\n");
                         }
                         
                         if(!dropAmbienteSaida2.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(aux + "," + dropAmbienteSaida2.getSelectedItem());
+                            arq2.write(aux + "," + dropAmbienteSaida2.getSelectedItem() + "\n");
                         }
                         
                         if(!dropAmbienteSaida3.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(aux + "," + dropAmbienteSaida3.getSelectedItem());
+                            arq2.write(aux + "," + dropAmbienteSaida3.getSelectedItem() + "\n");
                         }
                         
                         if(!dropAmbienteSaida4.getSelectedItem().equals("Selecione um ambiente")){
-                            arq2.write(aux + "," + dropAmbienteSaida4.getSelectedItem());
+                            arq2.write(aux + "," + dropAmbienteSaida4.getSelectedItem() + "\n");
                         }
                         
                         arq2.close();
@@ -287,7 +288,7 @@ public class TelaCadastrarAmbiente {
                         
                         File novo = selecionadorDeImagens.getSelectedFile();
                         
-                        novo.renameTo(new File("persistencias/imagens/" + caixaNome.getText() +".png"));
+                        novo.renameTo(new File("src/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/" + caixaNome.getText() +".png"));
                         
                         caixaNome.setText("");
                         caixaMensagem.setText("");

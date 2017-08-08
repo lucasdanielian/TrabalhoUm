@@ -14,7 +14,7 @@ Ceu,CasaBob
 CasaBob,Houston
 CasaBob,CasaCaim
 CasaBob,Purgatorio
-CasaBob,Winchester
+CasaBob,CasaWinchester
 CasaCaim,Houston
 CasaCaim,PortalInferno
 CasaCaim,Denver

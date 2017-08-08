@@ -9,6 +9,7 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeI
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.regranegocio.RegraNegocio;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -29,12 +30,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,6 +68,11 @@ public class TelaJogo implements Serializacao {
     private JPanel painelLeste;
     private JPanel painelOeste;
     private JPanel painelCentral;
+    private JScrollPane jScrollPanePainelNorte;
+    private JScrollPane jScrollPanePainelSul;
+    private JScrollPane jScrollPanePainelLeste;
+    private JScrollPane jScrollPanePainelOeste;
+    private JScrollPane jScrollPanePainelCentral;
     private GridBagConstraints gbc;
     private GridBagLayout layoutNorte;
     private GridBagLayout layoutSul;
@@ -94,7 +96,6 @@ public class TelaJogo implements Serializacao {
     private JButton btnItemAmbiente;
     private HashMap<String,JButton> botoesItensAmbientes;
 
-    
     //Botoes que mostra os itens da mochila
     private JButton btnItemJogador;
     private HashMap<String,JButton> botoesItensJogador;
@@ -122,12 +123,13 @@ public class TelaJogo implements Serializacao {
     private ImageIcon logo;
     private JLabel imagensJogo;
     private JLabel rotuloTxtEntradaComandos;
-    private File file;
-    private URL resource;
+    private File fileImagens;
+    private File filePersistencia;
     private String imagemPrincipal;
     private String diretorioPersistencia;
-
-     /**
+    private SessaoUsuario sessaoUsuario ;
+    
+    /**
      * Constrói a tela Meus Filmes guardando a referência da tela principal.
      * 
      * @param telaPrincipal Referência da tela principal.
@@ -183,42 +185,25 @@ public class TelaJogo implements Serializacao {
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void adicionarImagemAmbiente(String diretorio){
-        try{
-            URL resource = getClass().getResource(diretorio);
-            file = new File(resource.toURI());
-            logo = new ImageIcon(file.getPath());
-            imagensJogo = new JLabel(logo);
+    private void adicionarImagemAmbiente(ImageIcon imagem){
+        
+            imagensJogo = new JLabel(imagem);
             imagensJogo.setPreferredSize(new Dimension(500, 200));
             //Adicao da imagem no painei Oeste
             adicionarComponentePainel(imagensJogo, painelNorte, layoutNorte,
                     GridBagConstraints.CENTER,
                     GridBagConstraints.HORIZONTAL,
                     0, 5, 1, 1);
-        } catch (URISyntaxException | NullPointerException ex){
-            JOptionPane.showMessageDialog(janela, "Imagem: " + diretorio
-                    + " Nao encontrada");
-            JOptionPane.showMessageDialog(janela, "O jogo continuará sem imagem. \n"
-                    + "Se o problema persistir contate o administrador do sistema");
-        }
     }
     
     /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void trocaImagemAmbiente(String diretorio){
-        try{
-           URL resource = getClass().getResource(diretorio);
-            file = new File(resource.toURI());
-            logo = new ImageIcon(file.getPath());
-            imagensJogo.setIcon(new ImageIcon(file.getPath())); 
-        } catch (URISyntaxException | NullPointerException ex){
-            JOptionPane.showMessageDialog(painelNorte, "Imagem: " + diretorio
-                    + " Nao encontrada");
-            JOptionPane.showMessageDialog(painelNorte, "O jogo continuará sem imagem. \n"
-                    + "Se o problema persistir contate o administrador do sistema");
-        }
+    private void trocaImagemAmbiente(ImageIcon imagem){
+        
+        imagensJogo.setIcon(imagem); 
+        
     }
     
     /**
@@ -238,46 +223,50 @@ public class TelaJogo implements Serializacao {
         painel.add(c);
     }
     
-    
+    /**
+     * Metodo responsavel pela criação dos botões
+     * @param ambientes recebe uma lista de ambientes
+     */
     private void criarBotoes(List<Ambiente> ambientes){
         for (Ambiente ambiente : ambientes) {
             //Cria os botoes item dos ambientes e jogador
-            if(ambiente.getItem() != null){
-                //Cria botoes ambientes
-                if(botoesItensAmbientes.size() > 0){
-                    //Verifica se o botao já existe, caso seja null ele cria o botao
-                    if(botoesItensAmbientes.get(ambiente.getItem().getNomeItem()) == null){
-                        btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
-                                GerenciadorDeImagens.OK);
-                        btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
-                        botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+            if(ambiente.getItens() != null){
+                for (Item item : ambiente.getItens()) {
+                    //Cria botoes itens ambientes
+                    if(botoesItensAmbientes.size() > 0){
+                        //Verifica se o botao já existe, caso seja null ele cria o botao
+                        if(botoesItensAmbientes.get(item.getNomeItem()) == null){
+                            btnItemAmbiente = new JButton(item.getNomeItem(),
+                                    GerenciadorDeImagens.OK);
+                            btnItemAmbiente.setName(item.getNomeItem());
+                            botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+                        }else{
+
+                        }
+                        //Caso seja o primeiro botao entra aqui!    
                     }else{
-                        
+                        btnItemAmbiente = new JButton(item.getNomeItem(),
+                                    GerenciadorDeImagens.OK);
+                        btnItemAmbiente.setName(item.getNomeItem());
+                        botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
                     }
-                    //Caso seja o primeiro botao entra aqui!    
-                }else{
-                    btnItemAmbiente = new JButton(ambiente.getItem().getNomeItem(),
+                    
+                    //cria botoes jogador
+                    if(botoesItensJogador.size() > 0){
+                        if(botoesItensJogador.get(item.getNomeItem()) == null){
+                            btnItemJogador = new JButton(item.getNomeItem(),
                                 GerenciadorDeImagens.OK);
-                    btnItemAmbiente.setName(ambiente.getItem().getNomeItem());
-                    botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
-                }
-                
-                //cria botoes jogador
-                if(botoesItensJogador.size() > 0){
-                    if(botoesItensJogador.get(ambiente.getItem().getNomeItem()) == null){
-                        btnItemJogador = new JButton(ambiente.getItem().getNomeItem(),
-                            GerenciadorDeImagens.OK);
-                        btnItemJogador.setName(ambiente.getItem().getNomeItem());
+                            btnItemJogador.setName(item.getNomeItem());
+                            botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
+                        }
+                     //Caso seja o primeiro botao entra aqui!   
+                    }else{
+                        btnItemJogador = new JButton(item.getNomeItem(),
+                                GerenciadorDeImagens.OK);
+                        btnItemJogador.setName(item.getNomeItem());
                         botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
                     }
-                 //Caso seja o primeiro botao entra aqui!   
-                }else{
-                    btnItemJogador = new JButton(ambiente.getItem().getNomeItem(),
-                            GerenciadorDeImagens.OK);
-                    btnItemJogador.setName(ambiente.getItem().getNomeItem());
-                    botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
                 }
-                
             }
             //Cria os botoes dos ambientes
             if(botoesAmbientes.size() > 0){
@@ -297,14 +286,38 @@ public class TelaJogo implements Serializacao {
         }
     }
     
+    /**
+     * Metodo responsavel por verificar os itens do jogador e dos ambientes para
+     * manter a tela atualizada
+     */
     private void atualizaBotoesDeItens(){
+        //Atualiza botoes de itens jogador
+        if(regraNegocio.getJogador().getMochila().getItens() != null){
+            for (JButton botao : botoesItensJogador.values()) {
+                for (Item item : regraNegocio.getJogador().getMochila().getItens()) {
+                    if(botao.getName().equals(item.getNomeItem())){
+                        botao.setVisible(true);
+                    }
+                    else{
+                        botao.setVisible(false);
+                    }
+                }
+            }
+        }else{
+            for (JButton botao : botoesItensJogador.values()) {
+                botao.setVisible(false);
+            }
+        }
         
-        if(regraNegocio.getAmbienteAtual().getItem() != null){
+        //Atualiza botoes de itens dos Ambientes
+        if(regraNegocio.getAmbienteAtual().getItens() != null){
             for (JButton botao : botoesItensAmbientes.values()) {
-                if(botao.getName().equals(regraNegocio.getAmbienteAtual().getItem().getNomeItem())){
-                    botao.setVisible(true);
-                }else{
-                    botao.setVisible(false);
+                for (Item item : regraNegocio.getAmbienteAtual().getItens()) {
+                    if(botao.getName().equals(item.getNomeItem())){
+                        botao.setVisible(true);
+                    }else{
+                        botao.setVisible(false);
+                    }
                 }
             }    
         }else{
@@ -312,22 +325,12 @@ public class TelaJogo implements Serializacao {
                 botao.setVisible(false);
             } 
         }
-        
-        List<Item> objetosMochila = regraNegocio.getJogador().getMochila().getItens();
-        for (Item item : objetosMochila) {
-            if(botoesItensJogador.containsKey(item.getNomeItem())){
-                botoesItensJogador.get(item.getNomeItem()).setVisible(true);
-            }else{
-                for (JButton botao : botoesItensJogador.values()) {
-                    botao.setVisible(false);
-                }
-            }
-        }
-        
-         
-        
     }
     
+    /**
+     * Painel de navegação do jogador, informa os dias corridos os dias restantes
+     * e o ambiente atual.
+     */
     private void painelOrientacaoJogador(){
         //Imprime os dias corridos do jagador na tela
         diasCorridos = new JTextArea("Dias Corridos: " + regraNegocio.getDiasCorridos());
@@ -367,6 +370,9 @@ public class TelaJogo implements Serializacao {
                 1, 5, 1, 1);
     }
     
+    /**
+     * Metodo responsavel por inserir os botões estaticos
+     */
     private void botoesEstaticos(){
         //Imprime o texto na tela
         tituloBotoesPrincipais = new JTextArea("BOTOES PRINCIPAIS");
@@ -416,6 +422,9 @@ public class TelaJogo implements Serializacao {
                 4, 0, 1, 1);
     }
     
+    /**
+     * Metodo responsavel por adicionar os botões de itens do jogador na tela
+     */
     private void adicionarBotoesItensJogador(){
         int linha = 20;
         //Imprime o titulo dos botoes de itens da mochila na tela
@@ -440,6 +449,9 @@ public class TelaJogo implements Serializacao {
         
     }
     
+    /**
+     * Metodo responsavel por adicionar os botões dos ambientes na tela
+     */
     private void adicionaBotoesItensAmbientes(){
         int linha = 0;
         
@@ -464,6 +476,9 @@ public class TelaJogo implements Serializacao {
         }
     }
     
+    /**
+     * metodo responsavel por adicionar os botões dos ambientes na tela
+     */
     private void adicionaBotoesAmbientes(){
         int linha = 8;
         //Imprime o texto na tela
@@ -474,14 +489,14 @@ public class TelaJogo implements Serializacao {
         tituloBotoesAmbientes.setEditable(false);
         //Adiciona o texto na tela
         adicionarComponentePainel(tituloBotoesAmbientes, painelOeste, layoutOeste,
-                GridBagConstraints.CENTER,
+                GridBagConstraints.SOUTH,
                 GridBagConstraints.VERTICAL,
                 linha, 0, 2, 2);
         linha += 2;
         
         for (JButton botao : botoesAmbientes.values()) {
             adicionarComponentePainel(botao, painelOeste, layoutOeste,
-                    GridBagConstraints.CENTER,
+                    GridBagConstraints.SOUTH,
                     GridBagConstraints.VERTICAL,
                     linha, 0, 2, 2);
             linha += 2;
@@ -493,8 +508,7 @@ public class TelaJogo implements Serializacao {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentesTelaJogo(){
-        imagemPrincipal = "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/principal.jpeg";
-        adicionarImagemAmbiente(imagemPrincipal);
+        adicionarImagemAmbiente(GerenciadorDeImagens.PRINCIPAL);
         
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
@@ -544,7 +558,8 @@ public class TelaJogo implements Serializacao {
         adicionarBotoesItensJogador();
         botoesEstaticos();
         painelOrientacaoJogador();
-        prepararComponentesEstadoInicial();        
+        prepararComponentesEstadoInicial();
+        atualizaBotoesDeItens();
     }
 
     /**
@@ -562,11 +577,10 @@ public class TelaJogo implements Serializacao {
                     textoExibicao = regraNegocio.processarComando(comando);
                     if(textoExibicao.contains(chave + " guardado com sucesso")){
                         textoDinamico.setText(textoExibicao);
-                        atualizaBotoesDeItens();
                     }else{
                         textoDinamico.setText(textoExibicao);
-                        atualizaBotoesDeItens();
                     }
+                    atualizaBotoesDeItens();
                 }
             });
         }
@@ -586,11 +600,11 @@ public class TelaJogo implements Serializacao {
                         gameOver();
                     }else{
                         textoDinamico.setText(validaAmbiente);
-                        atualizaBotoesDeItens();
                         trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                         atualizaPainelPontuacao();
                     }
                 }
+                atualizaBotoesDeItens();
             }
         });
     }        
@@ -603,9 +617,6 @@ public class TelaJogo implements Serializacao {
                 comando = analisador.pegarComando("pegar " + chave);
                 String item = regraNegocio.processarComando(comando);
                 textoDinamico.setText(item);
-                if(item.contains("item coletado")||item.contains("coletado com sucesso")){
-                    atualizaBotoesDeItens();
-                }
                 atualizaBotoesDeItens();
             }
         });
@@ -647,6 +658,7 @@ public class TelaJogo implements Serializacao {
         public void actionPerformed(ActionEvent e) {
             leituraArquivo();
             atualizaPainelPontuacao();
+            atualizaBotoesDeItens();
             textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
             JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
         }
@@ -710,19 +722,37 @@ public class TelaJogo implements Serializacao {
         painelSul.setLayout(layoutSul);
         painelLeste.setLayout(layoutLeste);
         
+        //Adiciona barra de rolagem ao texto
+        jScrollPanePainelNorte = new JScrollPane(painelNorte);
+        jScrollPanePainelNorte.setPreferredSize(new Dimension(500, 400));
+        //Adiciona barra de rolagem ao texto
+        jScrollPanePainelSul = new JScrollPane(painelSul);
+        jScrollPanePainelSul.setPreferredSize(new Dimension(500, 400));
+        //Adiciona barra de rolagem ao texto
+        jScrollPanePainelLeste = new JScrollPane(painelLeste);
+        jScrollPanePainelLeste.setPreferredSize(new Dimension(250, 100));
+        //Adiciona barra de rolagem ao texto
+        jScrollPanePainelOeste = new JScrollPane(painelOeste);
+        jScrollPanePainelOeste.setPreferredSize(new Dimension(250, 100));
+        //Adiciona barra de rolagem ao texto
+        jScrollPanePainelCentral = new JScrollPane(painelCentral);
+        jScrollPanePainelCentral.setPreferredSize(new Dimension(500, 400));
+        
+        
         //Configurando Layout dos paineis
         janela.add(painelNorte, BorderLayout.NORTH);
         janela.add(painelSul, BorderLayout.SOUTH);
-        janela.add(painelLeste, BorderLayout.EAST);
-        janela.add(painelOeste, BorderLayout.WEST);
+        janela.add(jScrollPanePainelLeste, BorderLayout.EAST);
+        janela.add(jScrollPanePainelOeste, BorderLayout.WEST);
         janela.add(painelCentral, BorderLayout.CENTER);
         
         //
         adicionarComponentesTelaJogo();
         janela.pack();
+        sessaoUsuario = SessaoUsuario.obterInstancia();
         
         //Nome do arquivo para serializacao
-        diretorioPersistencia = "superNatural.dat";
+        diretorioPersistencia = "persistencias/superNatural_" + sessaoUsuario.obterUsuario().obterNome() + ".dat";
         
     }
 
@@ -731,7 +761,7 @@ public class TelaJogo implements Serializacao {
      */
     private void exibirTela() {
         janela.setLocationRelativeTo(telaPrincipal.obterJanela());
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         janela.setVisible(true);
         janela.setResizable(false);
     }
@@ -743,7 +773,7 @@ public class TelaJogo implements Serializacao {
     public void escritaArquivo() {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(
-            new FileOutputStream(diretorioPersistencia));
+                    new FileOutputStream(diretorioPersistencia));
             oos.writeObject(regraNegocio);
             oos.close();
         }

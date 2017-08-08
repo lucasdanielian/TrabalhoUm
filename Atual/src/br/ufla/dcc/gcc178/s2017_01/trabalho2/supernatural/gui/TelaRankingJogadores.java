@@ -39,7 +39,11 @@ public class TelaRankingJogadores {
  * @author Julio Alves e Paulo Jr.
  */
 
-    
+    /**
+     * Constrói a tela Ranking de Jogadores guardando a referência da tela principal.
+     * 
+     * @param telaPrincipal Referência da tela principal.
+     */
     public TelaRankingJogadores(TelaPrincipal telaPrincipal) {
         this.telaPrincipal = telaPrincipal;
     }

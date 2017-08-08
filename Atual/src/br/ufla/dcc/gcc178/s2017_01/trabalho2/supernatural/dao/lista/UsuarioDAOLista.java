@@ -1,7 +1,6 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.UsuarioDAO;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.excecoes.CaracteresUsuarioException;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.modelo.Usuario;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.persistencia.Serializacao;
 import java.io.FileInputStream;
@@ -35,7 +34,7 @@ public class UsuarioDAOLista implements Serializable, UsuarioDAO, Serializacao{
      */
     private UsuarioDAOLista() {
         listaUsuario = new ArrayList<Usuario>();
-        diretorioPersistencia = "usuarios.dat";
+        diretorioPersistencia = "persistencias/usuarios.dat";
         leituraArquivo();
 
     }
@@ -79,7 +78,6 @@ public class UsuarioDAOLista implements Serializable, UsuarioDAO, Serializacao{
     /**
      * Retorna o usuário a partir de seu nome
      * 
-     * @param login Nome do usuário a ser retornado.
      * @return Usuário correspondente ao nome passado.
      */
     @Override

@@ -1,10 +1,13 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
 
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
@@ -26,17 +29,20 @@ public abstract class Ambiente implements Serializable{
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
+    private ColecaoDeItens itens;
     
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
      * "um jardim aberto"
      * @param nomeAmbiente esperada uma string contendo o nome do ambiente
+     * @param qtdItens espera um inteiro com a quantidade de itens do ambiente.
      */
-    public Ambiente(String nomeAmbiente)  {
+    public Ambiente(String nomeAmbiente, int qtdItens)  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
+        itens = new ColecaoDeItens(qtdItens);
     }
     
     /**
@@ -66,31 +72,49 @@ public abstract class Ambiente implements Serializable{
     public abstract String mensagemDeEntrada(Jogador dean);
     
     /**
-     * Metodo para verificar se um ambiente possui um item disponivel ou nao
-     * @param dean Jogador e passado para verificacao se e possivel adicionar o
-     * item na mochila ou nao
-     * @return String contendo disponivel ou indisponivel de acordo com a
-     * disponibilidade do item
+     * Metodo utilizado para verificar se um ambiente possui itens disponiveis
+     * para captura
+     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
+     * ambiente
+     * @return String informando que nao é possivel coletar itens neste ambiente
      */
-    public abstract String disponibilizarItemAmbiente(Jogador dean);
+    public String disponibilizarItemAmbiente(Jogador dean) {
+        
+        return itens.retornaDescricaoTodosItens();
+    }
+
+    /**
+     * Remove um objeto contido no armario.
+     * @param nome criterio de remoção
+     * @return Item removido é retornado para tratamento
+     */
+    public Item pegarItemAmbiente(String nome) {
+        return itens.removerPeloNome(nome);
+    }
+
+    /**
+     * Insere um item no armario 
+     * @param item o item passado por referencia é colocado no armario
+     * @return boolean se inserido retorna true e se não inserido retorna false
+     */
+    public boolean inserirItensAmbiente(Item item) {
+        return itens.inserirItens(item);
+    }
     
     /**
-     * Metodo que pega um Item do ambiente
-     * @param nome passa o nome do item a ser coletado
-     * @return o item para que possa ser adicionado na mochila
+     * Metodo que retorna o item de um ambinete
+     * @return Item 
      */
-    public abstract Item pegarItemAmbiente(String nome);
-    
-    public abstract boolean inserirItensAmbiente(Item item);
-    
-    public abstract Item getItem();
+    public List<Item> getItens() {
+        return itens.getItens();
+    }
     
     /**
      *  Metodo que retornará uma string com a localização da imagem.
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @return String
      */
-    public abstract String imagemDoAmbiente();
+    public abstract ImageIcon imagemDoAmbiente();
     
     /**
      * Metodo que retorna se um ambiente já foi visitado ou nao.

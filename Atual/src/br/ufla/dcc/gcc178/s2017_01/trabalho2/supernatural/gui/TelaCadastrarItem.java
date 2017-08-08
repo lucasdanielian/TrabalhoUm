@@ -16,7 +16,6 @@ import java.io.FileWriter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -143,7 +142,7 @@ public class TelaCadastrarItem {
                         dropAmbienteInicial.setSelectedItem("Selecione um ambiente");
                     }  
                     catch(Exception ex){
-
+                        JOptionPane.showMessageDialog(tela, ex.getMessage());
                     }
 
                 }

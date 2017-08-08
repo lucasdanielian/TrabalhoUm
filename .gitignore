@@ -3,5 +3,6 @@
 !*/dist
 */dist/*
 !*/dist/javadoc
-!*/superNatural.dat
+!*/persistencias/*
+!*/persistencias
 

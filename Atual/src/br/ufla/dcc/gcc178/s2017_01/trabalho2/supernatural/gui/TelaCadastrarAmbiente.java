@@ -6,9 +6,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -20,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -190,7 +187,7 @@ public class TelaCadastrarAmbiente {
             dropAmbienteEntrada4.addItem("Purgatorio");
             
             try{
-            BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt"));
+            BufferedReader arq = new BufferedReader(new FileReader("persistencias/ambientes.txt"));
             
             String linha = arq.readLine();
             
@@ -245,7 +242,7 @@ public class TelaCadastrarAmbiente {
                   String aux = caixaNome.getText().replaceAll(" ", "");
  
                     try{
-                        FileWriter arq = new FileWriter("ambientes.txt", true);
+                        FileWriter arq = new FileWriter("persistencias/ambientes.txt", true);
                         arq.write(aux + "," + caixaMensagem.getText() + "\n");
                         arq.close();
                         

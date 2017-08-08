@@ -137,6 +137,8 @@ public class RegraNegocio implements Serializable{
                 ambiente.ajustarSaidas(aux);
             }
         }
+        
+        
      
         // o jogo comeca do lado de fora
         ambienteAtual = casaWinchester;

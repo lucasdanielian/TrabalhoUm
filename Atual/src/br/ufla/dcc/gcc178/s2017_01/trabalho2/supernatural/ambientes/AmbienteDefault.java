@@ -16,10 +16,12 @@ import javax.swing.ImageIcon;
 public class AmbienteDefault extends Ambiente{
     
     private String mensagem;
+    private ImageIcon imagem;
 
     public AmbienteDefault(String nomeAmbiente, String m) {
         super(nomeAmbiente, 1);
         mensagem = m;
+        new ImageIcon(GerenciadorDeImagens.class.getResource("principal.jpeg"));
     }
 
     @Override
@@ -29,7 +31,16 @@ public class AmbienteDefault extends Ambiente{
 
     @Override
     public ImageIcon imagemDoAmbiente() {
-        return GerenciadorDeImagens.PRINCIPAL;
+        return imagem;
+    }
+    
+    /**
+     * Metodo responsavel por alterar a imagem padrão do ambiente
+     * @param caminhoImagem deve ser passado o nome do ambiente, pois as imagens
+     * são salvas com este nome
+     */
+    public void setImageIcon(String caminhoImagem){
+        new ImageIcon(GerenciadorDeImagens.class.getResource(caminhoImagem));
     }
     
 }

@@ -5,8 +5,9 @@
  */
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,11 +16,9 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 public class AmbienteDefault extends Ambiente{
     
     private String mensagem;
-    private Item item;
 
     public AmbienteDefault(String nomeAmbiente, String m) {
-        super(nomeAmbiente);
-        item = null;
+        super(nomeAmbiente, 1);
         mensagem = m;
     }
 
@@ -29,28 +28,8 @@ public class AmbienteDefault extends Ambiente{
     }
 
     @Override
-    public String disponibilizarItemAmbiente(Jogador dean) {
-        return "mensagem teste";    
-    }
-
-    @Override
-    public Item pegarItemAmbiente(String nome) {
-        return item;
-    }
-
-    @Override
-    public boolean inserirItensAmbiente(Item item) {
-        return false;
-    }
-
-    @Override
-    public Item getItem() {
-        return item;
-    }
-
-    @Override
-    public String imagemDoAmbiente() {
-        return "sem imagem";
+    public ImageIcon imagemDoAmbiente() {
+        return GerenciadorDeImagens.PRINCIPAL;
     }
     
 }

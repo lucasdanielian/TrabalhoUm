@@ -17,13 +17,12 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasa
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
-import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 
 /**
  *  Essa eh a classe principal(Para iniciar na lina de comando) do RegraNegocio "SuperNatural".
@@ -117,7 +116,7 @@ public class RegraNegocio implements Serializable{
         
         try{
            
-           BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt")); 
+           BufferedReader arq = new BufferedReader(new FileReader("persistencias/ambientes.txt")); 
            String linha = arq.readLine();
            
            while(linha!=null){
@@ -131,79 +130,6 @@ public class RegraNegocio implements Serializable{
         catch(Exception e){
             
         }
-        
-//        // inicializa as saidas do ambiente casaWinchester
-//        casaWinchester.ajustarSaidas(ceu);
-//        casaWinchester.ajustarSaidas(inferno);
-//        casaWinchester.ajustarSaidas(denver);
-//        casaWinchester.ajustarSaidas(casaBob);
-//        casaWinchester.ajustarSaidas(houston);
-//        casaWinchester.ajustarSaidas(casaCaim);
-//        casaWinchester.ajustarSaidas(purgatorio);
-//        
-//        // inicializa as saidas do ambiente denver
-//        denver.ajustarSaidas(ceu);
-//        denver.ajustarSaidas(inferno);
-//        denver.ajustarSaidas(casaBob);
-//        denver.ajustarSaidas(houston);
-//        denver.ajustarSaidas(casaCaim);
-//        denver.ajustarSaidas(purgatorio);
-//        denver.ajustarSaidas(casaWinchester);
-//        
-//        // inicializa as saidas do ambiente houston
-//        houston.ajustarSaidas(ceu);
-//        houston.ajustarSaidas(inferno);
-//        houston.ajustarSaidas(casaBob);
-//        houston.ajustarSaidas(casaCaim);
-//        houston.ajustarSaidas(casaWinchester);
-//        houston.ajustarSaidas(purgatorio);
-//        houston.ajustarSaidas(denver);
-//        
-//        // inicializa as saidas do ambiente casaCaim
-//        casaCaim.ajustarSaidas(houston);
-//        casaCaim.ajustarSaidas(ceu);
-//        casaCaim.ajustarSaidas(casaBob);
-//        casaCaim.ajustarSaidas(casaWinchester);
-//        casaCaim.ajustarSaidas(denver);
-//        casaCaim.ajustarSaidas(purgatorio);
-//        casaCaim.ajustarSaidas(inferno);
-//        
-//        // inicializa as saidas do ambiente casaBob
-//        casaBob.ajustarSaidas(ceu);
-//        casaBob.ajustarSaidas(denver);
-//        casaBob.ajustarSaidas(casaWinchester);
-//        casaBob.ajustarSaidas(casaCaim);
-//        casaBob.ajustarSaidas(inferno);
-//        casaBob.ajustarSaidas(purgatorio);
-//        casaBob.ajustarSaidas(houston);
-//        
-//        // O ambiente inferno não tem saidas disponíveis
-//        /*inferno.ajustarSaidas(ceu);
-//        inferno.ajustarSaidas(denver);
-//        inferno.ajustarSaidas(casaWinchester);
-//        inferno.ajustarSaidas(casaCaim);
-//        inferno.ajustarSaidas(casaBob);
-//        inferno.ajustarSaidas(houston);
-//        inferno.ajustarSaidas(purgatorio);
-//        */
-//        
-//        // inicializa as saidas do ambiente purgatorio
-//        purgatorio.ajustarSaidas(ceu);
-//        purgatorio.ajustarSaidas(denver);
-//        purgatorio.ajustarSaidas(casaWinchester);
-//        purgatorio.ajustarSaidas(casaBob);
-//        purgatorio.ajustarSaidas(casaCaim);
-//        purgatorio.ajustarSaidas(inferno);
-//        purgatorio.ajustarSaidas(houston);
-//        
-//        // inicializa as saidas do ambiente ceu
-//        ceu.ajustarSaidas(houston);
-//        ceu.ajustarSaidas(inferno);
-//        ceu.ajustarSaidas(casaCaim);
-//        ceu.ajustarSaidas(casaBob);
-//        ceu.ajustarSaidas(casaWinchester);
-//        ceu.ajustarSaidas(denver);
-//        ceu.ajustarSaidas(purgatorio);
         
         for (Ambiente ambiente : ambientes) {
             for(Ambiente aux : ambientes){
@@ -274,7 +200,7 @@ public class RegraNegocio implements Serializable{
      * Retorna o endereço da imagem do ambiente Atual
      * @return String contendo o endereco da imagem
      */
-    public String imagemAmbienteAtual() {
+    public ImageIcon imagemAmbienteAtual() {
         return ambienteAtual.imagemDoAmbiente();
     }
 

@@ -1,8 +1,8 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
+import javax.swing.ImageIcon;
 
 /**
  * Classe AmbienteCasaWinchester - um ambiente em um jogo adventure.
@@ -23,17 +23,12 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
  */
 public class AmbienteCasaWinchester extends Ambiente {
     
-    private ColecaoDeItens armario;
-    Item item;
-    
     /**
      * @param nomeAmbiente 
      * Constroi um ambiente "CasaWincester" passando seu nome por parametro
      */
     public AmbienteCasaWinchester(String nomeAmbiente)  {
-        super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
-        armario = new ColecaoDeItens(100);
-        item = null;
+        super(nomeAmbiente, 3);//Inicializa o nome do ambiente na classe pai
     }
      
     /**
@@ -55,49 +50,7 @@ public class AmbienteCasaWinchester extends Ambiente {
      * retorna uma String com o endereco da imagem
      */
     @Override
-    public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/casaWinchester.jpg";
-    }
-
-    /**
-     * Metodo utilizado para verificar se um ambiente possui itens disponiveis
-     * para captura
-     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
-     * ambiente
-     * @return String informando que nao é possivel coletar itens neste ambiente
-     */
-    @Override
-    public String disponibilizarItemAmbiente(Jogador dean) {
-        
-        return armario.retornaDescricaoTodosItens();
-    }
-
-    /**
-     * Remove um objeto contido no armario.
-     * @param nome criterio de remoção
-     * @return Item removido é retornado para tratamento
-     */
-    @Override
-    public Item pegarItemAmbiente(String nome) {
-        return armario.removerPeloNome(nome);
-    }
-
-    /**
-     * Insere um item no armario 
-     * @param item o item passado por referencia é colocado no armario
-     * @return boolean se inserido retorna true e se não inserido retorna false
-     */
-    @Override
-    public boolean inserirItensAmbiente(Item item) {
-        return armario.inserirItens(item);
-    }
-    
-    /**
-     * Metodo que retorna o item de um ambinete
-     * @return Item 
-     */
-    @Override
-    public Item getItem() {
-        return item;
+    public ImageIcon imagemDoAmbiente() {
+        return GerenciadorDeImagens.CASA_WINCHESTER;
     }
 }

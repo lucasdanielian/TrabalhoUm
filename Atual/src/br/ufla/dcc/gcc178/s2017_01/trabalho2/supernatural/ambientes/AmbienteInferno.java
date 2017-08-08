@@ -1,7 +1,8 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
+import javax.swing.ImageIcon;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -24,7 +25,6 @@ public class AmbienteInferno extends Ambiente {
     private boolean denteLobo;
     private boolean penaAnjo;
     private boolean almas;
-    private Item item;
     
     /**
      * @param nomeAmbiente
@@ -32,11 +32,10 @@ public class AmbienteInferno extends Ambiente {
      * denteLobo, penaAnjo e almas é inicializado como false
      */
     public AmbienteInferno(String nomeAmbiente)  {
-        super(nomeAmbiente);
+        super(nomeAmbiente, 1);
         denteLobo = false;
         penaAnjo = false;
         almas = false;
-        item = null;
     }
     
     /**
@@ -102,48 +101,7 @@ public class AmbienteInferno extends Ambiente {
      * retorna uma String com o endereco da imagem
      */
     @Override
-    public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/inferno.png";
-    }
-
-    /**
-     * Metodo utilizado para verificar se um ambiente possui itens disponiveis
-     * para captura
-     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
-     * ambiente
-     * @return String informando que nao é possivel coletar itens neste ambiente
-     */
-    @Override
-    public String disponibilizarItemAmbiente(Jogador dean) {
-        return "item indisponivel";
-    }
-
-    /**
-     * Remove um objeto contido no armario.
-     * @param nome criterio de remoção
-     * @return Item removido é retornado para tratamento
-     */
-    @Override
-    public Item pegarItemAmbiente(String nome) {
-        return null;
-    }
-
-    /**
-     * Insere o item passado no ambiente
-     * @param item objeto do tipo Item
-     * @return true caso o item foi inserido e false caso ao contrario
-     */
-    @Override
-    public boolean inserirItensAmbiente(Item item) {
-        return false;
-    }
-    
-    /**
-     * Metodo que retorna o item de um ambinete
-     * @return Item 
-     */
-    @Override
-    public Item getItem() {
-        return item;
+    public ImageIcon imagemDoAmbiente() {
+        return GerenciadorDeImagens.INFERNO;
     }
 }

@@ -138,8 +138,8 @@ public class ColecaoDeItens implements Serializable{
     }
     
     /**
-     * 
-     * @return 
+     * Metodo que retorna todos os itens de um ambiente
+     * @return uma lista contendo os itens
      */
     public List<Item> getItens() {
         return itens;

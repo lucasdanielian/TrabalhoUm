@@ -72,7 +72,52 @@ public class GerenciadorDeImagens {
      *
      */
     public static final ImageIcon SOBRE = carregarIcone("sobre.png");
+    
+    /**
+     *
+     */
+    public static final ImageIcon DENVER = carregarIcone("Denver.jpg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon HOUSTON = carregarIcone("Houston.jpg");
 
+    /**
+     *
+     */
+    public static final ImageIcon CASA_BOB = carregarIcone("casaBob.jpg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon CASA_CAIM = carregarIcone("casaCaim.jpg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon CASA_WINCHESTER = carregarIcone("casaWinchester.jpg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon CEU = carregarIcone("ceu.jpg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon INFERNO = carregarIcone("inferno.png");
+    
+    /**
+     *
+     */
+    public static final ImageIcon PRINCIPAL = carregarIcone("principal.jpeg");
+    
+    /**
+     *
+     */
+    public static final ImageIcon PURGATORIO = carregarIcone("purgatorio.jpg");
+    
     /**
      *
      */

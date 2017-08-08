@@ -1,7 +1,9 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
+import javax.swing.ImageIcon;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -31,10 +33,11 @@ public class AmbienteDenver extends Ambiente {
      * @param nomeAmbiente  passando seu nome por parametro
      */
     public AmbienteDenver(String nomeAmbiente)  {
-        super(nomeAmbiente);
+        super(nomeAmbiente, 1);
         itemFoiColetado = false;
         foiCeu = false;
         item = new Item("Dente","O dente de lobisomem representa o mal do mundo");
+        inserirItensAmbiente(item);
     }
     
     /**
@@ -102,72 +105,7 @@ public class AmbienteDenver extends Ambiente {
      * retorna uma String com o endereco da imagem
      */
     @Override
-    public String imagemDoAmbiente() {
-        return "/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/Denver.jpg";
-    }
-
-    /**
-     * Metodo que verifica se um item do ambiente está disponivel ou não
-     * @param dean Jogador passado para verificacao da mochila caso tenha itens no
-     * ambiente
-     * @return uma string para verificacao de adicao
-     */
-    @Override
-    public String disponibilizarItemAmbiente(Jogador dean){
-        if(getJaVisitada() == false){
-            if(foiCeu == true){ 
-                return "Dente disponivel";
-            }
-            else{
-                return "indisponivel";
-            }
-        }
-        else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-            if(itemFoiColetado == false && foiCeu == true){    
-                return "Dente disponivel";
-            }
-            else{
-                return "indisponivel";
-            }
-        } 
-    }
-    
-    /**
-     * Remove um objeto contido no armario.
-     * @param nome criterio de remoção
-     * @return Item removido é retornado para tratamento
-     */
-    @Override
-    public Item pegarItemAmbiente(String nome) {
-        if(nome.equals(item.getNomeItem()) && itemFoiColetado == false){
-            itemFoiColetado = true;
-            return item;
-        }else{
-            return null;
-        }
-    }
-
-    /**
-     * Insere o item passado no ambiente
-     * @param item objeto do tipo Item
-     * @return true caso o item foi inserido e false caso ao contrario
-     */
-    @Override
-    public boolean inserirItensAmbiente(Item item) {
-        if(item.getNomeItem().equals("Dente")){
-            itemFoiColetado = false;
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    /**
-     * Metodo que retorna o item de um ambinete
-     * @return Item 
-     */
-    @Override
-    public Item getItem() {
-        return item;
+    public ImageIcon imagemDoAmbiente() {
+        return GerenciadorDeImagens.DENVER;
     }
 }

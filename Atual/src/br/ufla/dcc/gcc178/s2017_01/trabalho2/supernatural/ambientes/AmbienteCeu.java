@@ -32,7 +32,7 @@ public class AmbienteCeu extends Ambiente {
      * @param nomeAmbiente passando seu nome por parametro
      */
     public AmbienteCeu(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         itemFoiColetado = false;
         item = new Item("Pena", "pena do anjo Castiel");
         inserirItensAmbiente(item);

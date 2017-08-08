@@ -33,7 +33,7 @@ public class AmbienteHouston extends Ambiente {
      * @param nomeAmbiente  passando seu nome por parametro
      */
     public AmbienteHouston(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         itemFoiColetado = false;
         foiCaim = false;
         item = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");

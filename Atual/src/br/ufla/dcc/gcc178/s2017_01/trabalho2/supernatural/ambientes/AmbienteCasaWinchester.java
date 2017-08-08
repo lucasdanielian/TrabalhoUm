@@ -28,7 +28,7 @@ public class AmbienteCasaWinchester extends Ambiente {
      * Constroi um ambiente "CasaWincester" passando seu nome por parametro
      */
     public AmbienteCasaWinchester(String nomeAmbiente)  {
-        super(nomeAmbiente, 3);//Inicializa o nome do ambiente na classe pai
+        super(nomeAmbiente);//Inicializa o nome do ambiente na classe pai
     }
      
     /**

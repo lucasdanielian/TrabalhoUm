@@ -33,7 +33,7 @@ public class AmbientePurgatorio extends Ambiente {
      * @param nomeAmbiente  passando seu nome por parametro
      */
     public AmbientePurgatorio(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         itemFoiColetado = false;
         foiCeu = false;
         item = new Item("Almas", "Armazena 10 almas em seu interior.");

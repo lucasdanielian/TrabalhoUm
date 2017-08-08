@@ -30,6 +30,7 @@ public abstract class Ambiente implements Serializable{
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
     private ColecaoDeItens itens;
+    private final int MAX_ITENS = 1000;
     
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -38,11 +39,11 @@ public abstract class Ambiente implements Serializable{
      * @param nomeAmbiente esperada uma string contendo o nome do ambiente
      * @param qtdItens espera um inteiro com a quantidade de itens do ambiente.
      */
-    public Ambiente(String nomeAmbiente, int qtdItens)  {
+    public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
         saidas = new HashMap<String, Ambiente>();
-        itens = new ColecaoDeItens(qtdItens);
+        itens = new ColecaoDeItens(MAX_ITENS);
     }
     
     /**

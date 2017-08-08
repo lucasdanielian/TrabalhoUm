@@ -34,7 +34,7 @@ public class AmbienteCasaBob extends Ambiente {
      * @param nomeAmbiente passando seu nome por parametro
      */
     public AmbienteCasaBob(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         foiCeu = false;
         item = new Item("Carta", "Carta de Bob para Caim, que"
                 + "cedida pelo mesmo para ajudar Dean.");

@@ -155,6 +155,10 @@ public class TelaJogo implements Serializacao {
         
         //Botao que envia os comandos
         btnEnviarComando.setEnabled(true);
+
+        //
+        atualizaBotoesDeItens();
+        
     }
     
     /**
@@ -226,7 +230,7 @@ public class TelaJogo implements Serializacao {
     private void criarBotoes(List<Ambiente> ambientes){
         for (Ambiente ambiente : ambientes) {
             //Cria os botoes item dos ambientes e jogador
-            if(ambiente.getItens() != null){
+            if(ambiente.getItens().size() > 0){
                 for (Item item : ambiente.getItens()) {
                     //Cria botoes itens ambientes
                     if(botoesItensAmbientes.size() > 0){
@@ -235,7 +239,7 @@ public class TelaJogo implements Serializacao {
                             btnItemAmbiente = new JButton(item.getNomeItem(),
                                     GerenciadorDeImagens.OK);
                             btnItemAmbiente.setName(item.getNomeItem());
-                            botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+                            botoesItensAmbientes.put(item.getNomeItem(), btnItemAmbiente);
                         }else{
 
                         }
@@ -244,7 +248,7 @@ public class TelaJogo implements Serializacao {
                         btnItemAmbiente = new JButton(item.getNomeItem(),
                                     GerenciadorDeImagens.OK);
                         btnItemAmbiente.setName(item.getNomeItem());
-                        botoesItensAmbientes.put(btnItemAmbiente.getName(), btnItemAmbiente);
+                        botoesItensAmbientes.put(item.getNomeItem(), btnItemAmbiente);
                     }
                     
                     //cria botoes jogador
@@ -253,14 +257,14 @@ public class TelaJogo implements Serializacao {
                             btnItemJogador = new JButton(item.getNomeItem(),
                                 GerenciadorDeImagens.OK);
                             btnItemJogador.setName(item.getNomeItem());
-                            botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
+                            botoesItensJogador.put(item.getNomeItem(), btnItemJogador);
                         }
                      //Caso seja o primeiro botao entra aqui!   
                     }else{
                         btnItemJogador = new JButton(item.getNomeItem(),
                                 GerenciadorDeImagens.OK);
                         btnItemJogador.setName(item.getNomeItem());
-                        botoesItensJogador.put(btnItemJogador.getName(), btnItemJogador);
+                        botoesItensJogador.put(item.getNomeItem(), btnItemJogador);
                     }
                 }
             }
@@ -270,14 +274,14 @@ public class TelaJogo implements Serializacao {
                     btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
                             GerenciadorDeImagens.OK);
                     btnAmbiente.setName(ambiente.getNomeAmbiente());
-                    botoesAmbientes.put(btnAmbiente.getName(),btnAmbiente);
+                    botoesAmbientes.put(ambiente.getNomeAmbiente(),btnAmbiente);
                 }
             //Caso entre aqui é porque é o primeiro botao a ser criado    
             }else{
                 btnAmbiente = new JButton(ambiente.getNomeAmbiente(),
                             GerenciadorDeImagens.OK);
                 btnAmbiente.setName(ambiente.getNomeAmbiente());
-                botoesAmbientes.put(btnAmbiente.getName(),btnAmbiente);
+                botoesAmbientes.put(ambiente.getNomeAmbiente(),btnAmbiente);
             }
         }
     }
@@ -295,7 +299,7 @@ public class TelaJogo implements Serializacao {
                         botao.setVisible(true);
                     }
                     else{
-                        botao.setVisible(false);
+                        //botao.setEnabled(false);
                     }
                 }
             }
@@ -312,7 +316,7 @@ public class TelaJogo implements Serializacao {
                     if(botao.getName().equals(item.getNomeItem())){
                         botao.setVisible(true);
                     }else{
-                        botao.setVisible(false);
+                        //botao.setEnabled(false);
                     }
                 }
             }    
@@ -428,37 +432,11 @@ public class TelaJogo implements Serializacao {
                 4, 0, 1, 1);
     }
     
-    /**
-     * Metodo responsavel por adicionar os botões de itens do jogador na tela
-     */
-    private void adicionarBotoesItensJogador(){
-        int linha = 20;
-        //Imprime o titulo dos botoes de itens da mochila na tela
-        tituloBotoesVerItens = new JTextArea(" ITENS JOGADOR ");
-        tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
-        tituloBotoesVerItens.setBackground(Color.GRAY);
-        tituloBotoesVerItens.setForeground(Color.WHITE);
-        tituloBotoesVerItens.setEditable(false);
-        //Adiciona o texto na tela
-        adicionarComponentePainel(tituloBotoesVerItens, painelLeste, layoutLeste,
-                GridBagConstraints.CENTER,
-                GridBagConstraints.VERTICAL,
-                linha, 0, 2, 2);
-        
-        for (JButton botao : botoesItensJogador.values()) {
-            adicionarComponentePainel(botao, painelLeste, layoutLeste,
-                GridBagConstraints.NORTH,
-                GridBagConstraints.VERTICAL,
-                linha, 0, 2, 2);
-            linha += 2;
-        }
-        
-    }
     
     /**
      * Metodo responsavel por adicionar os botões dos ambientes na tela
      */
-    private void adicionaBotoesItensAmbientes(){
+    private void adicionaBotoesItensNaTela(){
         int linha = 0;
         
         //Imprime o titulo dos botões de itens na tela
@@ -472,6 +450,7 @@ public class TelaJogo implements Serializacao {
                 GridBagConstraints.NORTH,
                 GridBagConstraints.VERTICAL,
                 linha, 0, 2, 2);
+        linha += 2;
 
         for (JButton botao : botoesItensAmbientes.values()) {
             adicionarComponentePainel(botao, painelLeste, layoutLeste,
@@ -480,6 +459,28 @@ public class TelaJogo implements Serializacao {
                 linha, 0, 2, 2);
             linha += 2;
         }
+        
+        //Imprime o titulo dos botoes de itens da mochila na tela
+        tituloBotoesVerItens = new JTextArea(" ITENS JOGADOR ");
+        tituloBotoesVerItens.setFont(new Font("Serif", Font.ITALIC, 18));
+        tituloBotoesVerItens.setBackground(Color.GRAY);
+        tituloBotoesVerItens.setForeground(Color.WHITE);
+        tituloBotoesVerItens.setEditable(false);
+        //Adiciona o texto na tela
+        adicionarComponentePainel(tituloBotoesVerItens, painelLeste, layoutLeste,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.VERTICAL,
+                linha, 0, 2, 2);
+        linha += 2;
+        
+        for (JButton botao : botoesItensJogador.values()) {
+            adicionarComponentePainel(botao, painelLeste, layoutLeste,
+                GridBagConstraints.SOUTH,
+                GridBagConstraints.VERTICAL,
+                linha, 0, 2, 2);
+            linha += 2;
+        }
+        
     }
     
     /**
@@ -558,12 +559,11 @@ public class TelaJogo implements Serializacao {
         
         criarBotoes(regraNegocio.getAmbientes());
         adicionaBotoesAmbientes();
-        adicionaBotoesItensAmbientes();
-        adicionarBotoesItensJogador();
         botoesEstaticos();
         painelOrientacaoJogador();
+        adicionaBotoesItensNaTela();
         prepararComponentesEstadoInicial();
-        atualizaBotoesDeItens();
+        
     }
 
     /**

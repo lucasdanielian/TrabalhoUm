@@ -31,7 +31,7 @@ public class AmbienteCasaCaim extends Ambiente {
      * Constroi um ambiente "Inferno" passando seu nome por parametro
      */
     public AmbienteCasaCaim(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         visitouBob = false;
         recebeuTask = false;
     }

@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JButton;
@@ -75,7 +76,7 @@ public class TelaCadastrarAmbiente {
         private void criarComponentes(){
             
             Font myFont = new Font("Arial", Font.BOLD, 16);
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagens", "jpg", "jpeg", "png");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagens","png");
             
             tela = new JFrame("Cadastrar Ambiente");
             labelNome = new JLabel("Nome:");
@@ -246,7 +247,47 @@ public class TelaCadastrarAmbiente {
                         arq.write(aux + "," + caixaMensagem.getText() + "\n");
                         arq.close();
                         
+                        FileWriter arq2 = new FileWriter("persistencias/saidas.txt",true);
+                        
+                        if(!dropAmbienteEntrada1.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(dropAmbienteEntrada1.getSelectedItem() + "," + aux);
+                        }
+                        
+                        if(!dropAmbienteEntrada2.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(dropAmbienteEntrada2.getSelectedItem() + "," + aux);
+                        }
+                        
+                        if(!dropAmbienteEntrada3.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(dropAmbienteEntrada3.getSelectedItem() + "," + aux);
+                        }
+                        
+                        if(!dropAmbienteEntrada4.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(dropAmbienteEntrada4.getSelectedItem() + "," + aux);
+                        }
+                        
+                        if(!dropAmbienteSaida1.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(aux + "," + dropAmbienteSaida1.getSelectedItem());
+                        }
+                        
+                        if(!dropAmbienteSaida2.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(aux + "," + dropAmbienteSaida2.getSelectedItem());
+                        }
+                        
+                        if(!dropAmbienteSaida3.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(aux + "," + dropAmbienteSaida3.getSelectedItem());
+                        }
+                        
+                        if(!dropAmbienteSaida4.getSelectedItem().equals("Selecione um ambiente")){
+                            arq2.write(aux + "," + dropAmbienteSaida4.getSelectedItem());
+                        }
+                        
+                        arq2.close();
+                        
                         JOptionPane.showMessageDialog(tela,"Ambiente cadastrado com sucesso" ,"Confirmação" , 2);
+                        
+                        File novo = selecionadorDeImagens.getSelectedFile();
+                        
+                        novo.renameTo(new File("persistencias/imagens/" + caixaNome.getText() +".png"));
                         
                         caixaNome.setText("");
                         caixaMensagem.setText("");

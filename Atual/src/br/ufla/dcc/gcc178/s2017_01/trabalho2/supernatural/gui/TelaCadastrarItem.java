@@ -86,7 +86,7 @@ public class TelaCadastrarItem {
         dropAmbienteInicial.addItem("Purgatorio");
         
         try{
-            BufferedReader arq = new BufferedReader(new FileReader("ambientes.txt"));
+            BufferedReader arq = new BufferedReader(new FileReader("persistencias/ambientes.txt"));
             
             String linha = arq.readLine();
             
@@ -131,7 +131,7 @@ public class TelaCadastrarItem {
                     item = new Item(caixaNome.getText(), caixaDescricao.getText());
 
                     try{
-                        FileWriter arq = new FileWriter("itens.txt", true);
+                        FileWriter arq = new FileWriter("persistencias/itens.txt", true);
                         arq.write(item.getNomeItem() + "," + item.getDescricao() + "," + dropAmbienteInicial.getSelectedItem() + "\n");
                         arq.close();
                         

@@ -1,8 +1,6 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.gui;
 
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.Ambiente;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.interacaousuario.TelaPrincipal;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.i18n.I18N;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
@@ -117,8 +115,6 @@ public class TelaJogo implements Serializacao {
     
     //Outros
     private static RegraNegocio regraNegocio;
-    private Comando comando;
-    private Analisador analisador;
     private JScrollPane jScrollPaneSaida;
     private ImageIcon logo;
     private JLabel imagensJogo;
@@ -519,9 +515,6 @@ public class TelaJogo implements Serializacao {
         
         botoesItensJogador = new HashMap<>();
         
-        //Analisador de comandos do jogo
-        analisador = new Analisador();
-        
         //Imprime os textos da regra de negocios
         textoDinamico = new JTextArea(regraNegocio.mensagemBoasVindas());
         textoDinamico.setEditable(false);
@@ -572,9 +565,7 @@ public class TelaJogo implements Serializacao {
             botoesItensJogador.get(chave).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String textoExibicao;
-                    comando = analisador.pegarComando("guardar " + chave);
-                    textoExibicao = regraNegocio.processarComando(comando);
+                    String textoExibicao = regraNegocio.receberComando("guardar " + chave);
                     if(textoExibicao.contains(chave + " guardado com sucesso")){
                         textoDinamico.setText(textoExibicao);
                     }else{
@@ -590,9 +581,7 @@ public class TelaJogo implements Serializacao {
             botoesAmbientes.get(chave).addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String validaAmbiente;
-                comando = analisador.pegarComando("ir " + chave);
-                validaAmbiente = regraNegocio.processarComando(comando);
+                String validaAmbiente = regraNegocio.receberComando("ir " + chave);
                 if (validaAmbiente.contains("Nao ha passagem!")){
                     textoDinamico.setText("\nNao ha passagem!\n");
                 }else{
@@ -614,8 +603,7 @@ public class TelaJogo implements Serializacao {
         botoesItensAmbientes.get(chave).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                comando = analisador.pegarComando("pegar " + chave);
-                String item = regraNegocio.processarComando(comando);
+                String item = regraNegocio.receberComando("pegar " + chave);
                 textoDinamico.setText(item);
                 atualizaBotoesDeItens();
             }
@@ -629,8 +617,8 @@ public class TelaJogo implements Serializacao {
             if(validaTexto.equals("sair")){
                 janela.dispose();
             }else{
-                comando = analisador.pegarComando(validaTexto);
-                textoDinamico.setText(regraNegocio.processarComando(comando));
+                String aux = regraNegocio.receberComando(validaTexto);
+                textoDinamico.setText(aux);
                 trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                 txtEntradaComandos.setText("Entrada de Comandos:");
             }
@@ -677,8 +665,8 @@ public class TelaJogo implements Serializacao {
                 if(validaTexto.equals("sair")){
                     janela.dispose();
                 }else{
-                    comando = analisador.pegarComando(validaTexto);
-                    textoDinamico.setText(regraNegocio.processarComando(comando));
+                    String aux = regraNegocio.receberComando(validaTexto);
+                    textoDinamico.setText(aux);
                     trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                     txtEntradaComandos.setText("Entrada de Comandos:");
                 }

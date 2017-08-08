@@ -500,4 +500,9 @@ public class RegraNegocio implements Serializable{
         return ambienteAtual;
     }
     
+    public String receberComando(String palavraComando){
+        Comando comando = analisador.pegarComando(palavraComando);
+        return processarComando(comando);
+    }
+    
 }

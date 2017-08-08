@@ -21,7 +21,7 @@ public class AmbienteDefault extends Ambiente{
     public AmbienteDefault(String nomeAmbiente, String m) {
         super(nomeAmbiente, 1);
         mensagem = m;
-        new ImageIcon(GerenciadorDeImagens.class.getResource("principal.jpeg"));
+        imagem = new ImageIcon("src/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/" + nomeAmbiente + ".png");
     }
 
     @Override

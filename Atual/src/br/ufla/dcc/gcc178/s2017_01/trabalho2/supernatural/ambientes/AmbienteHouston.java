@@ -24,7 +24,6 @@ import javax.swing.ImageIcon;
  */
 public class AmbienteHouston extends Ambiente {
 
-    private boolean itemFoiColetado;
     private boolean foiCaim;
     private Item item;
     
@@ -33,8 +32,7 @@ public class AmbienteHouston extends Ambiente {
      * @param nomeAmbiente  passando seu nome por parametro
      */
     public AmbienteHouston(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
-        itemFoiColetado = false;
+        super(nomeAmbiente);
         foiCaim = false;
         item = new Item("CabecaVampiro", "Cabeca do vampiro oiginal");
         inserirItensAmbiente(item);
@@ -84,7 +82,7 @@ public class AmbienteHouston extends Ambiente {
             }
         }
         else{// caso o jogador ja tenha vindo a esse ambiente
-            if(itemFoiColetado == false){
+            if(getItemFoiColetado() == false){
                 if(dean.espacoDisponivelMochila()){
                     return "\nO item 'CabecaVampiro' agora esta disponivel para ser coletado\n";
                 }

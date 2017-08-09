@@ -32,7 +32,7 @@ public class AmbienteInferno extends Ambiente {
      * denteLobo, penaAnjo e almas é inicializado como false
      */
     public AmbienteInferno(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         denteLobo = false;
         penaAnjo = false;
         almas = false;

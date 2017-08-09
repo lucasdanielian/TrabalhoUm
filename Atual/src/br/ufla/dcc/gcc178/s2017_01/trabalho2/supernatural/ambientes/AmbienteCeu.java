@@ -24,7 +24,6 @@ import javax.swing.ImageIcon;
  */
 public class AmbienteCeu extends Ambiente {
     
-    private boolean itemFoiColetado;
     private Item item;
             
     /**
@@ -32,8 +31,7 @@ public class AmbienteCeu extends Ambiente {
      * @param nomeAmbiente passando seu nome por parametro
      */
     public AmbienteCeu(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
-        itemFoiColetado = false;
+        super(nomeAmbiente);
         item = new Item("Pena", "pena do anjo Castiel");
         inserirItensAmbiente(item);
     }
@@ -88,7 +86,7 @@ public class AmbienteCeu extends Ambiente {
            
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-            if(itemFoiColetado == false){
+            if(getItemFoiColetado() == false){
                 if(dean.espacoDisponivelMochila()){
                     return "O item 'Pena' agora esta disponivel para ser coletado\n";
                 }

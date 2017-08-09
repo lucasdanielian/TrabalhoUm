@@ -441,45 +441,25 @@ public class RegraNegocio implements Serializable{
         }
         String nomeItem = comando.getSegundaPalavra();
         Item aux = ambienteAtual.pegarItemAmbiente(nomeItem);
-        if (ambienteAtual.getNomeAmbiente().equals("CasaWinchester")){
-            if(aux != null){
-                String verificacao = jogador.inserirItensMochila(aux);
-                if (verificacao.contains("adicionado")){
-                    return "\n Item: " + nomeItem + " coletado com sucesso\n";
+        if(aux != null){
+            String verificacao = jogador.inserirItensMochila(aux);
+            if (verificacao.contains("adicionado")){
+                ambienteAtual.setItemFoiColetado(true);
+                return "\n Item: " + nomeItem + " coletado com sucesso\n";
+            }else{
+                boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);
+                if(retornaItem){
+                    return "\n Item " + nomeItem + " não foi coletado\n"
+                            + "O item continua no ambiente";
                 }else{
-                    boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);
-                    if(retornaItem){
-                        return "\n Item " + nomeItem + " não foi coletado\n"
-                                + "O item continua no ambiente";
-                    }else{
-                        return "\n Item " + nomeItem + " não foi coletado\n"
-                                + "O item se perdeu e não retornou ao ambiente";
-                    }
+                    return "\n Item " + nomeItem + " não foi coletado\n"
+                            + "O item se perdeu e não retornou ao ambiente";
                 }
             }
-            else{
-                return "\n Item: " + nomeItem + " nao esta no armario\n";
-            }
-        }else{
-            if(aux != null){
-                String verificacao = jogador.inserirItensMochila(aux);
-                if (verificacao.contains("adicionado")){
-                    return "\n Item: " + nomeItem + " coletado com sucesso\n";
-                }else{
-                    boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);
-                    if(retornaItem){
-                        return "\n Item " + nomeItem + " não foi coletado\n"
-                                + "O item continua no ambiente";
-                    }else{
-                        return "\n Item " + nomeItem + " não foi coletado\n"
-                                + "O item se perdeu e não retornou ao ambiente";
-                    }
-                }
-            }
-            else{
-                return "\n Item: " + nomeItem + " nao esta neste ambiente\n";
-            }
-        }    
+        }
+        else{
+            return "\n Item: " + nomeItem + " nao esta no ambiente\n";
+        } 
 
     }
     

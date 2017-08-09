@@ -24,7 +24,6 @@ import javax.swing.ImageIcon;
  */
 public class AmbientePurgatorio extends Ambiente {
 
-    private boolean itemFoiColetado;
     private boolean foiCeu;
     private Item item;
     
@@ -33,8 +32,7 @@ public class AmbientePurgatorio extends Ambiente {
      * @param nomeAmbiente  passando seu nome por parametro
      */
     public AmbientePurgatorio(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
-        itemFoiColetado = false;
+        super(nomeAmbiente);
         foiCeu = false;
         item = new Item("Almas", "Armazena 10 almas em seu interior.");
         inserirItensAmbiente(item);
@@ -81,7 +79,7 @@ public class AmbientePurgatorio extends Ambiente {
             }
         }
         else{ // caso o jogador ja tenha passado por este ambiente antes
-            if(itemFoiColetado == false){
+            if(getItemFoiColetado() == false){
                 if(dean.espacoDisponivelMochila()){
                     return "\nO item 'Almas' agora esta disponivel para ser coletado\n";
                 }

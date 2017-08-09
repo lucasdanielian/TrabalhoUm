@@ -25,7 +25,6 @@ import javax.swing.ImageIcon;
  * @version 2011.07.31 (2017.05.16)
  */
 public class AmbienteCasaBob extends Ambiente {
-    private boolean itemFoiColetado;
     private boolean foiCeu;
     private Item item;
     
@@ -34,7 +33,7 @@ public class AmbienteCasaBob extends Ambiente {
      * @param nomeAmbiente passando seu nome por parametro
      */
     public AmbienteCasaBob(String nomeAmbiente)  {
-        super(nomeAmbiente, 1);
+        super(nomeAmbiente);
         foiCeu = false;
         item = new Item("Carta", "Carta de Bob para Caim, que"
                 + "cedida pelo mesmo para ajudar Dean.");
@@ -95,7 +94,7 @@ public class AmbienteCasaBob extends Ambiente {
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
-            if(itemFoiColetado == true){    
+            if(getItemFoiColetado() == true){    
             return mensagemEntrada1 + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente"
                     + "garoto, eu já não posso\n fazer mais nada por você”\n";
             }

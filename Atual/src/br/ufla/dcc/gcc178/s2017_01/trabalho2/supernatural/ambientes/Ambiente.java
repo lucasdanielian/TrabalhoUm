@@ -7,7 +7,6 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.ImageIcon;
 
 /**
  * Classe Ambiente - um ambiente em um jogo adventure.
@@ -120,7 +119,7 @@ public abstract class Ambiente implements Serializable{
      * O metodo é abstrato e deve ser sobrescrito nas classes filhas
      * @return String
      */
-    public abstract ImageIcon imagemDoAmbiente();
+    public abstract String imagemDoAmbiente();
     
     /**
      * Metodo que retorna se um ambiente já foi visitado ou nao.

@@ -28,6 +28,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -214,29 +216,46 @@ public class TelaJogo implements Serializacao {
         
     }
     
-    /**
+        /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void adicionarImagemAmbiente(ImageIcon imagem){
-        
-            imagensJogo = new JLabel(imagem);
+    private void adicionarImagemAmbiente(String imagem){
+        try{
+            URL resource = GerenciadorDeImagens.class.getResource(imagem);
+            fileImagens = new File(resource.toURI());
+            logo = new ImageIcon(fileImagens.getPath());
+            imagensJogo = new JLabel(logo);
             imagensJogo.setPreferredSize(new Dimension(500, 200));
             //Adicao da imagem no painei Oeste
             adicionarComponentePainel(imagensJogo, painelNorte, layoutNorte,
                     GridBagConstraints.CENTER,
                     GridBagConstraints.HORIZONTAL,
                     0, 5, 1, 1);
-    }
+            } catch (URISyntaxException | NullPointerException ex){
+            JOptionPane.showMessageDialog(janela, "Imagem: " + imagem
+                    + " Nao encontrada");
+            JOptionPane.showMessageDialog(janela, "O jogo continuará sem imagem. \n"
+                    + "Se o problema persistir contate o administrador do sistema");
+        }
+}
     
     /**
      * Troca a imgagem atual da tela
      * @param String o endereço da mesma deve está dentro do pacote imagens
      */
-    private void trocaImagemAmbiente(ImageIcon imagem){
-        
-        imagensJogo.setIcon(imagem); 
-        
+    private void atualizaImagemAmbiente(String imagem){
+        try{
+           URL resource = GerenciadorDeImagens.class.getResource(imagem);
+            fileImagens = new File(resource.toURI());
+            logo = new ImageIcon(fileImagens.getPath());
+            imagensJogo.setIcon(new ImageIcon(fileImagens.getPath())); 
+        } catch (URISyntaxException | NullPointerException ex){
+            JOptionPane.showMessageDialog(painelNorte, "Imagem: " + imagem
+                    + " Nao encontrada");
+            JOptionPane.showMessageDialog(painelNorte, "O jogo continuará sem imagem. \n"
+                    + "Se o problema persistir contate o administrador do sistema");
+        }
     }
     
     /**
@@ -343,6 +362,30 @@ public class TelaJogo implements Serializacao {
             for (JButton botao : botoesItensAmbientes.values()) {
                 botao.setVisible(false);
             } 
+        }
+    }
+    
+    /**
+     * Metodo responsavel por atualizar os botões de itens do jogador quando 
+     * uma persistencia é restaurada
+     */
+    private void atualizaBotoesDeItensJogador(){
+        //Atualiza botoes de itens jogador
+        if(regraNegocio.getJogador().getMochila().getItens().size() > 0){
+            for (JButton botao : botoesItensJogador.values()) {
+                for (Item item : regraNegocio.getJogador().getMochila().getItens()) {
+                    if(botao.getName().equals(item.getNomeItem())){
+                        botao.setVisible(true);
+                    }
+                    else{
+                        botao.setVisible(false);
+                    }
+                }
+            }
+        }else{
+            for (JButton botao : botoesItensJogador.values()) {
+                botao.setVisible(false);
+            }
         }
     }
     
@@ -538,7 +581,7 @@ public class TelaJogo implements Serializacao {
      * Adiciona os componentes da tela tratando layout e internacionalização
      */
     private void adicionarComponentesTelaJogo(){
-        adicionarImagemAmbiente(GerenciadorDeImagens.PRINCIPAL);
+        adicionarImagemAmbiente("principal.jpeg");
         
         //Gerenciador do Jogo
         regraNegocio = new RegraNegocio();
@@ -622,14 +665,14 @@ public class TelaJogo implements Serializacao {
                     }else{
                         if(regraNegocio.diasRestantes()==0){
                             textoDinamico.setText(validaAmbiente);
-                            trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                            atualizaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                             atualizaPainelPontuacao();
                             atualizaBotoesDeItensAmbientes();
                             atualizaBotoesDeAmbientes();
                             gameOver();
                         }else{
                             textoDinamico.setText(validaAmbiente);
-                            trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                            atualizaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                             atualizaPainelPontuacao();
                             atualizaBotoesDeItensAmbientes();
                             atualizaBotoesDeAmbientes();
@@ -666,7 +709,7 @@ public class TelaJogo implements Serializacao {
             }else{
                 String aux = regraNegocio.receberComando(validaTexto);
                 textoDinamico.setText(aux);
-                trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                atualizaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                 atualizaBotoesDeItensAmbientes();
                 atualizaBotoesDeAmbientes();
                 txtEntradaComandos.setText("Entrada de Comandos:");
@@ -684,21 +727,30 @@ public class TelaJogo implements Serializacao {
     btnSalvarJogo.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            escritaArquivo();
-            regraNegocio.rankingJogadores();
-            JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
+            if(escritaArquivo()){
+                regraNegocio.rankingJogadores();
+                JOptionPane.showMessageDialog(janela, "Jogo salvo com sucesso");
+            }else{
+                JOptionPane.showMessageDialog(janela, "Não foi possível salvar o jogo");
+            }
         }
     });
 
     btnRecuperarJogo.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            leituraArquivo();
-            atualizaPainelPontuacao();
-            atualizaBotoesDeItensAmbientes();
-            atualizaBotoesDeAmbientes();
-            textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
-            JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
+            if(leituraArquivo()){
+                atualizaPainelPontuacao();
+                atualizaBotoesDeItensAmbientes();
+                atualizaBotoesDeItensJogador();
+                atualizaBotoesDeAmbientes();
+                atualizaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                textoDinamico.setText(regraNegocio.descricaoAmbienteAtual());
+                JOptionPane.showMessageDialog(janela, "Jogo recuperado com sucesso");
+            }else{
+                JOptionPane.showMessageDialog(janela, "Você não possui um jogo salvo");
+            }
+            
         }
     });
         
@@ -717,7 +769,7 @@ public class TelaJogo implements Serializacao {
                 }else{
                     String aux = regraNegocio.receberComando(validaTexto);
                     textoDinamico.setText(aux);
-                    trocaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
+                    atualizaImagemAmbiente(regraNegocio.imagemAmbienteAtual());
                     txtEntradaComandos.setText("Entrada de Comandos:");
                 }
             }
@@ -806,34 +858,41 @@ public class TelaJogo implements Serializacao {
     
     /**
      * Salva o estado atual do jogo serializando o arquivo
+     * @return se salvo retorna true caso ao contrario retorna false
      */
     @Override
-    public void escritaArquivo() {
+    public boolean escritaArquivo() {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(
                     new FileOutputStream(diretorioPersistencia));
             oos.writeObject(regraNegocio);
             oos.close();
+            return true;
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(janela, e.getMessage());
+            return false;
         }
     }
 
     /**
      * Recupera o estado do ultimo jogo salvo
+     * @return retorna true se efetuou a leitura e false caso ao contrario
      */
     @Override
-    public void leituraArquivo() {
+    public boolean leituraArquivo() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(diretorioPersistencia));
             regraNegocio = (RegraNegocio)ois.readObject();
             ois.close();
+            return true;
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(janela, e.getMessage());
+            return false;
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(janela, ex.getMessage());
+            return false;
         }
     }
 }

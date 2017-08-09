@@ -250,7 +250,7 @@ public class RegraNegocio implements Serializable{
      * Retorna o endereço da imagem do ambiente Atual
      * @return String contendo o endereco da imagem
      */
-    public ImageIcon imagemAmbienteAtual() {
+    public String imagemAmbienteAtual() {
         return ambienteAtual.imagemDoAmbiente();
     }
 

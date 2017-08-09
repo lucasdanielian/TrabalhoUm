@@ -1,9 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
-import javax.swing.ImageIcon;
 
 /**
  * Classe AmbienteCasaCaim - um ambiente em um jogo adventure.
@@ -101,7 +99,7 @@ public class AmbientePurgatorio extends Ambiente {
      * retorna uma String com o endereco da imagem
      */
     @Override
-    public ImageIcon imagemDoAmbiente() {
-        return GerenciadorDeImagens.PURGATORIO;
+    public String imagemDoAmbiente() {
+        return "purgatorio.jpg";
     }
 }

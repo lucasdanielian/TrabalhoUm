@@ -13,11 +13,13 @@ public interface Serializacao {
     
    /**
      * Salva o estado atual do jogo serializando o arquivo
+     * @return retorna true se salvo e false caso ao contrario
      */ 
-   void escritaArquivo();
+   boolean escritaArquivo();
 
     /**
-     * Recupera o estado do ultimo jogo salvo de um arquivo serializado 
+     * Recupera o estado do ultimo jogo salvo de um arquivo serializado
+     * @return retorna true se efetuou a leitura e false caso ao contrario
      */
-    void leituraArquivo();
+    boolean leituraArquivo();
 }

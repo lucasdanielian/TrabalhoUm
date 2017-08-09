@@ -1,11 +1,7 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes;
 
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens.GerenciadorDeImagens;
-import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.ColecaoDeItens;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.itens.Item;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.jogador.Jogador;
-import java.util.List;
-import javax.swing.ImageIcon;
 
 /**
  * Classe AmbienteCasaBob - um ambiente em um jogo adventure.
@@ -117,7 +113,7 @@ public class AmbienteCasaBob extends Ambiente {
      * @return String com o endereco da imagem
      */
     @Override
-    public ImageIcon imagemDoAmbiente() {
-        return GerenciadorDeImagens.CASA_BOB;
+    public String imagemDoAmbiente() {
+        return "casaBob.jpg";
     }
 }

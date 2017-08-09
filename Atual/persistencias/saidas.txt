@@ -22,3 +22,5 @@ Houston,CasaWinchester
 Houston,Purgatorio
 Purgatorio,PortalInferno
 Purgatorio,CasaWinchester
+CasaWinchester,ambienteteste
+ambienteteste,Ceu

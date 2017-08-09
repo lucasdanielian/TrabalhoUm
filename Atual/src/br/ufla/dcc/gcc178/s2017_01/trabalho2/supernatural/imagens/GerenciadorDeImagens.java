@@ -1,5 +1,6 @@
 package br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.imagens;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
@@ -7,7 +8,7 @@ import javax.swing.ImageIcon;
  * 
  * @author Paulo Jr. e Julio Alves
  */
-public class GerenciadorDeImagens {
+public class GerenciadorDeImagens implements Serializable{
 
     // conjunto de ícones / imagens usadas no sistema.
     // Obs: atributos são públicos por serem constantes.

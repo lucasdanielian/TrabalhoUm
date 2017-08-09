@@ -103,34 +103,41 @@ public class UsuarioDAOLista implements Serializable, UsuarioDAO, Serializacao{
     
     /**
      * Salva o estado atual do jogo serializando o arquivo
+     * @return retorna true se salvo e false caso ao contrario
      */
     @Override
-    public void escritaArquivo() {
+    public boolean escritaArquivo() {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(
             new FileOutputStream(diretorioPersistencia));
             oos.writeObject(listaUsuario);
             oos.close();
+            return true;
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
         }
     }
 
     /**
      * Recupera o estado do ultimo jogo salvo
+     * @return retorna true se efetuou a leitura e false caso ao contrario
      */
     @Override
-    public void leituraArquivo() {
+    public boolean leituraArquivo() {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(diretorioPersistencia));
             listaUsuario = (ArrayList<Usuario>)ois.readObject();
             ois.close();
+            return true;
         }
         catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return false;
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
         }
     }
 }

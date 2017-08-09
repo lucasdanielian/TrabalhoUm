@@ -24,7 +24,6 @@ import javax.swing.ImageIcon;
  */
 public class AmbienteDenver extends Ambiente {
     
-    private boolean itemFoiColetado;
     private boolean foiCeu;
     private Item item;
     
@@ -34,7 +33,6 @@ public class AmbienteDenver extends Ambiente {
      */
     public AmbienteDenver(String nomeAmbiente)  {
         super(nomeAmbiente);
-        itemFoiColetado = false;
         foiCeu = false;
         item = new Item("Dente","O dente de lobisomem representa o mal do mundo");
         inserirItensAmbiente(item);
@@ -83,7 +81,7 @@ public class AmbienteDenver extends Ambiente {
             }
         }
         else{ // caso ele ja tenha vindo no ambiente
-            if(itemFoiColetado == false){
+            if(getItemFoiColetado() == false){
                 if(dean.espacoDisponivelMochila()){
                     return "O item 'Dente' agora esta disponivel para ser coletado\n";
                 }

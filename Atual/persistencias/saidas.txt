@@ -22,6 +22,3 @@ Houston,CasaWinchester
 Houston,Purgatorio
 Purgatorio,PortalInferno
 Purgatorio,CasaWinchester
-
-CasaBob,Teste
-Teste,CasaWinchester

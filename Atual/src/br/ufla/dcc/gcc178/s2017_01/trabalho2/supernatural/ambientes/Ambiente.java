@@ -26,6 +26,7 @@ import javax.swing.ImageIcon;
 public abstract class Ambiente implements Serializable{
     //Atributos
     private static final long serialVersionUID = 1L;
+    private boolean itemFoiColetado;
     private String nomeAmbiente;
     private boolean jaVisitada; // variavel que grava se este ambiente ja foi visitado pelo jogador
     private HashMap<String, Ambiente> saidas;
@@ -42,6 +43,7 @@ public abstract class Ambiente implements Serializable{
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
         jaVisitada = false;
+        itemFoiColetado = false;
         saidas = new HashMap<String, Ambiente>();
         itens = new ColecaoDeItens(MAX_ITENS);
     }
@@ -154,4 +156,13 @@ public abstract class Ambiente implements Serializable{
         }
         return textoSaidas;
     }
+
+    public void setItemFoiColetado(boolean itemFoiColetado) {
+        this.itemFoiColetado = itemFoiColetado;
+    }
+    
+    public boolean getItemFoiColetado() {
+        return itemFoiColetado;
+    }
+    
 }

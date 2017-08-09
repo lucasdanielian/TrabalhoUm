@@ -167,21 +167,39 @@ public class TelaRankingJogadores {
         private static final int DIAS_RESTANTES = 1;
         private static final int DIAS_CORRIDOS = 2;
         
+        /**
+         * Metodos padroes da criação de tebela
+         * @return numero de linhas
+         */
         @Override
         public int getRowCount() {
             return linhas.size();
         }
 
+        /**
+         * Metodos padroes da criação de tebela
+         * @return numero de colunas
+         */
         @Override
         public int getColumnCount() {
             return colunas.length;
         }
 
+        /**
+         * Metodos padroes da criação de tebela
+         * @param columnIndex numero da coluna a ser pesquisada
+         * @return elemento da coluna
+         */
         @Override
         public String getColumnName(int columnIndex){
             return colunas[columnIndex];
         }
         
+        /**
+         * Metodos padroes da criação de tebela
+         * @param columnIndex Recebe o numero de colunas
+         * @return as colunas da tabela
+         */
         @Override
         public Class<?> getColumnClass(int columnIndex){
             switch (columnIndex){
@@ -198,11 +216,23 @@ public class TelaRankingJogadores {
             }
         }
         
+        /**
+         * Metodos padroes da criação de tebela
+         * @param rowIndex nome da linha
+         * @param columnIndex nome da coluna
+         * @return true caso seja editavel ou false caso ao contrario
+         */
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex){
             return false;
         }
         
+        /**
+         * Metodos padroes da criação de tebela
+         * @param rowIndex numero da linha
+         * @param columnIndex numero da coluna
+         * @return o valor da posição da matriz
+         */
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             //Pega o Usuario referente a linha especifica

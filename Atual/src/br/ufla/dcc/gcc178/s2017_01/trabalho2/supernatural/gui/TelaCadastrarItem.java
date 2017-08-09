@@ -48,6 +48,10 @@ public class TelaCadastrarItem {
     //
     private Item item;
 
+    /**
+     * Metodo responsavel por associar a tela de cadastro de item a tela principal
+     * @param telaPrincipal recebe a tela a qual ela será indexada
+     */
     public TelaCadastrarItem(TelaPrincipal telaPrincipal) {
         this.telaPrincipal = telaPrincipal;
     }
@@ -63,6 +67,9 @@ public class TelaCadastrarItem {
         exibirTela();
     }
     
+    /**
+     * Metodo responsavel por criar os componentes da tela
+     */
     private void criarComponentes(){
 
         tela = new JFrame("Cadastrar Item");
@@ -157,6 +164,9 @@ public class TelaCadastrarItem {
         });
     }
     
+    /**
+     * Metodo responsavel por montar a janela
+     */
     private void montarJanela(){
 
         tela.setSize(300, 400);
@@ -190,6 +200,9 @@ public class TelaCadastrarItem {
 
     }
 
+    /**
+     * Metodo responsavel por habilitar a exibição da tela
+     */
     public void exibirTela(){
         tela.setVisible(true);
     }

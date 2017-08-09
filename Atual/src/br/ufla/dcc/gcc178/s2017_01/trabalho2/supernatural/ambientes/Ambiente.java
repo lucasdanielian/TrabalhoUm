@@ -37,8 +37,7 @@ public abstract class Ambiente implements Serializable{
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
      * nao tem saidas. "descricao" eh algo como "uma cozinha" ou
      * "um jardim aberto"
-     * @param nomeAmbiente esperada uma string contendo o nome do ambiente
-     * @param qtdItens espera um inteiro com a quantidade de itens do ambiente.
+     * @param nomeAmbiente esperada uma string contendo o nome do ambiente.
      */
     public Ambiente(String nomeAmbiente)  {
         this.nomeAmbiente = nomeAmbiente;
@@ -101,7 +100,11 @@ public abstract class Ambiente implements Serializable{
      * @return boolean se inserido retorna true e se não inserido retorna false
      */
     public boolean inserirItensAmbiente(Item item) {
-        return itens.inserirItens(item);
+        //Verifica se o item já está no ambiente
+        if(itens.buscarPeloNome(item.getNomeItem()) == null){
+            return itens.inserirItens(item);
+        }
+        return false;
     }
     
     /**

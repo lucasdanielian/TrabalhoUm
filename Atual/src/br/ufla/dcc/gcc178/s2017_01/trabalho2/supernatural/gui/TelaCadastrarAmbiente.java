@@ -62,10 +62,18 @@ public class TelaCadastrarAmbiente {
         
         private Ambiente ambiente;
         
+        /**
+         * Metodo responsavel por associar a tela de cadastro ambinete a tela
+         * principal
+         * @param telaPrincipal recebe a tela ao qual sera indexada
+         */
         public TelaCadastrarAmbiente(TelaPrincipal telaPrincipal) {
             this.telaPrincipal = telaPrincipal;
         }
         
+        /**
+         * Metodo responsavel por inicializar as funções
+         */
         public void inicializar(){
             criarComponentes();
             montarJanela();
@@ -73,6 +81,9 @@ public class TelaCadastrarAmbiente {
             exibirTela();
         }
         
+        /**
+         * Metodo responsavel por criar os componentes da tela
+         */
         private void criarComponentes(){
             
             Font myFont = new Font("Arial", Font.BOLD, 16);
@@ -219,7 +230,7 @@ public class TelaCadastrarAmbiente {
                 botaoCancelar.setBackground(Color.red);
             }
         
-        /**
+    /**
      * Configura os eventos da tela.
      */
     private void configurarEventosTela() {
@@ -310,7 +321,9 @@ public class TelaCadastrarAmbiente {
     }); 
     
     }
-        
+        /**
+         * Metodo responsavel por montar a janela
+         */
         private void montarJanela(){
             
             tela.setSize(800, 600);
@@ -379,6 +392,9 @@ public class TelaCadastrarAmbiente {
             
         }
         
+        /**
+         * Metodo responsavel por exibir a janela
+         */
         public void exibirTela(){
             tela.setVisible(true);
         }

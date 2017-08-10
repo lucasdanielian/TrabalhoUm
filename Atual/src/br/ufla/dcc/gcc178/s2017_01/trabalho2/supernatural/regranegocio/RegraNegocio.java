@@ -15,6 +15,8 @@ import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Comando;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.comandos.Analisador;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteCasaCaim;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteDefault;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteLasVegas;
+import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.ambientes.AmbienteSanAntonio;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.gcc178.s2017_01.trabalho2.supernatural.seguranca.SessaoUsuario;
 import java.io.BufferedReader;
@@ -22,7 +24,6 @@ import java.io.FileReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +50,8 @@ public class RegraNegocio implements Serializable{
     private Ambiente ambienteAtual;
     private int diasCorridos; //variavel que conta quantas ações o jogador ja fez
     private Jogador jogador;
-    private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu, casaWinchester;
+    private Ambiente denver, houston, casaCaim,casaBob, inferno, purgatorio, ceu,
+            sanAntonio, lasVegas, casaWinchester;
     private SessaoUsuario sessaoUsuario;
     private UsuarioDAOLista usuarioDAOLista;
     private List<Ambiente> ambientes;
@@ -84,6 +86,14 @@ public class RegraNegocio implements Serializable{
      */
     private void criarAmbientes() {
       
+        //Inserção do AmbinteSanAntonio
+        sanAntonio = new AmbienteSanAntonio("SanAntonio");
+        ambientes.add(sanAntonio);
+        
+        //Inserção do Ambiente Las Vegas
+        lasVegas = new AmbienteLasVegas("LasVegas");
+        ambientes.add(lasVegas);
+        
         //Inserção do Ambiente casa Winchester
         casaWinchester = new AmbienteCasaWinchester("CasaWinchester");
         ambientes.add(casaWinchester);
@@ -115,8 +125,17 @@ public class RegraNegocio implements Serializable{
         ceu = new AmbienteCeu("Ceu");
         ambientes.add(ceu);
         
-       
-        
+        persistencia();
+     
+        // o jogo comeca do lado de fora
+        ambienteAtual = casaWinchester;
+    }
+    
+    /**
+     * Metodo responsavel por ler os arquivos da persistencia
+     */
+    private void persistencia(){
+                
          try{
            
            BufferedReader arq = new BufferedReader(new FileReader("persistencias/ambientes.txt")); 
@@ -185,11 +204,6 @@ public class RegraNegocio implements Serializable{
                     
             }
         }
-        
-        
-     
-        // o jogo comeca do lado de fora
-        ambienteAtual = casaWinchester;
     }
 
     /**

@@ -34,5 +34,4 @@ License versão 2 com excepção do Classpath.
   Para o bom desempenho do jogo é altemente recomendado que se utilize a plataforma do netbeans uma vez que os testes foram feitos
   somente para esta plataforma.
   
-  Usuario: valdeci; julio; lucas
-  senha: 123
+  OBS: Para poder jogar deve-se antes realizar o cadastro do jogador, após feito o cadastro basta entrar com usuario e senha!

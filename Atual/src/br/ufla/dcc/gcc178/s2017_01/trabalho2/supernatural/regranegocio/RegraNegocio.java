@@ -359,15 +359,36 @@ public class RegraNegocio implements Serializable{
                 }
             }
             else { 
-                ambienteAtual = proximoAmbiente;
-                diasCorridos = diasCorridos+3;
-
-                if(diasCorridos <=30){
-                    return descricaoAmbienteAtual();
-                }
-                else{
-                    return "\nVoce excedeu o tempo limite. Sam Winchester está "
-                            + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
+                if(direcao.equals("SanAntonio")){
+                    ambienteAtual = proximoAmbiente;
+                    diasCorridos = diasCorridos - 2;
+                    if(diasCorridos <=30){
+                        return descricaoAmbienteAtual();
+                    }
+                    else{
+                        return "\nVoce excedeu o tempo limite. Sam Winchester está "
+                                + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
+                    }
+                }else if (direcao.equals("LasVegas")){
+                    ambienteAtual = proximoAmbiente;
+                    diasCorridos = diasCorridos + 5;
+                    if(diasCorridos <=30){
+                        return descricaoAmbienteAtual();
+                    }
+                    else{
+                        return "\nVoce excedeu o tempo limite. Sam Winchester está "
+                                + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
+                    }
+                }else{
+                    ambienteAtual = proximoAmbiente;
+                    diasCorridos = diasCorridos + 3;
+                    if(diasCorridos <=30){
+                        return descricaoAmbienteAtual();
+                    }
+                    else{
+                        return "\nVoce excedeu o tempo limite. Sam Winchester está "
+                                + "morto.\n GAME OVER! Digite 'sair' e tente novamente\n";
+                    }
                 }
             }
         }

@@ -22,5 +22,10 @@ Houston,CasaWinchester
 Houston,Purgatorio
 Purgatorio,PortalInferno
 Purgatorio,CasaWinchester
-CasaWinchester,ambienteteste
-ambienteteste,Ceu
+Denver,LasVegas
+CasaCaim,LasVegas
+LasVegas,SanAntonio
+LasVegas,CasaWinchester
+LasVegas,Houston
+SanAntonio,CasaWinchester
+SanAntonio,Purgatorio

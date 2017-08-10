@@ -31,8 +31,7 @@ public class AmbienteSanAntonio extends Ambiente {
     public AmbienteSanAntonio(String nomeAmbiente)  {
         super(nomeAmbiente);
         foiCeu = false;
-        item = new Item("Carta", "Carta de Bob para Caim, que"
-                + "cedida pelo mesmo para ajudar Dean.");
+        item = new Item("Telefone", "Telefone que toca na igreja.");
         inserirItensAmbiente(item);
     }
     
@@ -47,20 +46,18 @@ public class AmbienteSanAntonio extends Ambiente {
     @Override
     public String mensagemDeEntrada(Jogador dean){
         //texto a ser exibido caso o jogador entre pela primeira vez neste ambiente
-        String mensagemEntrada1 = "\nDean se direciona para Boulder, no estado do\n"
-            + "Colorado.Lá mora Bob, melhor amigo de seu falecido pai,\n"
-            + "que se tornou como um pai para os garotos.\n";
-        String mensagemEntrada2 = "\nChegando à\n"
-            + "casa de Bob, Dean explica toda a situação ocorrida para\n"
-            + "o mesmo.Em seguida, Bob diz : “Você não pode, de forma\n"
-            + "alguma, entregar as almas requeridas pelo demônio, seri\n"
-            + "um desrespeito à memória de seu pai.. Acredito que você\n"
-            + "possa adquirir poderes suficientes para matar a criatura\n"
-            + "se procurar Caim, filho de adão e eva. Não será fácil,\n"
-            + "porém ele poderá lhe conceder a “Marca de Caim” que lhe\n"
-            + "tornará forte o suficiente para lhe transformar em um\n"
-            + "Deus. Ele me deve alguns favores,leve esta carta contigo\n"
-            + "que ele poderá lhe ajudar”\n";
+        String mensagemEntrada1 = "\nDean se direciona para San Antonio, no estado do\n"
+            + "Texas.";
+        String mensagemEntrada2 = "Ele se direciona para uma antiga catedral à \n "
+                + "qual frequentava quando era apenas uma criança. Dean não é \n"
+                + "uma pessoa de rezar muito, o que se justifica por todos estes\n"
+                + " anos lutando contra criaturas do mal, entretanto, ele se \n"
+                + "ajoelha e reza. Reza para que Deus possa lhe ajudar, arrependido\n"
+                + " de ter perdido tempo se divertindo em Las Vegas.Como recompensa\n"
+                + " por este momento de fé, Dean ganhou 2 dias extra para procurar\n"
+                + " seu irmão. No momento em que ia se levantar para ir embora ,\n"
+                + " um telefone , aparentemente esquecido em cima do banco, começa \n"
+                + "a tocar.";
         if(getJaVisitada() == false){
             
             for (int i = 0; i < dean.tamanhoDiario(); i++) {
@@ -73,34 +70,33 @@ public class AmbienteSanAntonio extends Ambiente {
             }
             if(foiCeu == true){
                 setJaVisitada(true);
-                dean.adicionarPaginaDiario("Procurar caim para derrotar o demônio");
+                dean.adicionarPaginaDiario("Você ganhou mais 2 dias extra");
                 if(dean.espacoDisponivelMochila()){
-                    return mensagemEntrada1 + mensagemEntrada2 + "O item carta "
+                    return mensagemEntrada1 + mensagemEntrada2 + "O item telefone "
                             + "agora esta disponivel para ser coletado";
                 }
                 else{
-                    return mensagemEntrada1 + mensagemEntrada2 + "O item carta "
+                    return mensagemEntrada1 + mensagemEntrada2 + "O item telefone "
                             + "nao esta disponivel para ser coletado pois na ha"
                             + " espaco suficiente na mochila";
                 }
             }
             else{
-                return mensagemEntrada1 + "Entretanto,\n por mais que Bob queira ajudar,"
-                        + "Dean não possui informações\n suficientes para que possa ser ajudado\n";
+                return mensagemEntrada1 + "Entretanto,"
+                        + "Dean não sabe o que fazer neste ambiente.\n";
             }
         }
         else{ // texto a ser exibido caso o jogador já tenha vindo ao ambiente em questão
             if(getItemFoiColetado() == true){    
-            return mensagemEntrada1 + "Chegando à casa de Bob, o mesmo diz a ele : “Infelizmente"
-                    + "garoto, eu já não posso\n fazer mais nada por você”\n";
+            return mensagemEntrada1 + "Entretanto, não sabe mais o que fazer neste ambiente";
             }
             else{
                 if(dean.espacoDisponivelMochila()){
-                    return mensagemEntrada1 + "O item carta "
+                    return mensagemEntrada1 + "O item telefone"
                             + "agora esta disponivel para ser coletado";
                 }
                 else{
-                    return mensagemEntrada1 + "O item carta "
+                    return mensagemEntrada1 + "O item telefone "
                             + "nao esta disponivel para ser coletado pois na ha"
                             + " espaco suficiente na mochila";
                 }
@@ -114,6 +110,6 @@ public class AmbienteSanAntonio extends Ambiente {
      */
     @Override
     public String imagemDoAmbiente() {
-        return "casaBob.jpg";
+        return "sanfrancisco.jpg";
     }
 }

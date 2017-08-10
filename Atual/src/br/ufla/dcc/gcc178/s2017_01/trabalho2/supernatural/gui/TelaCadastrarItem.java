@@ -99,8 +99,8 @@ public class TelaCadastrarItem {
             
             while(linha!=null){
                 
-                String aux = linha;
-                dropAmbienteInicial.addItem(linha);
+                String[] aux = linha.split(",");
+                dropAmbienteInicial.addItem(aux[0]);
                 linha = arq.readLine();
             }
         }

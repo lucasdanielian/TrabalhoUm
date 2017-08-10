@@ -480,6 +480,17 @@ public class RegraNegocio implements Serializable{
             String verificacao = jogador.inserirItensMochila(aux);
             if (verificacao.contains("adicionado")){
                 ambienteAtual.setItemFoiColetado(true);
+                if(nomeItem.equals("Telefone")){
+                    return "Ao atender o telefone, Dean escuta uma mensagem de \n"
+                            + "Castiel: \"Dean, em uma batalha entre anjos e \n"
+                            + "demônios esta semana, no deserto de Gobi, \n"
+                            + "conseguimos ferir a criatura que está aprisionando\n"
+                            + " seu irmão. Acredito que ele está muito debilitado\n"
+                            + " para causar algum tipo de mal a seu irmão, isto\n "
+                            + "lhe dará uma vantagem!\" Você tem 3 dias extra\n "
+                            + "para resgatar seu irmão.\n Item: " + nomeItem + " "
+                            + "coletado com sucesso\n ";
+                }
                 return "\n Item: " + nomeItem + " coletado com sucesso\n";
             }else{
                 boolean retornaItem = ambienteAtual.inserirItensAmbiente(aux);

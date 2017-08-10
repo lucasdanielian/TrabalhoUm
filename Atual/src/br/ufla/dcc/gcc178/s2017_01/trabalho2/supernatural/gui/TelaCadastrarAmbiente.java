@@ -205,15 +205,15 @@ public class TelaCadastrarAmbiente {
             
                 while(linha!=null){
 
-                    String aux = linha;
-                    dropAmbienteSaida1.addItem(linha);
-                    dropAmbienteSaida2.addItem(linha);
-                    dropAmbienteSaida3.addItem(linha);
-                    dropAmbienteSaida4.addItem(linha);
-                    dropAmbienteEntrada1.addItem(linha);
-                    dropAmbienteEntrada2.addItem(linha);
-                    dropAmbienteEntrada3.addItem(linha);
-                    dropAmbienteEntrada4.addItem(linha);
+                    String[] aux = linha.split(",");
+                    dropAmbienteSaida1.addItem(aux[0]);
+                    dropAmbienteSaida2.addItem(aux[0]);
+                    dropAmbienteSaida3.addItem(aux[0]);
+                    dropAmbienteSaida4.addItem(aux[0]);
+                    dropAmbienteEntrada1.addItem(aux[0]);
+                    dropAmbienteEntrada2.addItem(aux[0]);
+                    dropAmbienteEntrada3.addItem(aux[0]);
+                    dropAmbienteEntrada4.addItem(aux[0]);
                     linha = arq.readLine();
                 }
             }

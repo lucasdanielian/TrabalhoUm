@@ -167,4 +167,9 @@ public abstract class Ambiente implements Serializable{
         return itemFoiColetado;
     }
     
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    public abstract boolean getFoiCeu();
 }

@@ -106,4 +106,13 @@ public class AmbienteHouston extends Ambiente {
     public String imagemDoAmbiente() {
         return "Houston.jpg";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
 }

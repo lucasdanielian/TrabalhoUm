@@ -51,4 +51,13 @@ public class AmbienteCasaWinchester extends Ambiente {
     public String imagemDoAmbiente() {
         return "casaWinchester.jpg";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
 }

@@ -112,4 +112,13 @@ public class AmbienteSanAntonio extends Ambiente {
     public String imagemDoAmbiente() {
         return "sanfrancisco.jpg";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return foiCeu;
+    }
 }

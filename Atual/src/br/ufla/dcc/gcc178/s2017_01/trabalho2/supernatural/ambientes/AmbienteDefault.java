@@ -39,4 +39,13 @@ public class AmbienteDefault extends Ambiente {
         return getNomeAmbiente() + ".png";
     }
     
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
+    
 }

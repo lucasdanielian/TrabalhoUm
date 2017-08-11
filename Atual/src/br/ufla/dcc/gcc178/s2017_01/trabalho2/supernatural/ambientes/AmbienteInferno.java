@@ -102,4 +102,13 @@ public class AmbienteInferno extends Ambiente {
     public String imagemDoAmbiente() {
         return "inferno.png";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
 }

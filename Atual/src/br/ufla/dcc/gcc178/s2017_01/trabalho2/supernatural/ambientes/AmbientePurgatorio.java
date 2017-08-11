@@ -102,4 +102,13 @@ public class AmbientePurgatorio extends Ambiente {
     public String imagemDoAmbiente() {
         return "purgatorio.jpg";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
 }

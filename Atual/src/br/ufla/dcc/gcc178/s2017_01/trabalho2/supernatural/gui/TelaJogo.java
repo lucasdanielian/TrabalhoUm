@@ -691,6 +691,7 @@ public class TelaJogo implements Serializacao {
                 String textoExibicao = regraNegocio.receberComando("pegar " + chave);
                 if(textoExibicao.contains(chave + " coletado com sucesso")){
                     botoesItensJogador.get(chave).setVisible(true);
+                    atualizaPainelPontuacao();
                     botoesItensAmbientes.get(chave).setVisible(false);
                     textoDinamico.setText(textoExibicao);
                 }else{

@@ -149,4 +149,13 @@ public class AmbienteCasaCaim extends Ambiente {
     public String imagemDoAmbiente() {
         return "casaCaim.jpg";
     }
+    
+    /**
+     * Metodo que retorna o conteudo da variavel foiCeu
+     * @return true se visitado e false caso contrario
+     */
+    @Override
+    public boolean getFoiCeu() {
+        return false;
+    }
 }

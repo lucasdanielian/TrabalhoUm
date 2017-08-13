@@ -35,5 +35,7 @@ License versão 2 com excepção do Classpath.
   somente para esta plataforma.
   
   OBS: Para poder jogar deve-se antes realizar o cadastro do jogador, após feito o cadastro basta entrar com usuario e senha! Uma vez realizado o cadastro não e preciso cadastrar novamente pois os dados são persistidos
+       
        O projeto contem uma pasta "MapaDoJogo" que contém um mapa que auxilia nos melhores caminho para que Dean winchester possa salvar seu irmão do inferno o mais rapido o possivel!
+       
        O JavaDoc se encontra dentro da pasta: TrabalhoUm/Atual/dist/javadoc/index.html

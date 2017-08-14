@@ -13,8 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.channels.FileChannel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -300,6 +303,19 @@ public class TelaCadastrarAmbiente {
                         File novo = selecionadorDeImagens.getSelectedFile();
                         
                         novo.renameTo(new File("src/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/" + caixaNome.getText() +".png"));
+                        
+                        FileInputStream origem; 
+                        FileOutputStream destino;
+                        FileChannel fcOrigem;
+                        FileChannel fcDestino;
+                        
+                        origem = new FileInputStream("src/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/" + caixaNome.getText() +".png");
+                        destino = new FileOutputStream("build/classes/br/ufla/dcc/gcc178/s2017_01/trabalho2/supernatural/imagens/"+ caixaNome.getText() +".png");
+                                fcOrigem = origem.getChannel();
+                                fcDestino = destino.getChannel();
+                                fcOrigem.transferTo(0, fcOrigem.size(), fcDestino);
+                                origem.close();
+                                destino.close();
                         
                         caixaNome.setText("");
                         caixaMensagem.setText("");
